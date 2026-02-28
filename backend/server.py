@@ -110,29 +110,31 @@ class SyncResult(BaseModel):
 # ----- Helper Functions -----
 
 def extract_category(summary: str) -> str:
-    """Extract category from event summary.
-    Categories are typically the first part before a comma or colon.
-    Examples: 'Skriftligt prov, kapitel 9-11' -> 'Skriftligt prov'
-              'Läxa: Matematik' -> 'Läxa'
+    """Extract subject/category from Vklass event summary.
+    Vklass format: 'Ämne (klass_kod)\nKod \nLärare'
+    Example: 'Svenska (7A 2526_HSL)\nSV \nMAH' -> 'Svenska'
     """
     if not summary:
         return "Övrigt"
     
-    # Try to extract category from beginning of summary
-    # Split on comma first
-    if ',' in summary:
-        category = summary.split(',')[0].strip()
-    elif ':' in summary:
-        category = summary.split(':')[0].strip()
-    else:
-        # Use first two words or whole summary if short
-        words = summary.split()
-        if len(words) <= 3:
-            category = summary.strip()
-        else:
-            category = ' '.join(words[:2])
+    # Vklass format: subject is before the first parenthesis
+    if '(' in summary:
+        subject = summary.split('(')[0].strip()
+        if subject:
+            return subject
     
-    return category if category else "Övrigt"
+    # Fallback: first line before newline
+    if '\\n' in summary:
+        subject = summary.split('\\n')[0].strip()
+        if subject:
+            return subject
+    
+    if '\n' in summary:
+        subject = summary.split('\n')[0].strip()
+        if subject:
+            return subject
+    
+    return summary.strip() if summary.strip() else "Övrigt"
 
 def generate_event_key(summary: str, start: str, calendar_index: int) -> str:
     """Generate stable unique key for event identification based on content, not UID"""
