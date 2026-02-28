@@ -154,28 +154,28 @@ function App() {
       <Toaster position="top-right" richColors />
       <BrowserRouter>
         <Routes>
+          {/* Dashboard is always public */}
           <Route
             path="/"
             element={
-              authEnabled && !isAuthenticated ? (
-                <Navigate to="/login" replace />
-              ) : (
-                <Dashboard
-                  settings={settings}
-                  events={events}
-                  syncing={syncing}
-                  onSync={triggerSync}
-                  onConfirmEvent={confirmEvent}
-                  onLogout={authEnabled ? handleLogout : null}
-                />
-              )
+              <Dashboard
+                settings={settings}
+                events={events}
+                syncing={syncing}
+                onSync={triggerSync}
+                onConfirmEvent={confirmEvent}
+                authEnabled={authEnabled}
+                isAuthenticated={isAuthenticated}
+                onLogout={isAuthenticated ? handleLogout : null}
+              />
             }
           />
+          {/* Settings requires authentication if enabled */}
           <Route
             path="/settings"
             element={
               authEnabled && !isAuthenticated ? (
-                <Navigate to="/login" replace />
+                <Navigate to="/login?redirect=/settings" replace />
               ) : (
                 <Settings
                   settings={settings}
@@ -188,11 +188,7 @@ function App() {
           <Route
             path="/login"
             element={
-              isAuthenticated ? (
-                <Navigate to="/" replace />
-              ) : (
-                <Login onLogin={handleLogin} />
-              )
+              <Login onLogin={handleLogin} />
             }
           />
         </Routes>
