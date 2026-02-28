@@ -156,7 +156,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-3">
               <Calendar className="w-6 h-6 text-slate-900" />
-              <h1 className="text-lg font-bold text-slate-900 tracking-tight">iCal Sync</h1>
+              <h1 className="text-lg font-bold text-slate-900 tracking-tight">Vklass Sync</h1>
             </div>
             
             <div className="flex items-center gap-2">
