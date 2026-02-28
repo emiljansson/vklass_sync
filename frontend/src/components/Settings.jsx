@@ -95,7 +95,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                 data-testid="back-button"
                 variant="ghost"
                 size="icon"
-                onClick={onBack}
+                onClick={() => navigate('/')}
               >
                 <ArrowLeft className="w-5 h-5" />
               </Button>
