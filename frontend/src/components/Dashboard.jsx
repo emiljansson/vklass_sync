@@ -74,13 +74,13 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const EventCard = ({ event }) => (
     <Card 
       data-testid={`event-card-${event.id}`}
-      className={`event-card relative border transition-all duration-200 ${getStatusStyles(event.status)}`}
+      className={`event-card relative border transition-all duration-200 ${getStatusStyles(event.status, event.start)}`}
     >
       <CardContent className="p-4">
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
-              {getStatusBadge(event.status)}
+              {getStatusBadge(event.status, event.start)}
             </div>
             <h3 className={`font-semibold text-base truncate ${event.status === 'new' ? 'text-rose-900' : event.status === 'removed' ? 'text-blue-900' : 'text-slate-900'}`}>
               {event.summary}
