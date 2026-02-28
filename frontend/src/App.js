@@ -152,7 +152,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Toaster position="top-right" richColors />
+      <Toaster position="top-center" richColors duration={3000} />
       <AddToHomeScreen />
       <BrowserRouter>
         <Routes>
