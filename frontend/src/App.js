@@ -42,9 +42,9 @@ function App() {
     try {
       const response = await axios.get(`${API}/settings`);
       setSettings(response.data);
+      setAuthEnabled(response.data.auth_enabled);
     } catch (e) {
       console.error("Error fetching settings:", e);
-      toast.error("Kunde inte hämta inställningar");
     }
   }, []);
 
@@ -58,24 +58,20 @@ function App() {
     }
   }, []);
 
-  // Initial data fetch
+  // Initial data fetch - always fetch for dashboard (public)
   useEffect(() => {
-    if (isAuthenticated) {
-      fetchSettings();
-      fetchEvents();
-    }
-  }, [isAuthenticated, fetchSettings, fetchEvents]);
+    fetchSettings();
+    fetchEvents();
+  }, [fetchSettings, fetchEvents]);
 
-  // Auto-refresh events based on interval
+  // Auto-refresh events
   useEffect(() => {
-    if (!isAuthenticated || !settings) return;
-    
     const interval = setInterval(() => {
       fetchEvents();
     }, 30000); // Refresh events every 30 seconds
     
     return () => clearInterval(interval);
-  }, [isAuthenticated, settings, fetchEvents]);
+  }, [fetchEvents]);
 
   // Handle login
   const handleLogin = async (password) => {
