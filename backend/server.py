@@ -199,6 +199,7 @@ async def parse_ical_feed(url: str) -> List[Dict[str, Any]]:
                     'summary': summary,
                     'description': description,
                     'location': location,
+                    'category': extract_category(summary),
                     'start': start_str,
                     'end': end_str
                 })
