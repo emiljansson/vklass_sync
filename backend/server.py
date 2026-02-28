@@ -106,33 +106,6 @@ class SyncResult(BaseModel):
 
 # ----- Helper Functions -----
 
-def extract_category(summary: str) -> str:
-    """Extract subject/category from Vklass event summary.
-    Vklass format: 'Ämne (klass_kod)\nKod \nLärare'
-    Example: 'Svenska (7A 2526_HSL)\nSV \nMAH' -> 'Svenska'
-    """
-    if not summary:
-        return "Övrigt"
-    
-    # Vklass format: subject is before the first parenthesis
-    if '(' in summary:
-        subject = summary.split('(')[0].strip()
-        if subject:
-            return subject
-    
-    # Fallback: first line before newline
-    if '\\n' in summary:
-        subject = summary.split('\\n')[0].strip()
-        if subject:
-            return subject
-    
-    if '\n' in summary:
-        subject = summary.split('\n')[0].strip()
-        if subject:
-            return subject
-    
-    return summary.strip() if summary.strip() else "Övrigt"
-
 def generate_event_key(summary: str, start: str, calendar_index: int) -> str:
     """Generate stable unique key for event identification based on content, not UID"""
     # Use summary + start date + calendar index to create a stable identifier
