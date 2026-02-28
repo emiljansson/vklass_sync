@@ -14,7 +14,8 @@ import axios from "axios";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-export const Settings = ({ settings, onUpdateSettings, onBack }) => {
+export const Settings = ({ settings, onUpdateSettings }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     ical_url_1: "",
     ical_url_2: "",
