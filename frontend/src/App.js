@@ -25,17 +25,11 @@ function App() {
         const response = await axios.get(`${API}/auth/status`);
         setAuthEnabled(response.data.auth_enabled);
         
-        // If auth is not enabled, user is authenticated by default
-        if (!response.data.auth_enabled) {
-          setIsAuthenticated(true);
-        } else {
-          // Check if user has logged in this session
-          const sessionAuth = sessionStorage.getItem('ical_authenticated');
-          setIsAuthenticated(sessionAuth === 'true');
-        }
+        // Check if user has logged in this session (for settings access)
+        const sessionAuth = sessionStorage.getItem('ical_authenticated');
+        setIsAuthenticated(sessionAuth === 'true');
       } catch (e) {
         console.error("Error checking auth status:", e);
-        setIsAuthenticated(true); // Default to authenticated if error
       } finally {
         setLoading(false);
       }
