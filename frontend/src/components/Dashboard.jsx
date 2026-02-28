@@ -65,11 +65,6 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
               {event.summary}
             </h3>
             
-            <div className={`flex items-center gap-1.5 mt-2 text-sm ${event.status === 'new' ? 'text-rose-700' : event.status === 'removed' ? 'text-blue-700' : 'text-slate-600'}`}>
-              <Clock className="w-3.5 h-3.5 flex-shrink-0" />
-              <span className="font-mono text-xs">{formatDateTime(event.start)}</span>
-            </div>
-            
             {event.location && (
               <div className={`flex items-center gap-1.5 mt-1 text-sm ${event.status === 'new' ? 'text-rose-600' : event.status === 'removed' ? 'text-blue-600' : 'text-slate-500'}`}>
                 <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
