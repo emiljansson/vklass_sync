@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { Lock, Eye, EyeOff, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,6 +11,10 @@ export const Login = ({ onLogin }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  
+  const redirectTo = searchParams.get('redirect') || '/settings';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,7 +23,9 @@ export const Login = ({ onLogin }) => {
     
     const success = await onLogin(password);
     
-    if (!success) {
+    if (success) {
+      navigate(redirectTo);
+    } else {
       setError("Fel lösenord");
     }
     
