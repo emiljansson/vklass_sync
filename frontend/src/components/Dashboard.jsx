@@ -20,12 +20,24 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   };
   
   // Simple category extraction for frontend (mirrors backend logic)
+  // Vklass format: 'Ämne (klass_kod)\nKod \nLärare'
   const extractCategory = (summary) => {
     if (!summary) return "Övrigt";
-    if (summary.includes(',')) return summary.split(',')[0].trim();
-    if (summary.includes(':')) return summary.split(':')[0].trim();
-    const words = summary.split(' ');
-    return words.length <= 3 ? summary.trim() : words.slice(0, 2).join(' ');
+    // Subject is before the first parenthesis
+    if (summary.includes('(')) {
+      const subject = summary.split('(')[0].trim();
+      if (subject) return subject;
+    }
+    // Fallback: first part before newline
+    if (summary.includes('\\n')) {
+      const subject = summary.split('\\n')[0].trim();
+      if (subject) return subject;
+    }
+    if (summary.includes('\n')) {
+      const subject = summary.split('\n')[0].trim();
+      if (subject) return subject;
+    }
+    return summary.trim() || "Övrigt";
   };
   
   const calendar1Events = filterByCategory(events.filter(e => e.calendar_index === 1));
