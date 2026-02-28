@@ -196,7 +196,7 @@ async def send_webpushr_notification(title: str, message: str, settings: Setting
         payload = {
             "title": title,
             "message": message,
-            "target_url": "https://ical-sync-notify.preview.emergentagent.com"
+            "target_url": "https://vklass.frontproduction.se"
         }
         
         async with httpx.AsyncClient(timeout=30.0) as client:
