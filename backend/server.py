@@ -386,6 +386,25 @@ async def trigger_sync():
     """Manually trigger calendar sync"""
     return await sync_calendars()
 
+@api_router.post("/test-push")
+async def test_push_notification():
+    """Send a test push notification"""
+    settings = await get_settings_from_db()
+    
+    if not settings.webpushr_key or not settings.webpushr_auth_token:
+        return {"success": False, "message": "Webpushr API-nycklar saknas"}
+    
+    success = await send_webpushr_notification(
+        "Test från iCal Sync",
+        "Detta är en testnotifikation! Push-notifikationer fungerar.",
+        settings
+    )
+    
+    if success:
+        return {"success": True, "message": "Test-notifikation skickad"}
+    else:
+        return {"success": False, "message": "Kunde inte skicka notifikation. Kontrollera API-nycklar."}
+
 @api_router.get("/health")
 async def health_check():
     """Health check endpoint"""
