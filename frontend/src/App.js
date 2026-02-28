@@ -92,7 +92,7 @@ function App() {
   const handleLogout = () => {
     setIsAuthenticated(false);
     sessionStorage.removeItem('ical_authenticated');
-    toast.info("Utloggad");
+    toast.info("Utloggad", { duration: 3000 });
   };
 
   // Update settings
