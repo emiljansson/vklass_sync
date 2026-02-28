@@ -393,31 +393,6 @@ async def get_events():
     
     return filtered_events
 
-@api_router.get("/categories")
-async def get_categories():
-    """Get all unique categories from events"""
-    # Get categories from current events
-    events = await db.events.find({}, {"_id": 0, "category": 1, "summary": 1}).to_list(10000)
-    
-    categories = set()
-    for event in events:
-        cat = event.get('category')
-        if cat:
-            categories.add(cat)
-        else:
-            # Extract from summary if not set
-            categories.add(extract_category(event.get('summary', '')))
-    
-    # Also parse fresh from iCal feeds to get all possible categories
-    settings = await get_settings_from_db()
-    for url in [settings.ical_url_1, settings.ical_url_2]:
-        if url:
-            feed_events = await parse_ical_feed(url)
-            for e in feed_events:
-                categories.add(e.get('category', extract_category(e.get('summary', ''))))
-    
-    return {"categories": sorted(list(categories))}
-
 @api_router.post("/events/{event_id}/confirm")
 async def confirm_event(event_id: str):
     """Confirm a new event (change status from 'new' to 'normal')"""
