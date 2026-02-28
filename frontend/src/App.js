@@ -6,6 +6,7 @@ import { Toaster, toast } from "sonner";
 import { Dashboard } from "@/components/Dashboard";
 import { Settings } from "@/components/Settings";
 import { Login } from "@/components/Login";
+import { AddToHomeScreen } from "@/components/AddToHomeScreen";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
