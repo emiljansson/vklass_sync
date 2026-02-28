@@ -58,6 +58,23 @@ export const Settings = ({ settings, onUpdateSettings, onBack }) => {
     setSaving(false);
   };
 
+  const handleTestPush = async () => {
+    setTestingPush(true);
+    try {
+      const response = await axios.post(`${API}/test-push`);
+      if (response.data.success) {
+        toast.success("Test-notifikation skickad!");
+      } else {
+        toast.error(response.data.message || "Kunde inte skicka notifikation");
+      }
+    } catch (e) {
+      console.error("Error testing push:", e);
+      toast.error("Fel vid test av push-notifikation. Kontrollera API-nycklar.");
+    } finally {
+      setTestingPush(false);
+    }
+  };
+
   const intervalOptions = [
     { value: 5, label: "5 minuter" },
     { value: 15, label: "15 minuter" },
