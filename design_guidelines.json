@@ -1,0 +1,131 @@
+{
+  "identity": {
+    "name": "E1",
+    "role": "Anti-AI Creative Designer",
+    "principles": [
+      "Fusion over Imitation",
+      "Emotion First",
+      "Content is King",
+      "Zoom In",
+      "Negative Space",
+      "Contrast"
+    ]
+  },
+  "typography": {
+    "font_family": {
+      "headings": "Manrope, sans-serif",
+      "body": "Inter, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "scale": {
+      "h1": "text-4xl md:text-5xl font-bold tracking-tight",
+      "h2": "text-3xl font-bold tracking-tight",
+      "h3": "text-2xl font-semibold tracking-tight",
+      "body": "text-base leading-relaxed",
+      "small": "text-sm text-muted-foreground"
+    }
+  },
+  "colors": {
+    "palette": {
+      "background": "#F8FAFC",
+      "foreground": "#0F172A",
+      "card": "#FFFFFF",
+      "card_foreground": "#0F172A",
+      "primary": "#0F172A",
+      "primary_foreground": "#F8FAFC",
+      "muted": "#F1F5F9",
+      "muted_foreground": "#64748B",
+      "border": "#E2E8F0"
+    },
+    "status": {
+      "new": {
+        "color": "#E11D48",
+        "bg": "#FFF1F2",
+        "border": "#FDA4AF",
+        "description": "Used for NEW events. Requires user confirmation."
+      },
+      "removed": {
+        "color": "#2563EB",
+        "bg": "#EFF6FF",
+        "border": "#BFDBFE",
+        "description": "Used for REMOVED events. Auto-disappears after 6 hours."
+      },
+      "confirmed": {
+        "color": "#0F172A",
+        "bg": "#FFFFFF",
+        "border": "#E2E8F0",
+        "description": "Standard state for confirmed/existing events."
+      }
+    }
+  },
+  "layout": {
+    "dashboard": {
+      "structure": "grid grid-cols-1 md:grid-cols-2 gap-8 p-4 md:p-8",
+      "column_style": "flex flex-col gap-4"
+    },
+    "settings": {
+      "structure": "max-w-2xl mx-auto space-y-8 p-6 bg-white rounded-xl shadow-sm border border-slate-100",
+      "form_group": "space-y-2",
+      "input_style": "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+    }
+  },
+  "components": {
+    "event_card": {
+      "base": "relative p-4 rounded-lg border transition-all duration-200 hover:shadow-md",
+      "variants": {
+        "new": "bg-rose-50 border-rose-200 text-rose-900",
+        "removed": "bg-blue-50 border-blue-200 text-blue-900 opacity-80",
+        "normal": "bg-white border-slate-200 text-slate-900"
+      },
+      "elements": {
+        "title": "font-bold text-lg mb-1",
+        "time": "font-mono text-sm opacity-90",
+        "location": "text-sm opacity-75 flex items-center gap-1",
+        "confirm_btn": "absolute top-2 right-2 p-2 rounded-full hover:bg-rose-200 text-rose-700 transition-colors"
+      }
+    },
+    "buttons": {
+      "primary": "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2",
+      "secondary": "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
+    }
+  },
+  "assets": {
+    "images": [
+      {
+        "url": "https://images.unsplash.com/photo-1763929154494-a3d6eba05282?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTF8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwd2hpdGUlMjBhYnN0cmFjdCUyMGdlb21ldHJpYyUyMHRlY2hub2xvZ3klMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc3MjI2MDg5M3ww&ixlib=rb-4.1.0&q=85",
+        "category": "background",
+        "description": "Subtle abstract blue/white background for login or empty states"
+      }
+    ]
+  },
+  "animations": {
+    "transitions": "transition-all duration-300 ease-in-out",
+    "hover": "hover:-translate-y-1 hover:shadow-lg"
+  },
+  "accessibility": {
+    "rules": [
+      "Ensure contrast ratio > 4.5:1 for normal text",
+      "Use data-testid on all interactive elements",
+      "Interactive elements must have visible focus states"
+    ]
+  },
+  "universal_guidelines": [
+    "Do not use gradients for dark colors.",
+    "Do not center align the app container.",
+    "Use 'sonner' for toasts.",
+    "Components must use named exports.",
+    "Pages must use default exports.",
+    "Ensure 'Inter' font is used for body, 'Manrope' for headings.",
+    "Implement a clear visual distinction between New (Red) and Removed (Blue) events."
+  ],
+  "instructions_to_main_agent": [
+    "Implement the Dashboard with two columns for the two iCal feeds.",
+    "Use the specific color codes for New (Red) and Removed (Blue) events.",
+    "Add a 'Confirm' button (check icon) for Red events to turn them into Normal events.",
+    "Ensure Blue events automatically disappear after 6 hours (handle this logic in frontend or backend).",
+    "Create a Settings page for iCal URLs, Webpushr credentials, and Refresh Interval.",
+    "Use 'lucide-react' for icons.",
+    "Use 'sonner' for notifications.",
+    "For the login page, use the provided abstract background image."
+  ]
+}
