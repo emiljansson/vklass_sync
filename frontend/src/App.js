@@ -180,7 +180,6 @@ function App() {
                 <Settings
                   settings={settings}
                   onUpdateSettings={updateSettings}
-                  onBack={() => window.history.back()}
                 />
               )
             }
