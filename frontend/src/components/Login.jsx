@@ -81,6 +81,18 @@ export const Login = ({ onLogin }) => {
               <Lock className="w-4 h-4" />
               {loading ? 'Loggar in...' : 'Logga in'}
             </Button>
+            
+            <Link to="/" className="block mt-4">
+              <Button
+                type="button"
+                variant="ghost"
+                data-testid="back-to-home-button"
+                className="w-full gap-2 text-slate-600"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Tillbaka till förstasidan
+              </Button>
+            </Link>
           </form>
         </CardContent>
       </Card>
