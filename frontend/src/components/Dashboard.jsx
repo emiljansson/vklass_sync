@@ -28,7 +28,24 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     }
   };
 
-  const getStatusStyles = (status) => {
+  const isEventPast = (startDate) => {
+    if (!startDate) return false;
+    try {
+      const eventDate = new Date(startDate);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return eventDate < today;
+    } catch {
+      return false;
+    }
+  };
+
+  const getStatusStyles = (status, start) => {
+    // Check if event is in the past (already occurred)
+    if (isEventPast(start) && status !== 'removed') {
+      return 'bg-sky-100 border-sky-200';
+    }
+    
     switch (status) {
       case 'new':
         return 'bg-rose-50 border-rose-200 hover:bg-rose-100';
@@ -39,7 +56,11 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     }
   };
 
-  const getStatusBadge = (status) => {
+  const getStatusBadge = (status, start) => {
+    if (isEventPast(start) && status !== 'removed') {
+      return <Badge className="bg-sky-200 text-sky-800">Passerad</Badge>;
+    }
+    
     switch (status) {
       case 'new':
         return <Badge className="bg-rose-100 text-rose-700 hover:bg-rose-200">Ny</Badge>;
