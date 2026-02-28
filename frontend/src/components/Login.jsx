@@ -39,7 +39,7 @@ export const Login = ({ onLogin }) => {
           <div className="mx-auto w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mb-4">
             <Calendar className="w-6 h-6 text-slate-900" />
           </div>
-          <CardTitle className="text-2xl font-bold">iCal Sync</CardTitle>
+          <CardTitle className="text-2xl font-bold">Vklass Sync</CardTitle>
           <CardDescription>Ange lösenord för att fortsätta</CardDescription>
         </CardHeader>
         <CardContent>
