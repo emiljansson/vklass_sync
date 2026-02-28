@@ -109,6 +109,31 @@ class SyncResult(BaseModel):
 
 # ----- Helper Functions -----
 
+def extract_category(summary: str) -> str:
+    """Extract category from event summary.
+    Categories are typically the first part before a comma or colon.
+    Examples: 'Skriftligt prov, kapitel 9-11' -> 'Skriftligt prov'
+              'Läxa: Matematik' -> 'Läxa'
+    """
+    if not summary:
+        return "Övrigt"
+    
+    # Try to extract category from beginning of summary
+    # Split on comma first
+    if ',' in summary:
+        category = summary.split(',')[0].strip()
+    elif ':' in summary:
+        category = summary.split(':')[0].strip()
+    else:
+        # Use first two words or whole summary if short
+        words = summary.split()
+        if len(words) <= 3:
+            category = summary.strip()
+        else:
+            category = ' '.join(words[:2])
+    
+    return category if category else "Övrigt"
+
 def generate_event_key(summary: str, start: str, calendar_index: int) -> str:
     """Generate stable unique key for event identification based on content, not UID"""
     # Use summary + start date + calendar index to create a stable identifier
