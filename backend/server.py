@@ -223,20 +223,30 @@ async def sync_calendars() -> SyncResult:
         
         # Parse new events from feed
         feed_events = await parse_ical_feed(url)
-        feed_uids = {e['uid'] for e in feed_events}
+        
+        # Create stable keys for feed events (based on summary + start, not UID)
+        feed_keys = {}
+        for e in feed_events:
+            key = generate_event_key(e['summary'], e['start'], cal_index)
+            feed_keys[key] = e
         
         # Get existing events from database
         existing_events = await db.events.find(
             {"calendar_index": cal_index, "status": {"$ne": "removed"}},
             {"_id": 0}
         ).to_list(10000)
-        existing_uids = {e['uid'] for e in existing_events}
+        
+        # Create map of existing event keys
+        existing_keys = {}
+        for e in existing_events:
+            key = generate_event_key(e['summary'], e['start'], cal_index)
+            existing_keys[key] = e
         
         # Find new events (in feed but not in DB)
-        for event_data in feed_events:
-            if event_data['uid'] not in existing_uids:
+        for event_key, event_data in feed_keys.items():
+            if event_key not in existing_keys:
                 new_event = CalendarEvent(
-                    uid=event_data['uid'],
+                    uid=event_key,  # Use stable key as UID
                     calendar_index=cal_index,
                     summary=event_data['summary'],
                     description=event_data['description'],
@@ -251,8 +261,8 @@ async def sync_calendars() -> SyncResult:
                 logger.info(f"New event detected: {event_data['summary']} in {cal_name}")
         
         # Find removed events (in DB but not in feed)
-        for existing in existing_events:
-            if existing['uid'] not in feed_uids:
+        for event_key, existing in existing_keys.items():
+            if event_key not in feed_keys:
                 await db.events.update_one(
                     {"id": existing['id']},
                     {"$set": {
