@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { Settings as SettingsIcon, RefreshCw, LogOut, Calendar, MapPin, Check, Clock } from "lucide-react";
+import { Settings as SettingsIcon, RefreshCw, LogOut, Calendar, MapPin, Check, Clock, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
-export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, onLogout }) => {
+export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, authEnabled, isAuthenticated, onLogout }) => {
   const calendar1Events = events.filter(e => e.calendar_index === 1);
   const calendar2Events = events.filter(e => e.calendar_index === 2);
 
