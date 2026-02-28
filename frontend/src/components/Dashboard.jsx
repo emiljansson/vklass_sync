@@ -172,11 +172,23 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
                 {syncing ? 'Synkar...' : 'Synka nu'}
               </Button>
               
-              <Link to="/settings">
-                <Button data-testid="settings-button" variant="ghost" size="icon">
-                  <SettingsIcon className="w-5 h-5" />
-                </Button>
-              </Link>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Link to={authEnabled && !isAuthenticated ? "/login?redirect=/settings" : "/settings"}>
+                      <Button data-testid="settings-button" variant="ghost" size="icon" className="relative">
+                        <SettingsIcon className="w-5 h-5" />
+                        {authEnabled && !isAuthenticated && (
+                          <Lock className="w-3 h-3 absolute -top-0.5 -right-0.5 text-amber-600" />
+                        )}
+                      </Button>
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    {authEnabled && !isAuthenticated ? "Inställningar (kräver inloggning)" : "Inställningar"}
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
               
               {onLogout && (
                 <Button
