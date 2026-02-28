@@ -9,7 +9,6 @@ import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 import axios from "axios";
-import { Categories } from "@/components/Categories";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -356,9 +355,6 @@ export const Settings = ({ settings, onUpdateSettings, onBack }) => {
               )}
             </CardContent>
           </Card>
-
-          {/* Categories */}
-          <Categories settings={settings} onUpdateSettings={onUpdateSettings} />
         </form>
       </main>
     </div>

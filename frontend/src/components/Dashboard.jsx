@@ -7,41 +7,8 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, authEnabled, isAuthenticated, onLogout }) => {
-  // Filter events by enabled categories
-  const enabledCategories = settings?.enabled_categories || [];
-  const hasEnabledCategories = enabledCategories.length > 0;
-  
-  const filterByCategory = (eventList) => {
-    if (!hasEnabledCategories) return eventList; // Show all if no filter set
-    return eventList.filter(e => {
-      const category = e.category || extractCategory(e.summary);
-      return enabledCategories.includes(category);
-    });
-  };
-  
-  // Simple category extraction for frontend (mirrors backend logic)
-  // Vklass format: 'Ämne (klass_kod)\nKod \nLärare'
-  const extractCategory = (summary) => {
-    if (!summary) return "Övrigt";
-    // Subject is before the first parenthesis
-    if (summary.includes('(')) {
-      const subject = summary.split('(')[0].trim();
-      if (subject) return subject;
-    }
-    // Fallback: first part before newline
-    if (summary.includes('\\n')) {
-      const subject = summary.split('\\n')[0].trim();
-      if (subject) return subject;
-    }
-    if (summary.includes('\n')) {
-      const subject = summary.split('\n')[0].trim();
-      if (subject) return subject;
-    }
-    return summary.trim() || "Övrigt";
-  };
-  
-  const calendar1Events = filterByCategory(events.filter(e => e.calendar_index === 1));
-  const calendar2Events = filterByCategory(events.filter(e => e.calendar_index === 2));
+  const calendar1Events = events.filter(e => e.calendar_index === 1);
+  const calendar2Events = events.filter(e => e.calendar_index === 2);
 
   const formatDateTime = (dateStr) => {
     if (!dateStr) return "";
