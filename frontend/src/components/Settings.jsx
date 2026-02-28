@@ -310,13 +310,13 @@ export const Settings = ({ settings, onUpdateSettings, onBack }) => {
                 <Lock className="w-5 h-5" />
                 Lösenordsskydd
               </CardTitle>
-              <CardDescription>Aktivera för att kräva lösenord för att komma åt appen</CardDescription>
+              <CardDescription>Aktivera för att kräva lösenord för att komma åt inställningar</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
                   <Label htmlFor="auth_enabled">Aktivera lösenordsskydd</Label>
-                  <p className="text-sm text-slate-500">Kräv lösenord vid inloggning</p>
+                  <p className="text-sm text-slate-500">Kräv lösenord för att ändra inställningar</p>
                 </div>
                 <Switch
                   id="auth_enabled"
@@ -356,6 +356,9 @@ export const Settings = ({ settings, onUpdateSettings, onBack }) => {
               )}
             </CardContent>
           </Card>
+
+          {/* Categories */}
+          <Categories settings={settings} onUpdateSettings={onUpdateSettings} />
         </form>
       </main>
     </div>
