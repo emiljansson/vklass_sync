@@ -52,7 +52,6 @@ class Settings(BaseModel):
     webpushr_auth_token: Optional[str] = ""
     auth_enabled: Optional[bool] = False
     auth_password: Optional[str] = ""
-    enabled_categories: Optional[List[str]] = []  # Categories to show on dashboard
     
     @property
     def safe_ical_url_1(self) -> str:
@@ -76,7 +75,6 @@ class SettingsUpdate(BaseModel):
     webpushr_auth_token: Optional[str] = None
     auth_enabled: Optional[bool] = None
     auth_password: Optional[str] = None
-    enabled_categories: Optional[List[str]] = None
     auth_enabled: Optional[bool] = None
     auth_password: Optional[str] = None
 
