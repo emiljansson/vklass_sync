@@ -135,10 +135,10 @@ function App() {
     try {
       await axios.post(`${API}/events/${eventId}/confirm`);
       await fetchEvents();
-      toast.success("Händelse bekräftad");
+      toast.success("Händelse bekräftad", { duration: 3000 });
     } catch (e) {
       console.error("Error confirming event:", e);
-      toast.error("Kunde inte bekräfta händelse");
+      toast.error("Kunde inte bekräfta händelse", { duration: 3000 });
     }
   };
 
