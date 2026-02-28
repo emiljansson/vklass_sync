@@ -88,6 +88,7 @@ class CalendarEvent(BaseModel):
     summary: str
     description: str = ""
     location: str = ""
+    category: str = ""  # Extracted category from summary
     start: str
     end: str
     status: str = "normal"  # new, removed, normal
