@@ -225,6 +225,7 @@ async def sync_calendars() -> SyncResult:
     
     new_count = 0
     removed_count = 0
+    new_events_details = []  # Store details for notification
     
     for cal_index in [1, 2]:
         url = settings.ical_url_1 if cal_index == 1 else settings.ical_url_2
@@ -270,6 +271,11 @@ async def sync_calendars() -> SyncResult:
                 )
                 await db.events.insert_one(new_event.model_dump())
                 new_count += 1
+                new_events_details.append({
+                    'calendar_name': cal_name,
+                    'summary': event_data['summary'],
+                    'start': event_data['start']
+                })
                 logger.info(f"New event detected: {event_data['summary']} in {cal_name}")
         
         # Find removed events (in DB but not in feed)
@@ -285,17 +291,30 @@ async def sync_calendars() -> SyncResult:
                 removed_count += 1
                 logger.info(f"Event removed: {existing['summary']} from {cal_name}")
     
-    # Send notification if changes detected
-    if new_count > 0 or removed_count > 0:
-        notification_parts = []
-        if new_count > 0:
-            notification_parts.append(f"{new_count} nya")
-        if removed_count > 0:
-            notification_parts.append(f"{removed_count} borttagna")
+    # Send notification for new events with calendar name and details
+    if new_events_details:
+        # Group events by calendar
+        cal_events = {}
+        for event in new_events_details:
+            cal_name = event['calendar_name']
+            if cal_name not in cal_events:
+                cal_events[cal_name] = []
+            cal_events[cal_name].append(event['summary'])
+        
+        # Build notification message
+        message_parts = []
+        for cal_name, summaries in cal_events.items():
+            message_parts.append(f"*{cal_name}*")
+            for summary in summaries:
+                # Clean up summary (remove newlines etc)
+                clean_summary = summary.replace('\\n', ' ').replace('\n', ' ').strip()
+                if len(clean_summary) > 100:
+                    clean_summary = clean_summary[:97] + "..."
+                message_parts.append(clean_summary)
         
         await send_webpushr_notification(
-            "Kalenderändring",
-            f"Händelser uppdaterade: {', '.join(notification_parts)}",
+            "Nya kalenderhändelser",
+            '\n'.join(message_parts),
             settings
         )
     
