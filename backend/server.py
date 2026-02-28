@@ -104,9 +104,12 @@ class SyncResult(BaseModel):
 
 # ----- Helper Functions -----
 
-def generate_event_hash(uid: str, calendar_index: int) -> str:
-    """Generate unique hash for event identification"""
-    return hashlib.md5(f"{uid}-{calendar_index}".encode()).hexdigest()
+def generate_event_key(summary: str, start: str, calendar_index: int) -> str:
+    """Generate stable unique key for event identification based on content, not UID"""
+    # Use summary + start date + calendar index to create a stable identifier
+    # This handles iCal feeds that regenerate UIDs on each request
+    key_string = f"{summary.strip().lower()}-{start}-{calendar_index}"
+    return hashlib.md5(key_string.encode()).hexdigest()
 
 async def parse_ical_feed(url: str) -> List[Dict[str, Any]]:
     """Fetch and parse iCal feed"""
@@ -123,7 +126,7 @@ async def parse_ical_feed(url: str) -> List[Dict[str, Any]]:
         
         for component in cal.walk():
             if component.name == "VEVENT":
-                uid = str(component.get('uid', ''))
+                original_uid = str(component.get('uid', ''))
                 summary = str(component.get('summary', 'Ingen titel'))
                 description = str(component.get('description', ''))
                 location = str(component.get('location', ''))
@@ -152,7 +155,7 @@ async def parse_ical_feed(url: str) -> List[Dict[str, Any]]:
                     end_str = start_str
                 
                 events.append({
-                    'uid': uid,
+                    'original_uid': original_uid,
                     'summary': summary,
                     'description': description,
                     'location': location,
