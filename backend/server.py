@@ -135,7 +135,17 @@ async def parse_ical_feed(url: str) -> List[Dict[str, Any]]:
                 dtend = component.get('dtend')
                 
                 start_dt = dtstart.dt if dtstart else None
-                end_dt = dtend.dt if dtend else start_dt
+                end_dt = dtend.dt if dtend else None
+                
+                # Check if event has both start AND end TIME (not just date)
+                # If both have time components, skip this event (it's a meeting, not a task)
+                has_start_time = start_dt and hasattr(start_dt, 'hour')
+                has_end_time = end_dt and hasattr(end_dt, 'hour')
+                
+                if has_start_time and has_end_time:
+                    # Skip events with both start and end time
+                    logger.debug(f"Skipping event with start/end time: {summary}")
+                    continue
                 
                 # Handle all-day events (date without time)
                 if start_dt:
