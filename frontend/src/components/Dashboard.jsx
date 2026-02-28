@@ -7,8 +7,29 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, authEnabled, isAuthenticated, onLogout }) => {
-  const calendar1Events = events.filter(e => e.calendar_index === 1);
-  const calendar2Events = events.filter(e => e.calendar_index === 2);
+  // Filter events by enabled categories
+  const enabledCategories = settings?.enabled_categories || [];
+  const hasEnabledCategories = enabledCategories.length > 0;
+  
+  const filterByCategory = (eventList) => {
+    if (!hasEnabledCategories) return eventList; // Show all if no filter set
+    return eventList.filter(e => {
+      const category = e.category || extractCategory(e.summary);
+      return enabledCategories.includes(category);
+    });
+  };
+  
+  // Simple category extraction for frontend (mirrors backend logic)
+  const extractCategory = (summary) => {
+    if (!summary) return "Övrigt";
+    if (summary.includes(',')) return summary.split(',')[0].trim();
+    if (summary.includes(':')) return summary.split(':')[0].trim();
+    const words = summary.split(' ');
+    return words.length <= 3 ? summary.trim() : words.slice(0, 2).join(' ');
+  };
+  
+  const calendar1Events = filterByCategory(events.filter(e => e.calendar_index === 1));
+  const calendar2Events = filterByCategory(events.filter(e => e.calendar_index === 2));
 
   const formatDateTime = (dateStr) => {
     if (!dateStr) return "";
