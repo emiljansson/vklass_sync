@@ -292,6 +292,7 @@ async def sync_calendars() -> SyncResult:
                     summary=event_data['summary'],
                     description=event_data['description'],
                     location=event_data['location'],
+                    category=event_data.get('category', extract_category(event_data['summary'])),
                     start=event_data['start'],
                     end=event_data['end'],
                     status="new",
