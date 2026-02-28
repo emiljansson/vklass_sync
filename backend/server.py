@@ -196,7 +196,9 @@ async def send_webpushr_notification(title: str, message: str, settings: Setting
         payload = {
             "title": title,
             "message": message,
-            "target_url": "https://vklass.frontproduction.se"
+            "target_url": "https://vklass.frontproduction.se",
+            "expire_push": "24h",
+            "auto_hide": 1
         }
         
         async with httpx.AsyncClient(timeout=30.0) as client:
