@@ -294,7 +294,7 @@ async def periodic_sync():
     while True:
         try:
             settings = await get_settings_from_db()
-            interval = settings.sync_interval * 60  # Convert to seconds
+            interval = (settings.sync_interval or 15) * 60  # Convert to seconds
             await asyncio.sleep(interval)
             await sync_calendars()
         except asyncio.CancelledError:
