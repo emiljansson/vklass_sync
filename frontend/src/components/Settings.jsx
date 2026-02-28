@@ -281,6 +281,24 @@ export const Settings = ({ settings, onUpdateSettings, onBack }) => {
                   </Button>
                 </div>
               </div>
+              <Separator />
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label>Testa push-notifikation</Label>
+                  <p className="text-sm text-slate-500">Skicka en testnotifikation för att verifiera inställningarna</p>
+                </div>
+                <Button
+                  type="button"
+                  data-testid="test-push-button"
+                  variant="outline"
+                  onClick={handleTestPush}
+                  disabled={testingPush || !formData.webpushr_key || !formData.webpushr_auth_token}
+                  className="gap-2"
+                >
+                  <Send className="w-4 h-4" />
+                  {testingPush ? 'Skickar...' : 'Testa'}
+                </Button>
+              </div>
             </CardContent>
           </Card>
 
