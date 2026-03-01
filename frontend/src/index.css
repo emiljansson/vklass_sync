@@ -78,7 +78,7 @@ code, .font-mono {
     }
 }
 
-/* Fallout terminal scanline effect - more visible */
+/* Fallout terminal scanline effect - subtle */
 .fallout-scanlines::before {
     content: "";
     position: fixed;
@@ -89,8 +89,8 @@ code, .font-mono {
     pointer-events: none;
     background: repeating-linear-gradient(
         0deg,
-        rgba(0, 0, 0, 0.4),
-        rgba(0, 0, 0, 0.4) 1px,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0.2) 1px,
         transparent 1px,
         transparent 3px
     );
