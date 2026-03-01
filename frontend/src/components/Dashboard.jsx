@@ -6,32 +6,45 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import axios from "axios";
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
 
 export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, authEnabled, isAuthenticated, onLogout }) => {
   const [countdown, setCountdown] = useState(null);
-  const [lastSyncTime, setLastSyncTime] = useState(() => {
-    // Try to get from localStorage or use current time
-    const saved = localStorage.getItem('lastSyncTime');
-    return saved ? parseInt(saved) : Date.now();
-  });
+  const [nextSyncTime, setNextSyncTime] = useState(null);
   const [wasSyncing, setWasSyncing] = useState(false);
   
   const calendar1Events = events.filter(e => e.calendar_index === 1);
   const calendar2Events = events.filter(e => e.calendar_index === 2);
   
+  // Fetch sync status from backend
+  const fetchSyncStatus = async () => {
+    try {
+      const response = await axios.get(`${API}/sync-status`);
+      setNextSyncTime(response.data.next_sync * 1000); // Convert to milliseconds
+    } catch (e) {
+      console.error("Error fetching sync status:", e);
+    }
+  };
+  
+  // Fetch sync status on mount
+  useEffect(() => {
+    fetchSyncStatus();
+  }, []);
+  
   // Countdown timer
   useEffect(() => {
-    const syncInterval = (settings?.sync_interval || 15) * 60; // seconds
+    if (!nextSyncTime) return;
     
     const updateCountdown = () => {
-      const elapsed = Math.floor((Date.now() - lastSyncTime) / 1000);
-      const remaining = Math.max(0, syncInterval - elapsed);
+      const now = Date.now();
+      const remaining = Math.max(0, Math.floor((nextSyncTime - now) / 1000));
       
-      // If countdown reaches 0, reset it (backend synced automatically)
+      // If countdown reaches 0, refetch sync status
       if (remaining === 0) {
-        const newTime = Date.now();
-        setLastSyncTime(newTime);
-        localStorage.setItem('lastSyncTime', newTime.toString());
+        fetchSyncStatus();
       }
       
       const minutes = Math.floor(remaining / 60);
@@ -43,14 +56,12 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     const timer = setInterval(updateCountdown, 1000);
     
     return () => clearInterval(timer);
-  }, [settings?.sync_interval, lastSyncTime]);
+  }, [nextSyncTime]);
   
-  // Reset countdown only when manual sync completes
+  // Refetch sync status when manual sync completes
   useEffect(() => {
     if (wasSyncing && !syncing) {
-      const newTime = Date.now();
-      setLastSyncTime(newTime);
-      localStorage.setItem('lastSyncTime', newTime.toString());
+      fetchSyncStatus();
     }
     setWasSyncing(syncing);
   }, [syncing, wasSyncing]);
