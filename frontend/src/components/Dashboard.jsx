@@ -310,16 +310,20 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
 
         {/* Calendar Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <CalendarColumn
-            title={settings?.calendar_name_1 || "TERMINAL 1"}
-            events={calendar1Events}
-            isEmpty={!settings?.ical_url_1}
-          />
-          <CalendarColumn
-            title={settings?.calendar_name_2 || "TERMINAL 2"}
-            events={calendar2Events}
-            isEmpty={!settings?.ical_url_2}
-          />
+          <div>
+            <CalendarColumn
+              title={settings?.calendar_name_1 || "TERMINAL 1"}
+              events={calendar1Events}
+              isEmpty={!settings?.ical_url_1}
+            />
+          </div>
+          <div>
+            <CalendarColumn
+              title={settings?.calendar_name_2 || "TERMINAL 2"}
+              events={calendar2Events}
+              isEmpty={!settings?.ical_url_2}
+            />
+          </div>
         </div>
       </main>
     </div>
