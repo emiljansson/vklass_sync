@@ -72,13 +72,13 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     try {
       const response = await axios.post(`${API}/test-push`);
       if (response.data.success) {
-        toast.success("Test-notifikation skickad!");
+        toast.success("Test-notifikation skickad!", { duration: 3000 });
       } else {
-        toast.error(response.data.message || "Kunde inte skicka notifikation");
+        toast.error(response.data.message || "Kunde inte skicka notifikation", { duration: 3000 });
       }
     } catch (e) {
       console.error("Error testing push:", e);
-      toast.error("Fel vid test av push-notifikation. Kontrollera API-nycklar.");
+      toast.error("Fel vid test av push-notifikation. Kontrollera API-nycklar.", { duration: 3000 });
     } finally {
       setTestingPush(false);
     }
