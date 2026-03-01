@@ -198,7 +198,8 @@ async def send_webpushr_notification(title: str, message: str, settings: Setting
             "message": message,
             "target_url": "https://vklass.frontproduction.se",
             "expire_push": "24h",
-            "auto_hide": 1
+            "auto_hide": 1,
+            "icon": "https://ical-sync-notify.preview.emergentagent.com/apple-touch-icon.png"
         }
         
         async with httpx.AsyncClient(timeout=30.0) as client:
