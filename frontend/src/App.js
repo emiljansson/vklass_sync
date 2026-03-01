@@ -155,7 +155,10 @@ function App() {
     <div className="min-h-screen bg-slate-50">
       <Toaster position="top-center" richColors duration={3000} />
       <AddToHomeScreen />
-      <ScreenFlicker />
+      <ScreenFlicker 
+        soundEnabled={settings?.sound_enabled !== undefined ? settings.sound_enabled : true}
+        soundVolume={settings?.sound_volume !== undefined ? settings.sound_volume : 50}
+      />
       <BrowserRouter>
         <Routes>
           {/* Dashboard is always public */}
