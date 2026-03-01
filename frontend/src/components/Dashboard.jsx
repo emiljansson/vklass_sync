@@ -264,24 +264,33 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        {/* Legend */}
-        <div className="flex flex-wrap items-center gap-4 mb-6 p-3 bg-[#141e14] rounded border border-green-500/30">
-          <span className="text-sm text-green-400 font-medium uppercase tracking-wider">Status:</span>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded bg-amber-500/30 border border-amber-500/50"></div>
-            <span className="text-sm text-green-500/70">Nytt <Check className="inline w-3 h-3 text-amber-400" /></span>
+        {/* Status & Legend */}
+        <div className="mb-6 p-4 bg-[#141e14] rounded border border-green-500/30">
+          {/* Countdown row */}
+          <div className="flex items-center justify-center gap-3 mb-3 pb-3 border-b border-green-500/20">
+            <Clock className="w-4 h-4 text-green-400" />
+            <span className="text-sm text-green-500/70 uppercase tracking-wider">Nästa koll:</span>
+            <span className="text-lg font-bold text-green-400 pip-glow font-mono">{countdown || '--:--'}</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded bg-red-500/30 border border-red-500/50"></div>
-            <span className="text-sm text-green-500/70">Borttagen (6h)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded bg-cyan-500/30 border border-cyan-500/50"></div>
-            <span className="text-sm text-green-500/70">Utfört</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded bg-green-500/20 border border-green-500/50"></div>
-            <span className="text-sm text-green-500/70">Aktiv</span>
+          
+          {/* Legend row */}
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-amber-500/30 border border-amber-500/50"></div>
+              <span className="text-sm text-green-500/70">Nytt <Check className="inline w-3 h-3 text-amber-400" /></span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-red-500/30 border border-red-500/50"></div>
+              <span className="text-sm text-green-500/70">Borttagen (6h)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-cyan-500/30 border border-cyan-500/50"></div>
+              <span className="text-sm text-green-500/70">Utfört</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded bg-green-500/20 border border-green-500/50"></div>
+              <span className="text-sm text-green-500/70">Aktiv</span>
+            </div>
           </div>
         </div>
 
