@@ -552,27 +552,7 @@ app.add_middleware(
 @app.on_event("startup")
 async def startup_event():
     global sync_task
-    import time
-    
-    # Get current settings for interval
-    settings = await get_settings_from_db()
-    interval_seconds = (settings.sync_interval or 15) * 60
-    
-    # Update sync_status to reflect when the scheduler will actually sync
-    # The scheduler waits for interval before first sync, so next_sync = now + interval
-    current_time = time.time()
-    await db.sync_status.update_one(
-        {"id": "sync_status"},
-        {"$set": {
-            "id": "sync_status",
-            "last_sync": current_time,
-            "scheduler_start": current_time
-        }},
-        upsert=True
-    )
-    logger.info(f"Sync status initialized: next sync in {interval_seconds}s")
-    
-    # Start periodic sync task
+    # Start periodic sync task (will run initial sync immediately)
     sync_task = asyncio.create_task(periodic_sync())
     logger.info("Periodic sync task started")
 
