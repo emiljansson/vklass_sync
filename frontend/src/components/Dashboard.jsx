@@ -219,7 +219,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   );
 
   return (
-    <div className="min-h-screen bg-[#0a0f0a] fallout-scanlines pip-screen">
+    <div className="min-h-screen bg-[#0a0f0a] fallout-scanlines">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#0a0f0a]/95 backdrop-blur-sm border-b border-green-500/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
