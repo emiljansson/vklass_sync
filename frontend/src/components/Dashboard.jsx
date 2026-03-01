@@ -138,8 +138,8 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const CalendarColumn = ({ title, events, isEmpty }) => (
     <div className="calendar-column">
       <div className="calendar-header">
-        <h2 className="text-xl font-bold text-slate-900 tracking-tight">{title}</h2>
-        <p className="text-sm text-slate-500 mt-1">
+        <h2 className="text-xl font-bold text-green-400 pip-glow tracking-tight">{title}</h2>
+        <p className="text-sm text-green-500/60 mt-1">
           {events.length} händelse{events.length !== 1 ? 'r' : ''}
         </p>
       </div>
@@ -147,10 +147,10 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
       <ScrollArea className="flex-1 pr-4">
         {events.length === 0 ? (
           <div className="empty-state">
-            <Calendar className="empty-state-icon" />
-            <p className="empty-state-title">Inga händelser</p>
+            <Radio className="empty-state-icon radiation-icon" />
+            <p className="empty-state-title">INGEN DATA</p>
             <p className="empty-state-description">
-              {isEmpty ? "Konfigurera iCal-länk i inställningar" : "Kalendern är tom"}
+              {isEmpty ? "Konfigurera iCal-länk i terminal" : "Väntar på signal..."}
             </p>
           </div>
         ) : (
@@ -175,14 +175,14 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   );
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-[#0a0f0a] fallout-scanlines pip-screen">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+      <header className="sticky top-0 z-50 bg-[#0a0f0a]/95 backdrop-blur-sm border-b border-green-500/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-3">
-              <Calendar className="w-6 h-6 text-slate-900" />
-              <h1 className="text-lg font-bold text-slate-900 tracking-tight">Vklass Sync</h1>
+              <Radio className="w-6 h-6 text-green-400 radiation-icon" />
+              <h1 className="text-lg font-bold text-green-400 pip-glow tracking-tight">VKLASS SYNC</h1>
             </div>
             
             <div className="flex items-center gap-2">
