@@ -328,6 +328,14 @@ async def sync_calendars() -> SyncResult:
         "status_changed_at": {"$lt": six_hours_ago}
     })
     
+    # Save sync timestamp
+    import time
+    await db.sync_status.update_one(
+        {"id": "sync_status"},
+        {"$set": {"id": "sync_status", "last_sync": time.time()}},
+        upsert=True
+    )
+    
     return SyncResult(
         success=True,
         message=f"Synkronisering klar",
