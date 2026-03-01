@@ -9,7 +9,12 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, authEnabled, isAuthenticated, onLogout }) => {
   const [countdown, setCountdown] = useState(null);
-  const [lastSync, setLastSync] = useState(Date.now());
+  const [lastSyncTime, setLastSyncTime] = useState(() => {
+    // Try to get from localStorage or use current time
+    const saved = localStorage.getItem('lastSyncTime');
+    return saved ? parseInt(saved) : Date.now();
+  });
+  const [wasSyncing, setWasSyncing] = useState(false);
   
   const calendar1Events = events.filter(e => e.calendar_index === 1);
   const calendar2Events = events.filter(e => e.calendar_index === 2);
@@ -19,8 +24,15 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     const syncInterval = (settings?.sync_interval || 15) * 60; // seconds
     
     const updateCountdown = () => {
-      const elapsed = Math.floor((Date.now() - lastSync) / 1000);
+      const elapsed = Math.floor((Date.now() - lastSyncTime) / 1000);
       const remaining = Math.max(0, syncInterval - elapsed);
+      
+      // If countdown reaches 0, reset it (backend synced automatically)
+      if (remaining === 0) {
+        const newTime = Date.now();
+        setLastSyncTime(newTime);
+        localStorage.setItem('lastSyncTime', newTime.toString());
+      }
       
       const minutes = Math.floor(remaining / 60);
       const seconds = remaining % 60;
@@ -31,14 +43,17 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     const timer = setInterval(updateCountdown, 1000);
     
     return () => clearInterval(timer);
-  }, [settings?.sync_interval, lastSync]);
+  }, [settings?.sync_interval, lastSyncTime]);
   
-  // Reset countdown when sync happens
+  // Reset countdown only when manual sync completes
   useEffect(() => {
-    if (!syncing) {
-      setLastSync(Date.now());
+    if (wasSyncing && !syncing) {
+      const newTime = Date.now();
+      setLastSyncTime(newTime);
+      localStorage.setItem('lastSyncTime', newTime.toString());
     }
-  }, [syncing, events]);
+    setWasSyncing(syncing);
+  }, [syncing, wasSyncing]);
 
   const formatDateTime = (dateStr) => {
     if (!dateStr) return "";
