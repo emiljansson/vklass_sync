@@ -49,8 +49,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
         auth_enabled: settings.auth_enabled || false,
         auth_password: settings.auth_password || "",
         sound_enabled: settings.sound_enabled !== undefined ? settings.sound_enabled : true,
-        sound_volume: settings.sound_volume !== undefined ? settings.sound_volume : 50,
-        screen_wake_lock: settings.screen_wake_lock || false
+        sound_volume: settings.sound_volume !== undefined ? settings.sound_volume : 50
       });
     }
   }, [settings]);
