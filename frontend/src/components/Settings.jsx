@@ -92,9 +92,9 @@ export const Settings = ({ settings, onUpdateSettings }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-[#0a0f0a] fallout-scanlines">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+      <header className="sticky top-0 z-50 bg-[#0a0f0a]/95 backdrop-blur-sm border-b border-green-500/30">
         <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-3">
@@ -103,20 +103,21 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                 variant="ghost"
                 size="icon"
                 onClick={() => navigate('/')}
+                className="text-green-400 hover:bg-green-500/10 hover:text-green-300"
               >
                 <ArrowLeft className="w-5 h-5" />
               </Button>
-              <h1 className="text-lg font-bold text-slate-900 tracking-tight">Inställningar</h1>
+              <h1 className="text-lg font-bold text-green-400 pip-glow tracking-tight">INSTÄLLNINGAR</h1>
             </div>
             
             <Button
               data-testid="save-settings-button"
               onClick={handleSubmit}
               disabled={saving}
-              className="gap-2"
+              className="gap-2 bg-green-600 hover:bg-green-500 text-black font-bold"
             >
               <Save className="w-4 h-4" />
-              {saving ? 'Sparar...' : 'Spara'}
+              {saving ? 'SPARAR...' : 'SPARA'}
             </Button>
           </div>
         </div>
@@ -126,19 +127,19 @@ export const Settings = ({ settings, onUpdateSettings }) => {
       <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Sound Settings */}
-          <Card>
+          <Card className="bg-[#141e14] border-2 border-green-500/40">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-green-400">
                 {formData.sound_enabled ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
                 Ljudeffekter
               </CardTitle>
-              <CardDescription>Kontrollera ljudeffekter för screen flicker</CardDescription>
+              <CardDescription className="text-green-500/60">Kontrollera ljudeffekter för screen flicker</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label htmlFor="sound_enabled">Ljud på/av</Label>
-                  <p className="text-sm text-slate-500">Aktivera elektriska ljudeffekter</p>
+                  <Label htmlFor="sound_enabled" className="text-green-400">Ljud på/av</Label>
+                  <p className="text-sm text-green-500/60">Aktivera elektriska ljudeffekter</p>
                 </div>
                 <Switch
                   id="sound_enabled"
@@ -150,11 +151,11 @@ export const Settings = ({ settings, onUpdateSettings }) => {
               
               {formData.sound_enabled && (
                 <>
-                  <Separator />
+                  <Separator className="bg-green-500/20" />
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <Label htmlFor="sound_volume">Volym</Label>
-                      <span className="text-sm text-slate-500">{formData.sound_volume}%</span>
+                      <Label htmlFor="sound_volume" className="text-green-400">Volym</Label>
+                      <span className="text-sm text-green-500/60">{formData.sound_volume}%</span>
                     </div>
                     <Slider
                       id="sound_volume"
@@ -173,19 +174,19 @@ export const Settings = ({ settings, onUpdateSettings }) => {
           </Card>
 
           {/* Screen Wake Lock Settings */}
-          <Card>
+          <Card className="bg-[#141e14] border-2 border-green-500/40">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-green-400">
                 <Monitor className="w-5 h-5" />
                 Skärm
               </CardTitle>
-              <CardDescription>Förhindra att skärmen släcks automatiskt</CardDescription>
+              <CardDescription className="text-green-500/60">Förhindra att skärmen släcks automatiskt</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label htmlFor="screen_wake_lock">Håll skärmen vaken</Label>
-                  <p className="text-sm text-slate-500">Förhindrar att skärmen går i viloläge</p>
+                  <Label htmlFor="screen_wake_lock" className="text-green-400">Håll skärmen vaken</Label>
+                  <p className="text-sm text-green-500/60">Förhindrar att skärmen går i viloläge</p>
                 </div>
                 <Switch
                   id="screen_wake_lock"
@@ -198,27 +199,28 @@ export const Settings = ({ settings, onUpdateSettings }) => {
           </Card>
 
           {/* Calendar 1 Settings */}
-          <Card>
+          <Card className="bg-[#141e14] border-2 border-green-500/40">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-green-400">
                 <LinkIcon className="w-5 h-5" />
                 Kalender 1
               </CardTitle>
-              <CardDescription>Konfigurera första kalenderns iCal-länk och namn</CardDescription>
+              <CardDescription className="text-green-500/60">Konfigurera första kalenderns iCal-länk och namn</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="calendar_name_1">Kalendernamn</Label>
+                <Label htmlFor="calendar_name_1" className="text-green-400">Kalendernamn</Label>
                 <Input
                   id="calendar_name_1"
                   data-testid="calendar-name-1-input"
                   value={formData.calendar_name_1}
                   onChange={(e) => handleChange('calendar_name_1', e.target.value)}
                   placeholder="T.ex. Arbete"
+                  className="bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40 focus:border-green-400"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="ical_url_1">iCal URL</Label>
+                <Label htmlFor="ical_url_1" className="text-green-400">iCal URL</Label>
                 <Input
                   id="ical_url_1"
                   data-testid="ical-url-1-input"
@@ -226,33 +228,35 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                   value={formData.ical_url_1}
                   onChange={(e) => handleChange('ical_url_1', e.target.value)}
                   placeholder="https://calendar.google.com/calendar/ical/..."
+                  className="bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40 focus:border-green-400"
                 />
               </div>
             </CardContent>
           </Card>
 
           {/* Calendar 2 Settings */}
-          <Card>
+          <Card className="bg-[#141e14] border-2 border-green-500/40">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-green-400">
                 <LinkIcon className="w-5 h-5" />
                 Kalender 2
               </CardTitle>
-              <CardDescription>Konfigurera andra kalenderns iCal-länk och namn</CardDescription>
+              <CardDescription className="text-green-500/60">Konfigurera andra kalenderns iCal-länk och namn</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="calendar_name_2">Kalendernamn</Label>
+                <Label htmlFor="calendar_name_2" className="text-green-400">Kalendernamn</Label>
                 <Input
                   id="calendar_name_2"
                   data-testid="calendar-name-2-input"
                   value={formData.calendar_name_2}
                   onChange={(e) => handleChange('calendar_name_2', e.target.value)}
                   placeholder="T.ex. Privat"
+                  className="bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40 focus:border-green-400"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="ical_url_2">iCal URL</Label>
+                <Label htmlFor="ical_url_2" className="text-green-400">iCal URL</Label>
                 <Input
                   id="ical_url_2"
                   data-testid="ical-url-2-input"
@@ -260,33 +264,34 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                   value={formData.ical_url_2}
                   onChange={(e) => handleChange('ical_url_2', e.target.value)}
                   placeholder="https://calendar.google.com/calendar/ical/..."
+                  className="bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40 focus:border-green-400"
                 />
               </div>
             </CardContent>
           </Card>
 
           {/* Sync Settings */}
-          <Card>
+          <Card className="bg-[#141e14] border-2 border-green-500/40">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-green-400">
                 <Clock className="w-5 h-5" />
                 Synkronisering
               </CardTitle>
-              <CardDescription>Hur ofta ska kalendrarna uppdateras</CardDescription>
+              <CardDescription className="text-green-500/60">Hur ofta ska kalendrarna uppdateras</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
-                <Label htmlFor="sync_interval">Uppdateringsintervall</Label>
+                <Label htmlFor="sync_interval" className="text-green-400">Uppdateringsintervall</Label>
                 <Select
                   value={String(formData.sync_interval)}
                   onValueChange={(value) => handleChange('sync_interval', parseInt(value))}
                 >
-                  <SelectTrigger data-testid="sync-interval-select">
+                  <SelectTrigger data-testid="sync-interval-select" className="bg-[#0a0f0a] border-green-500/40 text-green-400">
                     <SelectValue placeholder="Välj intervall" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-[#141e14] border-green-500/40">
                     {intervalOptions.map(option => (
-                      <SelectItem key={option.value} value={String(option.value)}>
+                      <SelectItem key={option.value} value={String(option.value)} className="text-green-400 focus:bg-green-500/20 focus:text-green-300">
                         {option.label}
                       </SelectItem>
                     ))}
@@ -297,19 +302,19 @@ export const Settings = ({ settings, onUpdateSettings }) => {
           </Card>
 
           {/* Webpushr Settings */}
-          <Card>
+          <Card className="bg-[#141e14] border-2 border-green-500/40">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-green-400">
                 <Bell className="w-5 h-5" />
                 Push-notifikationer (Webpushr)
               </CardTitle>
-              <CardDescription>
+              <CardDescription className="text-green-500/60">
                 Konfigurera Webpushr för att få push-notifikationer vid ändringar.{" "}
                 <a 
                   href="https://www.webpushr.com/docs/introduction-to-rest-api" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
+                  className="text-green-400 hover:underline"
                 >
                   Hämta API-nycklar här
                 </a>
@@ -317,7 +322,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="webpushr_key">Webpushr API Key</Label>
+                <Label htmlFor="webpushr_key" className="text-green-400">Webpushr API Key</Label>
                 <div className="relative">
                   <Input
                     id="webpushr_key"
@@ -326,13 +331,13 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                     value={formData.webpushr_key}
                     onChange={(e) => handleChange('webpushr_key', e.target.value)}
                     placeholder="Din webpushrKey"
-                    className="pr-10"
+                    className="pr-10 bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40 focus:border-green-400"
                   />
                   <Button
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="absolute right-0 top-0 h-full"
+                    className="absolute right-0 top-0 h-full text-green-400 hover:bg-green-500/10"
                     onClick={() => setShowWebpushrKey(!showWebpushrKey)}
                   >
                     {showWebpushrKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
@@ -340,7 +345,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                 </div>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="webpushr_auth_token">Webpushr Auth Token</Label>
+                <Label htmlFor="webpushr_auth_token" className="text-green-400">Webpushr Auth Token</Label>
                 <div className="relative">
                   <Input
                     id="webpushr_auth_token"
@@ -349,24 +354,24 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                     value={formData.webpushr_auth_token}
                     onChange={(e) => handleChange('webpushr_auth_token', e.target.value)}
                     placeholder="Din webpushrAuthToken"
-                    className="pr-10"
+                    className="pr-10 bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40 focus:border-green-400"
                   />
                   <Button
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="absolute right-0 top-0 h-full"
+                    className="absolute right-0 top-0 h-full text-green-400 hover:bg-green-500/10"
                     onClick={() => setShowWebpushrToken(!showWebpushrToken)}
                   >
                     {showWebpushrToken ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </Button>
                 </div>
               </div>
-              <Separator />
+              <Separator className="bg-green-500/20" />
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label>Testa push-notifikation</Label>
-                  <p className="text-sm text-slate-500">Skicka en testnotifikation för att verifiera inställningarna</p>
+                  <Label className="text-green-400">Testa push-notifikation</Label>
+                  <p className="text-sm text-green-500/60">Skicka en testnotifikation för att verifiera inställningarna</p>
                 </div>
                 <Button
                   type="button"
@@ -374,7 +379,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                   variant="outline"
                   onClick={handleTestPush}
                   disabled={testingPush || !formData.webpushr_key || !formData.webpushr_auth_token}
-                  className="gap-2"
+                  className="gap-2 border-green-500/40 text-green-400 hover:bg-green-500/10 hover:text-green-300"
                 >
                   <Send className="w-4 h-4" />
                   {testingPush ? 'Skickar...' : 'Testa'}
@@ -384,19 +389,19 @@ export const Settings = ({ settings, onUpdateSettings }) => {
           </Card>
 
           {/* Auth Settings */}
-          <Card>
+          <Card className="bg-[#141e14] border-2 border-green-500/40">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+              <CardTitle className="flex items-center gap-2 text-green-400">
                 <Lock className="w-5 h-5" />
                 Lösenordsskydd
               </CardTitle>
-              <CardDescription>Aktivera för att kräva lösenord för att komma åt inställningar</CardDescription>
+              <CardDescription className="text-green-500/60">Aktivera för att kräva lösenord för att komma åt inställningar</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">
-                  <Label htmlFor="auth_enabled">Aktivera lösenordsskydd</Label>
-                  <p className="text-sm text-slate-500">Kräv lösenord för att ändra inställningar</p>
+                  <Label htmlFor="auth_enabled" className="text-green-400">Aktivera lösenordsskydd</Label>
+                  <p className="text-sm text-green-500/60">Kräv lösenord för att ändra inställningar</p>
                 </div>
                 <Switch
                   id="auth_enabled"
@@ -408,9 +413,9 @@ export const Settings = ({ settings, onUpdateSettings }) => {
               
               {formData.auth_enabled && (
                 <>
-                  <Separator />
+                  <Separator className="bg-green-500/20" />
                   <div className="space-y-2">
-                    <Label htmlFor="auth_password">Lösenord</Label>
+                    <Label htmlFor="auth_password" className="text-green-400">Lösenord</Label>
                     <div className="relative">
                       <Input
                         id="auth_password"
@@ -419,13 +424,13 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                         value={formData.auth_password}
                         onChange={(e) => handleChange('auth_password', e.target.value)}
                         placeholder="Ange lösenord"
-                        className="pr-10"
+                        className="pr-10 bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40 focus:border-green-400"
                       />
                       <Button
                         type="button"
                         variant="ghost"
                         size="icon"
-                        className="absolute right-0 top-0 h-full"
+                        className="absolute right-0 top-0 h-full text-green-400 hover:bg-green-500/10"
                         onClick={() => setShowPassword(!showPassword)}
                       >
                         {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
