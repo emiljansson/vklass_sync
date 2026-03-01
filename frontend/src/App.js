@@ -160,6 +160,7 @@ function App() {
         soundEnabled={settings?.sound_enabled !== undefined ? settings.sound_enabled : true}
         soundVolume={settings?.sound_volume !== undefined ? settings.sound_volume : 50}
       />
+      <WakeLock enabled={settings?.screen_wake_lock || false} />
       <BrowserRouter>
         <Routes>
           {/* Dashboard is always public */}
