@@ -181,7 +181,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   );
 
   const CalendarColumn = ({ title, events, isEmpty }) => (
-    <div className="flex flex-col gap-[5px]">
+    <div className="flex flex-col gap-2">
       {/* Header box */}
       <div className="bg-[#1a2a1a] rounded-lg border-2 border-green-500/50 border-t-4 border-t-green-400 px-4 py-4">
         <h2 className="text-xl font-bold text-green-400 pip-glow tracking-tight">{title}</h2>
