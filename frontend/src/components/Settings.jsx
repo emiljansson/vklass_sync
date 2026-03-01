@@ -290,13 +290,12 @@ export const Settings = ({ settings, onUpdateSettings }) => {
               <div className="space-y-2">
                 <Label htmlFor="sync_interval" className="text-green-400">Uppdateringsintervall</Label>
                 <Select
-                  value={formData.sync_interval ? String(formData.sync_interval) : "15"}
+                  key={formData.sync_interval}
+                  defaultValue={String(formData.sync_interval)}
                   onValueChange={(value) => handleChange('sync_interval', parseInt(value))}
                 >
                   <SelectTrigger data-testid="sync-interval-select" className="bg-[#0a0f0a] border-green-500/40 text-green-400">
-                    <SelectValue>
-                      {getIntervalLabel()}
-                    </SelectValue>
+                    <SelectValue placeholder="Välj intervall" />
                   </SelectTrigger>
                   <SelectContent className="bg-[#141e14] border-green-500/40">
                     {intervalOptions.map(option => (
