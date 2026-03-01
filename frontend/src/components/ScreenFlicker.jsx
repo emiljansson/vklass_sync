@@ -144,12 +144,12 @@ export const ScreenFlicker = () => {
       for (let i = 0; i < blinks; i++) {
         setFlickering(true);
         
-        // Play spark sound if audio is enabled
+        // Play buzz sound if audio is enabled
         if (audioContextRef.current && userInteractedRef.current) {
           if (audioContextRef.current.state === 'suspended') {
             audioContextRef.current.resume();
           }
-          playElectricalSpark(audioContextRef.current);
+          playElectricalBuzz(audioContextRef.current);
         }
         
         await new Promise(r => setTimeout(r, 50 + Math.random() * 100));
