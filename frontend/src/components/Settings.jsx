@@ -123,6 +123,53 @@ export const Settings = ({ settings, onUpdateSettings }) => {
       {/* Main Content */}
       <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Sound Settings */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                {formData.sound_enabled ? <Volume2 className="w-5 h-5" /> : <VolumeX className="w-5 h-5" />}
+                Ljudeffekter
+              </CardTitle>
+              <CardDescription>Kontrollera ljudeffekter för screen flicker</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label htmlFor="sound_enabled">Ljud på/av</Label>
+                  <p className="text-sm text-slate-500">Aktivera elektriska ljudeffekter</p>
+                </div>
+                <Switch
+                  id="sound_enabled"
+                  data-testid="sound-enabled-switch"
+                  checked={formData.sound_enabled}
+                  onCheckedChange={(checked) => handleChange('sound_enabled', checked)}
+                />
+              </div>
+              
+              {formData.sound_enabled && (
+                <>
+                  <Separator />
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <Label htmlFor="sound_volume">Volym</Label>
+                      <span className="text-sm text-slate-500">{formData.sound_volume}%</span>
+                    </div>
+                    <Slider
+                      id="sound_volume"
+                      data-testid="sound-volume-slider"
+                      value={[formData.sound_volume]}
+                      onValueChange={(value) => handleChange('sound_volume', value[0])}
+                      max={100}
+                      min={0}
+                      step={5}
+                      className="w-full"
+                    />
+                  </div>
+                </>
+              )}
+            </CardContent>
+          </Card>
+
           {/* Calendar 1 Settings */}
           <Card>
             <CardHeader>
