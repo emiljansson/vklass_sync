@@ -310,7 +310,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
         </div>
 
         {/* Calendar Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <CalendarColumn
             title={settings?.calendar_name_1 || "TERMINAL 1"}
             events={calendar1Events}
