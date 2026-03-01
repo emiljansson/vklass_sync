@@ -28,7 +28,8 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     auth_enabled: false,
     auth_password: "",
     sound_enabled: true,
-    sound_volume: 50
+    sound_volume: 50,
+    screen_wake_lock: false
   });
   const [saving, setSaving] = useState(false);
   const [testingPush, setTestingPush] = useState(false);
