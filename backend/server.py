@@ -354,8 +354,23 @@ async def periodic_sync():
         try:
             settings = await get_settings_from_db()
             interval = (settings.sync_interval or 15) * 60  # Convert to seconds
+            
+            # Wait for the interval
             await asyncio.sleep(interval)
+            
+            # Run the sync
+            logger.info("Running scheduled sync...")
             await sync_calendars()
+            
+            # Update sync_status with new last_sync time
+            import time
+            await db.sync_status.update_one(
+                {"id": "sync_status"},
+                {"$set": {"id": "sync_status", "last_sync": time.time()}},
+                upsert=True
+            )
+            logger.info("Scheduled sync completed, sync_status updated")
+            
         except asyncio.CancelledError:
             break
         except Exception as e:
