@@ -122,7 +122,7 @@ function App() {
       if (response.data.new_events > 0 || response.data.removed_events > 0) {
         toast.success(`Synkronisering klar: ${response.data.new_events} nya, ${response.data.removed_events} borttagna`, { duration: 3000 });
       } else {
-        toast.info("Inga ändringar hittades", { duration: 3000 });
+        toast.success("Inga ändringar hittades", { duration: 3000 });
       }
     } catch (e) {
       console.error("Error syncing:", e);
