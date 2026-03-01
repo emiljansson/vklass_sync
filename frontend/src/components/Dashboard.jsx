@@ -119,7 +119,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const EventCard = ({ event }) => (
     <Card 
       data-testid={`event-card-${event.id}`}
-      className={`event-card relative border transition-all duration-200 bg-[#141e14] border-green-500/30 ${getStatusStyles(event.status, event.start)}`}
+      className={`event-card relative transition-all duration-200 bg-[#0f1a0f] rounded-lg border-2 border-green-500/40 ${getStatusStyles(event.status, event.start)}`}
     >
       <CardContent className="p-4">
         <div className="flex items-start justify-between gap-2">
