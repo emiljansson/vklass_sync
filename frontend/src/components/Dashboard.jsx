@@ -137,7 +137,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
 
   const CalendarColumn = ({ title, events, isEmpty }) => (
     <div className="calendar-column">
-      <div className="calendar-header">
+      <div className="calendar-header border-t-4 border-green-500 px-4 pt-4">
         <h2 className="text-xl font-bold text-green-400 pip-glow tracking-tight">{title}</h2>
         <p className="text-sm text-green-500/60 mt-1">
           {events.length} händelse{events.length !== 1 ? 'r' : ''}
