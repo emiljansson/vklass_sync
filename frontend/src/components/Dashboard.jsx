@@ -11,7 +11,7 @@ import axios from "axios";
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, authEnabled, isAuthenticated, onLogout }) => {
+export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, authEnabled, isAuthenticated, onLogout, onRefreshEvents }) => {
   const [countdown, setCountdown] = useState(null);
   const [nextSyncTime, setNextSyncTime] = useState(null);
   const [wasSyncing, setWasSyncing] = useState(false);
