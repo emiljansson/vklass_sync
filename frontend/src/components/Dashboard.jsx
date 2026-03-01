@@ -24,8 +24,10 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     try {
       const response = await axios.get(`${API}/sync-status`);
       setNextSyncTime(response.data.next_sync * 1000); // Convert to milliseconds
+      return response.data;
     } catch (e) {
       console.error("Error fetching sync status:", e);
+      return null;
     }
   };
   
@@ -38,18 +40,35 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   useEffect(() => {
     if (!nextSyncTime) return;
     
-    const updateCountdown = () => {
+    let isPolling = false;
+    
+    const updateCountdown = async () => {
       const now = Date.now();
       const remaining = Math.max(0, Math.floor((nextSyncTime - now) / 1000));
-      
-      // If countdown reaches 0, refetch sync status
-      if (remaining === 0) {
-        fetchSyncStatus();
-      }
       
       const minutes = Math.floor(remaining / 60);
       const seconds = remaining % 60;
       setCountdown(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+      
+      // If countdown reaches 0, poll for updated sync status
+      if (remaining === 0 && !isPolling) {
+        isPolling = true;
+        
+        // Poll every 2 seconds until we get a new next_sync time
+        const pollForNewSync = async () => {
+          const status = await fetchSyncStatus();
+          if (status && status.next_sync * 1000 > now) {
+            // Got a new sync time in the future, stop polling
+            isPolling = false;
+          } else {
+            // Backend hasn't synced yet, try again in 2 seconds
+            setTimeout(pollForNewSync, 2000);
+          }
+        };
+        
+        // Wait a moment for backend to complete sync, then start polling
+        setTimeout(pollForNewSync, 1000);
+      }
     };
     
     updateCountdown();
