@@ -4,117 +4,137 @@ import { useState, useEffect, useRef } from "react";
 const playElectricalBuzz = (audioContext) => {
   const duration = 0.1 + Math.random() * 0.15;
   const now = audioContext.currentTime;
-  const volume = 0.25 + Math.random() * 0.1; // Medium volume
+  const volume = 0.22 + Math.random() * 0.1;
   
   // Main gain node
   const mainGain = audioContext.createGain();
   mainGain.connect(audioContext.destination);
   mainGain.gain.setValueAtTime(0, now);
-  mainGain.gain.linearRampToValueAtTime(volume, now + 0.01);
-  mainGain.gain.setValueAtTime(volume, now + duration - 0.02);
+  mainGain.gain.linearRampToValueAtTime(volume, now + 0.008);
+  mainGain.gain.setValueAtTime(volume, now + duration - 0.03);
   mainGain.gain.linearRampToValueAtTime(0, now + duration);
   
-  // Higher base frequency for more buzz
+  // Base frequency with slight randomness
   const baseFreq = 300 + Math.random() * 150;
   
-  // Oscillator 1: Base buzz
-  const osc1 = audioContext.createOscillator();
-  osc1.type = 'sawtooth';
-  osc1.frequency.value = baseFreq;
+  // Waveshaper for analog warmth/distortion
+  const waveshaper = audioContext.createWaveShaper();
+  const curve = new Float32Array(256);
+  for (let i = 0; i < 256; i++) {
+    const x = (i / 128) - 1;
+    curve[i] = Math.tanh(x * 2) * 0.8 + x * 0.2; // Soft saturation
+  }
+  waveshaper.curve = curve;
+  waveshaper.oversample = '2x';
   
-  // Oscillator 2: Higher harmonic
-  const osc2 = audioContext.createOscillator();
-  osc2.type = 'square';
-  osc2.frequency.value = baseFreq * 2;
+  // Multiple detuned oscillators for thickness
+  const oscillators = [];
+  const gains = [];
+  const detunes = [-12, -5, 0, 5, 8, 15]; // Slight detuning for analog feel
+  const types = ['sawtooth', 'square', 'sawtooth', 'triangle', 'square', 'sawtooth'];
+  const volumes = [0.25, 0.2, 0.3, 0.15, 0.15, 0.1];
   
-  // Oscillator 3: Even higher for more buzz texture
-  const osc3 = audioContext.createOscillator();
-  osc3.type = 'sawtooth';
-  osc3.frequency.value = baseFreq * 3 + Math.random() * 30;
+  detunes.forEach((detune, i) => {
+    const osc = audioContext.createOscillator();
+    osc.type = types[i];
+    osc.frequency.value = baseFreq * (i < 3 ? 1 : 2); // Some at base, some at octave
+    osc.detune.value = detune + (Math.random() - 0.5) * 10;
+    
+    const gain = audioContext.createGain();
+    gain.gain.value = volumes[i];
+    
+    osc.connect(gain);
+    oscillators.push(osc);
+    gains.push(gain);
+  });
   
-  // Oscillator 4: High frequency buzz component
-  const osc4 = audioContext.createOscillator();
-  osc4.type = 'square';
-  osc4.frequency.value = baseFreq * 5 + Math.random() * 50;
+  // Pitch wobble LFO (analog instability)
+  const pitchLfo = audioContext.createOscillator();
+  pitchLfo.type = 'sine';
+  pitchLfo.frequency.value = 4 + Math.random() * 8;
   
-  // LFO for tremolo/flutter effect (makes it sound unstable)
-  const lfo = audioContext.createOscillator();
-  lfo.type = 'sine';
-  lfo.frequency.value = 20 + Math.random() * 35; // Fast flutter
+  const pitchLfoGain = audioContext.createGain();
+  pitchLfoGain.gain.value = 8 + Math.random() * 12; // Cents of wobble
   
-  const lfoGain = audioContext.createGain();
-  lfoGain.gain.value = 0.4;
+  pitchLfo.connect(pitchLfoGain);
+  oscillators.forEach(osc => {
+    pitchLfoGain.connect(osc.detune);
+  });
   
-  lfo.connect(lfoGain);
-  lfoGain.connect(mainGain.gain);
+  // Amplitude tremolo (unstable power)
+  const tremoloLfo = audioContext.createOscillator();
+  tremoloLfo.type = 'triangle';
+  tremoloLfo.frequency.value = 18 + Math.random() * 30;
   
-  // Gain nodes for mixing oscillators - more emphasis on higher harmonics
-  const gain1 = audioContext.createGain();
-  gain1.gain.value = 0.35;
+  const tremoloGain = audioContext.createGain();
+  tremoloGain.gain.value = 0.35;
   
-  const gain2 = audioContext.createGain();
-  gain2.gain.value = 0.3;
+  tremoloLfo.connect(tremoloGain);
+  tremoloGain.connect(mainGain.gain);
   
-  const gain3 = audioContext.createGain();
-  gain3.gain.value = 0.25;
+  // Mixer before filter
+  const mixer = audioContext.createGain();
+  mixer.gain.value = 1.2;
   
-  const gain4 = audioContext.createGain();
-  gain4.gain.value = 0.15;
+  gains.forEach(g => g.connect(mixer));
   
-  // Higher lowpass filter for brighter buzz
-  const lowpass = audioContext.createBiquadFilter();
-  lowpass.type = 'lowpass';
-  lowpass.frequency.value = 800 + Math.random() * 400;
-  lowpass.Q.value = 2;
+  // Resonant filter for character
+  const filter = audioContext.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.value = 1200 + Math.random() * 600;
+  filter.Q.value = 3 + Math.random() * 4;
   
-  // Add noise for texture
+  // Filter wobble
+  const filterLfo = audioContext.createOscillator();
+  filterLfo.type = 'sine';
+  filterLfo.frequency.value = 6 + Math.random() * 10;
+  
+  const filterLfoGain = audioContext.createGain();
+  filterLfoGain.gain.value = 300;
+  
+  filterLfo.connect(filterLfoGain);
+  filterLfoGain.connect(filter.frequency);
+  
+  // Noise layer for grit
   const noiseBuffer = audioContext.createBuffer(1, audioContext.sampleRate * duration, audioContext.sampleRate);
   const noiseData = noiseBuffer.getChannelData(0);
   for (let i = 0; i < noiseData.length; i++) {
-    noiseData[i] = (Math.random() * 2 - 1) * 0.15;
+    // Pink-ish noise with occasional crackles
+    const crackle = Math.random() > 0.98 ? (Math.random() - 0.5) * 2 : 0;
+    noiseData[i] = (Math.random() * 2 - 1) * 0.3 + crackle;
   }
   const noiseSource = audioContext.createBufferSource();
   noiseSource.buffer = noiseBuffer;
   
   const noiseFilter = audioContext.createBiquadFilter();
   noiseFilter.type = 'bandpass';
-  noiseFilter.frequency.value = 500;
-  noiseFilter.Q.value = 1;
+  noiseFilter.frequency.value = 600 + Math.random() * 400;
+  noiseFilter.Q.value = 1.5;
   
   const noiseGain = audioContext.createGain();
-  noiseGain.gain.value = 0.2;
+  noiseGain.gain.value = 0.25;
   
-  // Connect everything
-  osc1.connect(gain1);
-  osc2.connect(gain2);
-  osc3.connect(gain3);
-  osc4.connect(gain4);
-  
-  gain1.connect(lowpass);
-  gain2.connect(lowpass);
-  gain3.connect(lowpass);
-  gain4.connect(lowpass);
+  // Connect signal chain
+  mixer.connect(waveshaper);
+  waveshaper.connect(filter);
+  filter.connect(mainGain);
   
   noiseSource.connect(noiseFilter);
   noiseFilter.connect(noiseGain);
   noiseGain.connect(mainGain);
   
-  lowpass.connect(mainGain);
-  
-  // Start all oscillators
-  osc1.start(now);
-  osc2.start(now);
-  osc3.start(now);
-  osc4.start(now);
-  lfo.start(now);
+  // Start everything
+  oscillators.forEach(osc => osc.start(now));
+  pitchLfo.start(now);
+  tremoloLfo.start(now);
+  filterLfo.start(now);
   noiseSource.start(now);
   
-  // Stop all
-  osc1.stop(now + duration);
-  osc2.stop(now + duration);
-  osc3.stop(now + duration);
-  osc4.stop(now + duration);
-  lfo.stop(now + duration);
+  // Stop everything
+  oscillators.forEach(osc => osc.stop(now + duration));
+  pitchLfo.stop(now + duration);
+  tremoloLfo.stop(now + duration);
+  filterLfo.stop(now + duration);
   noiseSource.stop(now + duration);
 };
 
