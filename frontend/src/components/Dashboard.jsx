@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Settings as SettingsIcon, RefreshCw, LogOut, Calendar, MapPin, Check, Lock } from "lucide-react";
+import { Settings as SettingsIcon, RefreshCw, LogOut, Calendar, MapPin, Check, Lock, Radio } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -43,29 +43,29 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const getStatusStyles = (status, start) => {
     // Check if event is in the past (already occurred)
     if (isEventPast(start) && status !== 'removed') {
-      return 'bg-sky-100 border-sky-200';
+      return 'event-card-past';
     }
     
     switch (status) {
       case 'new':
-        return 'bg-rose-50 border-rose-200 hover:bg-rose-100';
+        return 'event-card-new';
       case 'removed':
-        return 'bg-blue-50 border-blue-200 opacity-80';
+        return 'event-card-removed';
       default:
-        return 'bg-white border-slate-200 hover:bg-slate-50';
+        return 'bg-[#141e14] border-green-900/50 hover:border-green-500/50';
     }
   };
 
   const getStatusBadge = (status, start) => {
     if (isEventPast(start) && status !== 'removed') {
-      return <Badge className="bg-sky-200 text-sky-800">Passerad</Badge>;
+      return <Badge className="bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 uppercase text-xs tracking-wider">Utfört</Badge>;
     }
     
     switch (status) {
       case 'new':
-        return <Badge className="bg-rose-100 text-rose-700 hover:bg-rose-200">Ny</Badge>;
+        return <Badge className="bg-amber-500/20 text-amber-400 border border-amber-500/30 uppercase text-xs tracking-wider">Nytt</Badge>;
       case 'removed':
-        return <Badge className="bg-blue-100 text-blue-700 hover:bg-blue-200">Borttagen</Badge>;
+        return <Badge className="bg-red-500/20 text-red-400 border border-red-500/30 uppercase text-xs tracking-wider">Borttagen</Badge>;
       default:
         return null;
     }
