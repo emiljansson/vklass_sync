@@ -202,7 +202,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           </div>
         </div>
       ) : (
-        <div className="flex flex-col gap-[5px]">
+        <div className="flex flex-col gap-2">
           {events
             .sort((a, b) => {
               const statusOrder = { new: 0, normal: 1, removed: 2 };
