@@ -289,7 +289,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           </div>
           
           {/* Legend row */}
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="flex items-center justify-center gap-4 overflow-x-auto whitespace-nowrap">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded bg-amber-500/30 border border-amber-500/50"></div>
               <span className="text-sm text-green-500/70">Nytt <Check className="inline w-3 h-3 text-amber-400" /></span>
