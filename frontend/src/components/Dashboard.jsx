@@ -252,23 +252,15 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded bg-green-500/20 border border-green-500/50"></div>
             <span className="text-sm text-green-500/70">Aktiv</span>
-          </div>
-        </div>
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded bg-white border border-slate-300"></div>
-            <span className="text-sm text-slate-600">Normal</span>
-          </div>
-        </div>
-
         {/* Calendar Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           <CalendarColumn
-            title={settings?.calendar_name_1 || "Kalender 1"}
+            title={settings?.calendar_name_1 || "TERMINAL 1"}
             events={calendar1Events}
             isEmpty={!settings?.ical_url_1}
           />
           <CalendarColumn
-            title={settings?.calendar_name_2 || "Kalender 2"}
+            title={settings?.calendar_name_2 || "TERMINAL 2"}
             events={calendar2Events}
             isEmpty={!settings?.ical_url_2}
           />
