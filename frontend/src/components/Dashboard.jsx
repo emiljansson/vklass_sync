@@ -45,14 +45,23 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     
     const updateCountdown = () => {
       const now = Date.now();
-      const remaining = Math.max(0, Math.floor((nextSyncTime - now) / 1000));
+      let remaining = Math.max(0, Math.floor((nextSyncTime - now) / 1000));
+      
+      // Round up to nearest minute if within 10 seconds of a full minute
+      // This makes the display cleaner (05:00 instead of 04:55)
+      const secondsIntoMinute = remaining % 60;
+      if (secondsIntoMinute >= 50) {
+        remaining = remaining + (60 - secondsIntoMinute);
+      }
       
       const minutes = Math.floor(remaining / 60);
       const seconds = remaining % 60;
       setCountdown(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
       
       // If countdown reaches 0, poll for updated sync status
-      if (remaining === 0 && !isPolling) {
+      // Use original calculation for logic (not rounded)
+      const actualRemaining = Math.max(0, Math.floor((nextSyncTime - now) / 1000));
+      if (actualRemaining === 0 && !isPolling) {
         isPolling = true;
         
         // Poll every 2 seconds until we get a new next_sync time
