@@ -5,7 +5,8 @@
 
 /* Fallout App specific styles */
 .calendar-column {
-    @apply flex flex-col h-full;
+    display: flex;
+    flex-direction: column;
 }
 
 .calendar-header {
