@@ -350,6 +350,16 @@ async def sync_calendars() -> SyncResult:
 async def periodic_sync():
     """Background task for periodic sync"""
     global sync_task
+    
+    # Run initial sync immediately at startup
+    try:
+        logger.info("Running initial sync at startup...")
+        await sync_calendars()
+        logger.info("Initial sync completed")
+    except Exception as e:
+        logger.error(f"Initial sync error: {e}")
+    
+    # Then continue with periodic syncs
     while True:
         try:
             settings = await get_settings_from_db()
