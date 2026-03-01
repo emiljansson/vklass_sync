@@ -1,5 +1,6 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Settings as SettingsIcon, RefreshCw, LogOut, Calendar, MapPin, Check, Lock, Radio } from "lucide-react";
+import { Settings as SettingsIcon, RefreshCw, LogOut, Calendar, MapPin, Check, Lock, Radio, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,8 +8,37 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, authEnabled, isAuthenticated, onLogout }) => {
+  const [countdown, setCountdown] = useState(null);
+  const [lastSync, setLastSync] = useState(Date.now());
+  
   const calendar1Events = events.filter(e => e.calendar_index === 1);
   const calendar2Events = events.filter(e => e.calendar_index === 2);
+  
+  // Countdown timer
+  useEffect(() => {
+    const syncInterval = (settings?.sync_interval || 15) * 60; // seconds
+    
+    const updateCountdown = () => {
+      const elapsed = Math.floor((Date.now() - lastSync) / 1000);
+      const remaining = Math.max(0, syncInterval - elapsed);
+      
+      const minutes = Math.floor(remaining / 60);
+      const seconds = remaining % 60;
+      setCountdown(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+    };
+    
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+    
+    return () => clearInterval(timer);
+  }, [settings?.sync_interval, lastSync]);
+  
+  // Reset countdown when sync happens
+  useEffect(() => {
+    if (!syncing) {
+      setLastSync(Date.now());
+    }
+  }, [syncing, events]);
 
   const formatDateTime = (dateStr) => {
     if (!dateStr) return "";
