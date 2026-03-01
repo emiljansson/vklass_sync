@@ -51,9 +51,11 @@ const createSparkSound = (audioContext, volume = 0.3) => {
 };
 
 // Play multiple spark sounds for a more realistic effect
-const playElectricalSpark = (audioContext) => {
+const playElectricalSpark = (audioContext, volumePercent) => {
   const sparkCount = 1 + Math.floor(Math.random() * 3);
-  const volume = 0.25 + Math.random() * 0.15;
+  // Convert percentage (0-100) to actual volume (0-0.4)
+  const baseVolume = (volumePercent / 100) * 0.4;
+  const volume = baseVolume * (0.8 + Math.random() * 0.4);
   
   for (let i = 0; i < sparkCount; i++) {
     setTimeout(() => {
@@ -62,7 +64,7 @@ const playElectricalSpark = (audioContext) => {
   }
 };
 
-export const ScreenFlicker = () => {
+export const ScreenFlicker = ({ soundEnabled = true, soundVolume = 50 }) => {
   const [flickering, setFlickering] = useState(false);
   const timeoutRef = useRef(null);
   const audioContextRef = useRef(null);
@@ -102,11 +104,11 @@ export const ScreenFlicker = () => {
         setFlickering(true);
         
         // Play spark sound if audio is enabled
-        if (audioContextRef.current && userInteractedRef.current) {
+        if (soundEnabled && audioContextRef.current && userInteractedRef.current) {
           if (audioContextRef.current.state === 'suspended') {
             audioContextRef.current.resume();
           }
-          playElectricalSpark(audioContextRef.current);
+          playElectricalSpark(audioContextRef.current, soundVolume);
         }
         
         await new Promise(r => setTimeout(r, 50 + Math.random() * 100));
@@ -134,7 +136,7 @@ export const ScreenFlicker = () => {
         clearTimeout(timeoutRef.current);
       }
     };
-  }, []);
+  }, [soundEnabled, soundVolume]);
 
   if (!flickering) return null;
 
