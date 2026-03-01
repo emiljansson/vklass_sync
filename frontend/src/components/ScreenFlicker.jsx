@@ -1,10 +1,60 @@
 import { useState, useEffect, useRef } from "react";
 
-// Web Audio API electrical buzzing sound generator
+// Continuous crackle sound generator
+const startContinuousCrackle = (audioContext) => {
+  const createCrackleLoop = () => {
+    const duration = 0.15 + Math.random() * 0.2;
+    const now = audioContext.currentTime;
+    
+    // Crackle noise buffer
+    const noiseBuffer = audioContext.createBuffer(1, audioContext.sampleRate * duration, audioContext.sampleRate);
+    const noiseData = noiseBuffer.getChannelData(0);
+    
+    for (let i = 0; i < noiseData.length; i++) {
+      // More frequent crackles
+      const crackle = Math.random() > 0.92 ? (Math.random() - 0.5) * 4 : 0;
+      const pop = Math.random() > 0.97 ? (Math.random() - 0.5) * 6 : 0;
+      noiseData[i] = (Math.random() * 2 - 1) * 0.05 + crackle * 0.3 + pop * 0.4;
+    }
+    
+    const noiseSource = audioContext.createBufferSource();
+    noiseSource.buffer = noiseBuffer;
+    
+    // Highpass filter for crispy crackles
+    const highpass = audioContext.createBiquadFilter();
+    highpass.type = 'highpass';
+    highpass.frequency.value = 1500 + Math.random() * 1000;
+    highpass.Q.value = 0.7;
+    
+    // Gain for crackle volume
+    const gainNode = audioContext.createGain();
+    gainNode.gain.value = 0.12 + Math.random() * 0.08;
+    
+    noiseSource.connect(highpass);
+    highpass.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    noiseSource.start(now);
+    noiseSource.stop(now + duration);
+    
+    // Schedule next crackle burst
+    noiseSource.onended = () => {
+      setTimeout(() => {
+        if (audioContext.state === 'running') {
+          createCrackleLoop();
+        }
+      }, 50 + Math.random() * 150);
+    };
+  };
+  
+  createCrackleLoop();
+};
+
+// Web Audio API electrical buzzing sound generator (half volume)
 const playElectricalBuzz = (audioContext) => {
   const duration = 0.1 + Math.random() * 0.15;
   const now = audioContext.currentTime;
-  const volume = 0.22 + Math.random() * 0.1;
+  const volume = (0.22 + Math.random() * 0.1) * 0.5; // Half volume
   
   // Main gain node
   const mainGain = audioContext.createGain();
@@ -22,7 +72,7 @@ const playElectricalBuzz = (audioContext) => {
   const curve = new Float32Array(256);
   for (let i = 0; i < 256; i++) {
     const x = (i / 128) - 1;
-    curve[i] = Math.tanh(x * 2) * 0.8 + x * 0.2; // Soft saturation
+    curve[i] = Math.tanh(x * 2) * 0.8 + x * 0.2;
   }
   waveshaper.curve = curve;
   waveshaper.oversample = '2x';
@@ -30,14 +80,14 @@ const playElectricalBuzz = (audioContext) => {
   // Multiple detuned oscillators for thickness
   const oscillators = [];
   const gains = [];
-  const detunes = [-12, -5, 0, 5, 8, 15]; // Slight detuning for analog feel
+  const detunes = [-12, -5, 0, 5, 8, 15];
   const types = ['sawtooth', 'square', 'sawtooth', 'triangle', 'square', 'sawtooth'];
   const volumes = [0.25, 0.2, 0.3, 0.15, 0.15, 0.1];
   
   detunes.forEach((detune, i) => {
     const osc = audioContext.createOscillator();
     osc.type = types[i];
-    osc.frequency.value = baseFreq * (i < 3 ? 1 : 2); // Some at base, some at octave
+    osc.frequency.value = baseFreq * (i < 3 ? 1 : 2);
     osc.detune.value = detune + (Math.random() - 0.5) * 10;
     
     const gain = audioContext.createGain();
@@ -48,20 +98,20 @@ const playElectricalBuzz = (audioContext) => {
     gains.push(gain);
   });
   
-  // Pitch wobble LFO (analog instability)
+  // Pitch wobble LFO
   const pitchLfo = audioContext.createOscillator();
   pitchLfo.type = 'sine';
   pitchLfo.frequency.value = 4 + Math.random() * 8;
   
   const pitchLfoGain = audioContext.createGain();
-  pitchLfoGain.gain.value = 8 + Math.random() * 12; // Cents of wobble
+  pitchLfoGain.gain.value = 8 + Math.random() * 12;
   
   pitchLfo.connect(pitchLfoGain);
   oscillators.forEach(osc => {
     pitchLfoGain.connect(osc.detune);
   });
   
-  // Amplitude tremolo (unstable power)
+  // Amplitude tremolo
   const tremoloLfo = audioContext.createOscillator();
   tremoloLfo.type = 'triangle';
   tremoloLfo.frequency.value = 18 + Math.random() * 30;
@@ -78,7 +128,7 @@ const playElectricalBuzz = (audioContext) => {
   
   gains.forEach(g => g.connect(mixer));
   
-  // Resonant filter for character
+  // Resonant filter
   const filter = audioContext.createBiquadFilter();
   filter.type = 'lowpass';
   filter.frequency.value = 1200 + Math.random() * 600;
@@ -95,47 +145,22 @@ const playElectricalBuzz = (audioContext) => {
   filterLfo.connect(filterLfoGain);
   filterLfoGain.connect(filter.frequency);
   
-  // Noise layer for grit
-  const noiseBuffer = audioContext.createBuffer(1, audioContext.sampleRate * duration, audioContext.sampleRate);
-  const noiseData = noiseBuffer.getChannelData(0);
-  for (let i = 0; i < noiseData.length; i++) {
-    // Pink-ish noise with occasional crackles
-    const crackle = Math.random() > 0.98 ? (Math.random() - 0.5) * 2 : 0;
-    noiseData[i] = (Math.random() * 2 - 1) * 0.3 + crackle;
-  }
-  const noiseSource = audioContext.createBufferSource();
-  noiseSource.buffer = noiseBuffer;
-  
-  const noiseFilter = audioContext.createBiquadFilter();
-  noiseFilter.type = 'bandpass';
-  noiseFilter.frequency.value = 600 + Math.random() * 400;
-  noiseFilter.Q.value = 1.5;
-  
-  const noiseGain = audioContext.createGain();
-  noiseGain.gain.value = 0.25;
-  
   // Connect signal chain
   mixer.connect(waveshaper);
   waveshaper.connect(filter);
   filter.connect(mainGain);
-  
-  noiseSource.connect(noiseFilter);
-  noiseFilter.connect(noiseGain);
-  noiseGain.connect(mainGain);
   
   // Start everything
   oscillators.forEach(osc => osc.start(now));
   pitchLfo.start(now);
   tremoloLfo.start(now);
   filterLfo.start(now);
-  noiseSource.start(now);
   
   // Stop everything
   oscillators.forEach(osc => osc.stop(now + duration));
   pitchLfo.stop(now + duration);
   tremoloLfo.stop(now + duration);
   filterLfo.stop(now + duration);
-  noiseSource.stop(now + duration);
 };
 
 export const ScreenFlicker = () => {
@@ -143,6 +168,7 @@ export const ScreenFlicker = () => {
   const timeoutRef = useRef(null);
   const audioContextRef = useRef(null);
   const userInteractedRef = useRef(false);
+  const crackleStartedRef = useRef(false);
 
   // Initialize audio context on first user interaction
   useEffect(() => {
@@ -151,6 +177,12 @@ export const ScreenFlicker = () => {
         audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
       }
       userInteractedRef.current = true;
+      
+      // Start continuous crackle
+      if (!crackleStartedRef.current && audioContextRef.current) {
+        crackleStartedRef.current = true;
+        startContinuousCrackle(audioContextRef.current);
+      }
     };
 
     // Listen for any user interaction to enable audio
