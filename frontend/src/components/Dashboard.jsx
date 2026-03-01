@@ -58,8 +58,11 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
         const pollForNewSync = async () => {
           const status = await fetchSyncStatus();
           if (status && status.next_sync * 1000 > now) {
-            // Got a new sync time in the future, stop polling
+            // Got a new sync time in the future, stop polling and refresh events
             isPolling = false;
+            if (onRefreshEvents) {
+              onRefreshEvents();
+            }
           } else {
             // Backend hasn't synced yet, try again in 2 seconds
             setTimeout(pollForNewSync, 2000);
@@ -75,7 +78,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     const timer = setInterval(updateCountdown, 1000);
     
     return () => clearInterval(timer);
-  }, [nextSyncTime]);
+  }, [nextSyncTime, onRefreshEvents]);
   
   // Refetch sync status when manual sync completes
   useEffect(() => {
