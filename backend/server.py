@@ -356,6 +356,28 @@ async def periodic_sync():
 async def root():
     return {"message": "iCal Sync API"}
 
+@api_router.get("/sync-status")
+async def get_sync_status():
+    """Get last sync time and next sync time"""
+    status = await db.sync_status.find_one({"id": "sync_status"}, {"_id": 0})
+    settings = await get_settings_from_db()
+    
+    if status and status.get("last_sync"):
+        last_sync = status["last_sync"]
+        interval_seconds = (settings.sync_interval or 15) * 60
+        next_sync = last_sync + interval_seconds
+    else:
+        # No sync yet, return current time
+        import time
+        last_sync = time.time()
+        next_sync = last_sync + ((settings.sync_interval or 15) * 60)
+    
+    return {
+        "last_sync": last_sync,
+        "next_sync": next_sync,
+        "interval_minutes": settings.sync_interval or 15
+    }
+
 @api_router.get("/settings", response_model=Settings)
 async def get_settings():
     """Get current settings"""
