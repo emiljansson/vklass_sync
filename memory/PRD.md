@@ -92,6 +92,7 @@ The user requested a full-stack application to monitor two user-provided iCal ca
 - [x] Screen flicker effect (random)
 - [x] Electrical spark sound effects (Web Audio API) - synced with flicker
 - [x] Sound settings in Settings page (on/off toggle + volume slider)
+- [x] Screen wake lock setting (prevent screen from sleeping)
 - [x] iOS "Add to Home Screen" popup
 - [x] Toast notification auto-hide (3s duration)
 - [x] Scanlines effect (adjustable)
