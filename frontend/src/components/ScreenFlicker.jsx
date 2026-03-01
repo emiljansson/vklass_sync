@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export const ScreenFlicker = () => {
   const [flickering, setFlickering] = useState(false);
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
     const doFlicker = async () => {
@@ -16,19 +17,25 @@ export const ScreenFlicker = () => {
           await new Promise(r => setTimeout(r, 50 + Math.random() * 150));
         }
       }
+      
+      // Schedule next flicker
+      scheduleNext();
     };
 
-    const scheduleFlicker = () => {
+    const scheduleNext = () => {
       // Random delay between 2-15 seconds
       const delay = 2000 + Math.random() * 13000;
-      return setTimeout(() => {
-        doFlicker();
-        scheduleFlicker();
-      }, delay);
+      timeoutRef.current = setTimeout(doFlicker, delay);
     };
 
-    const timerId = scheduleFlicker();
-    return () => clearTimeout(timerId);
+    // Start first flicker after a short delay
+    timeoutRef.current = setTimeout(doFlicker, 1000);
+    
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
   }, []);
 
   if (!flickering) return null;
@@ -37,8 +44,8 @@ export const ScreenFlicker = () => {
     <div 
       className="fixed inset-0 pointer-events-none z-[999]"
       style={{
-        backgroundColor: 'rgba(34, 197, 94, 0.15)',
-        mixBlendMode: 'overlay'
+        backgroundColor: 'rgba(34, 197, 94, 0.2)',
+        mixBlendMode: 'screen'
       }}
     />
   );
