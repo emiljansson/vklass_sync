@@ -282,7 +282,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
         {/* Status & Legend */}
         <div className="mb-6 p-4 bg-[#141e14] rounded border border-green-500/30">
           {/* Countdown row */}
-          <div className="flex items-center justify-center gap-3 mb-3 pb-3 border-b border-green-500/20">
+          <div className="flex items-center justify-center gap-3 mb-3 pb-3 border-b border-green-500/20 px-0.5">
             <Clock className="w-4 h-4 text-green-400" />
             <span className="text-sm text-green-500/70 uppercase tracking-wider">Nästa koll:</span>
             <span className="text-lg font-bold text-green-400 pip-glow font-mono">{countdown || '--:--'}</span>
