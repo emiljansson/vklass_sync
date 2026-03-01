@@ -26,7 +26,9 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     webpushr_key: "",
     webpushr_auth_token: "",
     auth_enabled: false,
-    auth_password: ""
+    auth_password: "",
+    sound_enabled: true,
+    sound_volume: 50
   });
   const [saving, setSaving] = useState(false);
   const [testingPush, setTestingPush] = useState(false);
