@@ -202,7 +202,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           </div>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-[5px]">
           {events
             .sort((a, b) => {
               const statusOrder = { new: 0, normal: 1, removed: 2 };
