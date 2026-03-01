@@ -1,13 +1,13 @@
-import { useEffect, useRef, useCallback } from "react";
-import { toast } from "@/components/ui/sonner";
+import { useEffect, useRef, useCallback, useState } from "react";
 
-export const WakeLock = ({ enabled }) => {
+export const WakeLock = ({ enabled, showIndicator = false }) => {
   const wakeLockRef = useRef(null);
   const isRequestingRef = useRef(false);
+  const [isActive, setIsActive] = useState(false);
 
   const requestWakeLock = useCallback(async () => {
     // Prevent multiple simultaneous requests
-    if (isRequestingRef.current) return;
+    if (isRequestingRef.current) return false;
     
     // Check if Wake Lock API is supported
     if (!("wakeLock" in navigator)) {
@@ -26,17 +26,20 @@ export const WakeLock = ({ enabled }) => {
       
       wakeLockRef.current = await navigator.wakeLock.request("screen");
       console.log("Wake lock acquired successfully");
+      setIsActive(true);
       
       // Listen for release
       wakeLockRef.current.addEventListener("release", () => {
         console.log("Wake lock was released");
         wakeLockRef.current = null;
+        setIsActive(false);
       });
       
       isRequestingRef.current = false;
       return true;
     } catch (e) {
       console.error("Error acquiring wake lock:", e.name, e.message);
+      setIsActive(false);
       isRequestingRef.current = false;
       return false;
     }
@@ -47,6 +50,7 @@ export const WakeLock = ({ enabled }) => {
       try {
         await wakeLockRef.current.release();
         wakeLockRef.current = null;
+        setIsActive(false);
         console.log("Wake lock released");
       } catch (e) {
         console.error("Error releasing wake lock:", e);
@@ -85,6 +89,28 @@ export const WakeLock = ({ enabled }) => {
       releaseWakeLock();
     };
   }, [enabled, requestWakeLock, releaseWakeLock]);
+
+  // Optional visual indicator for debugging
+  if (showIndicator && enabled) {
+    return (
+      <div 
+        style={{
+          position: 'fixed',
+          bottom: '10px',
+          right: '10px',
+          padding: '4px 8px',
+          background: isActive ? 'rgba(34, 197, 94, 0.8)' : 'rgba(239, 68, 68, 0.8)',
+          color: 'white',
+          borderRadius: '4px',
+          fontSize: '10px',
+          fontFamily: 'monospace',
+          zIndex: 9999,
+        }}
+      >
+        WL: {isActive ? 'ON' : 'OFF'}
+      </div>
+    );
+  }
 
   return null;
 };
