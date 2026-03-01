@@ -8,6 +8,7 @@ import { Settings } from "@/components/Settings";
 import { Login } from "@/components/Login";
 import { AddToHomeScreen } from "@/components/AddToHomeScreen";
 import { ScreenFlicker } from "@/components/ScreenFlicker";
+import { WakeLock } from "@/components/WakeLock";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
