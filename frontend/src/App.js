@@ -8,7 +8,6 @@ import { Settings } from "@/components/Settings";
 import { Login } from "@/components/Login";
 import { AddToHomeScreen } from "@/components/AddToHomeScreen";
 import { ScreenFlicker } from "@/components/ScreenFlicker";
-import { WakeLock } from "@/components/WakeLock";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -160,7 +159,6 @@ function App() {
         soundEnabled={settings?.sound_enabled !== undefined ? settings.sound_enabled : true}
         soundVolume={settings?.sound_volume !== undefined ? settings.sound_volume : 50}
       />
-      <WakeLock enabled={settings?.screen_wake_lock || false} showIndicator={true} />
       <BrowserRouter>
         <Routes>
           {/* Dashboard is always public */}
