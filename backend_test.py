@@ -5,7 +5,7 @@ from datetime import datetime
 
 class iCalSyncTester:
     def __init__(self):
-        self.base_url = "https://ical-sync-notify.preview.emergentagent.com/api"
+        self.base_url = "https://event-watcher.preview.emergentagent.com/api"
         self.tests_run = 0
         self.tests_passed = 0
         self.errors = []
