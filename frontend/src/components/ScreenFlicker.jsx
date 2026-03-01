@@ -15,7 +15,7 @@ const playElectricalBuzz = (audioContext) => {
   mainGain.gain.linearRampToValueAtTime(0, now + duration);
   
   // Higher base frequency for more buzz
-  const baseFreq = 120 + Math.random() * 30;
+  const baseFreq = 240 + Math.random() * 60;
   
   // Oscillator 1: Base buzz
   const osc1 = audioContext.createOscillator();
