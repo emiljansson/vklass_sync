@@ -295,7 +295,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                 >
                   <SelectTrigger data-testid="sync-interval-select" className="bg-[#0a0f0a] border-green-500/40 text-green-400">
                     <SelectValue>
-                      {intervalOptions.find(opt => opt.value === formData.sync_interval)?.label || "Välj intervall"}
+                      {getIntervalLabel()}
                     </SelectValue>
                   </SelectTrigger>
                   <SelectContent className="bg-[#141e14] border-green-500/40">
