@@ -172,6 +172,31 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </CardContent>
           </Card>
 
+          {/* Screen Wake Lock Settings */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Monitor className="w-5 h-5" />
+                Skärm
+              </CardTitle>
+              <CardDescription>Förhindra att skärmen släcks automatiskt</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label htmlFor="screen_wake_lock">Håll skärmen vaken</Label>
+                  <p className="text-sm text-slate-500">Förhindrar att skärmen går i viloläge</p>
+                </div>
+                <Switch
+                  id="screen_wake_lock"
+                  data-testid="screen-wake-lock-switch"
+                  checked={formData.screen_wake_lock}
+                  onCheckedChange={(checked) => handleChange('screen_wake_lock', checked)}
+                />
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Calendar 1 Settings */}
           <Card>
             <CardHeader>
