@@ -84,6 +84,13 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     }
   };
 
+  const intervalOptions = [
+    { value: 5, label: "5 minuter" },
+    { value: 15, label: "15 minuter" },
+    { value: 30, label: "30 minuter" },
+    { value: 60, label: "1 timme" }
+  ];
+  
   // Get interval label helper
   const getIntervalLabel = () => {
     const interval = formData.sync_interval;
