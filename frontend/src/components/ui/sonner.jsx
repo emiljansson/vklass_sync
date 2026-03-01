@@ -1,4 +1,4 @@
-import { Toaster as Sonner, toast } from "sonner"
+import { Toaster as Sonner, toast as sonnerToast } from "sonner"
 
 const Toaster = ({
   ...props
@@ -25,5 +25,30 @@ const Toaster = ({
       {...props} />
   );
 }
+
+// Wrapper function to ensure toasts auto-dismiss on Safari/iOS
+const createToastWithAutoDismiss = (type) => (message, options = {}) => {
+  const duration = options.duration || 3000;
+  const toastId = sonnerToast[type](message, { ...options, duration });
+  
+  // Manual dismiss as backup for Safari/iOS
+  setTimeout(() => {
+    sonnerToast.dismiss(toastId);
+  }, duration + 100);
+  
+  return toastId;
+};
+
+const toast = {
+  success: createToastWithAutoDismiss('success'),
+  error: createToastWithAutoDismiss('error'),
+  info: createToastWithAutoDismiss('info'),
+  warning: createToastWithAutoDismiss('warning'),
+  message: createToastWithAutoDismiss('message'),
+  dismiss: sonnerToast.dismiss,
+  promise: sonnerToast.promise,
+  custom: sonnerToast.custom,
+  loading: sonnerToast.loading,
+};
 
 export { Toaster, toast }
