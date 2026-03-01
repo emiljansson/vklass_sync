@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Save, Link as LinkIcon, Bell, Clock, Lock, Eye, EyeOff, Send, Volume2, VolumeX, Monitor } from "lucide-react";
+import { ArrowLeft, Save, Link as LinkIcon, Bell, Clock, Lock, Eye, EyeOff, Send, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -28,8 +28,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     auth_enabled: false,
     auth_password: "",
     sound_enabled: true,
-    sound_volume: 50,
-    screen_wake_lock: false
+    sound_volume: 50
   });
   const [saving, setSaving] = useState(false);
   const [testingPush, setTestingPush] = useState(false);
