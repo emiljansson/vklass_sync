@@ -183,7 +183,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const CalendarColumn = ({ title, events, isEmpty }) => (
     <div className="flex flex-col gap-[5px]">
       {/* Header box */}
-      <div className="bg-[#141e14] rounded border border-green-500/30 border-t-4 border-t-green-500 px-4 py-4">
+      <div className="bg-[#1a2a1a] rounded-lg border-2 border-green-500/50 border-t-4 border-t-green-400 px-4 py-4">
         <h2 className="text-xl font-bold text-green-400 pip-glow tracking-tight">{title}</h2>
         <p className="text-sm text-green-500/60 mt-1">
           {events.length} händelse{events.length !== 1 ? 'r' : ''}
