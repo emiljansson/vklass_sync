@@ -155,6 +155,7 @@ function App() {
     <div className="min-h-screen bg-slate-50">
       <Toaster position="top-center" richColors duration={3000} />
       <AddToHomeScreen />
+      <ScreenFlicker />
       <BrowserRouter>
         <Routes>
           {/* Dashboard is always public */}
