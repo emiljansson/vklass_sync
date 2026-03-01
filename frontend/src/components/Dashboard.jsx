@@ -252,6 +252,9 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded bg-green-500/20 border border-green-500/50"></div>
             <span className="text-sm text-green-500/70">Aktiv</span>
+          </div>
+        </div>
+
         {/* Calendar Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
           <CalendarColumn
