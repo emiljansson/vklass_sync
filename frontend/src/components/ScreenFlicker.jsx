@@ -28,7 +28,7 @@ const startContinuousCrackle = (audioContext) => {
     
     // Gain for crackle volume
     const gainNode = audioContext.createGain();
-    gainNode.gain.value = 0.12 + Math.random() * 0.08;
+    gainNode.gain.value = 0.06 + Math.random() * 0.04;
     
     noiseSource.connect(highpass);
     highpass.connect(gainNode);
@@ -54,7 +54,7 @@ const startContinuousCrackle = (audioContext) => {
 const playElectricalBuzz = (audioContext) => {
   const duration = 0.1 + Math.random() * 0.15;
   const now = audioContext.currentTime;
-  const volume = (0.22 + Math.random() * 0.1) * 0.5; // Half volume
+  const volume = (0.22 + Math.random() * 0.1) * 0.25; // Quarter volume (half of half)
   
   // Main gain node
   const mainGain = audioContext.createGain();
