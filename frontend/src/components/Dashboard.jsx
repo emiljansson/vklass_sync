@@ -82,19 +82,29 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
             <div className="flex items-center gap-2 mb-1">
               {getStatusBadge(event.status, event.start)}
             </div>
-            <h3 className={`font-semibold text-base truncate ${event.status === 'new' ? 'text-rose-900' : event.status === 'removed' ? 'text-blue-900' : 'text-slate-900'}`}>
+            <h3 className={`font-semibold text-base truncate ${
+              event.status === 'new' ? 'text-amber-400' : 
+              event.status === 'removed' ? 'text-red-400' : 
+              isEventPast(event.start) ? 'text-cyan-400' : 'text-green-400'
+            }`}>
               {event.summary}
             </h3>
             
             {event.location && (
-              <div className={`flex items-center gap-1.5 mt-1 text-sm ${event.status === 'new' ? 'text-rose-600' : event.status === 'removed' ? 'text-blue-600' : 'text-slate-500'}`}>
+              <div className={`flex items-center gap-1.5 mt-1 text-sm ${
+                event.status === 'new' ? 'text-amber-500/70' : 
+                event.status === 'removed' ? 'text-red-500/70' : 'text-green-500/70'
+              }`}>
                 <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
                 <span className="truncate">{event.location}</span>
               </div>
             )}
             
             {event.description && (
-              <p className={`mt-2 text-sm line-clamp-2 ${event.status === 'new' ? 'text-rose-600' : event.status === 'removed' ? 'text-blue-600' : 'text-slate-500'}`}>
+              <p className={`mt-2 text-sm line-clamp-2 ${
+                event.status === 'new' ? 'text-amber-500/70' : 
+                event.status === 'removed' ? 'text-red-500/70' : 'text-green-500/70'
+              }`}>
                 {event.description}
               </p>
             )}
@@ -108,13 +118,13 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
                     data-testid={`confirm-event-${event.id}`}
                     variant="ghost"
                     size="icon"
-                    className="flex-shrink-0 h-8 w-8 rounded-full bg-rose-100 hover:bg-rose-200 text-rose-700"
+                    className="flex-shrink-0 h-8 w-8 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 border border-amber-500/30"
                     onClick={() => onConfirmEvent(event.id)}
                   >
                     <Check className="w-4 h-4" />
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent>
+                <TooltipContent className="bg-[#141e14] border-green-500/30 text-green-400">
                   <p>Bekräfta händelse</p>
                 </TooltipContent>
               </Tooltip>
