@@ -4,18 +4,6 @@
 }
 
 /* Fallout App specific styles */
-.calendar-column {
-    display: flex;
-    flex-direction: column;
-}
-
-.calendar-header {
-    @apply sticky top-0 z-10 pb-4 mb-4;
-    background: rgba(20, 30, 20, 0.95);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(34, 197, 94, 0.3);
-}
-
 .settings-panel {
     background: rgba(20, 30, 20, 0.9);
     border: 1px solid rgba(34, 197, 94, 0.3);
