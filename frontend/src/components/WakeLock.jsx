@@ -1,54 +1,80 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
+import { toast } from "@/components/ui/sonner";
 
 export const WakeLock = ({ enabled }) => {
   const wakeLockRef = useRef(null);
+  const isRequestingRef = useRef(false);
+
+  const requestWakeLock = useCallback(async () => {
+    // Prevent multiple simultaneous requests
+    if (isRequestingRef.current) return;
+    
+    // Check if Wake Lock API is supported
+    if (!("wakeLock" in navigator)) {
+      console.warn("Wake Lock API not supported in this browser");
+      return false;
+    }
+
+    isRequestingRef.current = true;
+    
+    try {
+      // Release existing lock first
+      if (wakeLockRef.current) {
+        await wakeLockRef.current.release();
+        wakeLockRef.current = null;
+      }
+      
+      wakeLockRef.current = await navigator.wakeLock.request("screen");
+      console.log("Wake lock acquired successfully");
+      
+      // Listen for release
+      wakeLockRef.current.addEventListener("release", () => {
+        console.log("Wake lock was released");
+        wakeLockRef.current = null;
+      });
+      
+      isRequestingRef.current = false;
+      return true;
+    } catch (e) {
+      console.error("Error acquiring wake lock:", e.name, e.message);
+      isRequestingRef.current = false;
+      return false;
+    }
+  }, []);
+
+  const releaseWakeLock = useCallback(async () => {
+    if (wakeLockRef.current) {
+      try {
+        await wakeLockRef.current.release();
+        wakeLockRef.current = null;
+        console.log("Wake lock released");
+      } catch (e) {
+        console.error("Error releasing wake lock:", e);
+      }
+    }
+  }, []);
 
   useEffect(() => {
-    const requestWakeLock = async () => {
-      if (!enabled) {
-        // Release wake lock if disabled
-        if (wakeLockRef.current) {
-          try {
-            await wakeLockRef.current.release();
-            wakeLockRef.current = null;
-            console.log("Wake lock released");
-          } catch (e) {
-            console.error("Error releasing wake lock:", e);
-          }
-        }
-        return;
-      }
+    if (!enabled) {
+      releaseWakeLock();
+      return;
+    }
 
-      // Check if Wake Lock API is supported
-      if (!("wakeLock" in navigator)) {
-        console.warn("Wake Lock API not supported in this browser");
-        return;
-      }
-
-      try {
-        wakeLockRef.current = await navigator.wakeLock.request("screen");
-        console.log("Wake lock acquired");
-
-        // Re-acquire wake lock if it's released (e.g., when tab becomes visible again)
-        wakeLockRef.current.addEventListener("release", () => {
-          console.log("Wake lock was released");
-        });
-      } catch (e) {
-        console.error("Error acquiring wake lock:", e);
-      }
-    };
-
+    // Request wake lock
     requestWakeLock();
 
     // Re-acquire wake lock when page becomes visible again
     const handleVisibilityChange = async () => {
-      if (enabled && document.visibilityState === "visible" && !wakeLockRef.current) {
-        try {
-          wakeLockRef.current = await navigator.wakeLock.request("screen");
-          console.log("Wake lock re-acquired after visibility change");
-        } catch (e) {
-          console.error("Error re-acquiring wake lock:", e);
-        }
+      if (enabled && document.visibilityState === "visible") {
+        // Small delay to ensure page is fully visible
+        setTimeout(async () => {
+          if (!wakeLockRef.current && enabled) {
+            const success = await requestWakeLock();
+            if (success) {
+              console.log("Wake lock re-acquired after visibility change");
+            }
+          }
+        }, 100);
       }
     };
 
@@ -56,11 +82,9 @@ export const WakeLock = ({ enabled }) => {
 
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
-      if (wakeLockRef.current) {
-        wakeLockRef.current.release().catch(() => {});
-      }
+      releaseWakeLock();
     };
-  }, [enabled]);
+  }, [enabled, requestWakeLock, releaseWakeLock]);
 
-  return null; // This component doesn't render anything
+  return null;
 };
