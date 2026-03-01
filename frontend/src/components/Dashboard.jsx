@@ -182,14 +182,14 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
 
   const CalendarColumn = ({ title, events, isEmpty }) => (
     <div className="calendar-column bg-[#141e14] rounded border border-green-500/30">
-      <div className="calendar-header border-t-4 border-green-500 px-4 pt-4 pb-2 rounded-t">
+      <div className="calendar-header border-t-4 border-green-500 px-4 pt-4 pb-4 rounded-t">
         <h2 className="text-xl font-bold text-green-400 pip-glow tracking-tight">{title}</h2>
         <p className="text-sm text-green-500/60 mt-1">
           {events.length} händelse{events.length !== 1 ? 'r' : ''}
         </p>
       </div>
       
-      <ScrollArea className="flex-1 px-4 pb-4 pt-2">
+      <ScrollArea className="flex-1 px-4 pb-4 pt-4">
         {events.length === 0 ? (
           <div className="empty-state">
             <Radio className="empty-state-icon radiation-icon" />
