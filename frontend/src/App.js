@@ -154,7 +154,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <Toaster position="top-center" richColors duration={3000} />
+      <Toaster position="top-center" />
       <AddToHomeScreen />
       <ScreenFlicker 
         soundEnabled={settings?.sound_enabled !== undefined ? settings.sound_enabled : true}
