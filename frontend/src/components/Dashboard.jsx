@@ -192,26 +192,26 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
                 size="sm"
                 onClick={onSync}
                 disabled={syncing}
-                className="gap-2"
+                className="gap-2 border-green-500/30 text-green-400 hover:bg-green-500/10 hover:text-green-300"
               >
                 <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
-                {syncing ? 'Synkar...' : 'Synka nu'}
+                {syncing ? 'SYNKAR...' : 'SYNKA'}
               </Button>
               
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Link to={authEnabled && !isAuthenticated ? "/login?redirect=/settings" : "/settings"}>
-                      <Button data-testid="settings-button" variant="ghost" size="icon" className="relative">
+                      <Button data-testid="settings-button" variant="ghost" size="icon" className="relative text-green-400 hover:bg-green-500/10 hover:text-green-300">
                         <SettingsIcon className="w-5 h-5" />
                         {authEnabled && !isAuthenticated && (
-                          <Lock className="w-3 h-3 absolute -top-0.5 -right-0.5 text-amber-600" />
+                          <Lock className="w-3 h-3 absolute -top-0.5 -right-0.5 text-amber-400" />
                         )}
                       </Button>
                     </Link>
                   </TooltipTrigger>
-                  <TooltipContent>
-                    {authEnabled && !isAuthenticated ? "Inställningar (kräver inloggning)" : "Inställningar"}
+                  <TooltipContent className="bg-[#141e14] border-green-500/30 text-green-400">
+                    {authEnabled && !isAuthenticated ? "Terminal (kräver access)" : "Terminal"}
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
@@ -222,6 +222,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
                   variant="ghost"
                   size="icon"
                   onClick={onLogout}
+                  className="text-green-400 hover:bg-green-500/10 hover:text-green-300"
                 >
                   <LogOut className="w-5 h-5" />
                 </Button>
@@ -234,16 +235,25 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Legend */}
-        <div className="flex flex-wrap items-center gap-4 mb-6 p-3 bg-white rounded-lg border border-slate-200">
-          <span className="text-sm text-slate-600 font-medium">Förklaring:</span>
+        <div className="flex flex-wrap items-center gap-4 mb-6 p-3 bg-[#141e14] rounded border border-green-500/30">
+          <span className="text-sm text-green-400 font-medium uppercase tracking-wider">Status:</span>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded bg-rose-200 border border-rose-300"></div>
-            <span className="text-sm text-slate-600">Ny (bekräfta med <Check className="inline w-3 h-3" />)</span>
+            <div className="w-3 h-3 rounded bg-amber-500/30 border border-amber-500/50"></div>
+            <span className="text-sm text-green-500/70">Nytt <Check className="inline w-3 h-3 text-amber-400" /></span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded bg-blue-200 border border-blue-300"></div>
-            <span className="text-sm text-slate-600">Borttagen (försvinner efter 6h)</span>
+            <div className="w-3 h-3 rounded bg-red-500/30 border border-red-500/50"></div>
+            <span className="text-sm text-green-500/70">Borttagen (6h)</span>
           </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded bg-cyan-500/30 border border-cyan-500/50"></div>
+            <span className="text-sm text-green-500/70">Utfört</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 rounded bg-green-500/20 border border-green-500/50"></div>
+            <span className="text-sm text-green-500/70">Aktiv</span>
+          </div>
+        </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded bg-white border border-slate-300"></div>
             <span className="text-sm text-slate-600">Normal</span>
