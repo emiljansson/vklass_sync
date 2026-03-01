@@ -99,7 +99,7 @@ export const WakeLock = ({ enabled, showIndicator = false }) => {
           bottom: '10px',
           right: '10px',
           padding: '4px 8px',
-          background: isActive ? 'rgba(34, 197, 94, 0.8)' : 'rgba(239, 68, 68, 0.8)',
+          background: isActive ? 'rgba(34, 197, 94, 0.8)' : 'rgba(59, 130, 246, 0.8)',
           color: 'white',
           borderRadius: '4px',
           fontSize: '10px',
