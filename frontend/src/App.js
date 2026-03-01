@@ -82,10 +82,10 @@ function App() {
       await axios.post(`${API}/auth/login`, { password });
       setIsAuthenticated(true);
       sessionStorage.setItem('ical_authenticated', 'true');
-      toast.success("Inloggad!");
+      toast.success("Inloggad!", { duration: 3000 });
       return true;
     } catch (e) {
-      toast.error("Fel lösenord");
+      toast.error("Fel lösenord", { duration: 3000 });
       return false;
     }
   };
@@ -103,11 +103,11 @@ function App() {
       const response = await axios.put(`${API}/settings`, newSettings);
       setSettings(response.data);
       setAuthEnabled(response.data.auth_enabled);
-      toast.success("Inställningar sparade");
+      toast.success("Inställningar sparade", { duration: 3000 });
       return true;
     } catch (e) {
       console.error("Error updating settings:", e);
-      toast.error("Kunde inte spara inställningar");
+      toast.error("Kunde inte spara inställningar", { duration: 3000 });
       return false;
     }
   };
