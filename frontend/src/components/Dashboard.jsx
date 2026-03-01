@@ -181,16 +181,18 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   );
 
   const CalendarColumn = ({ title, events, isEmpty }) => (
-    <div className="calendar-column bg-[#141e14] rounded border border-green-500/30">
-      <div className="calendar-header border-t-4 border-green-500 px-4 pt-4 pb-4 rounded-t">
+    <div className="calendar-column space-y-4">
+      {/* Header box */}
+      <div className="bg-[#141e14] rounded border border-green-500/30 border-t-4 border-t-green-500 px-4 py-4">
         <h2 className="text-xl font-bold text-green-400 pip-glow tracking-tight">{title}</h2>
         <p className="text-sm text-green-500/60 mt-1">
           {events.length} händelse{events.length !== 1 ? 'r' : ''}
         </p>
       </div>
       
-      <ScrollArea className="flex-1 px-4 pb-4 pt-4">
-        {events.length === 0 ? (
+      {/* Events */}
+      {events.length === 0 ? (
+        <div className="bg-[#141e14] rounded border border-green-500/30 p-4">
           <div className="empty-state">
             <Radio className="empty-state-icon radiation-icon" />
             <p className="empty-state-title">INGEN DATA</p>
@@ -198,24 +200,21 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
               {isEmpty ? "Konfigurera iCal-länk i terminal" : "Väntar på signal..."}
             </p>
           </div>
-        ) : (
-          <div className="space-y-3 pb-4">
-            {events
-              .sort((a, b) => {
-                // Sort: new first, then normal, then removed
-                const statusOrder = { new: 0, normal: 1, removed: 2 };
-                const statusDiff = statusOrder[a.status] - statusOrder[b.status];
-                if (statusDiff !== 0) return statusDiff;
-                
-                // Then by start date
-                return new Date(a.start) - new Date(b.start);
-              })
-              .map(event => (
-                <EventCard key={event.id} event={event} />
-              ))}
-          </div>
-        )}
-      </ScrollArea>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {events
+            .sort((a, b) => {
+              const statusOrder = { new: 0, normal: 1, removed: 2 };
+              const statusDiff = statusOrder[a.status] - statusOrder[b.status];
+              if (statusDiff !== 0) return statusDiff;
+              return new Date(a.start) - new Date(b.start);
+            })
+            .map(event => (
+              <EventCard key={event.id} event={event} />
+            ))}
+        </div>
+      )}
     </div>
   );
 
