@@ -9,18 +9,17 @@ const Toaster = ({
       className="toaster group"
       toastOptions={{
         duration: 3000,
+        style: {
+          background: '#141e14',
+          border: '2px solid rgba(34, 197, 94, 0.5)',
+          color: '#4ade80',
+          boxShadow: '0 4px 12px rgba(34, 197, 94, 0.2)',
+        },
         classNames: {
-          toast:
-            "group toast group-[.toaster]:bg-[#141e14] group-[.toaster]:text-green-400 group-[.toaster]:border-2 group-[.toaster]:border-green-500/50 group-[.toaster]:shadow-lg group-[.toaster]:shadow-green-500/20",
-          description: "group-[.toast]:text-green-500/70",
-          actionButton:
-            "group-[.toast]:bg-green-600 group-[.toast]:text-black group-[.toast]:font-bold",
-          cancelButton:
-            "group-[.toast]:bg-green-500/20 group-[.toast]:text-green-400",
-          success: "group-[.toaster]:border-green-500/70",
-          error: "group-[.toaster]:border-red-500/70 group-[.toaster]:text-red-400",
-          info: "group-[.toaster]:border-cyan-500/70 group-[.toaster]:text-cyan-400",
-          warning: "group-[.toaster]:border-amber-500/70 group-[.toaster]:text-amber-400",
+          toast: "group toast",
+          description: "text-green-500/70",
+          actionButton: "bg-green-600 text-black font-bold",
+          cancelButton: "bg-green-500/20 text-green-400",
         },
       }}
       {...props} />
