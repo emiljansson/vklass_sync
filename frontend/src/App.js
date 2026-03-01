@@ -176,6 +176,7 @@ function App() {
                 authEnabled={authEnabled}
                 isAuthenticated={isAuthenticated}
                 onLogout={isAuthenticated ? handleLogout : null}
+                onRefreshEvents={fetchEvents}
               />
             }
           />
