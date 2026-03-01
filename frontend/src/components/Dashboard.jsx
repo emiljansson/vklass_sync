@@ -41,8 +41,9 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     if (!nextSyncTime) return;
     
     let isPolling = false;
+    let pollTimeout = null;
     
-    const updateCountdown = async () => {
+    const updateCountdown = () => {
       const now = Date.now();
       const remaining = Math.max(0, Math.floor((nextSyncTime - now) / 1000));
       
@@ -56,8 +57,10 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
         
         // Poll every 2 seconds until we get a new next_sync time
         const pollForNewSync = async () => {
+          const currentTime = Date.now(); // Get fresh timestamp
           const status = await fetchSyncStatus();
-          if (status && status.next_sync * 1000 > now) {
+          
+          if (status && status.next_sync * 1000 > currentTime) {
             // Got a new sync time in the future, stop polling and refresh events
             isPolling = false;
             if (onRefreshEvents) {
@@ -65,19 +68,24 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
             }
           } else {
             // Backend hasn't synced yet, try again in 2 seconds
-            setTimeout(pollForNewSync, 2000);
+            pollTimeout = setTimeout(pollForNewSync, 2000);
           }
         };
         
         // Wait a moment for backend to complete sync, then start polling
-        setTimeout(pollForNewSync, 1000);
+        pollTimeout = setTimeout(pollForNewSync, 1000);
       }
     };
     
     updateCountdown();
     const timer = setInterval(updateCountdown, 1000);
     
-    return () => clearInterval(timer);
+    return () => {
+      clearInterval(timer);
+      if (pollTimeout) {
+        clearTimeout(pollTimeout);
+      }
+    };
   }, [nextSyncTime, onRefreshEvents]);
   
   // Refetch sync status when manual sync completes
