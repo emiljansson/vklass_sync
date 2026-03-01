@@ -90,13 +90,6 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     { value: 30, label: "30 minuter" },
     { value: 60, label: "1 timme" }
   ];
-  
-  // Get interval label helper
-  const getIntervalLabel = () => {
-    const interval = formData.sync_interval;
-    const option = intervalOptions.find(opt => opt.value === interval);
-    return option ? option.label : "Välj intervall";
-  };
 
   return (
     <div className="min-h-screen bg-[#0a0f0a] fallout-scanlines">
