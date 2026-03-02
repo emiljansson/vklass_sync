@@ -265,7 +265,12 @@ async def get_settings_from_db() -> Settings:
 
 async def sync_calendars() -> SyncResult:
     """Sync calendars and detect changes"""
+    from urllib.parse import urlparse, parse_qs
+    
     settings = await get_settings_from_db()
+    
+    # Create CID to subject lookup for notifications
+    cid_lookup = {m.get('cid'): m.get('subject', '') for m in (settings.cid_mappings or [])}
     
     new_count = 0
     removed_count = 0
@@ -316,10 +321,24 @@ async def sync_calendars() -> SyncResult:
                 )
                 await db.events.insert_one(new_event.model_dump())
                 new_count += 1
+                
+                # Get subject name from CID in URL
+                subject_name = ''
+                event_url = event_data.get('url', '')
+                if event_url:
+                    try:
+                        params = parse_qs(urlparse(event_url).query)
+                        cid = params.get('cid', [''])[0]
+                        if cid and cid in cid_lookup:
+                            subject_name = cid_lookup[cid]
+                    except:
+                        pass
+                
                 new_events_details.append({
                     'calendar_name': cal_name,
                     'summary': event_data['summary'],
-                    'start': event_data['start']
+                    'start': event_data['start'],
+                    'subject_name': subject_name
                 })
                 logger.info(f"New event detected: {event_data['summary']} in {cal_name}")
         
