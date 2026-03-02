@@ -606,8 +606,8 @@ async def test_push_notification():
     if not settings.webpushr_key or not settings.webpushr_auth_token:
         return {"success": False, "message": "Webpushr API-nycklar saknas"}
     
-    # Create CID to subject lookup
-    cid_lookup = {m.get('cid'): m.get('subject', '') for m in (settings.cid_mappings or [])}
+    # Create CID to subject lookup from event_mappings
+    cid_lookup = {m.get('cid'): m.get('subject', '') for m in (settings.event_mappings or []) if m.get('cid') and m.get('subject')}
     
     # Get current new events from database
     events = await db.events.find({"status": "new"}, {"_id": 0}).to_list(10000)
