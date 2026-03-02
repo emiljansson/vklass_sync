@@ -274,8 +274,8 @@ async def sync_calendars() -> SyncResult:
     
     settings = await get_settings_from_db()
     
-    # Create CID to subject lookup for notifications
-    cid_lookup = {m.get('cid'): m.get('subject', '') for m in (settings.cid_mappings or [])}
+    # Create CID to subject lookup for notifications from event_mappings
+    cid_lookup = {m.get('cid'): m.get('subject', '') for m in (settings.event_mappings or []) if m.get('cid') and m.get('subject')}
     
     new_count = 0
     removed_count = 0
