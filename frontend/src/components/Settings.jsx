@@ -398,6 +398,92 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </CardContent>
           </Card>
 
+          {/* Database Status & Migration */}
+          <Card className="bg-[#141e14] border-2 border-amber-500/40">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-amber-400">
+                <Database className="w-5 h-5" />
+                Databasstatus
+              </CardTitle>
+              <CardDescription className="text-amber-500/60">
+                Kontrollera och åtgärda databasstrukturen för CID-funktionen
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label className="text-green-400">Kontrollera status</Label>
+                  <p className="text-sm text-green-500/60">Visa antal events med URL och CID-mappningar</p>
+                </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={fetchDbStatus}
+                  disabled={loadingDbStatus}
+                  className="gap-2 border-green-500/40 text-green-400 hover:bg-green-500/10 hover:text-green-300"
+                >
+                  <RefreshCw className={`w-4 h-4 ${loadingDbStatus ? 'animate-spin' : ''}`} />
+                  {loadingDbStatus ? 'Laddar...' : 'Kontrollera'}
+                </Button>
+              </div>
+              
+              {dbStatus && (
+                <>
+                  <Separator className="bg-green-500/20" />
+                  <div className="space-y-2 p-3 bg-[#0a0f0a] rounded border border-green-500/30">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-green-500/70">Totalt antal events:</span>
+                      <span className="text-green-400 font-mono">{dbStatus.total_events}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-green-500/70">Events med URL:</span>
+                      <span className={`font-mono ${dbStatus.events_with_url_count === dbStatus.total_events ? 'text-green-400' : 'text-amber-400'}`}>
+                        {dbStatus.events_with_url_count}
+                      </span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-green-500/70">Sparade CID-mappningar:</span>
+                      <span className="text-green-400 font-mono">{dbStatus.cid_mappings_in_settings?.length || 0}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-green-500/70">CIDs i events:</span>
+                      <span className="text-green-400 font-mono">{dbStatus.cids_found_in_events?.length || 0}</span>
+                    </div>
+                  </div>
+                  
+                  {dbStatus.events_with_url_count < dbStatus.total_events && (
+                    <>
+                      <Separator className="bg-amber-500/20" />
+                      <div className="p-3 bg-amber-500/10 rounded border border-amber-500/30">
+                        <p className="text-sm text-amber-400 mb-3">
+                          ⚠️ {dbStatus.total_events - dbStatus.events_with_url_count} events saknar URL-fältet. 
+                          Kör migrering för att hämta URL:er från iCal-flödena och upptäcka CID:s.
+                        </p>
+                        <Button
+                          type="button"
+                          onClick={handleMigration}
+                          disabled={migrating}
+                          className="w-full gap-2 bg-amber-600 hover:bg-amber-500 text-black font-bold"
+                        >
+                          <Database className={`w-4 h-4 ${migrating ? 'animate-pulse' : ''}`} />
+                          {migrating ? 'Migrerar...' : 'Kör migrering'}
+                        </Button>
+                      </div>
+                    </>
+                  )}
+                  
+                  {dbStatus.events_with_url_count === dbStatus.total_events && dbStatus.total_events > 0 && (
+                    <div className="p-3 bg-green-500/10 rounded border border-green-500/30">
+                      <p className="text-sm text-green-400">
+                        ✓ Alla events har URL-fältet. CID-funktionen är redo att användas.
+                      </p>
+                    </div>
+                  )}
+                </>
+              )}
+            </CardContent>
+          </Card>
+
           {/* Webpushr Settings */}
           <Card className="bg-[#141e14] border-2 border-green-500/40">
             <CardHeader>
