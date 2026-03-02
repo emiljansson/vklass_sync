@@ -87,6 +87,40 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     }
   };
 
+  const fetchDbStatus = async () => {
+    setLoadingDbStatus(true);
+    try {
+      const response = await axios.get(`${API}/debug/cid-status`);
+      setDbStatus(response.data);
+    } catch (e) {
+      console.error("Error fetching db status:", e);
+      toast.error("Kunde inte hämta databasstatus", { duration: 3000 });
+    } finally {
+      setLoadingDbStatus(false);
+    }
+  };
+
+  const handleMigration = async () => {
+    setMigrating(true);
+    try {
+      const response = await axios.post(`${API}/migrate/update-event-urls`);
+      if (response.data.success) {
+        toast.success(`${response.data.message}`, { duration: 3000 });
+        // Refresh db status and settings after migration
+        fetchDbStatus();
+        // Reload settings to get new CID mappings
+        window.location.reload();
+      } else {
+        toast.error("Migrering misslyckades", { duration: 3000 });
+      }
+    } catch (e) {
+      console.error("Error during migration:", e);
+      toast.error("Fel vid migrering", { duration: 3000 });
+    } finally {
+      setMigrating(false);
+    }
+  };
+
   // CID mapping handlers
   const handleCidMappingChange = (index, field, value) => {
     const newMappings = [...formData.cid_mappings];
