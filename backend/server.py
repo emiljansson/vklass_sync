@@ -122,7 +122,7 @@ def generate_event_key(summary: str, start: str, calendar_index: int) -> str:
 
 
 async def update_event_mappings_from_events():
-    """Auto-discover CIDs and event IDs from event URLs and add to settings if not present"""
+    """Auto-discover events from URLs and add to settings if not present"""
     from urllib.parse import urlparse, parse_qs
     
     settings = await get_settings_from_db()
@@ -157,6 +157,38 @@ async def update_event_mappings_from_events():
             {"$set": {"event_mappings": current_mappings}}
         )
         logger.info(f"Added {len(new_mappings)} new event mapping(s)")
+    
+    # Also update CID for any existing mappings that are missing it
+    updated = False
+    current_mappings = list(settings.event_mappings or [])
+    event_id_to_cid = {}
+    
+    # Build lookup of event_id to CID from events
+    async for event in db.events.find({"url": {"$ne": "", "$exists": True}}, {"url": 1}):
+        url = event.get('url', '')
+        if url:
+            try:
+                params = parse_qs(urlparse(url).query)
+                cid = params.get('cid', [''])[0]
+                event_id = params.get('id', [''])[0]
+                if event_id and cid:
+                    event_id_to_cid[event_id] = cid
+            except:
+                pass
+    
+    # Update mappings with missing CID
+    for mapping in current_mappings:
+        event_id = mapping.get('event_id', '')
+        if event_id and not mapping.get('cid') and event_id in event_id_to_cid:
+            mapping['cid'] = event_id_to_cid[event_id]
+            updated = True
+    
+    if updated:
+        await db.settings.update_one(
+            {"id": "app_settings"},
+            {"$set": {"event_mappings": current_mappings}}
+        )
+        logger.info("Updated CIDs for existing event mappings")
 
 async def parse_ical_feed(url: str) -> List[Dict[str, Any]]:
     """Fetch and parse iCal feed"""
