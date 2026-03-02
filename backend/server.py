@@ -520,7 +520,7 @@ async def auth_status():
 
 @api_router.get("/events")
 async def get_events():
-    """Get all events with CID mappings"""
+    """Get all events with CID mappings and event types"""
     from urllib.parse import urlparse, parse_qs
     
     events = await db.events.find({}, {"_id": 0}).to_list(10000)
@@ -528,7 +528,10 @@ async def get_events():
     
     # Create CID to subject lookup
     cid_lookup = {m.get('cid'): m.get('subject', '') for m in (settings.cid_mappings or [])}
+    # Create event ID to type lookup
+    event_type_lookup = {m.get('event_id'): m.get('event_type', '') for m in (settings.event_type_mappings or [])}
     logger.info(f"CID lookup table: {cid_lookup}")
+    logger.info(f"Event type lookup table: {event_type_lookup}")
     
     # Filter out removed events older than 6 hours
     six_hours_ago = (datetime.now(timezone.utc) - timedelta(hours=6)).isoformat()
@@ -540,19 +543,25 @@ async def get_events():
             if changed_at and changed_at < six_hours_ago:
                 continue
         
-        # Add subject_name from CID mapping
+        # Add subject_name and event_type from mappings
         url = event.get('url', '')
         subject_name = ''
+        event_type = ''
         if url:
             try:
                 params = parse_qs(urlparse(url).query)
                 cid = params.get('cid', [''])[0]
+                event_id = params.get('id', [''])[0]
                 if cid and cid in cid_lookup:
                     subject_name = cid_lookup[cid]
                     logger.info(f"Matched CID {cid} -> {subject_name} for event: {event.get('summary', '')[:30]}")
+                if event_id and event_id in event_type_lookup:
+                    event_type = event_type_lookup[event_id]
+                    logger.info(f"Matched event ID {event_id} -> {event_type}")
             except Exception as e:
                 logger.error(f"Error parsing URL {url}: {e}")
         event['subject_name'] = subject_name
+        event['event_type'] = event_type
         filtered_events.append(event)
     
     return filtered_events
