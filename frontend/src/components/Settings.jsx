@@ -29,7 +29,8 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     auth_password: "",
     sound_enabled: true,
     sound_volume: 50,
-    cid_mappings: []
+    cid_mappings: [],
+    event_type_mappings: []
   });
   const [saving, setSaving] = useState(false);
   const [testingPush, setTestingPush] = useState(false);
