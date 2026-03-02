@@ -653,6 +653,38 @@ async def health_check():
     """Health check endpoint"""
     return {"status": "healthy"}
 
+@api_router.get("/debug/cid-status")
+async def debug_cid_status():
+    """Debug endpoint to check CID mapping status"""
+    from urllib.parse import urlparse, parse_qs
+    
+    settings = await get_settings_from_db()
+    events = await db.events.find({}, {"_id": 0, "summary": 1, "url": 1}).to_list(10000)
+    
+    # Get all CIDs from events
+    event_cids = []
+    for event in events:
+        url = event.get('url', '')
+        if url:
+            try:
+                params = parse_qs(urlparse(url).query)
+                cid = params.get('cid', [''])[0]
+                if cid:
+                    event_cids.append({
+                        "summary": event.get('summary', '')[:40],
+                        "cid": cid,
+                        "url": url
+                    })
+            except:
+                pass
+    
+    return {
+        "cid_mappings_in_settings": settings.cid_mappings or [],
+        "cids_found_in_events": event_cids,
+        "events_with_url_count": len([e for e in events if e.get('url')]),
+        "total_events": len(events)
+    }
+
 # Include the router in the main app
 app.include_router(api_router)
 
