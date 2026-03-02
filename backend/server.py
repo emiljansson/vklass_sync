@@ -574,10 +574,15 @@ async def trigger_sync():
 @api_router.post("/test-push")
 async def test_push_notification():
     """Send a test push notification with current events"""
+    from urllib.parse import urlparse, parse_qs
+    
     settings = await get_settings_from_db()
     
     if not settings.webpushr_key or not settings.webpushr_auth_token:
         return {"success": False, "message": "Webpushr API-nycklar saknas"}
+    
+    # Create CID to subject lookup
+    cid_lookup = {m.get('cid'): m.get('subject', '') for m in (settings.cid_mappings or [])}
     
     # Get current new events from database
     events = await db.events.find({"status": "new"}, {"_id": 0}).to_list(10000)
@@ -597,17 +602,38 @@ async def test_push_notification():
             cal_name = settings.calendar_name_1 if cal_index == 1 else settings.calendar_name_2
             if cal_name not in cal_events:
                 cal_events[cal_name] = []
-            cal_events[cal_name].append(event['summary'])
+            
+            # Get subject name from CID
+            subject_name = ''
+            url = event.get('url', '')
+            if url:
+                try:
+                    params = parse_qs(urlparse(url).query)
+                    cid = params.get('cid', [''])[0]
+                    if cid and cid in cid_lookup:
+                        subject_name = cid_lookup[cid]
+                except:
+                    pass
+            
+            cal_events[cal_name].append({
+                'summary': event['summary'],
+                'subject_name': subject_name
+            })
         
         # Build notification message
         message_parts = []
-        for cal_name, summaries in cal_events.items():
-            message_parts.append(f"*{cal_name}*")
-            for summary in summaries:
-                clean_summary = summary.replace('\\n', ' ').replace('\n', ' ').strip()
-                if len(clean_summary) > 100:
-                    clean_summary = clean_summary[:97] + "..."
-                message_parts.append(clean_summary)
+        for cal_name, events_list in cal_events.items():
+            message_parts.append(cal_name)
+            for event in events_list:
+                clean_summary = event['summary'].replace('\\n', ' ').replace('\n', ' ').strip()
+                if len(clean_summary) > 80:
+                    clean_summary = clean_summary[:77] + "..."
+                
+                subject = event.get('subject_name', '')
+                if subject:
+                    message_parts.append(f"[{subject}] {clean_summary}")
+                else:
+                    message_parts.append(clean_summary)
         
         success = await send_webpushr_notification(
             "Nya kalenderhändelser",
