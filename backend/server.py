@@ -339,6 +339,9 @@ async def sync_calendars() -> SyncResult:
         "status_changed_at": {"$lt": six_hours_ago}
     })
     
+    # Auto-discover new CIDs from events and add to settings
+    await update_cid_mappings_from_events()
+    
     # Save sync timestamp
     import time
     await db.sync_status.update_one(
