@@ -121,42 +121,23 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     }
   };
 
-  // CID mapping handlers
-  const handleCidMappingChange = (index, field, value) => {
-    const newMappings = [...formData.cid_mappings];
+  // Event mapping handlers (combined CID/Subject + ID/Type)
+  const handleEventMappingChange = (index, field, value) => {
+    const newMappings = [...formData.event_mappings];
     newMappings[index] = { ...newMappings[index], [field]: value };
-    setFormData({ ...formData, cid_mappings: newMappings });
+    setFormData({ ...formData, event_mappings: newMappings });
   };
 
-  const addCidMapping = () => {
+  const addEventMapping = () => {
     setFormData({
       ...formData,
-      cid_mappings: [...formData.cid_mappings, { cid: "", subject: "" }]
+      event_mappings: [...formData.event_mappings, { cid: "", subject: "", event_id: "", event_type: "" }]
     });
   };
 
-  const removeCidMapping = (index) => {
-    const newMappings = formData.cid_mappings.filter((_, i) => i !== index);
-    setFormData({ ...formData, cid_mappings: newMappings });
-  };
-
-  // Event type mapping handlers
-  const handleEventTypeMappingChange = (index, field, value) => {
-    const newMappings = [...formData.event_type_mappings];
-    newMappings[index] = { ...newMappings[index], [field]: value };
-    setFormData({ ...formData, event_type_mappings: newMappings });
-  };
-
-  const addEventTypeMapping = () => {
-    setFormData({
-      ...formData,
-      event_type_mappings: [...formData.event_type_mappings, { event_id: "", event_type: "" }]
-    });
-  };
-
-  const removeEventTypeMapping = (index) => {
-    const newMappings = formData.event_type_mappings.filter((_, i) => i !== index);
-    setFormData({ ...formData, event_type_mappings: newMappings });
+  const removeEventMapping = (index) => {
+    const newMappings = formData.event_mappings.filter((_, i) => i !== index);
+    setFormData({ ...formData, event_mappings: newMappings });
   };
 
   const intervalOptions = [
