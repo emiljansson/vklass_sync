@@ -165,11 +165,16 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
       <CardContent className="p-4">
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1">
+            <div className="flex items-center gap-2 mb-1 flex-wrap">
               {getStatusBadge(event.status, event.start)}
               {event.subject_name && (
                 <Badge className="bg-green-500/20 text-green-300 border border-green-500/30 uppercase text-xs tracking-wider">
                   {event.subject_name}
+                </Badge>
+              )}
+              {event.event_type && (
+                <Badge className="bg-purple-500/20 text-purple-300 border border-purple-500/30 uppercase text-xs tracking-wider">
+                  {event.event_type}
                 </Badge>
               )}
             </div>
