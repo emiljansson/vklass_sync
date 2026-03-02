@@ -491,10 +491,16 @@ async def auth_status():
     settings = await get_settings_from_db()
     return {"auth_enabled": settings.auth_enabled}
 
-@api_router.get("/events", response_model=List[CalendarEvent])
+@api_router.get("/events")
 async def get_events():
-    """Get all events"""
+    """Get all events with CID mappings"""
+    from urllib.parse import urlparse, parse_qs
+    
     events = await db.events.find({}, {"_id": 0}).to_list(10000)
+    settings = await get_settings_from_db()
+    
+    # Create CID to subject lookup
+    cid_lookup = {m.get('cid'): m.get('subject', '') for m in (settings.cid_mappings or [])}
     
     # Filter out removed events older than 6 hours
     six_hours_ago = (datetime.now(timezone.utc) - timedelta(hours=6)).isoformat()
@@ -505,6 +511,19 @@ async def get_events():
             changed_at = event.get('status_changed_at', '')
             if changed_at and changed_at < six_hours_ago:
                 continue
+        
+        # Add subject_name from CID mapping
+        url = event.get('url', '')
+        subject_name = ''
+        if url:
+            try:
+                params = parse_qs(urlparse(url).query)
+                cid = params.get('cid', [''])[0]
+                if cid and cid in cid_lookup:
+                    subject_name = cid_lookup[cid]
+            except:
+                pass
+        event['subject_name'] = subject_name
         filtered_events.append(event)
     
     return filtered_events
