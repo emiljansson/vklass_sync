@@ -142,6 +142,25 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     setFormData({ ...formData, cid_mappings: newMappings });
   };
 
+  // Event type mapping handlers
+  const handleEventTypeMappingChange = (index, field, value) => {
+    const newMappings = [...formData.event_type_mappings];
+    newMappings[index] = { ...newMappings[index], [field]: value };
+    setFormData({ ...formData, event_type_mappings: newMappings });
+  };
+
+  const addEventTypeMapping = () => {
+    setFormData({
+      ...formData,
+      event_type_mappings: [...formData.event_type_mappings, { event_id: "", event_type: "" }]
+    });
+  };
+
+  const removeEventTypeMapping = (index) => {
+    const newMappings = formData.event_type_mappings.filter((_, i) => i !== index);
+    setFormData({ ...formData, event_type_mappings: newMappings });
+  };
+
   const intervalOptions = [
     { value: 5, label: "5 minuter" },
     { value: 15, label: "15 minuter" },
