@@ -96,6 +96,14 @@ The user requested a full-stack application to monitor two user-provided iCal ca
 - [x] iOS "Add to Home Screen" popup
 - [x] Toast notification auto-hide (3s duration)
 - [x] Scanlines effect (adjustable)
+- [x] CID-till-ämne mappning (auto-upptäckt av CID från event URLs)
+- [x] Visa ämnesnamn på eventkort i Dashboard (grön badge)
+
+## Database Schema
+- **settings (singleton):** `{ ical_urls, calendar_names, sync_interval, webpushr_keys, auth_config, last_sync_time, sound_enabled, sound_volume, cid_mappings }`
+- **events (collection):** `{ uid, calendar_id, summary, start_date, status, url, created_at }`
+- **sync_status (singleton):** `{ last_sync, next_sync }`
+- **cid_mappings:** stored in settings as `[{cid: string, subject: string}]`
 
 ## Known Credentials
 - **Settings Password:** 2378
