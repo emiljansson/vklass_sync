@@ -121,17 +121,15 @@ def generate_event_key(summary: str, start: str, calendar_index: int) -> str:
     return hashlib.md5(key_string.encode()).hexdigest()
 
 
-async def update_cid_mappings_from_events():
+async def update_event_mappings_from_events():
     """Auto-discover CIDs and event IDs from event URLs and add to settings if not present"""
     from urllib.parse import urlparse, parse_qs
     
     settings = await get_settings_from_db()
-    existing_cids = {m.get('cid') for m in (settings.cid_mappings or [])}
-    existing_event_ids = {m.get('event_id') for m in (settings.event_type_mappings or [])}
+    existing_event_ids = {m.get('event_id') for m in (settings.event_mappings or []) if m.get('event_id')}
     
-    # Find all unique CIDs and event IDs from events
-    new_cids = set()
-    new_event_ids = []
+    # Find all events with URLs and extract CID + event ID
+    new_mappings = []
     async for event in db.events.find({"url": {"$ne": "", "$exists": True}}, {"url": 1, "summary": 1}):
         url = event.get('url', '')
         if url:
@@ -139,40 +137,26 @@ async def update_cid_mappings_from_events():
                 params = parse_qs(urlparse(url).query)
                 cid = params.get('cid', [''])[0]
                 event_id = params.get('id', [''])[0]
-                if cid and cid not in existing_cids:
-                    new_cids.add(cid)
                 if event_id and event_id not in existing_event_ids:
-                    new_event_ids.append({
+                    new_mappings.append({
+                        'cid': cid,
+                        'subject': '',
                         'event_id': event_id,
-                        'summary': event.get('summary', '')[:50]
+                        'event_type': '',
+                        'summary': event.get('summary', '')[:50]  # For reference
                     })
-                    existing_event_ids.add(event_id)  # Prevent duplicates
+                    existing_event_ids.add(event_id)
             except:
                 pass
     
-    updates = {}
-    
-    # Add new CIDs to mappings
-    if new_cids:
-        current_mappings = list(settings.cid_mappings or [])
-        for cid in sorted(new_cids):
-            current_mappings.append({"cid": cid, "subject": ""})
-        updates["cid_mappings"] = current_mappings
-        logger.info(f"Added {len(new_cids)} new CID(s) to mappings: {new_cids}")
-    
-    # Add new event IDs to mappings
-    if new_event_ids:
-        current_event_mappings = list(settings.event_type_mappings or [])
-        for item in new_event_ids:
-            current_event_mappings.append({"event_id": item['event_id'], "event_type": ""})
-        updates["event_type_mappings"] = current_event_mappings
-        logger.info(f"Added {len(new_event_ids)} new event ID(s) to mappings")
-    
-    if updates:
+    if new_mappings:
+        current_mappings = list(settings.event_mappings or [])
+        current_mappings.extend(new_mappings)
         await db.settings.update_one(
             {"id": "app_settings"},
-            {"$set": updates}
+            {"$set": {"event_mappings": current_mappings}}
         )
+        logger.info(f"Added {len(new_mappings)} new event mapping(s)")
 
 async def parse_ical_feed(url: str) -> List[Dict[str, Any]]:
     """Fetch and parse iCal feed"""
