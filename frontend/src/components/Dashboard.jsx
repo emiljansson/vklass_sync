@@ -334,7 +334,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           {/* Countdown row */}
           <div className="flex items-center justify-center gap-3 mb-3 pb-3 border-b border-green-500/20 px-0.5">
             <Clock className="w-4 h-4 text-green-400" />
-            <span className="text-sm text-green-500/70 uppercase tracking-wider">Time to end of the world:</span>
+            <span className="text-sm text-green-500/70 uppercase tracking-wider">Time to Impact:</span>
             <span className="text-lg font-bold text-green-400 pip-glow font-mono">{countdown || '--:--'}</span>
           </div>
           
