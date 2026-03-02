@@ -324,6 +324,7 @@ async def sync_calendars() -> SyncResult:
     new_count = 0
     removed_count = 0
     new_events_details = []  # Store details for notification
+    removed_events_details = []  # Store details for removed events notification
     
     for cal_index in [1, 2]:
         url = settings.ical_url_1 if cal_index == 1 else settings.ical_url_2
