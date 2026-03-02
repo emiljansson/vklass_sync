@@ -394,6 +394,25 @@ async def sync_calendars() -> SyncResult:
         # Find removed events (in DB but not in feed)
         for event_key, existing in existing_keys.items():
             if event_key not in feed_keys:
+                # Get subject name for notification
+                subject_name = ''
+                event_url = existing.get('url', '')
+                if event_url:
+                    try:
+                        params = parse_qs(urlparse(event_url).query)
+                        cid = params.get('cid', [''])[0]
+                        if cid and cid in cid_lookup:
+                            subject_name = cid_lookup[cid]
+                    except:
+                        pass
+                
+                removed_events_details.append({
+                    'calendar_name': cal_name,
+                    'summary': existing['summary'],
+                    'start': existing.get('start', ''),
+                    'subject_name': subject_name
+                })
+                
                 await db.events.update_one(
                     {"id": existing['id']},
                     {"$set": {
