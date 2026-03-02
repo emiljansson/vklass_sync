@@ -98,6 +98,7 @@ The user requested a full-stack application to monitor two user-provided iCal ca
 - [x] Scanlines effect (adjustable)
 - [x] CID-till-ämne mappning (auto-upptäckt av CID från event URLs)
 - [x] Visa ämnesnamn på eventkort i Dashboard (grön badge)
+- [x] Ämnesnamn i push-notifikationer (format: [Ämne] Händelse)
 
 ## Database Schema
 - **settings (singleton):** `{ ical_urls, calendar_names, sync_interval, webpushr_keys, auth_config, last_sync_time, sound_enabled, sound_volume, cid_mappings }`
