@@ -310,8 +310,10 @@ async def sync_calendars() -> SyncResult:
         
         # Build notification message
         message_parts = []
-        for cal_name, summaries in cal_events.items():
-            message_parts.append(f"*{cal_name}*")
+        for i, (cal_name, summaries) in enumerate(cal_events.items()):
+            if i > 0:
+                message_parts.append("")  # Extra line break between calendars
+            message_parts.append(cal_name)
             for summary in summaries:
                 # Clean up summary (remove newlines etc)
                 clean_summary = summary.replace('\\n', ' ').replace('\n', ' ').strip()
