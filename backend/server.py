@@ -685,6 +685,45 @@ async def debug_cid_status():
         "total_events": len(events)
     }
 
+@api_router.post("/migrate/update-event-urls")
+async def migrate_update_event_urls():
+    """One-time migration: Update existing events with URLs from iCal feeds"""
+    settings = await get_settings_from_db()
+    updated_count = 0
+    
+    for cal_index in [1, 2]:
+        url = settings.ical_url_1 if cal_index == 1 else settings.ical_url_2
+        if not url:
+            continue
+        
+        # Parse events from feed
+        feed_events = await parse_ical_feed(url)
+        
+        for feed_event in feed_events:
+            if not feed_event.get('url'):
+                continue
+            
+            # Find matching event in database by summary and start
+            result = await db.events.update_many(
+                {
+                    "calendar_index": cal_index,
+                    "summary": feed_event['summary'],
+                    "start": feed_event['start'],
+                    "$or": [{"url": ""}, {"url": {"$exists": False}}]
+                },
+                {"$set": {"url": feed_event['url']}}
+            )
+            updated_count += result.modified_count
+    
+    # After updating URLs, discover new CIDs
+    await update_cid_mappings_from_events()
+    
+    return {
+        "success": True,
+        "message": f"Uppdaterade {updated_count} events med URL:er",
+        "updated_count": updated_count
+    }
+
 # Include the router in the main app
 app.include_router(api_router)
 
