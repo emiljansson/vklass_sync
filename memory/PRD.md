@@ -104,11 +104,10 @@ The user requested a full-stack application to monitor two user-provided iCal ca
 - [x] Läxa/Prov-kopplingar (event ID -> typ) med lila badge på eventkort
 
 ## Database Schema
-- **settings (singleton):** `{ ical_urls, calendar_names, sync_interval, webpushr_keys, auth_config, last_sync_time, sound_enabled, sound_volume, cid_mappings, event_type_mappings }`
+- **settings (singleton):** `{ ical_urls, calendar_names, sync_interval, webpushr_keys, auth_config, last_sync_time, sound_enabled, sound_volume, event_mappings }`
 - **events (collection):** `{ uid, calendar_id, summary, start_date, status, url, created_at }`
 - **sync_status (singleton):** `{ last_sync, next_sync }`
-- **cid_mappings:** stored in settings as `[{cid: string, subject: string}]`
-- **event_type_mappings:** stored in settings as `[{event_id: string, event_type: string}]`
+- **event_mappings:** stored in settings as `[{cid: string, subject: string, event_id: string, event_type: string}]`
 
 ## Known Credentials
 - **Settings Password:** 2378
