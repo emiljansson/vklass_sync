@@ -529,10 +529,19 @@ async def get_events():
     events = await db.events.find({}, {"_id": 0}).to_list(10000)
     settings = await get_settings_from_db()
     
-    # Create CID to subject lookup
-    cid_lookup = {m.get('cid'): m.get('subject', '') for m in (settings.cid_mappings or [])}
-    # Create event ID to type lookup
-    event_type_lookup = {m.get('event_id'): m.get('event_type', '') for m in (settings.event_type_mappings or [])}
+    # Create lookups from combined event_mappings
+    cid_lookup = {}
+    event_type_lookup = {}
+    for m in (settings.event_mappings or []):
+        cid = m.get('cid')
+        subject = m.get('subject', '')
+        event_id = m.get('event_id')
+        event_type = m.get('event_type', '')
+        if cid and subject:
+            cid_lookup[cid] = subject
+        if event_id and event_type:
+            event_type_lookup[event_id] = event_type
+    
     logger.info(f"CID lookup table: {cid_lookup}")
     logger.info(f"Event type lookup table: {event_type_lookup}")
     
