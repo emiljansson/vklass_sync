@@ -89,9 +89,29 @@
         })();
         </script>
         <!-- start webpushr tracking code --> 
-        <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.async=1;js.src = "https://cdn.webpushr.com/app.min.js";
-fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));
-webpushr('setup',{'key':'BJRC1RDcMtrQgyDODWuHAeA1Lu7Fa7_ql4iXIxB78tnKR0Q0srLwjDS3tqzjb_74RI8RqckdmTmK_afevd6t6cw' });</script>
+        <script>
+        // Only load webpushr in production (not preview environments)
+        (function() {
+            var isPreview = window.location.hostname.includes('preview.emergentagent.com');
+            if (isPreview) {
+                console.log('Webpushr disabled in preview environment');
+                window.webpushr = function() {}; // Stub function
+                return;
+            }
+            
+            (function(w,d, s, id) {
+                if(typeof(w.webpushr)!=='undefined') return;
+                w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};
+                var js, fjs = d.getElementsByTagName(s)[0];
+                js = d.createElement(s); 
+                js.id = id;
+                js.async=1;
+                js.src = "https://cdn.webpushr.com/app.min.js";
+                fjs.parentNode.appendChild(js);
+            }(window,document, 'script', 'webpushr-jssdk'));
+            webpushr('setup',{'key':'BJRC1RDcMtrQgyDODWuHAeA1Lu7Fa7_ql4iXIxB78tnKR0Q0srLwjDS3tqzjb_74RI8RqckdmTmK_afevd6t6cw' });
+        })();
+        </script>
         <!-- end webpushr tracking code -->
         <script src="https://assets.emergent.sh/scripts/emergent-main.js"></script>
         <!--
