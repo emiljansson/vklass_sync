@@ -296,6 +296,71 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </CardContent>
           </Card>
 
+          {/* CID to Subject Mappings */}
+          <Card className="bg-[#141e14] border-2 border-green-500/40">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-green-400">
+                <BookOpen className="w-5 h-5" />
+                Ämneskopplingar
+              </CardTitle>
+              <CardDescription className="text-green-500/60">
+                Koppla kurs-ID (CID) från Vklass till ämnesnamn. Nya CID upptäcks automatiskt vid synkronisering.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {/* Header row */}
+              <div className="grid grid-cols-[1fr_2fr_auto] gap-3 pb-2 border-b border-green-500/20">
+                <Label className="text-green-400 text-sm">CID</Label>
+                <Label className="text-green-400 text-sm">Ämne</Label>
+                <div className="w-8"></div>
+              </div>
+              
+              {/* Mapping rows */}
+              {formData.cid_mappings.map((mapping, index) => (
+                <div key={index} className="grid grid-cols-[1fr_2fr_auto] gap-3 items-center">
+                  <Input
+                    value={mapping.cid || ""}
+                    onChange={(e) => handleCidMappingChange(index, 'cid', e.target.value)}
+                    placeholder="CID"
+                    className="bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40 font-mono text-sm"
+                  />
+                  <Input
+                    value={mapping.subject || ""}
+                    onChange={(e) => handleCidMappingChange(index, 'subject', e.target.value)}
+                    placeholder="T.ex. Matematik, Svenska..."
+                    className="bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40"
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => removeCidMapping(index)}
+                    className="text-red-400 hover:text-red-300 hover:bg-red-500/10 h-8 w-8"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </div>
+              ))}
+              
+              {/* Add row button */}
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={addCidMapping}
+                className="w-full border border-dashed border-green-500/30 text-green-500/70 hover:text-green-400 hover:bg-green-500/10 hover:border-green-500/50"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Lägg till rad
+              </Button>
+              
+              {formData.cid_mappings.length === 0 && (
+                <p className="text-sm text-green-500/50 text-center py-2">
+                  Inga CID hittade ännu. Synkronisera kalendrarna för att automatiskt upptäcka CID.
+                </p>
+              )}
+            </CardContent>
+          </Card>
+
           {/* Webpushr Settings */}
           <Card className="bg-[#141e14] border-2 border-green-500/40">
             <CardHeader>
