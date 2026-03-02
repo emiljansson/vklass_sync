@@ -459,6 +459,41 @@ async def sync_calendars() -> SyncResult:
             settings
         )
     
+    # Send notification for removed events
+    if removed_events_details:
+        # Group events by calendar
+        cal_events = {}
+        for event in removed_events_details:
+            cal_name = event['calendar_name']
+            if cal_name not in cal_events:
+                cal_events[cal_name] = []
+            cal_events[cal_name].append(event)
+        
+        # Build notification message
+        message_parts = []
+        for i, (cal_name, events_list) in enumerate(cal_events.items()):
+            if i > 0:
+                message_parts.append("")  # Extra line break between calendars
+            message_parts.append(cal_name)
+            for event in events_list:
+                # Clean up summary (remove newlines etc)
+                clean_summary = event['summary'].replace('\\n', ' ').replace('\n', ' ').strip()
+                if len(clean_summary) > 80:
+                    clean_summary = clean_summary[:77] + "..."
+                
+                # Add subject name if available
+                subject = event.get('subject_name', '')
+                if subject:
+                    message_parts.append(f"[{subject}] {clean_summary}")
+                else:
+                    message_parts.append(clean_summary)
+        
+        await send_webpushr_notification(
+            "Borttagna kalenderhändelser",
+            '\n'.join(message_parts),
+            settings
+        )
+    
     # Clean up old removed events (older than 6 hours)
     six_hours_ago = (datetime.now(timezone.utc) - timedelta(hours=6)).isoformat()
     await db.events.delete_many({
