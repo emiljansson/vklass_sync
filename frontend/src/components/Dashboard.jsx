@@ -151,7 +151,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
       case 'new':
         return <Badge className="bg-amber-500/20 text-amber-400 border border-amber-500/30 uppercase text-xs tracking-wider">Nytt</Badge>;
       case 'removed':
-        return <Badge className="bg-red-500/20 text-red-400 border border-red-500/30 uppercase text-xs tracking-wider">Borttagen</Badge>;
+        return <Badge className="bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 uppercase text-xs tracking-wider">Borttagen</Badge>;
       default:
         return null;
     }
@@ -170,7 +170,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
             </div>
             <h3 className={`font-semibold text-base truncate ${
               event.status === 'new' ? 'text-amber-400' : 
-              event.status === 'removed' ? 'text-red-400' : 
+              event.status === 'removed' ? 'text-yellow-400' : 
               isEventPast(event.start) ? 'text-cyan-400' : 'text-green-400'
             }`}>
               {event.summary}
@@ -179,7 +179,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
             {event.location && (
               <div className={`flex items-center gap-1.5 mt-1 text-sm ${
                 event.status === 'new' ? 'text-amber-500/70' : 
-                event.status === 'removed' ? 'text-red-500/70' : 'text-green-500/70'
+                event.status === 'removed' ? 'text-yellow-500/70' : 'text-green-500/70'
               }`}>
                 <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
                 <span className="truncate">{event.location}</span>
@@ -189,7 +189,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
             {event.description && (
               <p className={`mt-2 text-sm line-clamp-2 ${
                 event.status === 'new' ? 'text-amber-500/70' : 
-                event.status === 'removed' ? 'text-red-500/70' : 'text-green-500/70'
+                event.status === 'removed' ? 'text-yellow-500/70' : 'text-green-500/70'
               }`}>
                 {event.description}
               </p>
@@ -343,7 +343,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
               <span className="text-sm text-green-500/70">Utfört</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-red-500/30 border border-red-500/50"></div>
+              <div className="w-3 h-3 rounded bg-yellow-500/30 border border-yellow-500/50"></div>
               <span className="text-sm text-green-500/70">Borttagen (6h)</span>
             </div>
           </div>
