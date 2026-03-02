@@ -526,6 +526,7 @@ async def get_events():
     
     # Create CID to subject lookup
     cid_lookup = {m.get('cid'): m.get('subject', '') for m in (settings.cid_mappings or [])}
+    logger.info(f"CID lookup table: {cid_lookup}")
     
     # Filter out removed events older than 6 hours
     six_hours_ago = (datetime.now(timezone.utc) - timedelta(hours=6)).isoformat()
@@ -546,8 +547,9 @@ async def get_events():
                 cid = params.get('cid', [''])[0]
                 if cid and cid in cid_lookup:
                     subject_name = cid_lookup[cid]
-            except:
-                pass
+                    logger.info(f"Matched CID {cid} -> {subject_name} for event: {event.get('summary', '')[:30]}")
+            except Exception as e:
+                logger.error(f"Error parsing URL {url}: {e}")
         event['subject_name'] = subject_name
         filtered_events.append(event)
     
