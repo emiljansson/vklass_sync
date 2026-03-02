@@ -90,6 +90,7 @@ class CalendarEvent(BaseModel):
     summary: str
     description: str = ""
     location: str = ""
+    url: str = ""  # URL from iCal
     start: str
     end: str
     status: str = "normal"  # new, removed, normal
