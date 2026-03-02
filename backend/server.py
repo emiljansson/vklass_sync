@@ -81,8 +81,7 @@ class SettingsUpdate(BaseModel):
     auth_password: Optional[str] = None
     sound_enabled: Optional[bool] = None
     sound_volume: Optional[int] = None
-    cid_mappings: Optional[list] = None
-    event_type_mappings: Optional[list] = None
+    event_mappings: Optional[list] = None
     screen_wake_lock: Optional[bool] = None
 
 class CalendarEvent(BaseModel):
