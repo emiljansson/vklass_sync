@@ -167,6 +167,11 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1">
               {getStatusBadge(event.status, event.start)}
+              {event.subject_name && (
+                <Badge className="bg-green-500/20 text-green-300 border border-green-500/30 uppercase text-xs tracking-wider">
+                  {event.subject_name}
+                </Badge>
+              )}
             </div>
             <h3 className={`font-semibold text-base truncate ${
               event.status === 'new' ? 'text-amber-400' : 
