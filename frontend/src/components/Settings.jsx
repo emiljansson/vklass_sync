@@ -84,6 +84,25 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     }
   };
 
+  // CID mapping handlers
+  const handleCidMappingChange = (index, field, value) => {
+    const newMappings = [...formData.cid_mappings];
+    newMappings[index] = { ...newMappings[index], [field]: value };
+    setFormData({ ...formData, cid_mappings: newMappings });
+  };
+
+  const addCidMapping = () => {
+    setFormData({
+      ...formData,
+      cid_mappings: [...formData.cid_mappings, { cid: "", subject: "" }]
+    });
+  };
+
+  const removeCidMapping = (index) => {
+    const newMappings = formData.cid_mappings.filter((_, i) => i !== index);
+    setFormData({ ...formData, cid_mappings: newMappings });
+  };
+
   const intervalOptions = [
     { value: 5, label: "5 minuter" },
     { value: 15, label: "15 minuter" },
