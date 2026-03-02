@@ -363,20 +363,26 @@ async def sync_calendars() -> SyncResult:
             cal_name = event['calendar_name']
             if cal_name not in cal_events:
                 cal_events[cal_name] = []
-            cal_events[cal_name].append(event['summary'])
+            cal_events[cal_name].append(event)
         
         # Build notification message
         message_parts = []
-        for i, (cal_name, summaries) in enumerate(cal_events.items()):
+        for i, (cal_name, events_list) in enumerate(cal_events.items()):
             if i > 0:
                 message_parts.append("")  # Extra line break between calendars
             message_parts.append(cal_name)
-            for summary in summaries:
+            for event in events_list:
                 # Clean up summary (remove newlines etc)
-                clean_summary = summary.replace('\\n', ' ').replace('\n', ' ').strip()
-                if len(clean_summary) > 100:
-                    clean_summary = clean_summary[:97] + "..."
-                message_parts.append(clean_summary)
+                clean_summary = event['summary'].replace('\\n', ' ').replace('\n', ' ').strip()
+                if len(clean_summary) > 80:
+                    clean_summary = clean_summary[:77] + "..."
+                
+                # Add subject name if available
+                subject = event.get('subject_name', '')
+                if subject:
+                    message_parts.append(f"[{subject}] {clean_summary}")
+                else:
+                    message_parts.append(clean_summary)
         
         await send_webpushr_notification(
             "Nya kalenderhändelser",
