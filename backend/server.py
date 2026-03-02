@@ -240,7 +240,7 @@ async def send_webpushr_notification(title: str, message: str, settings: Setting
             "target_url": "https://vklass.frontproduction.se",
             "expire_push": "24h",
             "auto_hide": 1,
-            "icon": "https://event-watcher.preview.emergentagent.com/apple-touch-icon.png"
+            "icon": "https://sync-preview-4.preview.emergentagent.com/apple-touch-icon.png"
         }
         
         async with httpx.AsyncClient(timeout=30.0) as client:

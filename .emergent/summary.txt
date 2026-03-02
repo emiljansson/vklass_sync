@@ -1,162 +1,159 @@
 <analysis>**original_problem_statement:**
-The user requested a full-stack application to monitor two iCal calendar feeds.
+The user requested a full-stack application, Vklass Sync, to monitor two iCal calendar feeds.
 
 **PRODUCT REQUIREMENTS:**
-- The application should fetch data from two user-provided iCal links at a configurable interval (5, 15, 30, 60 minutes).
-- Events from the two calendars should be displayed in a two-column layout on a public dashboard.
-- The app should detect changes between syncs:
-    - **New events:** Marked in red and require manual confirmation via a button.
-    - **Removed events:** Marked in blue and automatically disappear after 6 hours.
-- Changes should trigger a push notification via Webpushr. The notification format should be **Calendar Name** (bold) on a new line, followed by the event details, and should link to .
-- The application name should be Vklass Sync.
-- The main dashboard must be public, while the settings page must be password-protected.
-- Events that have both a start and an end time (i.e., not all-day events) should be filtered out and not displayed.
-- The UI should have a Fallout / Pip-Boy theme, with a green monochrome aesthetic, terminal font, scanlines, and a screen flicker effect.
-- A popup should instruct iPhone users on how to add the app to their home screen. The app should have a corresponding icon.
-- Past events should be highlighted with a light blue background.
-- Various UI/UX tweaks requested by the user, such as adjusting spacing, removing date/time from event cards, and styling toast notifications.
+- Fetch data from two user-provided iCal links at a configurable interval (5, 15, 30, 60 minutes).
+- Display events from both calendars in a two-column layout on a public dashboard.
+- Detect and visually distinguish changes:
+    - **New events:** Marked in amber, require manual confirmation.
+    - **Removed events:** Marked in gray and disappear after 6 hours.
+    - **Past events:** Highlighted with a light blue background.
+- Trigger push notifications via Webpushr for new/removed events.
+- The UI must have a Fallout / Pip-Boy theme (green monochrome, terminal font, scanlines, flicker effect).
+- The settings page must be password-protected.
+- Events with a start and end time (not all-day) should be filtered out.
+- A popup should instruct iPhone users on adding the app to their home screen.
+- A feature to map course IDs ( from event URLs) to human-readable subject names in the settings.
+- Sound effects (on/off and volume controls) synchronized with the screen flicker effect.
 
 **User's preferred language**: Swedish. The user communicates in Swedish. You MUST respond in Swedish.
 
 **what currently exists?**
-A full-stack application named Vklass Sync with a FastAPI/MongoDB backend and a React/TailwindCSS frontend. The application fetches and displays events from two iCal feeds. It features a public dashboard and a password-protected settings page. The entire UI is styled with a Fallout theme as requested. It successfully tracks new, removed, and past events with distinct visual states and sends push notifications via Webpushr.
+A full-stack application with a FastAPI/MongoDB backend and a React/TailwindCSS frontend. The app fetches and displays events from two iCal feeds on a public dashboard styled with a Fallout theme. It includes a password-protected settings page with controls for sync interval, calendar URLs, push notifications, and sound effects. A new feature allows users to map  values found in event URLs to custom subject names. The application successfully tracks new, removed, and past events and sends push notifications.
 
 **Last working item**:
-- **Last item agent was working:** The agent was attempting to fix two user-reported bugs simultaneously:
-    1.  The countdown clock on the dashboard was not correctly syncing with the backend's schedule, always resetting on page load.
-    2.  The screen flicker effect, which was changed to be random, stopped working entirely.
+- **Last item agent was working:** The agent had just finished implementing the UI and backend logic for the Ämneskopplingar (Subject Mappings) feature. The user asked if the logic for discovering new  values scans both provided iCal URLs. The agent confirmed that it does and was in the process of verifying this.
 - **Status:** IN PROGRESS
 - **Agent Testing Done:** N
-- **Which testing method agent to use?** Frontend testing agent to verify the UI behavior of both the flicker and the countdown clock, and also verify the backend using  to check the  endpoint.
-- **User Testing Done:** N (User reported that both features are broken after the agent's last attempt to fix them).
+- **Which testing method agent to use?** Manual testing by . Check the backend logic in  within the  and  functions. Verify by checking the  collection in the database to see if CIDs from both calendar URLs are present.
+- **User Testing Done:** N
 
 **All Pending/In progress Issue list**:
--   **Issue 1 (P0):** The countdown clock does not sync with the backend.
--   **Issue 2 (P1):** The random screen flicker UI effect is not working.
--   **Issue 3 (P2):** Toast notifications on the dashboard may not be auto-hiding correctly.
+-   **Issue 1 (P0):** The countdown timer jumps when it resets, starting at a slightly lower value (e.g., 04:55 instead of 05:00).
+-   **Issue 2 (P1):** Toast notifications may not auto-hide on Safari/iOS.
+-   **Issue 3 (P2):** The dropdown for Uppdateringsintervall in Settings was fixed with a method ( attribute) that previously caused side effects on other input fields.
 
 **Issues Detail:**
--   **Issue 1: Countdown Clock Sync**
-    -   **Attempted fixes:** The agent created a new backend endpoint  to provide the  and updated the frontend to calculate the countdown from this data. However, the user reported it's still not working correctly and resets on every page load.
+-   **Issue 1: Timer Jump on Reset**
+    -   **Attempted fixes:** The agent ensured the backend syncs immediately on startup. A subsequent attempt to round up the timer value in the frontend caused the UI to freeze for several seconds and was reverted. The current implementation polls the backend when the timer hits zero, but the small delay between the backend scheduler's execution and the frontend's successful poll causes the timer to start a few seconds short.
     -   **Next debug checklist:**
-        1.  **Backend ():** Verify  is correctly saved to the  collection in MongoDB within the  and background scheduler functions.
-        2.  **API Test:** Use  to test the  endpoint directly and confirm it returns the expected  and .
-        3.  **Frontend ():** In the  hook that fetches sync status, log the server response to check the received data.
-        4.  **Frontend ():** Scrutinize the time calculation logic that uses  to derive the countdown. It might have a timezone or logical error.
-    -   **Why fix this issue and what will be achieved with the fix?** The clock is a key UI feature that provides users with feedback on the app's status. Fixing it is essential for user experience.
+        1.  **Frontend ():** Review the polling logic in the  hook that handles the countdown reaching zero.
+        2.  Consider a solution where the frontend, upon hitting zero, displays a Syncing... state and receives the *exact* next sync time from the backend via the polling response, rather than just detecting a change.
+        3.  Alternatively, investigate using WebSockets for a more real-time update from the backend when a sync is complete, eliminating the need for frontend polling.
+    -   **Why fix this issue and what will be achieved with the fix?** The user has noticed the discrepancy. While minor, fixing it will improve the perceived quality and accuracy of the application.
     -   **Status:** IN PROGRESS
-    -   **Is recurring issue?** N
+    -   **Is recurring issue?** Y
     -   **Should Test frontend/backend/both after fix?** Both
     -   **Blocked on other issue:** None
 
--   **Issue 2: Screen Flicker Effect**
-    -   **Attempted fixes:** The agent replaced a periodic CSS animation with a  React component designed to trigger flickers at random intervals. This change broke the effect entirely.
-    -   **Next debug checklist:**
-        1.  **Component ():** Add  statements inside  and  to trace the execution flow and ensure the flicker logic is running.
-        2.  **CSS ():** Verify that the  class (or the class being toggled) applies a visible style change (e.g., ).
-        3.  **Component ():** Temporarily simplify the logic to a fixed, short interval (e.g., 2 seconds) to isolate whether the issue is in the randomization or the effect application itself.
-    -   **Why fix this issue and what will be achieved with the fix?** This is a cosmetic feature that is part of the Fallout theme requested by the user.
-    -   **Status:** IN PROGRESS
-    -   **Is recurring issue?** Y
+-   **Issue 2: Toast auto-hide on Safari/iOS**
+    -   **Attempted fixes:** The agent created a custom toast wrapper () that implements a manual  to call  as a fallback for browsers like Safari that might not respect the built-in  prop of the  library.
+    -   **Next debug checklist:** This fix needs explicit user confirmation on an affected device (iPhone/Safari).
+    -   **Why fix this issue and what will be achieved with the fix?** Ensures a consistent user experience across all devices by preventing toasts from getting stuck on the screen.
+    -   **Status:** USER VERIFICATION PENDING
+    -   **Is recurring issue?** N
     -   **Should Test frontend/backend/both after fix?** Frontend
     -   **Blocked on other issue:** None
 
--   **Issue 3: Toast auto-hide**
-    -   **Attempted fixes:** The agent added an explicit  to the toast notifications on the dashboard.
-    -   **Next debug checklist:**
-        1.  In , trigger a manual sync to generate the Inga ändringar hittades toast and visually confirm if it disappears after 3 seconds.
-        2.  Review the global  configuration in  to ensure it doesn't override the per-toast duration setting.
-    -   **Why fix this issue and what will be achieved with the fix?** It's a quality-of-life improvement to prevent persistent, non-critical notifications from cluttering the UI.
-    -   **Status:** USER VERIFICATION PENDING
+-   **Issue 3: Fragile Dropdown Fix**
+    -   **Attempted fixes:** The agent fixed an issue where the sync interval dropdown didn't show the saved value by adding a  prop to the  component in .
+    -   **Next debug checklist:** This is not an active bug, but a point of caution. If any issues with the settings form re-emerge, this  prop is the first place to investigate, as it previously caused other form fields to appear empty.
+    -   **Why fix this issue and what will be achieved with the fix?** This is a note for future debugging to prevent regression.
+    -   **Status:** RESOLVED (with caution)
     -   **Is recurring issue?** Y
     -   **Should Test frontend/backend/both after fix?** Frontend
     -   **Blocked on other issue:** None
 
 **In progress Task List**:
-- None.
+-   **Task 1: Finalize and Verify CID Mapping Feature**
+    -   **Where to resume:** The user asked for confirmation that both iCal URLs are used for CID discovery. The next step is to provide definitive proof by checking the  in the database against the events from both calendar feeds.
+    -   **What will be achieved with this?** The CID mapping feature will be fully implemented and verified.
+    -   **Status:** IN PROGRESS
+    -   **Should Test frontend/backend/both after fix?** Backend
+    -   **Blocked on something:** None
 
 **Upcoming and Future Tasks**
-- None. All user-requested features have been implemented, and the only proposed future task (multi-user support) was rejected by the user.
+- **Upcoming Tasks:**
+  - **P1: Utilize Mapped Subject Names**: The app now allows mapping CIDs to subject names, but these names are not used anywhere. The next logical step is to display the mapped subject name on the event cards in the dashboard UI.
+- **Future Tasks:**
+  - None.
 
 **Completed work in this session**
-- **Recently completed:**
-    - Implemented a Fallout theme with a green terminal aesthetic, scanlines, and custom-styled components.
-    - Added a status header with a countdown timer (currently bugged) and a legend for event states.
-    - Added an Add to Home Screen popup and app icon for iOS devices.
-    - Implemented a fix for iCal entries with dynamic UIDs by using a composite key ( + ).
-    - Separated the app into a public dashboard and a password-protected settings page.
-    - Configured push notification payload format, target URL, and expiry settings.
-    - Implemented numerous small UI adjustments for spacing, layout, and responsiveness based on user feedback.
-    - Removed Made with Emergent branding.
-    - Added highlighting for past events.
-    - Fixed a bug where  values in the database could crash the backend.
+- Fixed countdown timer to sync with the backend and restart automatically when it reaches zero.
+- Added sound effects to the screen flicker, including settings for on/off and volume control.
+- Themed the Settings page and all toast notifications to match the Fallout aesthetic.
+- Fixed multiple bugs related to toast notifications not auto-dismissing.
+- Implemented a fallback mechanism for toast dismissal specifically for Safari/iOS.
+- Fixed an issue where the live site database was out of sync with the preview environment.
+- Changed the color for Borttagen (Removed) events to gray based on user feedback.
+- Updated the format of push notifications to remove asterisks and add double line breaks.
+- Added support for parsing and storing the  property from iCal events.
+- **Implemented a full CID-to-Subject mapping feature**, allowing users to manage course ID mappings in the settings page.
 
 **Earlier issues found/mentioned but not fixed**
-- None.
+- The core issue of the countdown timer jumping by a few seconds upon reset is still present, though the major sync problems have been resolved.
 
 **Known issue recurrence from previous fork**
-- None.
+- **Countdown Clock Sync:** This was the primary issue from the last fork. While significantly improved, a minor version of the problem (the small jump on reset) persists.
 
 **Code Architecture**
 
 
 **Key Technical Concepts**
-- **Frontend:** React, Tailwind CSS, shadcn/ui, sonner (toasts).
-- **Backend:** FastAPI, Pydantic, Motor (async MongoDB driver), .
+- **Frontend:** React, Tailwind CSS, shadcn/ui, sonner (toasts), Web Audio API.
+- **Backend:** FastAPI, Pydantic, Motor (async MongoDB driver), , APScheduler.
 - **Database:** MongoDB.
-- **Architecture:** A single-page application with a monolithic REST API backend. A background scheduler handles periodic iCal syncs.
+- **Architecture:** Monolithic REST API backend with a background scheduler and a React SPA frontend.
 
 **key DB schema**
 -   ** (singleton collection):** 
+-   ** (collection):** 
 -   ** (collection):** 
 
 **changes in tech stack**
 - None.
 
 **All files of reference**
--   ****: The heart of the backend, containing all API logic, iCal parsing, database operations, and sync scheduling.
--   ****: The main frontend component, responsible for displaying the Fallout-themed UI, events, status header, and countdown clock.
--   ****: Defines the entire Fallout theme, including custom colors, fonts, scanlines, and animations.
--   ****: The custom React component for the random flicker effect, which is currently not working.
+-   ****: Contains all backend logic. Heavily modified to include CID mapping endpoints (), URL parsing from iCal, and background job logic.
+-   ****: Contains all settings UI. Heavily modified to include sound controls and the new CID mapping table.
+-   ****: Contains the main UI and the complex timer logic with polling.
+-   ****: New file. A wrapper around the  toast library to handle Safari/iOS compatibility issues.
+-   ****: Contains custom CSS to style toast notifications with the Fallout theme.
 
 **Areas that need refactoring**:
--    is a single large file containing all backend logic. It could be modularized into separate files for routes, database models, and services.
--    has grown very large. The status header, calendar columns, and event cards could be extracted into their own smaller components to improve maintainability.
+-   **** has become extremely large. Logic for settings, events, sync, and CID mapping should be split into separate modules (e.g., , , ).
+-   **** is now very long and manages a lot of state. The different settings sections (Calendars, Sync, Sound, CID Mappings) should be broken down into smaller, self-contained components.
 
 **key api endpoints**
 -   : GET/POST app configuration.
 -   : GET all events for the dashboard.
 -   : POST to trigger a manual sync.
 -   : GET the status for the countdown timer.
--   : POST to authenticate for the settings page.
--   : POST to send a test push notification.
+-   : GET/PUT CID-to-subject mappings.
 
 **Critical Info for New Agent**
--   The user is very detail-oriented regarding the UI, especially the Fallout theme. All visual changes must align with this aesthetic.
--   The backend identifies unique calendar events using a composite key of  because the iCal provider (Vklass) generates dynamic UIDs. This is a crucial piece of logic in .
--   The countdown clock and screen flicker are the highest priority bugs to fix.
--   The agent previously got stuck in a long loop debugging a visual layout issue that was an illusion caused by similar background colors. Be mindful that visual bugs may not always correspond to structural code errors.
+-   The live site has a separate database from the preview environment. The agent was required to manually copy settings from preview to live once. Be aware of this if the user reports discrepancies between preview and live.
+-   The countdown timer logic is brittle. The current implementation uses polling when the timer hits zero. Any changes to this logic must be tested thoroughly to avoid regressions.
+-   The user is highly engaged and provides frequent, iterative feedback, especially regarding UI and theming. Be prepared for small, incremental changes.
 
 **documents and test reports created in this job**
--   /app/design_guidelines.json
--   /app/webpushr_playbook.json
+- None.
 
 **Last 10 User Messages and any pending HUMAN messages**
--    (The clock doesn't show the backend clock...): User reporting the countdown clock is not synced. **PENDING FIX**.
--    (a little less of the scanlines): User requested to tone down the scanline effect. **Completed**.
--    (the countdown clock, it always starts at 15min...): User first reported the countdown clock issue. **PENDING FIX**.
--    (now it doesn't blink at all): User reporting the random flicker effect is completely broken. **PENDING FIX**.
--    (Screen flicker is still on the same pulsating): User reporting the old flicker effect was still active. **Completed** (but led to the current broken state).
--    (Increase scanlines... and make screen-flicker more random...): User request that led to the current flicker bug. **PENDING FIX**.
--    (when it blinks... what do you call it?): User asking about the flicker effect. **Completed**.
--    (send again): User requesting another test push. **Completed**.
--    (send a push notification): User requesting a test push. **Completed**.
--    (gap-3 was good): User confirming a UI spacing change was good. **Completed**.
+1.  **User**: Are both iCal URLs used to check for CIDs? **PENDING VERIFICATION**.
+2.  **Agent**: Confirmed yes, the logic checks all events in the database regardless of the source calendar.
+3.  **User**: Showed the complete CID mapping section with the Add Row button.
+4.  **Agent**: Showed the new Subject Mappings section in the settings UI.
+5.  **Agent**: Triggered a backend sync to populate the initial CID list.
+6.  **User**: Requested the CID mapping feature: a two-column list in settings to link discovered CIDs with a user-input subject name, with the ability to add/remove rows.
+7.  **User**: Asked about the logic within the iCal event URL parameters (uid=0(root) gid=0(root) groups=0(root) and ).
+8.  **Agent**: Analyzed the URL parameters, identifying uid=0(root) gid=0(root) groups=0(root) as a unique event ID and  as a probable course/class ID.
+9.  **User**: Asked to update existing events with the new URL field. **Completed**.
+10. **Agent**: Responded that the URL is only added for new events and asked if existing ones should be updated.
 
 **Project Health Check:**
 -   **Broken:**
-    -   Countdown timer synchronization with the backend.
-    -   Random screen flicker effect.
+    -   Countdown timer has a minor but noticeable jump on reset (e.g., starts at 04:55 instead of 05:00).
 -   **Mocked:**
     -   None.
 
@@ -164,13 +161,14 @@ A full-stack application named Vklass Sync with a FastAPI/MongoDB backend and a 
 -   **Webpushr:** Handles push notifications. Requires a user-provided API Key and Auth Token.
 
 **Testing status**
--   **Testing agent used after significant changes:** YES
+-   **Testing agent used after significant changes:** NO
 -   **Troubleshoot agent used after agent stuck in loop:** NO
 -   **Test files created:** None.
--   **Known regressions:** The screen flicker effect was working with a constant pulse but broke completely when changed to a random interval.
+-   **Known regressions:** The fix for the settings dropdown menu previously caused a regression where other form fields appeared empty. This was resolved via a DB copy but the underlying fragility may remain.
 
 **Credentials to test flow:**
 -   **Settings Page Password:** 
 
 **What agent forgot to execute**
--   The agent failed to properly test its fixes for the countdown clock and the screen flicker effect before presenting them as complete. The fixes did not work, leading to immediate user reports of failure. The next agent must thoroughly verify any fixes for these issues before concluding them.</analysis>
+- The agent did not get user confirmation that the Safari/iOS toast notification fix works on an affected device.
+- The agent was in the middle of verifying the last user request (that both iCal URLs are used for CID discovery) and has not completed this verification.</analysis>
