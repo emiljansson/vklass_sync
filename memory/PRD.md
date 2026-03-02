@@ -99,12 +99,16 @@ The user requested a full-stack application to monitor two user-provided iCal ca
 - [x] CID-till-ämne mappning (auto-upptäckt av CID från event URLs)
 - [x] Visa ämnesnamn på eventkort i Dashboard (grön badge)
 - [x] Ämnesnamn i push-notifikationer (format: [Ämne] Händelse)
+- [x] Fallout-ikon för push-notifikationer, favicon och webapp
+- [x] Databasstatus-sektion i Settings med migrations-knapp
+- [x] Läxa/Prov-kopplingar (event ID -> typ) med lila badge på eventkort
 
 ## Database Schema
-- **settings (singleton):** `{ ical_urls, calendar_names, sync_interval, webpushr_keys, auth_config, last_sync_time, sound_enabled, sound_volume, cid_mappings }`
+- **settings (singleton):** `{ ical_urls, calendar_names, sync_interval, webpushr_keys, auth_config, last_sync_time, sound_enabled, sound_volume, cid_mappings, event_type_mappings }`
 - **events (collection):** `{ uid, calendar_id, summary, start_date, status, url, created_at }`
 - **sync_status (singleton):** `{ last_sync, next_sync }`
 - **cid_mappings:** stored in settings as `[{cid: string, subject: string}]`
+- **event_type_mappings:** stored in settings as `[{event_id: string, event_type: string}]`
 
 ## Known Credentials
 - **Settings Password:** 2378
