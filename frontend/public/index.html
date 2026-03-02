@@ -31,87 +31,10 @@
         -->
         <title>Vklass Sync</title>
         <script>window.addEventListener("error",function(e){if(e.error instanceof DOMException&&e.error.name==="DataCloneError"&&e.message&&e.message.includes("PerformanceServerTiming")){e.stopImmediatePropagation();e.preventDefault()}},true);</script>
-        <!-- Suppress Webpushr errors in preview/dev environments -->
-        <script>
-        (function() {
-            // Suppress webpushr and fetch errors
-            window.addEventListener("error", function(e) {
-                if (e.message && (e.message.includes("webpushr") || e.message.includes("Failed to fetch") || e.message.includes("cdn.webpushr"))) {
-                    e.stopImmediatePropagation();
-                    e.preventDefault();
-                    return true;
-                }
-            }, true);
-            window.addEventListener("unhandledrejection", function(e) {
-                if (e.reason && (
-                    (e.reason.message && (e.reason.message.includes("webpushr") || e.reason.message.includes("Failed to fetch"))) ||
-                    (typeof e.reason === 'string' && (e.reason.includes("webpushr") || e.reason.includes("Failed to fetch")))
-                )) {
-                    e.stopImmediatePropagation();
-                    e.preventDefault();
-                    return true;
-                }
-            }, true);
-            
-            // Hide error overlay for webpushr errors
-            var observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    mutation.addedNodes.forEach(function(node) {
-                        if (node.nodeType === 1) {
-                            // Check for error overlay iframes
-                            if (node.tagName === 'IFRAME' && node.id && node.id.includes('webpack-dev-server')) {
-                                try {
-                                    var iframeDoc = node.contentDocument || node.contentWindow.document;
-                                    if (iframeDoc && iframeDoc.body && iframeDoc.body.textContent.includes('webpushr')) {
-                                        node.style.display = 'none';
-                                    }
-                                } catch(e) {}
-                            }
-                            // Check for any error div containing webpushr
-                            if (node.textContent && node.textContent.includes('webpushr')) {
-                                node.style.display = 'none';
-                            }
-                        }
-                    });
-                });
-            });
-            observer.observe(document.documentElement, { childList: true, subtree: true });
-            
-            // Also try to hide after page load
-            window.addEventListener('load', function() {
-                setTimeout(function() {
-                    var overlays = document.querySelectorAll('iframe[id*="webpack-dev-server"]');
-                    overlays.forEach(function(overlay) {
-                        overlay.style.display = 'none';
-                    });
-                }, 1000);
-            });
-        })();
-        </script>
         <!-- start webpushr tracking code --> 
-        <script>
-        // Only load webpushr in production (not preview environments)
-        (function() {
-            var isPreview = window.location.hostname.includes('preview.emergentagent.com');
-            if (isPreview) {
-                console.log('Webpushr disabled in preview environment');
-                window.webpushr = function() {}; // Stub function
-                return;
-            }
-            
-            (function(w,d, s, id) {
-                if(typeof(w.webpushr)!=='undefined') return;
-                w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};
-                var js, fjs = d.getElementsByTagName(s)[0];
-                js = d.createElement(s); 
-                js.id = id;
-                js.async=1;
-                js.src = "https://cdn.webpushr.com/app.min.js";
-                fjs.parentNode.appendChild(js);
-            }(window,document, 'script', 'webpushr-jssdk'));
-            webpushr('setup',{'key':'BJRC1RDcMtrQgyDODWuHAeA1Lu7Fa7_ql4iXIxB78tnKR0Q0srLwjDS3tqzjb_74RI8RqckdmTmK_afevd6t6cw' });
-        })();
-        </script>
+        <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.async=1;js.src = "https://cdn.webpushr.com/app.min.js";
+fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));
+webpushr('setup',{'key':'BJRC1RDcMtrQgyDODWuHAeA1Lu7Fa7_ql4iXIxB78tnKR0Q0srLwjDS3tqzjb_74RI8RqckdmTmK_afevd6t6cw' });</script>
         <!-- end webpushr tracking code -->
         <script src="https://assets.emergent.sh/scripts/emergent-main.js"></script>
         <!--
