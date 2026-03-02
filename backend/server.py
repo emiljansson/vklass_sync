@@ -176,7 +176,8 @@ async def parse_ical_feed(url: str) -> List[Dict[str, Any]]:
                     'description': description,
                     'location': location,
                     'start': start_str,
-                    'end': end_str
+                    'end': end_str,
+                    'url': str(component.get('url', '')) if component.get('url') else ''
                 })
         
         return events
