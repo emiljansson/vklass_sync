@@ -54,6 +54,7 @@ class Settings(BaseModel):
     auth_password: Optional[str] = ""
     sound_enabled: Optional[bool] = True
     sound_volume: Optional[int] = 50  # 0-100
+    cid_mappings: Optional[list] = []  # List of {cid: str, subject: str}
     screen_wake_lock: Optional[bool] = False  # Prevent screen from sleeping
     
     @property
