@@ -403,7 +403,7 @@ async def sync_calendars() -> SyncResult:
     })
     
     # Auto-discover new CIDs from events and add to settings
-    await update_cid_mappings_from_events()
+    await update_event_mappings_from_events()
     
     # Save sync timestamp
     import time
@@ -748,7 +748,7 @@ async def migrate_update_event_urls():
             updated_count += result.modified_count
     
     # After updating URLs, discover new CIDs
-    await update_cid_mappings_from_events()
+    await update_event_mappings_from_events()
     
     return {
         "success": True,
