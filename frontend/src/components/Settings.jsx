@@ -333,110 +333,59 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </CardContent>
           </Card>
 
-          {/* CID to Subject Mappings */}
+          {/* Combined Event Mappings (CID/Subject + ID/Type) */}
           <Card className="bg-[#141e14] border-2 border-green-500/40">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-green-400">
                 <BookOpen className="w-5 h-5" />
-                Ämneskopplingar
+                Händelsekopplingar
               </CardTitle>
               <CardDescription className="text-green-500/60">
-                Koppla kurs-ID (CID) från Vklass till ämnesnamn. Nya CID upptäcks automatiskt vid synkronisering.
+                Koppla kurs-ID (CID) till ämne och händelse-ID till typ (Läxa/Prov). Upptäcks automatiskt vid synkronisering.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
               {/* Header row */}
-              <div className="grid grid-cols-[1fr_2fr_auto] gap-3 pb-2 border-b border-green-500/20">
+              <div className="grid grid-cols-[1fr_1.5fr_1fr_1.5fr_auto] gap-2 pb-2 border-b border-green-500/20">
                 <Label className="text-green-400 text-sm">CID</Label>
                 <Label className="text-green-400 text-sm">Ämne</Label>
-                <div className="w-8"></div>
-              </div>
-              
-              {/* Mapping rows */}
-              {formData.cid_mappings.map((mapping, index) => (
-                <div key={index} className="grid grid-cols-[1fr_2fr_auto] gap-3 items-center">
-                  <Input
-                    value={mapping.cid || ""}
-                    onChange={(e) => handleCidMappingChange(index, 'cid', e.target.value)}
-                    placeholder="CID"
-                    className="bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40 font-mono text-sm"
-                  />
-                  <Input
-                    value={mapping.subject || ""}
-                    onChange={(e) => handleCidMappingChange(index, 'subject', e.target.value)}
-                    placeholder="T.ex. Matematik, Svenska..."
-                    className="bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40"
-                  />
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => removeCidMapping(index)}
-                    className="text-red-400 hover:text-red-300 hover:bg-red-500/10 h-8 w-8"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
-                </div>
-              ))}
-              
-              {/* Add row button */}
-              <Button
-                type="button"
-                variant="ghost"
-                onClick={addCidMapping}
-                className="w-full border border-dashed border-green-500/30 text-green-500/70 hover:text-green-400 hover:bg-green-500/10 hover:border-green-500/50"
-              >
-                <Plus className="w-4 h-4 mr-2" />
-                Lägg till rad
-              </Button>
-              
-              {formData.cid_mappings.length === 0 && (
-                <p className="text-sm text-green-500/50 text-center py-2">
-                  Inga CID hittade ännu. Synkronisera kalendrarna för att automatiskt upptäcka CID.
-                </p>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* Event Type Mappings (Läxa/Prov) */}
-          <Card className="bg-[#141e14] border-2 border-green-500/40">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-400">
-                <FileText className="w-5 h-5" />
-                Läxa/Prov-kopplingar
-              </CardTitle>
-              <CardDescription className="text-green-500/60">
-                Koppla händelse-ID till typ (Läxa, Prov, etc.). Nya ID:n upptäcks automatiskt vid synkronisering.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {/* Header row */}
-              <div className="grid grid-cols-[1fr_2fr_auto] gap-3 pb-2 border-b border-green-500/20">
                 <Label className="text-green-400 text-sm">ID</Label>
                 <Label className="text-green-400 text-sm">Läxa/Prov</Label>
                 <div className="w-8"></div>
               </div>
               
               {/* Mapping rows */}
-              {formData.event_type_mappings.map((mapping, index) => (
-                <div key={index} className="grid grid-cols-[1fr_2fr_auto] gap-3 items-center">
+              {formData.event_mappings.map((mapping, index) => (
+                <div key={index} className="grid grid-cols-[1fr_1.5fr_1fr_1.5fr_auto] gap-2 items-center">
+                  <Input
+                    value={mapping.cid || ""}
+                    onChange={(e) => handleEventMappingChange(index, 'cid', e.target.value)}
+                    placeholder="CID"
+                    className="bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40 font-mono text-xs"
+                  />
+                  <Input
+                    value={mapping.subject || ""}
+                    onChange={(e) => handleEventMappingChange(index, 'subject', e.target.value)}
+                    placeholder="Ämne"
+                    className="bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40 text-sm"
+                  />
                   <Input
                     value={mapping.event_id || ""}
-                    onChange={(e) => handleEventTypeMappingChange(index, 'event_id', e.target.value)}
+                    onChange={(e) => handleEventMappingChange(index, 'event_id', e.target.value)}
                     placeholder="ID"
-                    className="bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40 font-mono text-sm"
+                    className="bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40 font-mono text-xs"
                   />
                   <Input
                     value={mapping.event_type || ""}
-                    onChange={(e) => handleEventTypeMappingChange(index, 'event_type', e.target.value)}
-                    placeholder="T.ex. Läxa, Prov, Inlämning..."
-                    className="bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40"
+                    onChange={(e) => handleEventMappingChange(index, 'event_type', e.target.value)}
+                    placeholder="Läxa/Prov"
+                    className="bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40 text-sm"
                   />
                   <Button
                     type="button"
                     variant="ghost"
                     size="icon"
-                    onClick={() => removeEventTypeMapping(index)}
+                    onClick={() => removeEventMapping(index)}
                     className="text-red-400 hover:text-red-300 hover:bg-red-500/10 h-8 w-8"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -448,20 +397,22 @@ export const Settings = ({ settings, onUpdateSettings }) => {
               <Button
                 type="button"
                 variant="ghost"
-                onClick={addEventTypeMapping}
+                onClick={addEventMapping}
                 className="w-full border border-dashed border-green-500/30 text-green-500/70 hover:text-green-400 hover:bg-green-500/10 hover:border-green-500/50"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Lägg till rad
               </Button>
               
-              {formData.event_type_mappings.length === 0 && (
+              {formData.event_mappings.length === 0 && (
                 <p className="text-sm text-green-500/50 text-center py-2">
-                  Inga händelse-ID hittade ännu. Synkronisera kalendrarna för att automatiskt upptäcka ID:n.
+                  Inga händelser hittade ännu. Synkronisera kalendrarna för att automatiskt upptäcka händelser.
                 </p>
               )}
             </CardContent>
           </Card>
+
+          {/* Database Status & Migration */}
           <Card className="bg-[#141e14] border-2 border-amber-500/40">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-amber-400">
