@@ -102,6 +102,7 @@ The user requested a full-stack application to monitor two user-provided iCal ca
 - [x] Fallout-ikon för push-notifikationer, favicon och webapp
 - [x] Databasstatus-sektion i Settings med migrations-knapp
 - [x] Läxa/Prov-kopplingar (event ID -> typ) med lila badge på eventkort
+- [x] Kombinerad 4-kolumnstabell för händelsekopplingar (CID | Ämne | ID | Läxa/Prov)
 
 ## Database Schema
 - **settings (singleton):** `{ ical_urls, calendar_names, sync_interval, webpushr_keys, auth_config, last_sync_time, sound_enabled, sound_volume, event_mappings }`
