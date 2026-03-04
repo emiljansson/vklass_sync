@@ -103,6 +103,10 @@ The user requested a full-stack application to monitor two user-provided iCal ca
 - [x] Databasstatus-sektion i Settings med migrations-knapp
 - [x] Läxa/Prov-kopplingar (event ID -> typ) med lila badge på eventkort
 - [x] Kombinerad 4-kolumnstabell för händelsekopplingar (CID | Ämne | ID | Läxa/Prov)
+- [x] Impact Effect - cinematisk effekt när timern når noll (distortion, blackout, reboot-sekvens)
+- [x] Wake Lock-funktion med tänd/släckt glödlampa-ikon
+- [x] 15-sekunders offset i timer för Impact Effect-duration
+- [x] Toast-notiser fungerar korrekt på Safari/iOS
 
 ## Database Schema
 - **settings (singleton):** `{ ical_urls, calendar_names, sync_interval, webpushr_keys, auth_config, last_sync_time, sound_enabled, sound_volume, event_mappings }`
