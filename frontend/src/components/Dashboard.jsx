@@ -318,7 +318,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           </div>
           
           {showVaultBoy && (
-            <div className="flex-shrink-0">
+            <div className="flex-shrink-0" style={{ isolation: 'isolate' }}>
               <img 
                 src="/vault-boy.png"
                 alt="Vault Boy"
