@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, memo, useMemo } from "react";
+import { useState, useEffect, useCallback, memo, useMemo, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Settings as SettingsIcon, RefreshCw, LogOut, Calendar, MapPin, Check, Lock, Radio, Clock, Lightbulb, LightbulbOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -167,13 +167,16 @@ const EventCard = memo(({ event, onConfirmEvent }) => {
 const CountdownTimer = memo(({ settings, onRefreshEvents, onTriggerImpact, syncing }) => {
   const [countdown, setCountdown] = useState('--:--');
   const [nextSyncTime, setNextSyncTime] = useState(null);
-  const [hasTriggeredAtZero, setHasTriggeredAtZero] = useState(false);
   const [wasSyncing, setWasSyncing] = useState(false);
+  const hasTriggeredRef = useRef(false);
+  const pollTimeoutRef = useRef(null);
+  const pollCountRef = useRef(0);
   
   const fetchSyncStatus = useCallback(async () => {
     try {
       const response = await axios.get(`${API}/sync-status`);
-      setNextSyncTime(response.data.next_sync * 1000);
+      const newSyncTime = response.data.next_sync * 1000;
+      setNextSyncTime(newSyncTime);
       return response.data;
     } catch (e) {
       console.error("Error fetching sync status:", e);
@@ -188,9 +191,27 @@ const CountdownTimer = memo(({ settings, onRefreshEvents, onTriggerImpact, synci
   useEffect(() => {
     if (!nextSyncTime) return;
     
-    let pollTimeout = null;
-    let pollCount = 0;
     const MAX_POLLS = 30;
+    
+    const pollForNewSync = async () => {
+      pollCountRef.current++;
+      const currentTime = Date.now();
+      const status = await fetchSyncStatus();
+      
+      if (status && status.next_sync * 1000 > currentTime) {
+        // Got new sync time, reset trigger flag
+        hasTriggeredRef.current = false;
+        pollCountRef.current = 0;
+        if (onRefreshEvents) onRefreshEvents();
+      } else if (pollCountRef.current < MAX_POLLS) {
+        pollTimeoutRef.current = setTimeout(pollForNewSync, 2000);
+      } else {
+        // Max polls reached, force reset
+        hasTriggeredRef.current = false;
+        pollCountRef.current = 0;
+        await fetchSyncStatus();
+      }
+    };
     
     const updateCountdown = () => {
       const now = Date.now();
@@ -201,32 +222,19 @@ const CountdownTimer = memo(({ settings, onRefreshEvents, onTriggerImpact, synci
       setCountdown(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
       
       if (remaining > 0) {
-        setHasTriggeredAtZero(false);
-        pollCount = 0;
+        hasTriggeredRef.current = false;
+        pollCountRef.current = 0;
       }
       
-      if (remaining === 0 && !hasTriggeredAtZero) {
-        setHasTriggeredAtZero(true);
+      if (remaining === 0 && !hasTriggeredRef.current) {
+        hasTriggeredRef.current = true;
         
         if (settings?.impact_effect_enabled && onTriggerImpact) {
           onTriggerImpact();
         }
         
-        const pollForNewSync = async () => {
-          pollCount++;
-          const currentTime = Date.now();
-          const status = await fetchSyncStatus();
-          
-          if (status && status.next_sync * 1000 > currentTime) {
-            if (onRefreshEvents) onRefreshEvents();
-          } else if (pollCount < MAX_POLLS) {
-            pollTimeout = setTimeout(pollForNewSync, 2000);
-          } else {
-            await fetchSyncStatus();
-          }
-        };
-        
-        pollTimeout = setTimeout(pollForNewSync, 1000);
+        // Start polling after 1 second
+        pollTimeoutRef.current = setTimeout(pollForNewSync, 1000);
       }
     };
     
@@ -235,9 +243,11 @@ const CountdownTimer = memo(({ settings, onRefreshEvents, onTriggerImpact, synci
     
     return () => {
       clearInterval(timer);
-      if (pollTimeout) clearTimeout(pollTimeout);
+      if (pollTimeoutRef.current) {
+        clearTimeout(pollTimeoutRef.current);
+      }
     };
-  }, [nextSyncTime, onRefreshEvents, settings?.impact_effect_enabled, hasTriggeredAtZero, onTriggerImpact, fetchSyncStatus]);
+  }, [nextSyncTime, onRefreshEvents, settings?.impact_effect_enabled, onTriggerImpact, fetchSyncStatus]);
   
   useEffect(() => {
     if (wasSyncing && !syncing) {
