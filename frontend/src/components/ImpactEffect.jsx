@@ -4,7 +4,7 @@ export const ImpactEffect = ({ trigger, onComplete }) => {
   const [phase, setPhase] = useState('idle'); // idle, distortion, blackout, complete
 
   const runEffect = useCallback(() => {
-    // Phase 1: Distortion/flicker for 2 seconds
+    // Phase 1: INSANE distortion/flicker for 2 seconds
     setPhase('distortion');
     
     setTimeout(() => {
@@ -33,29 +33,37 @@ export const ImpactEffect = ({ trigger, onComplete }) => {
 
   return (
     <>
-      {/* Distortion phase */}
+      {/* INSANE Distortion phase */}
       {phase === 'distortion' && (
-        <div className="fixed inset-0 z-[9999] pointer-events-none impact-distortion">
-          <div className="absolute inset-0 bg-green-500/10 animate-pulse" />
-          <div className="absolute inset-0 glitch-overlay" />
-          <svg className="absolute inset-0 w-full h-full">
-            <defs>
-              <filter id="glitch">
-                <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" seed="1">
-                  <animate attributeName="baseFrequency" values="0.01;0.15;0.01" dur="0.2s" repeatCount="indefinite" />
-                </feTurbulence>
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="50" xChannelSelector="R" yChannelSelector="G">
-                  <animate attributeName="scale" values="0;80;20;100;0" dur="0.5s" repeatCount="indefinite" />
-                </feDisplacementMap>
-              </filter>
-            </defs>
-          </svg>
+        <div className="fixed inset-0 z-[9999] pointer-events-none">
+          {/* Main glitch container */}
+          <div className="absolute inset-0 impact-shake">
+            {/* Color channel splits */}
+            <div className="absolute inset-0 glitch-red" />
+            <div className="absolute inset-0 glitch-green" />
+            <div className="absolute inset-0 glitch-blue" />
+          </div>
+          
+          {/* Scanline noise */}
+          <div className="absolute inset-0 scanline-noise" />
+          
+          {/* Random blocks */}
+          <div className="absolute inset-0 glitch-blocks" />
+          
+          {/* Flicker overlay */}
+          <div className="absolute inset-0 flicker-insane" />
+          
+          {/* Static noise */}
+          <div className="absolute inset-0 static-noise" />
+          
+          {/* Horizontal tear lines */}
+          <div className="absolute inset-0 tear-lines" />
         </div>
       )}
 
       {/* Blackout phase */}
       {phase === 'blackout' && (
-        <div className="fixed inset-0 z-[9999] bg-black transition-opacity duration-300" />
+        <div className="fixed inset-0 z-[9999] bg-black transition-opacity duration-100" />
       )}
 
       {/* Complete phase - fade back */}
@@ -64,41 +72,208 @@ export const ImpactEffect = ({ trigger, onComplete }) => {
       )}
 
       <style>{`
-        .impact-distortion {
-          animation: distort 0.1s infinite;
+        /* INSANE SHAKE */
+        .impact-shake {
+          animation: insaneShake 0.05s infinite;
         }
         
-        @keyframes distort {
-          0% { transform: translate(0, 0) skewX(0deg); filter: hue-rotate(0deg); }
-          10% { transform: translate(-5px, 2px) skewX(2deg); filter: hue-rotate(90deg); }
-          20% { transform: translate(5px, -2px) skewX(-2deg); filter: hue-rotate(180deg); }
-          30% { transform: translate(-3px, 5px) skewX(5deg); filter: hue-rotate(270deg); }
-          40% { transform: translate(3px, -5px) skewX(-5deg); filter: hue-rotate(360deg); }
-          50% { transform: translate(-8px, 0) skewX(0deg); filter: hue-rotate(45deg); }
-          60% { transform: translate(8px, 3px) skewX(3deg); filter: hue-rotate(135deg); }
-          70% { transform: translate(-2px, -3px) skewX(-3deg); filter: hue-rotate(225deg); }
-          80% { transform: translate(2px, 8px) skewX(8deg); filter: hue-rotate(315deg); }
-          90% { transform: translate(-5px, -8px) skewX(-8deg); filter: hue-rotate(90deg); }
-          100% { transform: translate(0, 0) skewX(0deg); filter: hue-rotate(0deg); }
+        @keyframes insaneShake {
+          0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+          10% { transform: translate(-15px, 10px) rotate(-3deg) scale(1.02); }
+          20% { transform: translate(15px, -15px) rotate(3deg) scale(0.98); }
+          30% { transform: translate(-20px, -10px) rotate(-2deg) scale(1.03); }
+          40% { transform: translate(10px, 20px) rotate(4deg) scale(0.97); }
+          50% { transform: translate(-25px, 5px) rotate(-4deg) scale(1.05); }
+          60% { transform: translate(20px, -20px) rotate(2deg) scale(0.95); }
+          70% { transform: translate(-10px, 15px) rotate(-3deg) scale(1.02); }
+          80% { transform: translate(25px, -5px) rotate(5deg) scale(0.98); }
+          90% { transform: translate(-15px, -15px) rotate(-5deg) scale(1.04); }
+          100% { transform: translate(0, 0) rotate(0deg) scale(1); }
         }
 
-        .glitch-overlay {
+        /* RGB Color splits */
+        .glitch-red {
+          background: rgba(255, 0, 0, 0.3);
+          mix-blend-mode: multiply;
+          animation: glitchRed 0.1s infinite;
+        }
+        
+        .glitch-green {
+          background: rgba(0, 255, 0, 0.3);
+          mix-blend-mode: screen;
+          animation: glitchGreen 0.08s infinite;
+        }
+        
+        .glitch-blue {
+          background: rgba(0, 0, 255, 0.2);
+          mix-blend-mode: overlay;
+          animation: glitchBlue 0.12s infinite;
+        }
+
+        @keyframes glitchRed {
+          0%, 100% { transform: translateX(0); opacity: 0; }
+          20% { transform: translateX(-20px); opacity: 1; }
+          40% { transform: translateX(15px); opacity: 0.5; }
+          60% { transform: translateX(-10px); opacity: 1; }
+          80% { transform: translateX(25px); opacity: 0.7; }
+        }
+
+        @keyframes glitchGreen {
+          0%, 100% { transform: translateX(0); opacity: 0; }
+          15% { transform: translateX(20px); opacity: 1; }
+          35% { transform: translateX(-25px); opacity: 0.6; }
+          55% { transform: translateX(15px); opacity: 1; }
+          75% { transform: translateX(-20px); opacity: 0.8; }
+        }
+
+        @keyframes glitchBlue {
+          0%, 100% { transform: translateY(0); opacity: 0; }
+          25% { transform: translateY(-15px); opacity: 1; }
+          50% { transform: translateY(20px); opacity: 0.5; }
+          75% { transform: translateY(-25px); opacity: 0.8; }
+        }
+
+        /* Insane flicker */
+        .flicker-insane {
+          background: white;
+          animation: flickerInsane 0.05s infinite;
+        }
+
+        @keyframes flickerInsane {
+          0% { opacity: 0; }
+          5% { opacity: 1; }
+          10% { opacity: 0; }
+          15% { opacity: 0.8; }
+          20% { opacity: 0; }
+          25% { opacity: 0.6; }
+          30% { opacity: 0; }
+          35% { opacity: 1; }
+          40% { opacity: 0; }
+          45% { opacity: 0.4; }
+          50% { opacity: 0; }
+          55% { opacity: 0.9; }
+          60% { opacity: 0; }
+          65% { opacity: 0.3; }
+          70% { opacity: 0; }
+          75% { opacity: 1; }
+          80% { opacity: 0; }
+          85% { opacity: 0.7; }
+          90% { opacity: 0; }
+          95% { opacity: 0.5; }
+          100% { opacity: 0; }
+        }
+
+        /* Static noise */
+        .static-noise {
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+          animation: staticMove 0.1s steps(10) infinite;
+          opacity: 0.5;
+          mix-blend-mode: overlay;
+        }
+
+        @keyframes staticMove {
+          0% { transform: translate(0, 0); }
+          10% { transform: translate(-5%, -5%); }
+          20% { transform: translate(5%, 5%); }
+          30% { transform: translate(-10%, 5%); }
+          40% { transform: translate(10%, -5%); }
+          50% { transform: translate(-5%, 10%); }
+          60% { transform: translate(5%, -10%); }
+          70% { transform: translate(-10%, -10%); }
+          80% { transform: translate(10%, 10%); }
+          90% { transform: translate(-5%, 5%); }
+          100% { transform: translate(0, 0); }
+        }
+
+        /* Scanline noise */
+        .scanline-noise {
           background: repeating-linear-gradient(
             0deg,
-            rgba(0, 255, 0, 0.03) 0px,
-            rgba(0, 255, 0, 0.03) 1px,
+            rgba(0, 255, 0, 0.15) 0px,
+            rgba(0, 255, 0, 0.15) 1px,
             transparent 1px,
-            transparent 2px
+            transparent 3px
           );
-          animation: scanline-glitch 0.05s infinite;
+          animation: scanlineScroll 0.1s linear infinite;
         }
 
-        @keyframes scanline-glitch {
-          0% { transform: translateY(0); opacity: 1; }
-          25% { transform: translateY(100%); opacity: 0.5; }
-          50% { transform: translateY(-100%); opacity: 0.8; }
-          75% { transform: translateY(50%); opacity: 0.3; }
-          100% { transform: translateY(0); opacity: 1; }
+        @keyframes scanlineScroll {
+          0% { transform: translateY(0); }
+          100% { transform: translateY(6px); }
+        }
+
+        /* Glitch blocks */
+        .glitch-blocks {
+          animation: glitchBlocks 0.15s infinite;
+        }
+
+        @keyframes glitchBlocks {
+          0% {
+            clip-path: inset(0 0 100% 0);
+            background: linear-gradient(90deg, transparent 30%, lime 30%, lime 35%, transparent 35%);
+          }
+          10% {
+            clip-path: inset(20% 0 60% 0);
+            background: linear-gradient(90deg, transparent 60%, red 60%, red 65%, transparent 65%);
+          }
+          20% {
+            clip-path: inset(40% 0 30% 0);
+            background: linear-gradient(90deg, transparent 10%, cyan 10%, cyan 20%, transparent 20%);
+          }
+          30% {
+            clip-path: inset(60% 0 20% 0);
+            background: linear-gradient(90deg, transparent 80%, yellow 80%, yellow 90%, transparent 90%);
+          }
+          40% {
+            clip-path: inset(10% 0 70% 0);
+            background: linear-gradient(90deg, transparent 40%, magenta 40%, magenta 50%, transparent 50%);
+          }
+          50% {
+            clip-path: inset(80% 0 5% 0);
+            background: linear-gradient(90deg, transparent 20%, lime 20%, lime 30%, transparent 30%);
+          }
+          60% {
+            clip-path: inset(30% 0 50% 0);
+            background: linear-gradient(90deg, transparent 70%, white 70%, white 75%, transparent 75%);
+          }
+          70% {
+            clip-path: inset(5% 0 80% 0);
+            background: linear-gradient(90deg, transparent 50%, red 50%, red 60%, transparent 60%);
+          }
+          80% {
+            clip-path: inset(50% 0 40% 0);
+            background: linear-gradient(90deg, transparent 0%, cyan 0%, cyan 10%, transparent 10%);
+          }
+          90% {
+            clip-path: inset(70% 0 10% 0);
+            background: linear-gradient(90deg, transparent 90%, lime 90%, lime 100%, transparent 100%);
+          }
+          100% {
+            clip-path: inset(0 0 100% 0);
+            background: transparent;
+          }
+        }
+
+        /* Horizontal tear lines */
+        .tear-lines {
+          background: repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 50px,
+            rgba(0, 255, 0, 0.8) 50px,
+            rgba(0, 255, 0, 0.8) 52px,
+            transparent 52px
+          );
+          animation: tearMove 0.08s steps(5) infinite;
+        }
+
+        @keyframes tearMove {
+          0% { transform: translateY(0) skewX(0deg); }
+          20% { transform: translateY(20px) skewX(20deg); }
+          40% { transform: translateY(-30px) skewX(-15deg); }
+          60% { transform: translateY(40px) skewX(25deg); }
+          80% { transform: translateY(-20px) skewX(-20deg); }
+          100% { transform: translateY(0) skewX(0deg); }
         }
 
         .animate-fade-out {

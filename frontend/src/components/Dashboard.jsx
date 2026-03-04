@@ -18,6 +18,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const [wasSyncing, setWasSyncing] = useState(false);
   const [triggerImpact, setTriggerImpact] = useState(false);
   const [impactInProgress, setImpactInProgress] = useState(false);
+  const [hasTriggeredAtZero, setHasTriggeredAtZero] = useState(false);
   
   const calendar1Events = events.filter(e => e.calendar_index === 1);
   const calendar2Events = events.filter(e => e.calendar_index === 2);
@@ -43,7 +44,6 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   useEffect(() => {
     if (!nextSyncTime) return;
     
-    let isPolling = false;
     let pollTimeout = null;
     
     const updateCountdown = () => {
@@ -54,9 +54,14 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
       const seconds = remaining % 60;
       setCountdown(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
       
-      // If countdown reaches 0, trigger impact effect and poll for updated sync status
-      if (remaining === 0 && !isPolling && !impactInProgress) {
-        isPolling = true;
+      // Reset trigger flag when timer is above 0
+      if (remaining > 0) {
+        setHasTriggeredAtZero(false);
+      }
+      
+      // If countdown reaches 0, trigger impact effect ONCE
+      if (remaining === 0 && !hasTriggeredAtZero && !impactInProgress) {
+        setHasTriggeredAtZero(true);
         
         // Trigger impact effect if enabled
         if (settings?.impact_effect_enabled) {
@@ -64,24 +69,20 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           setImpactInProgress(true);
         }
         
-        // Poll every 2 seconds until we get a new next_sync time
+        // Poll for new sync time
         const pollForNewSync = async () => {
-          const currentTime = Date.now(); // Get fresh timestamp
+          const currentTime = Date.now();
           const status = await fetchSyncStatus();
           
           if (status && status.next_sync * 1000 > currentTime) {
-            // Got a new sync time in the future, stop polling and refresh events
-            isPolling = false;
             if (onRefreshEvents) {
               onRefreshEvents();
             }
           } else {
-            // Backend hasn't synced yet, try again in 2 seconds
             pollTimeout = setTimeout(pollForNewSync, 2000);
           }
         };
         
-        // Wait a moment for backend to complete sync, then start polling
         pollTimeout = setTimeout(pollForNewSync, 1000);
       }
     };
@@ -95,7 +96,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
         clearTimeout(pollTimeout);
       }
     };
-  }, [nextSyncTime, onRefreshEvents, settings?.impact_effect_enabled, impactInProgress]);
+  }, [nextSyncTime, onRefreshEvents, settings?.impact_effect_enabled, impactInProgress, hasTriggeredAtZero]);
   
   // Handle impact effect completion
   const handleImpactComplete = () => {
