@@ -87,13 +87,16 @@ export const ScreenFlicker = ({ soundEnabled = true, soundVolume = 50 }) => {
           return;
         }
         audioContextRef.current = new AudioContextClass();
+        console.log('AudioContext created, state:', audioContextRef.current.state);
       }
       
       const ctx = audioContextRef.current;
       
       // Resume if suspended (required for iOS)
       if (ctx.state === 'suspended') {
+        console.log('Resuming suspended AudioContext...');
         await ctx.resume();
+        console.log('AudioContext resumed, state:', ctx.state);
       }
       
       // iOS audio unlock: play a silent buffer
@@ -102,10 +105,18 @@ export const ScreenFlicker = ({ soundEnabled = true, soundVolume = 50 }) => {
       source.buffer = silentBuffer;
       source.connect(ctx.destination);
       source.start(0);
-      source.stop(0.001);
+      
+      // Also play a tiny actual sound to fully unlock on iOS
+      const oscillator = ctx.createOscillator();
+      const gainNode = ctx.createGain();
+      gainNode.gain.value = 0.001; // Nearly silent
+      oscillator.connect(gainNode);
+      gainNode.connect(ctx.destination);
+      oscillator.start(0);
+      oscillator.stop(ctx.currentTime + 0.01);
       
       audioUnlockedRef.current = true;
-      console.log('Audio unlocked successfully');
+      console.log('Audio unlocked successfully, state:', ctx.state);
     } catch (e) {
       console.warn('Error unlocking audio:', e);
     }
@@ -113,19 +124,20 @@ export const ScreenFlicker = ({ soundEnabled = true, soundVolume = 50 }) => {
 
   // Initialize audio context on user interaction
   useEffect(() => {
-    const events = ['click', 'touchstart', 'touchend', 'keydown', 'scroll'];
+    const events = ['click', 'touchstart', 'touchend', 'keydown', 'mousedown'];
     
-    const handleInteraction = () => {
+    const handleInteraction = (e) => {
+      console.log('User interaction detected:', e.type);
       unlockAudio();
     };
 
     events.forEach(event => {
-      document.addEventListener(event, handleInteraction, { passive: true });
+      document.addEventListener(event, handleInteraction, { passive: true, capture: true });
     });
 
     return () => {
       events.forEach(event => {
-        document.removeEventListener(event, handleInteraction);
+        document.removeEventListener(event, handleInteraction, { capture: true });
       });
     };
   }, [unlockAudio]);
