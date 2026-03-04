@@ -123,6 +123,26 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     }
   };
 
+  const [extractingTimes, setExtractingTimes] = useState(false);
+  
+  const handleExtractEventTimes = async () => {
+    setExtractingTimes(true);
+    try {
+      const response = await axios.post(`${API}/migrate/extract-event-times`);
+      if (response.data.success) {
+        toast.success(`${response.data.message}`, { duration: 3000 });
+        fetchDbStatus();
+      } else {
+        toast.error("Extraktion misslyckades", { duration: 3000 });
+      }
+    } catch (e) {
+      console.error("Error extracting event times:", e);
+      toast.error("Fel vid extraktion av tider", { duration: 3000 });
+    } finally {
+      setExtractingTimes(false);
+    }
+  };
+
   // Event mapping handlers (combined CID/Subject + ID/Type)
   const handleEventMappingChange = (index, field, value) => {
     const newMappings = [...formData.event_mappings];
@@ -512,6 +532,23 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                       </div>
                     </>
                   )}
+                  
+                  {/* Extract event times button */}
+                  <Separator className="bg-green-500/20" />
+                  <div className="p-3 bg-blue-500/10 rounded border border-blue-500/30">
+                    <p className="text-sm text-blue-400 mb-3">
+                      🕐 Extrahera event-tider från beskrivningen (t.ex. "kl: 09:25") för att beräkna "Utfört"-status korrekt.
+                    </p>
+                    <Button
+                      type="button"
+                      onClick={handleExtractEventTimes}
+                      disabled={extractingTimes}
+                      className="w-full gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold"
+                    >
+                      <Clock className={`w-4 h-4 ${extractingTimes ? 'animate-pulse' : ''}`} />
+                      {extractingTimes ? 'Extraherar...' : 'Extrahera event-tider'}
+                    </Button>
+                  </div>
                   
                   {dbStatus.events_with_url_count === dbStatus.total_events && dbStatus.total_events > 0 && (
                     <div className="p-3 bg-green-500/10 rounded border border-green-500/30">
