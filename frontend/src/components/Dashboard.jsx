@@ -407,7 +407,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
                       {wakeLockActive ? (
                         <Lightbulb className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                       ) : (
-                        <LightbulbOff className="w-4 h-4 text-green-400" />
+                        <LightbulbOff className="w-4 h-4 text-green-400 fill-green-400/30" />
                       )}
                     </Button>
                   </TooltipTrigger>
