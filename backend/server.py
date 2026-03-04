@@ -556,7 +556,7 @@ async def periodic_sync():
 # ----- API Routes -----
 
 # Internal offset added to sync intervals to account for effect duration (~20 seconds)
-SYNC_INTERVAL_OFFSET_SECONDS = 20
+SYNC_INTERVAL_OFFSET_SECONDS = 15
 
 @api_router.get("/")
 async def root():
