@@ -333,7 +333,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           </div>
           
           {showVaultBoy && (
-            <div className="flex-shrink-0 vault-boy-dance">
+            <div className="flex-shrink-0">
               <img 
                 src="/vault-boy.png"
                 alt="Vault Boy"
