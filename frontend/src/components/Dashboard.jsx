@@ -27,6 +27,8 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   
   // Wake Lock functionality
   const toggleWakeLock = useCallback(async () => {
+    console.log('toggleWakeLock called, current state:', wakeLockActive);
+    
     if (wakeLockActive && wakeLockObj) {
       // Release wake lock
       try {
@@ -39,12 +41,14 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
       }
     } else {
       // Request wake lock
+      console.log('Checking wakeLock support:', 'wakeLock' in navigator);
       try {
         if ('wakeLock' in navigator) {
+          console.log('Requesting wake lock...');
           const lock = await navigator.wakeLock.request('screen');
           setWakeLockObj(lock);
           setWakeLockActive(true);
-          console.log('Wake lock activated');
+          console.log('Wake lock activated successfully');
           
           // Handle visibility change (re-acquire lock when page becomes visible)
           lock.addEventListener('release', () => {
@@ -57,7 +61,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           alert('Skärmlås stöds inte av denna webbläsare. Prova Chrome, Edge eller Safari på iOS/macOS.');
         }
       } catch (e) {
-        console.warn('Error requesting wake lock:', e);
+        console.warn('Error requesting wake lock:', e.name, e.message);
         if (e.name === 'NotAllowedError') {
           alert('Skärmlås blockerades. Kontrollera webbläsarens inställningar.');
         } else {
