@@ -272,7 +272,8 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   };
 
   const EventCard = ({ event }) => {
-    const showVaultBoy = isEventPast(event.start) && event.status !== 'removed' && isRecentlyCompleted(event.start);
+    // TEMP: Show on all past events for testing (change back to isRecentlyCompleted later)
+    const showVaultBoy = isEventPast(event.start) && event.status !== 'removed';
     
     return (
     <Card 
