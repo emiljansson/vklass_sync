@@ -23,6 +23,128 @@ const VaultBoyImage = memo(() => (
   </div>
 ));
 
+// Helper functions moved outside component
+const isEventPast = (startDate) => {
+  if (!startDate) return false;
+  try {
+    const eventDate = new Date(startDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return eventDate < today;
+  } catch {
+    return false;
+  }
+};
+
+const getStatusStyles = (status, start) => {
+  if (isEventPast(start) && status !== 'removed') {
+    return 'event-card-past';
+  }
+  switch (status) {
+    case 'new':
+      return 'event-card-new';
+    case 'removed':
+      return 'event-card-removed';
+    default:
+      return 'bg-[#141e14] border-green-900/50 hover:border-green-500/50';
+  }
+};
+
+const getStatusBadge = (status, start) => {
+  if (isEventPast(start) && status !== 'removed') {
+    return <Badge className="bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 uppercase text-xs tracking-wider">Utfört</Badge>;
+  }
+  switch (status) {
+    case 'new':
+      return <Badge className="bg-amber-500/20 text-amber-400 border border-amber-500/30 uppercase text-xs tracking-wider">Nytt</Badge>;
+    case 'removed':
+      return <Badge className="bg-gray-500/20 text-gray-400 border border-gray-500/30 uppercase text-xs tracking-wider">Borttagen</Badge>;
+    default:
+      return null;
+  }
+};
+
+// Memoized EventCard to prevent re-renders from countdown timer
+const EventCard = memo(({ event, onConfirmEvent }) => {
+  const showVaultBoy = isEventPast(event.start) && event.status !== 'removed';
+  
+  return (
+    <Card 
+      data-testid={`event-card-${event.id}`}
+      className={`event-card relative transition-all duration-200 bg-[#0f1a0f] rounded-lg border-2 border-green-500/40 ${getStatusStyles(event.status, event.start)}`}
+    >
+      <CardContent className="p-4">
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1 flex-wrap">
+              {getStatusBadge(event.status, event.start)}
+              {event.subject_name && (
+                <Badge className="bg-green-500/20 text-green-300 border border-green-500/30 uppercase text-xs tracking-wider">
+                  {event.subject_name}
+                </Badge>
+              )}
+              {event.event_type && (
+                <Badge className="bg-purple-500/20 text-purple-300 border border-purple-500/30 uppercase text-xs tracking-wider">
+                  {event.event_type}
+                </Badge>
+              )}
+            </div>
+            <h3 className={`font-semibold text-base truncate ${
+              event.status === 'new' ? 'text-amber-400' : 
+              event.status === 'removed' ? 'text-gray-400' : 
+              isEventPast(event.start) ? 'text-cyan-400' : 'text-green-400'
+            }`}>
+              {event.summary}
+            </h3>
+            
+            {event.location && (
+              <div className={`flex items-center gap-1.5 mt-1 text-sm ${
+                event.status === 'new' ? 'text-amber-500/70' : 
+                event.status === 'removed' ? 'text-gray-500/70' : 'text-green-500/70'
+              }`}>
+                <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+                <span className="truncate">{event.location}</span>
+              </div>
+            )}
+            
+            {event.description && (
+              <p className={`mt-2 text-sm line-clamp-2 ${
+                event.status === 'new' ? 'text-amber-500/70' : 
+                event.status === 'removed' ? 'text-gray-500/70' : 'text-green-500/70'
+              }`}>
+                {event.description}
+              </p>
+            )}
+          </div>
+          
+          {showVaultBoy && <VaultBoyImage />}
+          
+          {event.status === 'new' && (
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    data-testid={`confirm-event-${event.id}`}
+                    variant="ghost"
+                    size="icon"
+                    className="flex-shrink-0 h-8 w-8 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 border border-amber-500/30"
+                    onClick={() => onConfirmEvent(event.id)}
+                  >
+                    <Check className="w-4 h-4" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent className="bg-[#141e14] border-green-500/30 text-green-400">
+                  <p>Bekräfta händelse</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
+        </div>
+      </CardContent>
+    </Card>
+  );
+});
+
 export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, authEnabled, isAuthenticated, onLogout, onRefreshEvents }) => {
   const [countdown, setCountdown] = useState(null);
   const [nextSyncTime, setNextSyncTime] = useState(null);
@@ -215,147 +337,6 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     setWasSyncing(syncing);
   }, [syncing, wasSyncing]);
 
-  const formatDateTime = (dateStr) => {
-    if (!dateStr) return "";
-    try {
-      const date = new Date(dateStr);
-      if (isNaN(date.getTime())) return dateStr;
-      
-      return new Intl.DateTimeFormat('sv-SE', {
-        weekday: 'short',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      }).format(date);
-    } catch {
-      return dateStr;
-    }
-  };
-
-  const isEventPast = (startDate) => {
-    if (!startDate) return false;
-    try {
-      const eventDate = new Date(startDate);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      return eventDate < today;
-    } catch {
-      return false;
-    }
-  };
-
-  const getStatusStyles = (status, start) => {
-    // Check if event is in the past (already occurred)
-    if (isEventPast(start) && status !== 'removed') {
-      return 'event-card-past';
-    }
-    
-    switch (status) {
-      case 'new':
-        return 'event-card-new';
-      case 'removed':
-        return 'event-card-removed';
-      default:
-        return 'bg-[#141e14] border-green-900/50 hover:border-green-500/50';
-    }
-  };
-
-  const getStatusBadge = (status, start) => {
-    if (isEventPast(start) && status !== 'removed') {
-      return <Badge className="bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 uppercase text-xs tracking-wider">Utfört</Badge>;
-    }
-    
-    switch (status) {
-      case 'new':
-        return <Badge className="bg-amber-500/20 text-amber-400 border border-amber-500/30 uppercase text-xs tracking-wider">Nytt</Badge>;
-      case 'removed':
-        return <Badge className="bg-gray-500/20 text-gray-400 border border-gray-500/30 uppercase text-xs tracking-wider">Borttagen</Badge>;
-      default:
-        return null;
-    }
-  };
-
-  const EventCard = ({ event }) => {
-    const showVaultBoy = isEventPast(event.start) && event.status !== 'removed';
-    
-    return (
-    <Card 
-      data-testid={`event-card-${event.id}`}
-      className={`event-card relative transition-all duration-200 bg-[#0f1a0f] rounded-lg border-2 border-green-500/40 ${getStatusStyles(event.status, event.start)}`}
-    >
-      <CardContent className="p-4">
-        <div className="flex items-start justify-between gap-2">
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1 flex-wrap">
-              {getStatusBadge(event.status, event.start)}
-              {event.subject_name && (
-                <Badge className="bg-green-500/20 text-green-300 border border-green-500/30 uppercase text-xs tracking-wider">
-                  {event.subject_name}
-                </Badge>
-              )}
-              {event.event_type && (
-                <Badge className="bg-purple-500/20 text-purple-300 border border-purple-500/30 uppercase text-xs tracking-wider">
-                  {event.event_type}
-                </Badge>
-              )}
-            </div>
-            <h3 className={`font-semibold text-base truncate ${
-              event.status === 'new' ? 'text-amber-400' : 
-              event.status === 'removed' ? 'text-gray-400' : 
-              isEventPast(event.start) ? 'text-cyan-400' : 'text-green-400'
-            }`}>
-              {event.summary}
-            </h3>
-            
-            {event.location && (
-              <div className={`flex items-center gap-1.5 mt-1 text-sm ${
-                event.status === 'new' ? 'text-amber-500/70' : 
-                event.status === 'removed' ? 'text-gray-500/70' : 'text-green-500/70'
-              }`}>
-                <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
-                <span className="truncate">{event.location}</span>
-              </div>
-            )}
-            
-            {event.description && (
-              <p className={`mt-2 text-sm line-clamp-2 ${
-                event.status === 'new' ? 'text-amber-500/70' : 
-                event.status === 'removed' ? 'text-gray-500/70' : 'text-green-500/70'
-              }`}>
-                {event.description}
-              </p>
-            )}
-          </div>
-          
-          {showVaultBoy && <VaultBoyImage />}
-          
-          {event.status === 'new' && (
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    data-testid={`confirm-event-${event.id}`}
-                    variant="ghost"
-                    size="icon"
-                    className="flex-shrink-0 h-8 w-8 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 border border-amber-500/30"
-                    onClick={() => onConfirmEvent(event.id)}
-                  >
-                    <Check className="w-4 h-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent className="bg-[#141e14] border-green-500/30 text-green-400">
-                  <p>Bekräfta händelse</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          )}
-        </div>
-      </CardContent>
-    </Card>
-    );
-  };
-
   const CalendarColumn = ({ title, events, isEmpty }) => (
     <div className="flex flex-col gap-[5px]">
       {/* Header box */}
@@ -387,7 +368,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
               return new Date(a.start) - new Date(b.start);
             })
             .map(event => (
-              <EventCard key={event.id} event={event} />
+              <EventCard key={event.id} event={event} onConfirmEvent={onConfirmEvent} />
             ))}
         </div>
       )}
