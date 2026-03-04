@@ -28,6 +28,15 @@ const isEventPast = (startDate) => {
   if (!startDate) return false;
   try {
     const eventDate = new Date(startDate);
+    const now = new Date();
+    
+    // If event has time component, check if 40 minutes have passed since event start
+    if (startDate.includes('T') || startDate.includes(':')) {
+      const eventPlusFortyMin = new Date(eventDate.getTime() + 40 * 60 * 1000);
+      return now >= eventPlusFortyMin;
+    }
+    
+    // For date-only events, check if the day has passed
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     return eventDate < today;
