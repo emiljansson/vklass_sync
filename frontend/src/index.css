@@ -241,52 +241,18 @@ input:focus, select:focus, textarea:focus {
 /* Dancing Vault Boy animation */
 @keyframes vault-boy-dance {
     0%, 100% {
-        transform: translateY(0) rotate(0deg) scaleX(1);
-    }
-    12.5% {
-        transform: translateY(-3px) rotate(-5deg) scaleX(1.02);
-    }
-    25% {
-        transform: translateY(-6px) rotate(0deg) scaleX(1);
-    }
-    37.5% {
-        transform: translateY(-3px) rotate(5deg) scaleX(0.98);
+        transform: translateY(0) rotate(0deg);
     }
     50% {
-        transform: translateY(0) rotate(0deg) scaleX(1);
-    }
-    62.5% {
-        transform: translateY(-3px) rotate(5deg) scaleX(0.98);
-    }
-    75% {
-        transform: translateY(-6px) rotate(0deg) scaleX(1);
-    }
-    87.5% {
-        transform: translateY(-3px) rotate(-5deg) scaleX(1.02);
-    }
-}
-
-@keyframes vault-boy-legs {
-    0%, 100% {
-        clip-path: inset(0 0 0 0);
-    }
-    25% {
-        clip-path: inset(0 2px 0 0);
-    }
-    50% {
-        clip-path: inset(0 0 0 0);
-    }
-    75% {
-        clip-path: inset(0 0 0 2px);
+        transform: translateY(-2px) rotate(2deg);
     }
 }
 
 .vault-boy-dance {
-    animation: vault-boy-dance 0.5s ease-in-out infinite;
+    animation: vault-boy-dance 1s ease-in-out infinite;
     transform-origin: bottom center;
 }
 
 .vault-boy-dance img {
-    filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.6)) drop-shadow(0 0 12px rgba(34, 197, 94, 0.3));
-    animation: vault-boy-legs 0.25s ease-in-out infinite;
+    filter: drop-shadow(0 0 6px rgba(34, 197, 94, 0.4));
 }
