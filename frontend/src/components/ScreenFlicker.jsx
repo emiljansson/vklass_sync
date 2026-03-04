@@ -1,53 +1,57 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 // Web Audio API electrical spark sound generator
 const createSparkSound = (audioContext, volume = 0.3) => {
-  const duration = 0.05 + Math.random() * 0.1;
-  const now = audioContext.currentTime;
-  
-  // Create noise buffer for the spark
-  const bufferSize = audioContext.sampleRate * duration;
-  const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
-  const data = buffer.getChannelData(0);
-  
-  // Generate filtered noise that sounds like electrical sparks
-  for (let i = 0; i < bufferSize; i++) {
-    // White noise with random spikes
-    const spike = Math.random() > 0.95 ? (Math.random() * 2 - 1) * 3 : 1;
-    data[i] = (Math.random() * 2 - 1) * spike;
+  try {
+    const duration = 0.05 + Math.random() * 0.1;
+    const now = audioContext.currentTime;
+    
+    // Create noise buffer for the spark
+    const bufferSize = Math.floor(audioContext.sampleRate * duration);
+    const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+    const data = buffer.getChannelData(0);
+    
+    // Generate filtered noise that sounds like electrical sparks
+    for (let i = 0; i < bufferSize; i++) {
+      // White noise with random spikes
+      const spike = Math.random() > 0.95 ? (Math.random() * 2 - 1) * 3 : 1;
+      data[i] = (Math.random() * 2 - 1) * spike;
+    }
+    
+    // Noise source
+    const noiseSource = audioContext.createBufferSource();
+    noiseSource.buffer = buffer;
+    
+    // Highpass filter for that crispy electrical sound
+    const highpass = audioContext.createBiquadFilter();
+    highpass.type = 'highpass';
+    highpass.frequency.value = 2000 + Math.random() * 3000;
+    highpass.Q.value = 1;
+    
+    // Bandpass for extra crackle
+    const bandpass = audioContext.createBiquadFilter();
+    bandpass.type = 'bandpass';
+    bandpass.frequency.value = 4000 + Math.random() * 4000;
+    bandpass.Q.value = 2;
+    
+    // Gain envelope for quick attack/decay
+    const gainNode = audioContext.createGain();
+    gainNode.gain.setValueAtTime(0, now);
+    gainNode.gain.linearRampToValueAtTime(volume, now + 0.005);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, now + duration);
+    
+    // Connect nodes
+    noiseSource.connect(highpass);
+    highpass.connect(bandpass);
+    bandpass.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    // Play
+    noiseSource.start(now);
+    noiseSource.stop(now + duration);
+  } catch (e) {
+    console.warn('Error creating spark sound:', e);
   }
-  
-  // Noise source
-  const noiseSource = audioContext.createBufferSource();
-  noiseSource.buffer = buffer;
-  
-  // Highpass filter for that crispy electrical sound
-  const highpass = audioContext.createBiquadFilter();
-  highpass.type = 'highpass';
-  highpass.frequency.value = 2000 + Math.random() * 3000;
-  highpass.Q.value = 1;
-  
-  // Bandpass for extra crackle
-  const bandpass = audioContext.createBiquadFilter();
-  bandpass.type = 'bandpass';
-  bandpass.frequency.value = 4000 + Math.random() * 4000;
-  bandpass.Q.value = 2;
-  
-  // Gain envelope for quick attack/decay
-  const gainNode = audioContext.createGain();
-  gainNode.gain.setValueAtTime(0, now);
-  gainNode.gain.linearRampToValueAtTime(volume, now + 0.005);
-  gainNode.gain.exponentialRampToValueAtTime(0.001, now + duration);
-  
-  // Connect nodes
-  noiseSource.connect(highpass);
-  highpass.connect(bandpass);
-  bandpass.connect(gainNode);
-  gainNode.connect(audioContext.destination);
-  
-  // Play
-  noiseSource.start(now);
-  noiseSource.stop(now + duration);
 };
 
 // Play multiple spark sounds for a more realistic effect
@@ -68,32 +72,92 @@ export const ScreenFlicker = ({ soundEnabled = true, soundVolume = 50 }) => {
   const [flickering, setFlickering] = useState(false);
   const timeoutRef = useRef(null);
   const audioContextRef = useRef(null);
-  const userInteractedRef = useRef(false);
+  const audioUnlockedRef = useRef(false);
 
-  // Initialize audio context on first user interaction
-  useEffect(() => {
-    const initAudio = () => {
+  // Function to unlock and initialize audio (iOS requirement)
+  const unlockAudio = useCallback(async () => {
+    if (audioUnlockedRef.current) return;
+    
+    try {
+      // Create AudioContext if not exists
       if (!audioContextRef.current) {
-        audioContextRef.current = new (window.AudioContext || window.webkitAudioContext)();
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) {
+          console.warn('Web Audio API not supported');
+          return;
+        }
+        audioContextRef.current = new AudioContextClass();
       }
-      userInteractedRef.current = true;
+      
+      const ctx = audioContextRef.current;
+      
+      // Resume if suspended (required for iOS)
+      if (ctx.state === 'suspended') {
+        await ctx.resume();
+      }
+      
+      // iOS audio unlock: play a silent buffer
+      const silentBuffer = ctx.createBuffer(1, 1, ctx.sampleRate);
+      const source = ctx.createBufferSource();
+      source.buffer = silentBuffer;
+      source.connect(ctx.destination);
+      source.start(0);
+      source.stop(0.001);
+      
+      audioUnlockedRef.current = true;
+      console.log('Audio unlocked successfully');
+    } catch (e) {
+      console.warn('Error unlocking audio:', e);
+    }
+  }, []);
+
+  // Initialize audio context on user interaction
+  useEffect(() => {
+    const events = ['click', 'touchstart', 'touchend', 'keydown', 'scroll'];
+    
+    const handleInteraction = () => {
+      unlockAudio();
     };
 
-    // Listen for any user interaction to enable audio
-    const events = ['click', 'touchstart', 'keydown'];
     events.forEach(event => {
-      document.addEventListener(event, initAudio, { once: true });
+      document.addEventListener(event, handleInteraction, { passive: true });
     });
 
     return () => {
       events.forEach(event => {
-        document.removeEventListener(event, initAudio);
+        document.removeEventListener(event, handleInteraction);
       });
-      if (audioContextRef.current) {
-        audioContextRef.current.close();
+    };
+  }, [unlockAudio]);
+
+  // Cleanup audio context on unmount
+  useEffect(() => {
+    return () => {
+      if (audioContextRef.current && audioContextRef.current.state !== 'closed') {
+        audioContextRef.current.close().catch(() => {});
       }
     };
   }, []);
+
+  // Play spark sound with iOS fixes
+  const playSound = useCallback(async () => {
+    if (!soundEnabled || !audioContextRef.current || !audioUnlockedRef.current) return;
+    
+    try {
+      const ctx = audioContextRef.current;
+      
+      // Always try to resume on iOS (can get suspended when tab is backgrounded)
+      if (ctx.state === 'suspended') {
+        await ctx.resume();
+      }
+      
+      if (ctx.state === 'running') {
+        playElectricalSpark(ctx, soundVolume);
+      }
+    } catch (e) {
+      console.warn('Error playing sound:', e);
+    }
+  }, [soundEnabled, soundVolume]);
 
   useEffect(() => {
     const doFlicker = async () => {
@@ -103,13 +167,8 @@ export const ScreenFlicker = ({ soundEnabled = true, soundVolume = 50 }) => {
       for (let i = 0; i < blinks; i++) {
         setFlickering(true);
         
-        // Play spark sound if audio is enabled
-        if (soundEnabled && audioContextRef.current && userInteractedRef.current) {
-          if (audioContextRef.current.state === 'suspended') {
-            audioContextRef.current.resume();
-          }
-          playElectricalSpark(audioContextRef.current, soundVolume);
-        }
+        // Play spark sound
+        playSound();
         
         await new Promise(r => setTimeout(r, 50 + Math.random() * 100));
         setFlickering(false);
@@ -136,7 +195,7 @@ export const ScreenFlicker = ({ soundEnabled = true, soundVolume = 50 }) => {
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [soundEnabled, soundVolume]);
+  }, [playSound]);
 
   if (!flickering) return null;
 
