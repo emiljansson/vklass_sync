@@ -79,7 +79,7 @@ class SettingsUpdate(BaseModel):
     webpushr_key: Optional[str] = None
     webpushr_auth_token: Optional[str] = None
     auth_enabled: Optional[bool] = None
-    auth_password: Optional[bool] = None
+    auth_password: Optional[str] = None
     sound_enabled: Optional[bool] = None
     sound_volume: Optional[int] = None
     impact_effect_enabled: Optional[bool] = None
