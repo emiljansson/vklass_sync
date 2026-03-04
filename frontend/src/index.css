@@ -254,7 +254,5 @@ input:focus, select:focus, textarea:focus {
 }
 
 .vault-boy-dance img {
-    /* Make white transparent, then tint green */
-    mix-blend-mode: multiply;
-    filter: sepia(1) saturate(5) hue-rotate(85deg);
+    /* No filter needed - image has true transparency */
 }
