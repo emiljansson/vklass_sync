@@ -339,9 +339,9 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           {showVaultBoy && (
             <div className="flex-shrink-0 vault-boy-dance">
               <img 
-                src="https://static.prod-images.emergentagent.com/jobs/a7217622-ec5d-4df3-84c4-cbfaa9d1f7a7/images/0330847ad066c364ccfdbf9e8c207e96755db45e4e5a719de88cdd3ae8ef246d.png"
+                src="https://static.prod-images.emergentagent.com/jobs/a7217622-ec5d-4df3-84c4-cbfaa9d1f7a7/images/3e1d406e93f5a26ac9ab48b9f97f7fb663cb5edd5fe0aa2e0d8f71381026b42a.png"
                 alt="Vault Boy"
-                className="w-12 h-12 object-contain"
+                className="w-14 h-14 object-contain"
               />
             </div>
           )}
