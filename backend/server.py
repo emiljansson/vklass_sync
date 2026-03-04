@@ -537,7 +537,7 @@ async def periodic_sync():
     while True:
         try:
             settings = await get_settings_from_db()
-            interval = (settings.sync_interval or 15) * 60  # Convert to seconds
+            interval = (settings.sync_interval or 15) * 60 + SYNC_INTERVAL_OFFSET_SECONDS  # Convert to seconds + offset
             
             # Wait for the interval
             await asyncio.sleep(interval)
@@ -555,6 +555,9 @@ async def periodic_sync():
 
 # ----- API Routes -----
 
+# Internal offset added to sync intervals to account for effect duration (~20 seconds)
+SYNC_INTERVAL_OFFSET_SECONDS = 20
+
 @api_router.get("/")
 async def root():
     return {"message": "iCal Sync API"}
@@ -567,13 +570,13 @@ async def get_sync_status():
     
     if status and status.get("last_sync"):
         last_sync = status["last_sync"]
-        interval_seconds = (settings.sync_interval or 15) * 60
+        interval_seconds = (settings.sync_interval or 15) * 60 + SYNC_INTERVAL_OFFSET_SECONDS
         next_sync = last_sync + interval_seconds
     else:
         # No sync yet, return current time
         import time
         last_sync = time.time()
-        next_sync = last_sync + ((settings.sync_interval or 15) * 60)
+        next_sync = last_sync + ((settings.sync_interval or 15) * 60) + SYNC_INTERVAL_OFFSET_SECONDS
     
     return {
         "last_sync": last_sync,
