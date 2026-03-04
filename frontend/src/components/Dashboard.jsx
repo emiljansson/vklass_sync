@@ -339,7 +339,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           {showVaultBoy && (
             <div className="flex-shrink-0 vault-boy-dance">
               <img 
-                src="https://static.prod-images.emergentagent.com/jobs/a7217622-ec5d-4df3-84c4-cbfaa9d1f7a7/images/b3a1cc10ee6cfdb88c557764b0bb283afd30e891f5ebc886d33fd4208571d926.png"
+                src="https://customer-assets.emergentagent.com/job_a7217622-ec5d-4df3-84c4-cbfaa9d1f7a7/artifacts/y2g8ah2c_74-746992_fallout4-vault-boy-vector-ai-vault-boy-middle-finger-fallout-4-fallout.png"
                 alt="Vault Boy"
                 className="w-14 h-14 object-contain"
               />
