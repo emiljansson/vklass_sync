@@ -45,6 +45,8 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     if (!nextSyncTime) return;
     
     let pollTimeout = null;
+    let pollCount = 0;
+    const MAX_POLLS = 30; // Max 30 attempts (60 seconds)
     
     const updateCountdown = () => {
       const now = Date.now();
@@ -57,6 +59,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
       // Reset trigger flag when timer is above 0
       if (remaining > 0) {
         setHasTriggeredAtZero(false);
+        pollCount = 0;
       }
       
       // If countdown reaches 0, trigger impact effect ONCE
@@ -71,18 +74,28 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
         
         // Poll for new sync time
         const pollForNewSync = async () => {
+          pollCount++;
           const currentTime = Date.now();
           const status = await fetchSyncStatus();
           
           if (status && status.next_sync * 1000 > currentTime) {
+            // Got a new sync time in the future
+            console.log('Got new sync time, refreshing events');
             if (onRefreshEvents) {
               onRefreshEvents();
             }
-          } else {
+          } else if (pollCount < MAX_POLLS) {
+            // Backend hasn't synced yet, try again
+            console.log(`Polling for sync... attempt ${pollCount}`);
             pollTimeout = setTimeout(pollForNewSync, 2000);
+          } else {
+            // Give up and force refresh
+            console.log('Max polls reached, forcing refresh');
+            await fetchSyncStatus();
           }
         };
         
+        // Start polling after 1 second
         pollTimeout = setTimeout(pollForNewSync, 1000);
       }
     };
@@ -99,9 +112,11 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   }, [nextSyncTime, onRefreshEvents, settings?.impact_effect_enabled, impactInProgress, hasTriggeredAtZero]);
   
   // Handle impact effect completion
-  const handleImpactComplete = () => {
+  const handleImpactComplete = async () => {
     setTriggerImpact(false);
     setImpactInProgress(false);
+    // Force fetch new sync status after effect completes
+    await fetchSyncStatus();
   };
   
   // Refetch sync status when manual sync completes
