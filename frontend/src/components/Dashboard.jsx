@@ -224,6 +224,22 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     }
   };
 
+  // Check if event recently became "utfört" (within 8 hours of the event's end of day)
+  const isRecentlyCompleted = (startDate) => {
+    if (!startDate) return false;
+    try {
+      const eventDate = new Date(startDate);
+      // Set to end of the event day (23:59:59)
+      eventDate.setHours(23, 59, 59, 999);
+      const now = Date.now();
+      const eightHoursMs = 8 * 60 * 60 * 1000;
+      // Show dancing Vault Boy for 8 hours after event day ended
+      return now > eventDate.getTime() && now < eventDate.getTime() + eightHoursMs;
+    } catch {
+      return false;
+    }
+  };
+
   const getStatusStyles = (status, start) => {
     // Check if event is in the past (already occurred)
     if (isEventPast(start) && status !== 'removed') {
@@ -255,7 +271,10 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     }
   };
 
-  const EventCard = ({ event }) => (
+  const EventCard = ({ event }) => {
+    const showVaultBoy = isEventPast(event.start) && event.status !== 'removed' && isRecentlyCompleted(event.start);
+    
+    return (
     <Card 
       data-testid={`event-card-${event.id}`}
       className={`event-card relative transition-all duration-200 bg-[#0f1a0f] rounded-lg border-2 border-green-500/40 ${getStatusStyles(event.status, event.start)}`}
@@ -304,6 +323,17 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
             )}
           </div>
           
+          {/* Dancing Vault Boy for recently completed events */}
+          {showVaultBoy && (
+            <div className="flex-shrink-0 vault-boy-dance">
+              <img 
+                src="https://static.prod-images.emergentagent.com/jobs/a7217622-ec5d-4df3-84c4-cbfaa9d1f7a7/images/0330847ad066c364ccfdbf9e8c207e96755db45e4e5a719de88cdd3ae8ef246d.png"
+                alt="Vault Boy"
+                className="w-12 h-12 object-contain"
+              />
+            </div>
+          )}
+          
           {event.status === 'new' && (
             <TooltipProvider>
               <Tooltip>
@@ -327,7 +357,8 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
         </div>
       </CardContent>
     </Card>
-  );
+    );
+  };
 
   const CalendarColumn = ({ title, events, isEmpty }) => (
     <div className="flex flex-col gap-[5px]">
