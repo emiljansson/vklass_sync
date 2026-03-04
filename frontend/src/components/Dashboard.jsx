@@ -22,7 +22,17 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const [wakeLockActive, setWakeLockActive] = useState(false);
   const [wakeLockObj, setWakeLockObj] = useState(null);
   
-  const calendar1Events = events.filter(e => e.calendar_index === 1);
+  // TEMP: Test event for Vault Boy
+  const testEvent = {
+    id: 'test-vault',
+    summary: 'TEST: Vault Boy',
+    start: '2025-01-01T10:00:00',
+    status: 'normal',
+    calendar_index: 1,
+    subject_name: 'Test'
+  };
+  
+  const calendar1Events = [testEvent, ...events.filter(e => e.calendar_index === 1)];
   const calendar2Events = events.filter(e => e.calendar_index === 2);
   
   // Wake Lock functionality
@@ -255,7 +265,10 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     }
   };
 
-  const EventCard = ({ event }) => (
+  const EventCard = ({ event }) => {
+    const showVaultBoy = isEventPast(event.start) && event.status !== 'removed';
+    
+    return (
     <Card 
       data-testid={`event-card-${event.id}`}
       className={`event-card relative transition-all duration-200 bg-[#0f1a0f] rounded-lg border-2 border-green-500/40 ${getStatusStyles(event.status, event.start)}`}
@@ -304,6 +317,16 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
             )}
           </div>
           
+          {showVaultBoy && (
+            <div className="flex-shrink-0">
+              <img 
+                src="/vault-boy.png"
+                alt="Vault Boy"
+                className="w-16 h-16 object-contain"
+              />
+            </div>
+          )}
+          
           {event.status === 'new' && (
             <TooltipProvider>
               <Tooltip>
@@ -327,7 +350,8 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
         </div>
       </CardContent>
     </Card>
-  );
+    );
+  };
 
   const CalendarColumn = ({ title, events, isEmpty }) => (
     <div className="flex flex-col gap-[5px]">
