@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, memo } from "react";
 import { Link } from "react-router-dom";
 import { Settings as SettingsIcon, RefreshCw, LogOut, Calendar, MapPin, Check, Lock, Radio, Clock, Lightbulb, LightbulbOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,17 @@ import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
+
+// Memoized Vault Boy image component to prevent re-renders
+const VaultBoyImage = memo(() => (
+  <div className="flex-shrink-0">
+    <img 
+      src="/vault-boy.png"
+      alt="Vault Boy"
+      className="w-16 h-16 object-contain"
+    />
+  </div>
+));
 
 export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, authEnabled, isAuthenticated, onLogout, onRefreshEvents }) => {
   const [countdown, setCountdown] = useState(null);
@@ -317,17 +328,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
             )}
           </div>
           
-          {showVaultBoy && (
-            <div className="flex-shrink-0">
-              <img 
-                key="vault-boy-static"
-                src="/vault-boy.png"
-                alt="Vault Boy"
-                className="w-16 h-16 object-contain"
-                loading="eager"
-              />
-            </div>
-          )}
+          {showVaultBoy && <VaultBoyImage />}
           
           {event.status === 'new' && (
             <TooltipProvider>
