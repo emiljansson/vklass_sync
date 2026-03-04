@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 
 export const ImpactEffect = ({ trigger, onComplete }) => {
-  const [phase, setPhase] = useState('idle'); // idle, distortion, blackout, complete
+  const [phase, setPhase] = useState('idle'); // idle, distortion, blackout, rebooting, complete
+  const [rebootProgress, setRebootProgress] = useState(0);
 
   const runEffect = useCallback(() => {
     // Phase 1: INSANE distortion/flicker for 2 seconds
@@ -12,13 +13,32 @@ export const ImpactEffect = ({ trigger, onComplete }) => {
       setPhase('blackout');
       
       setTimeout(() => {
-        // Phase 3: Complete - fade back in
-        setPhase('complete');
+        // Phase 3: Rebooting for 5 seconds
+        setPhase('rebooting');
+        setRebootProgress(0);
+        
+        // Animate progress bar
+        const progressInterval = setInterval(() => {
+          setRebootProgress(prev => {
+            if (prev >= 100) {
+              clearInterval(progressInterval);
+              return 100;
+            }
+            return prev + 2; // 50 steps over 5 seconds (100ms each)
+          });
+        }, 100);
         
         setTimeout(() => {
-          setPhase('idle');
-          if (onComplete) onComplete();
-        }, 500);
+          clearInterval(progressInterval);
+          // Phase 4: Complete - fade back in
+          setPhase('complete');
+          
+          setTimeout(() => {
+            setPhase('idle');
+            setRebootProgress(0);
+            if (onComplete) onComplete();
+          }, 500);
+        }, 5000);
       }, 3000);
     }, 2000);
   }, [onComplete]);
@@ -63,7 +83,47 @@ export const ImpactEffect = ({ trigger, onComplete }) => {
 
       {/* Blackout phase */}
       {phase === 'blackout' && (
-        <div className="fixed inset-0 z-[9999] bg-black transition-opacity duration-100" />
+        <div className="fixed inset-0 z-[9999] bg-black" />
+      )}
+
+      {/* Rebooting phase */}
+      {phase === 'rebooting' && (
+        <div className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center">
+          {/* CRT screen effect */}
+          <div className="absolute inset-0 crt-overlay pointer-events-none" />
+          
+          {/* Terminal text */}
+          <div className="text-center space-y-6 font-mono">
+            <div className="text-green-500 text-2xl tracking-widest terminal-flicker">
+              REBOOTING<span className="terminal-dots">...</span>
+            </div>
+            
+            {/* Progress bar container */}
+            <div className="w-80 h-6 border-2 border-green-500/50 bg-black/50 relative overflow-hidden">
+              {/* Progress bar fill */}
+              <div 
+                className="h-full bg-green-500/80 transition-all duration-100 progress-glow"
+                style={{ width: `${rebootProgress}%` }}
+              />
+              {/* Scanline effect on progress */}
+              <div className="absolute inset-0 progress-scanlines" />
+            </div>
+            
+            {/* Percentage */}
+            <div className="text-green-400 text-lg">
+              [{rebootProgress.toString().padStart(3, ' ')}%]
+            </div>
+            
+            {/* System messages */}
+            <div className="text-green-500/60 text-sm space-y-1 h-20">
+              {rebootProgress > 10 && <div className="terminal-type">Initializing system...</div>}
+              {rebootProgress > 30 && <div className="terminal-type">Loading kernel modules...</div>}
+              {rebootProgress > 50 && <div className="terminal-type">Mounting filesystems...</div>}
+              {rebootProgress > 70 && <div className="terminal-type">Starting services...</div>}
+              {rebootProgress > 90 && <div className="terminal-type text-green-400">System ready.</div>}
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Complete phase - fade back */}
@@ -274,6 +334,69 @@ export const ImpactEffect = ({ trigger, onComplete }) => {
           60% { transform: translateY(40px) skewX(25deg); }
           80% { transform: translateY(-20px) skewX(-20deg); }
           100% { transform: translateY(0) skewX(0deg); }
+        }
+
+        /* Rebooting styles */
+        .crt-overlay {
+          background: repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.15) 0px,
+            rgba(0, 0, 0, 0.15) 1px,
+            transparent 1px,
+            transparent 2px
+          );
+          animation: crtFlicker 0.15s infinite;
+        }
+
+        @keyframes crtFlicker {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.98; }
+          75% { opacity: 0.97; }
+        }
+
+        .terminal-flicker {
+          animation: terminalFlicker 0.5s infinite;
+        }
+
+        @keyframes terminalFlicker {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.8; }
+          75% { opacity: 0.9; }
+        }
+
+        .terminal-dots {
+          animation: dotsAnim 1s steps(4) infinite;
+        }
+
+        @keyframes dotsAnim {
+          0% { content: ''; }
+          25% { content: '.'; }
+          50% { content: '..'; }
+          75% { content: '...'; }
+          100% { content: ''; }
+        }
+
+        .progress-glow {
+          box-shadow: 0 0 10px rgba(0, 255, 0, 0.5), 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .progress-scanlines {
+          background: repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 2px,
+            rgba(0, 0, 0, 0.3) 2px,
+            rgba(0, 0, 0, 0.3) 4px
+          );
+        }
+
+        .terminal-type {
+          animation: typeIn 0.3s ease-out;
+        }
+
+        @keyframes typeIn {
+          from { opacity: 0; transform: translateX(-10px); }
+          to { opacity: 1; transform: translateX(0); }
         }
 
         .animate-fade-out {
