@@ -14,7 +14,7 @@ const API = `${BACKEND_URL}/api`;
 
 // Memoized Vault Boy image component to prevent re-renders
 const VaultBoyImage = memo(() => (
-  <div className="flex-shrink-0">
+  <div className="flex-shrink-0 vault-boy-sway">
     <img 
       src="/vault-boy.png"
       alt="Vault Boy"
