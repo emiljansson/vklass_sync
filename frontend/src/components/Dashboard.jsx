@@ -66,7 +66,9 @@ const getStatusBadge = (status, start) => {
 
 // Memoized EventCard to prevent re-renders from countdown timer
 const EventCard = memo(({ event, onConfirmEvent }) => {
-  const showVaultBoy = isEventPast(event.start) && event.status !== 'removed';
+  // TEMP: Show Vault Boy on specific test event
+  const isTestEvent = event.id === '5e2bab90-bd7e-4e46-9a9e-03c5fb911f16';
+  const showVaultBoy = isTestEvent || (isEventPast(event.start) && event.status !== 'removed');
   
   return (
     <Card 
@@ -144,22 +146,6 @@ const EventCard = memo(({ event, onConfirmEvent }) => {
     </Card>
   );
 });
-
-// TEMP: Test event for tomorrow (Vault Boy will show after it becomes "Utfört")
-const getTomorrowDate = () => {
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() - 1); // Yesterday so it shows as "Utfört"
-  return tomorrow.toISOString().split('T')[0] + 'T10:00:00';
-};
-
-const TEST_EVENT = {
-  id: 'test-vault',
-  summary: 'TEST: Vault Boy Event',
-  start: getTomorrowDate(),
-  status: 'normal',
-  calendar_index: 1,
-  subject_name: 'Test'
-};
 
 // Separate countdown component to isolate re-renders
 const CountdownTimer = memo(({ settings, onRefreshEvents, onTriggerImpact, syncing }) => {
@@ -258,7 +244,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const [wakeLockActive, setWakeLockActive] = useState(false);
   const [wakeLockObj, setWakeLockObj] = useState(null);
   
-  const calendar1Events = useMemo(() => [TEST_EVENT, ...events.filter(e => e.calendar_index === 1)], [events]);
+  const calendar1Events = useMemo(() => events.filter(e => e.calendar_index === 1), [events]);
   const calendar2Events = useMemo(() => events.filter(e => e.calendar_index === 2), [events]);
   
   const handleTriggerImpact = useCallback(() => {
