@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 
 export const ImpactEffect = ({ trigger, onComplete }) => {
-  const [phase, setPhase] = useState('idle'); // idle, distortion, blackout, rebooting, complete
+  const [phase, setPhase] = useState('idle'); // idle, distortion, blackout, rebooting, starting, complete
   const [rebootProgress, setRebootProgress] = useState(0);
 
   const runEffect = useCallback(() => {
@@ -13,7 +13,7 @@ export const ImpactEffect = ({ trigger, onComplete }) => {
       setPhase('blackout');
       
       setTimeout(() => {
-        // Phase 3: Rebooting for 8 seconds + 2 seconds pause at 100%
+        // Phase 3: Rebooting for 8 seconds
         setPhase('rebooting');
         setRebootProgress(0);
         
@@ -32,16 +32,21 @@ export const ImpactEffect = ({ trigger, onComplete }) => {
           clearInterval(progressInterval);
           setRebootProgress(100);
           
-          // Wait 2 more seconds at 100% so user can see the completed state
+          // Wait 2 seconds at 100%, then show "starting frontend system"
           setTimeout(() => {
-            // Phase 4: Complete - fade back in
-            setPhase('complete');
+            // Phase 3.5: Starting frontend system for 2 seconds
+            setPhase('starting');
             
             setTimeout(() => {
-              setPhase('idle');
-              setRebootProgress(0);
-              if (onComplete) onComplete();
-            }, 1000);
+              // Phase 4: Complete - fade back in
+              setPhase('complete');
+              
+              setTimeout(() => {
+                setPhase('idle');
+                setRebootProgress(0);
+                if (onComplete) onComplete();
+              }, 1000);
+            }, 2000);
           }, 2000);
         }, 8000);
       }, 3000);
@@ -126,6 +131,31 @@ export const ImpactEffect = ({ trigger, onComplete }) => {
               {rebootProgress > 50 && <div className="terminal-type">Mounting filesystems...</div>}
               {rebootProgress > 70 && <div className="terminal-type">Starting services...</div>}
               {rebootProgress > 90 && <div className="terminal-type text-green-400">System ready.</div>}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Starting frontend system phase */}
+      {phase === 'starting' && (
+        <div className="fixed inset-0 z-[9999] bg-black flex flex-col items-center justify-center">
+          {/* CRT screen effect */}
+          <div className="absolute inset-0 crt-overlay pointer-events-none" />
+          
+          {/* Terminal text */}
+          <div className="text-center space-y-6 font-mono">
+            <div className="text-green-500 text-2xl tracking-widest terminal-flicker">
+              STARTING FRONTEND SYSTEM<span className="terminal-dots">...</span>
+            </div>
+            
+            {/* Loading spinner */}
+            <div className="flex justify-center">
+              <div className="w-16 h-16 border-4 border-green-500/30 border-t-green-500 rounded-full animate-spin"></div>
+            </div>
+            
+            {/* Status text */}
+            <div className="text-green-400 text-sm">
+              <div className="terminal-type">Loading interface components...</div>
             </div>
           </div>
         </div>
