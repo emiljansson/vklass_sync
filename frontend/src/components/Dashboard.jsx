@@ -175,24 +175,11 @@ const EventCard = memo(({ event, onConfirmEvent }) => {
   );
 });
 
-// TEMP: Test event - will become "Utfört" at 23:08 UTC (22:28 + 40min)
-const today = new Date().toISOString().split('T')[0];
-const TEST_EVENT = {
-  id: 'test-vault',
-  summary: 'TEST: Övergång om 2 min',
-  start: today,
-  description: `Testevent kl: 22:28. Blir Utfört kl 23:08 UTC.`,
-  status: 'normal',
-  calendar_index: 1,
-  subject_name: 'Test'
-};
-
 // Separate countdown component to isolate re-renders
 const CountdownTimer = memo(({ settings, onRefreshEvents, onTriggerImpact, syncing }) => {
   const [countdown, setCountdown] = useState('--:--');
   const [nextSyncTime, setNextSyncTime] = useState(null);
   const [hasTriggeredAtZero, setHasTriggeredAtZero] = useState(false);
-  const [impactInProgress, setImpactInProgress] = useState(false);
   const [wasSyncing, setWasSyncing] = useState(false);
   
   const fetchSyncStatus = useCallback(async () => {
@@ -230,12 +217,11 @@ const CountdownTimer = memo(({ settings, onRefreshEvents, onTriggerImpact, synci
         pollCount = 0;
       }
       
-      if (remaining === 0 && !hasTriggeredAtZero && !impactInProgress) {
+      if (remaining === 0 && !hasTriggeredAtZero) {
         setHasTriggeredAtZero(true);
         
         if (settings?.impact_effect_enabled && onTriggerImpact) {
           onTriggerImpact();
-          setImpactInProgress(true);
         }
         
         const pollForNewSync = async () => {
@@ -245,12 +231,10 @@ const CountdownTimer = memo(({ settings, onRefreshEvents, onTriggerImpact, synci
           
           if (status && status.next_sync * 1000 > currentTime) {
             if (onRefreshEvents) onRefreshEvents();
-            setImpactInProgress(false);
           } else if (pollCount < MAX_POLLS) {
             pollTimeout = setTimeout(pollForNewSync, 2000);
           } else {
             await fetchSyncStatus();
-            setImpactInProgress(false);
           }
         };
         
@@ -265,7 +249,7 @@ const CountdownTimer = memo(({ settings, onRefreshEvents, onTriggerImpact, synci
       clearInterval(timer);
       if (pollTimeout) clearTimeout(pollTimeout);
     };
-  }, [nextSyncTime, onRefreshEvents, settings?.impact_effect_enabled, impactInProgress, hasTriggeredAtZero, onTriggerImpact, fetchSyncStatus]);
+  }, [nextSyncTime, onRefreshEvents, settings?.impact_effect_enabled, hasTriggeredAtZero, onTriggerImpact, fetchSyncStatus]);
   
   useEffect(() => {
     if (wasSyncing && !syncing) {
@@ -284,7 +268,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const [wakeLockActive, setWakeLockActive] = useState(false);
   const [wakeLockObj, setWakeLockObj] = useState(null);
   
-  const calendar1Events = useMemo(() => [TEST_EVENT, ...events.filter(e => e.calendar_index === 1)], [events]);
+  const calendar1Events = useMemo(() => events.filter(e => e.calendar_index === 1), [events]);
   const calendar2Events = useMemo(() => events.filter(e => e.calendar_index === 2), [events]);
   
   const handleTriggerImpact = useCallback(() => {
