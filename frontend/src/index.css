@@ -255,4 +255,5 @@ input:focus, select:focus, textarea:focus {
 
 .vault-boy-dance img {
     mix-blend-mode: multiply;
+    filter: sepia(100%) hue-rotate(70deg) saturate(200%) brightness(0.9);
 }
