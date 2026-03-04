@@ -145,16 +145,6 @@ const EventCard = memo(({ event, onConfirmEvent }) => {
   );
 });
 
-// TEMP: Static test event (outside component to prevent re-renders)
-const TEST_EVENT = {
-  id: 'test-vault',
-  summary: 'TEST: Vault Boy',
-  start: '2025-01-01T10:00:00',
-  status: 'normal',
-  calendar_index: 1,
-  subject_name: 'Test'
-};
-
 // Separate countdown component to isolate re-renders
 const CountdownTimer = memo(({ settings, onRefreshEvents, onTriggerImpact, syncing }) => {
   const [countdown, setCountdown] = useState('--:--');
@@ -252,7 +242,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const [wakeLockActive, setWakeLockActive] = useState(false);
   const [wakeLockObj, setWakeLockObj] = useState(null);
   
-  const calendar1Events = useMemo(() => [TEST_EVENT, ...events.filter(e => e.calendar_index === 1)], [events]);
+  const calendar1Events = useMemo(() => events.filter(e => e.calendar_index === 1), [events]);
   const calendar2Events = useMemo(() => events.filter(e => e.calendar_index === 2), [events]);
   
   const handleTriggerImpact = useCallback(() => {

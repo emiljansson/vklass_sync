@@ -274,10 +274,6 @@ async def parse_ical_feed(url: str) -> List[Dict[str, Any]]:
 
 async def send_webpushr_notification(title: str, message: str, settings: Settings):
     """Send push notification via Webpushr"""
-    # TEMP: Paused for testing
-    logger.info(f"PUSH PAUSED (test mode): {title} - {message}")
-    return True
-    
     if not settings.webpushr_key or not settings.webpushr_auth_token:
         logger.warning("Webpushr credentials not configured")
         return False
