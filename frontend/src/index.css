@@ -250,9 +250,4 @@ input:focus, select:focus, textarea:focus {
 
 .vault-boy-dance {
     animation: vault-boy-dance 1s ease-in-out infinite;
-    transform-origin: bottom center;
-}
-
-.vault-boy-dance img {
-    /* No filter needed - image has true transparency */
 }
