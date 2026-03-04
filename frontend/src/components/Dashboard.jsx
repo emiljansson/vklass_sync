@@ -175,13 +175,13 @@ const EventCard = memo(({ event, onConfirmEvent }) => {
   );
 });
 
-// TEMP: Test event starting at 00:05 today
+// TEMP: Test event - will become "Utfört" at 23:08 UTC (22:28 + 40min)
 const today = new Date().toISOString().split('T')[0];
 const TEST_EVENT = {
   id: 'test-vault',
-  summary: 'TEST: Event kl 00:05',
+  summary: 'TEST: Övergång om 2 min',
   start: today,
-  description: `Testevent kl: 00:05. Detta är ett test.`,
+  description: `Testevent kl: 22:28. Blir Utfört kl 23:08 UTC.`,
   status: 'normal',
   calendar_index: 1,
   subject_name: 'Test'
