@@ -33,6 +33,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
         await wakeLockObj.release();
         setWakeLockObj(null);
         setWakeLockActive(false);
+        console.log('Wake lock released');
       } catch (e) {
         console.warn('Error releasing wake lock:', e);
       }
@@ -43,18 +44,25 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           const lock = await navigator.wakeLock.request('screen');
           setWakeLockObj(lock);
           setWakeLockActive(true);
+          console.log('Wake lock activated');
           
           // Handle visibility change (re-acquire lock when page becomes visible)
           lock.addEventListener('release', () => {
+            console.log('Wake lock was released');
             setWakeLockActive(false);
             setWakeLockObj(null);
           });
         } else {
-          alert('Wake Lock stöds inte av denna webbläsare');
+          console.warn('Wake Lock API not supported');
+          alert('Skärmlås stöds inte av denna webbläsare. Prova Chrome, Edge eller Safari på iOS/macOS.');
         }
       } catch (e) {
         console.warn('Error requesting wake lock:', e);
-        alert('Kunde inte aktivera skärmlås. Kontrollera webbläsarinställningar.');
+        if (e.name === 'NotAllowedError') {
+          alert('Skärmlås blockerades. Kontrollera webbläsarens inställningar.');
+        } else {
+          alert('Kunde inte aktivera skärmlås: ' + e.message);
+        }
       }
     }
   }, [wakeLockActive, wakeLockObj]);
