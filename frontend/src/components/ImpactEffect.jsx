@@ -34,7 +34,7 @@ export const ImpactEffect = ({ trigger, onComplete }) => {
           
           // Wait 2 seconds at 100%, then show "starting frontend system"
           setTimeout(() => {
-            // Phase 3.5: Starting frontend system for 2 seconds
+            // Phase 3.5: Starting frontend system for 4 seconds
             setPhase('starting');
             
             setTimeout(() => {
@@ -46,7 +46,7 @@ export const ImpactEffect = ({ trigger, onComplete }) => {
                 setRebootProgress(0);
                 if (onComplete) onComplete();
               }, 1000);
-            }, 2000);
+            }, 4000);
           }, 2000);
         }, 8000);
       }, 3000);
