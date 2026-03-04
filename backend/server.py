@@ -97,6 +97,7 @@ class CalendarEvent(BaseModel):
     url: str = ""  # URL from iCal
     start: str
     end: str
+    event_time: Optional[str] = None  # Extracted time like "09:25"
     status: str = "normal"  # new, removed, normal
     status_changed_at: Optional[str] = None
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
@@ -264,13 +265,26 @@ async def parse_ical_feed(url: str) -> List[Dict[str, Any]]:
                     'location': location,
                     'start': start_str,
                     'end': end_str,
-                    'url': str(component.get('url', '')) if component.get('url') else ''
+                    'url': str(component.get('url', '')) if component.get('url') else '',
+                    'event_time': extract_time_from_description(description)
                 })
         
         return events
     except Exception as e:
         logger.error(f"Error parsing iCal feed {url}: {e}")
         return []
+
+def extract_time_from_description(description: str) -> Optional[str]:
+    """Extract time from description like 'kl: 09:25' or 'kl 09:25'"""
+    if not description:
+        return None
+    import re
+    match = re.search(r'kl:?\s*(\d{1,2}):(\d{2})', description, re.IGNORECASE)
+    if match:
+        hours = int(match.group(1))
+        minutes = int(match.group(2))
+        return f"{hours:02d}:{minutes:02d}"
+    return None
 
 async def send_webpushr_notification(title: str, message: str, settings: Settings):
     """Send push notification via Webpushr"""
@@ -368,6 +382,7 @@ async def sync_calendars() -> SyncResult:
                     url=event_data.get('url', ''),
                     start=event_data['start'],
                     end=event_data['end'],
+                    event_time=event_data.get('event_time'),
                     status="new",
                     status_changed_at=datetime.now(timezone.utc).isoformat()
                 )
@@ -848,6 +863,35 @@ async def migrate_update_event_urls():
     return {
         "success": True,
         "message": f"Uppdaterade {updated_count} events med URL:er",
+        "updated_count": updated_count
+    }
+
+@api_router.post("/migrate/extract-event-times")
+async def migrate_extract_event_times():
+    """Extract event_time from description for all existing events"""
+    import re
+    
+    events = await db.events.find({}).to_list(1000)
+    updated_count = 0
+    
+    for event in events:
+        description = event.get('description', '')
+        if description and not event.get('event_time'):
+            match = re.search(r'kl:?\s*(\d{1,2}):(\d{2})', description, re.IGNORECASE)
+            if match:
+                hours = int(match.group(1))
+                minutes = int(match.group(2))
+                event_time = f"{hours:02d}:{minutes:02d}"
+                
+                await db.events.update_one(
+                    {"_id": event["_id"]},
+                    {"$set": {"event_time": event_time}}
+                )
+                updated_count += 1
+    
+    return {
+        "success": True,
+        "message": f"Extraherade event_time för {updated_count} events",
         "updated_count": updated_count
     }
 

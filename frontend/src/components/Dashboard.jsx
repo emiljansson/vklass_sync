@@ -24,28 +24,16 @@ const VaultBoyImage = memo(() => (
 ));
 
 // Helper functions moved outside component
-const extractTimeFromDescription = (description) => {
-  if (!description) return null;
-  // Match pattern like "kl: 09:25" or "kl 09:25"
-  const match = description.match(/kl:?\s*(\d{1,2}):(\d{2})/i);
-  if (match) {
-    return { hours: parseInt(match[1]), minutes: parseInt(match[2]) };
-  }
-  return null;
-};
-
-const isEventPast = (startDate, description) => {
+const isEventPast = (startDate, eventTime) => {
   if (!startDate) return false;
   try {
     const eventDate = new Date(startDate);
     const now = new Date();
     
-    // Try to extract time from description
-    const timeFromDesc = extractTimeFromDescription(description);
-    
-    if (timeFromDesc) {
-      // Set the event time from description
-      eventDate.setHours(timeFromDesc.hours, timeFromDesc.minutes, 0, 0);
+    // Use event_time field if available
+    if (eventTime) {
+      const [hours, minutes] = eventTime.split(':').map(Number);
+      eventDate.setHours(hours, minutes, 0, 0);
       // Add 40 minutes
       const eventPlusFortyMin = new Date(eventDate.getTime() + 40 * 60 * 1000);
       return now >= eventPlusFortyMin;
@@ -57,7 +45,7 @@ const isEventPast = (startDate, description) => {
       return now >= eventPlusFortyMin;
     }
     
-    // For date-only events without time in description, check if the day has passed
+    // For date-only events, check if the day has passed
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     return eventDate < today;
@@ -66,8 +54,8 @@ const isEventPast = (startDate, description) => {
   }
 };
 
-const getStatusStyles = (status, start, description) => {
-  if (isEventPast(start, description) && status !== 'removed') {
+const getStatusStyles = (status, start, eventTime) => {
+  if (isEventPast(start, eventTime) && status !== 'removed') {
     return 'event-card-past';
   }
   switch (status) {
@@ -80,8 +68,8 @@ const getStatusStyles = (status, start, description) => {
   }
 };
 
-const getStatusBadge = (status, start, description) => {
-  if (isEventPast(start, description) && status !== 'removed') {
+const getStatusBadge = (status, start, eventTime) => {
+  if (isEventPast(start, eventTime) && status !== 'removed') {
     return <Badge className="bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 uppercase text-xs tracking-wider">Utfört</Badge>;
   }
   switch (status) {
@@ -96,18 +84,18 @@ const getStatusBadge = (status, start, description) => {
 
 // Memoized EventCard to prevent re-renders from countdown timer
 const EventCard = memo(({ event, onConfirmEvent }) => {
-  const showVaultBoy = isEventPast(event.start, event.description) && event.status !== 'removed';
+  const showVaultBoy = isEventPast(event.start, event.event_time) && event.status !== 'removed';
   
   return (
     <Card 
       data-testid={`event-card-${event.id}`}
-      className={`event-card relative transition-all duration-200 bg-[#0f1a0f] rounded-lg border-2 border-green-500/40 ${getStatusStyles(event.status, event.start, event.description)}`}
+      className={`event-card relative transition-all duration-200 bg-[#0f1a0f] rounded-lg border-2 border-green-500/40 ${getStatusStyles(event.status, event.start, event.event_time)}`}
     >
       <CardContent className="p-4">
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1 flex-wrap">
-              {getStatusBadge(event.status, event.start, event.description)}
+              {getStatusBadge(event.status, event.start, event.event_time)}
               {event.subject_name && (
                 <Badge className="bg-green-500/20 text-green-300 border border-green-500/30 uppercase text-xs tracking-wider">
                   {event.subject_name}
@@ -122,7 +110,7 @@ const EventCard = memo(({ event, onConfirmEvent }) => {
             <h3 className={`font-semibold text-base truncate ${
               event.status === 'new' ? 'text-amber-400' : 
               event.status === 'removed' ? 'text-gray-400' : 
-              isEventPast(event.start, event.description) ? 'text-cyan-400' : 'text-green-400'
+              isEventPast(event.start, event.event_time) ? 'text-cyan-400' : 'text-green-400'
             }`}>
               {event.summary}
             </h3>
