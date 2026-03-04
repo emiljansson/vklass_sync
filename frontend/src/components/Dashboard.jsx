@@ -370,6 +370,17 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
             </div>
             
             <div className="flex items-center gap-2">
+              <Button
+                data-testid="sync-button"
+                variant="outline"
+                size="sm"
+                onClick={onSync}
+                disabled={syncing}
+                className="gap-2 border-green-500/30 text-green-400 hover:bg-green-500/10 hover:text-green-300"
+              >
+                {syncing ? 'SYNKAR...' : 'SYNKA'}
+              </Button>
+              
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
@@ -432,6 +443,15 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
             <Clock className="w-4 h-4 text-green-400" />
             <span className="text-sm text-green-500/70 uppercase tracking-wider">Time to Impact:</span>
             <span className="text-lg font-bold text-green-400 pip-glow font-mono">{countdown || '--:--'}</span>
+            {/* TEST BUTTON */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => { setTriggerImpact(true); setImpactInProgress(true); }}
+              className="ml-4 border-red-500/50 text-red-400 hover:bg-red-500/20 text-xs"
+            >
+              TEST
+            </Button>
           </div>
           
           {/* Legend row */}
