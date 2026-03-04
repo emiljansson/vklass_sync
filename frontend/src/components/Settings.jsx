@@ -29,6 +29,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     auth_password: "",
     sound_enabled: true,
     sound_volume: 50,
+    impact_effect_enabled: false,
     event_mappings: []
   });
   const [saving, setSaving] = useState(false);
@@ -54,6 +55,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
         auth_password: settings.auth_password || "",
         sound_enabled: settings.sound_enabled !== undefined ? settings.sound_enabled : true,
         sound_volume: settings.sound_volume !== undefined ? settings.sound_volume : 50,
+        impact_effect_enabled: settings.impact_effect_enabled || false,
         event_mappings: settings.event_mappings || []
       });
     }
@@ -141,7 +143,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
   };
 
   const intervalOptions = [
-    { value: 5, label: "5 minuter" },
+    { value: 3, label: "3 minuter" },
     { value: 15, label: "15 minuter" },
     { value: 30, label: "30 minuter" },
     { value: 60, label: "1 timme" }
@@ -226,6 +228,31 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                   </div>
                 </>
               )}
+            </CardContent>
+          </Card>
+
+          {/* Impact Effect Settings */}
+          <Card className="bg-[#141e14] border-2 border-green-500/40">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-green-400">
+                <Clock className="w-5 h-5" />
+                Impact-effekt
+              </CardTitle>
+              <CardDescription className="text-green-500/60">Visuell effekt när nedräkningen når noll</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label htmlFor="impact_effect_enabled" className="text-green-400">Aktivera Impact-effekt</Label>
+                  <p className="text-sm text-green-500/60">Störningar, förvrängning och blackout vid 00:00</p>
+                </div>
+                <Switch
+                  id="impact_effect_enabled"
+                  data-testid="impact-effect-switch"
+                  checked={formData.impact_effect_enabled}
+                  onCheckedChange={(checked) => handleChange('impact_effect_enabled', checked)}
+                />
+              </div>
             </CardContent>
           </Card>
 

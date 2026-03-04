@@ -54,6 +54,7 @@ class Settings(BaseModel):
     auth_password: Optional[str] = ""
     sound_enabled: Optional[bool] = True
     sound_volume: Optional[int] = 50  # 0-100
+    impact_effect_enabled: Optional[bool] = False  # Visual effect at timer zero
     event_mappings: Optional[list] = []  # List of {cid: str, subject: str, event_id: str, event_type: str}
     screen_wake_lock: Optional[bool] = False  # Prevent screen from sleeping
     
@@ -78,9 +79,10 @@ class SettingsUpdate(BaseModel):
     webpushr_key: Optional[str] = None
     webpushr_auth_token: Optional[str] = None
     auth_enabled: Optional[bool] = None
-    auth_password: Optional[str] = None
+    auth_password: Optional[bool] = None
     sound_enabled: Optional[bool] = None
     sound_volume: Optional[int] = None
+    impact_effect_enabled: Optional[bool] = None
     event_mappings: Optional[list] = None
     screen_wake_lock: Optional[bool] = None
 

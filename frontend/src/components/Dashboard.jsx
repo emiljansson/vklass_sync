@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { ImpactEffect } from "./ImpactEffect";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -15,6 +16,8 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const [countdown, setCountdown] = useState(null);
   const [nextSyncTime, setNextSyncTime] = useState(null);
   const [wasSyncing, setWasSyncing] = useState(false);
+  const [triggerImpact, setTriggerImpact] = useState(false);
+  const [impactInProgress, setImpactInProgress] = useState(false);
   
   const calendar1Events = events.filter(e => e.calendar_index === 1);
   const calendar2Events = events.filter(e => e.calendar_index === 2);
@@ -51,9 +54,15 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
       const seconds = remaining % 60;
       setCountdown(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
       
-      // If countdown reaches 0, poll for updated sync status
-      if (remaining === 0 && !isPolling) {
+      // If countdown reaches 0, trigger impact effect and poll for updated sync status
+      if (remaining === 0 && !isPolling && !impactInProgress) {
         isPolling = true;
+        
+        // Trigger impact effect if enabled
+        if (settings?.impact_effect_enabled) {
+          setTriggerImpact(true);
+          setImpactInProgress(true);
+        }
         
         // Poll every 2 seconds until we get a new next_sync time
         const pollForNewSync = async () => {
@@ -86,7 +95,13 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
         clearTimeout(pollTimeout);
       }
     };
-  }, [nextSyncTime, onRefreshEvents]);
+  }, [nextSyncTime, onRefreshEvents, settings?.impact_effect_enabled, impactInProgress]);
+  
+  // Handle impact effect completion
+  const handleImpactComplete = () => {
+    setTriggerImpact(false);
+    setImpactInProgress(false);
+  };
   
   // Refetch sync status when manual sync completes
   useEffect(() => {
@@ -271,6 +286,9 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
 
   return (
     <div className="min-h-screen bg-[#0a0f0a] fallout-scanlines">
+      {/* Impact Effect */}
+      <ImpactEffect trigger={triggerImpact} onComplete={handleImpactComplete} />
+      
       {/* Header */}
       <header className="sticky top-0 z-50 bg-[#0a0f0a]/95 backdrop-blur-sm border-b border-green-500/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -354,7 +372,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded bg-gray-500/30 border border-gray-500/50"></div>
-              <span className="text-sm text-green-500/70">Borttagen (6h)</span>
+              <span className="text-sm text-green-500/70">Borttagen</span>
             </div>
           </div>
         </div>
