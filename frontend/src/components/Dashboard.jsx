@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { Settings as SettingsIcon, RefreshCw, LogOut, Calendar, MapPin, Check, Lock, Radio, Clock } from "lucide-react";
+import { Settings as SettingsIcon, LogOut, Calendar, MapPin, Check, Lock, Radio, Clock, Lightbulb } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -19,9 +19,64 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const [triggerImpact, setTriggerImpact] = useState(false);
   const [impactInProgress, setImpactInProgress] = useState(false);
   const [hasTriggeredAtZero, setHasTriggeredAtZero] = useState(false);
+  const [wakeLockActive, setWakeLockActive] = useState(false);
+  const [wakeLockObj, setWakeLockObj] = useState(null);
   
   const calendar1Events = events.filter(e => e.calendar_index === 1);
   const calendar2Events = events.filter(e => e.calendar_index === 2);
+  
+  // Wake Lock functionality
+  const toggleWakeLock = useCallback(async () => {
+    if (wakeLockActive && wakeLockObj) {
+      // Release wake lock
+      try {
+        await wakeLockObj.release();
+        setWakeLockObj(null);
+        setWakeLockActive(false);
+      } catch (e) {
+        console.warn('Error releasing wake lock:', e);
+      }
+    } else {
+      // Request wake lock
+      try {
+        if ('wakeLock' in navigator) {
+          const lock = await navigator.wakeLock.request('screen');
+          setWakeLockObj(lock);
+          setWakeLockActive(true);
+          
+          // Handle visibility change (re-acquire lock when page becomes visible)
+          lock.addEventListener('release', () => {
+            setWakeLockActive(false);
+            setWakeLockObj(null);
+          });
+        } else {
+          alert('Wake Lock stöds inte av denna webbläsare');
+        }
+      } catch (e) {
+        console.warn('Error requesting wake lock:', e);
+        alert('Kunde inte aktivera skärmlås. Kontrollera webbläsarinställningar.');
+      }
+    }
+  }, [wakeLockActive, wakeLockObj]);
+
+  // Re-acquire wake lock when page becomes visible again
+  useEffect(() => {
+    const handleVisibilityChange = async () => {
+      if (document.visibilityState === 'visible' && wakeLockActive && !wakeLockObj) {
+        try {
+          if ('wakeLock' in navigator) {
+            const lock = await navigator.wakeLock.request('screen');
+            setWakeLockObj(lock);
+          }
+        } catch (e) {
+          console.warn('Error re-acquiring wake lock:', e);
+        }
+      }
+    };
+    
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [wakeLockActive, wakeLockObj]);
   
   // Fetch sync status from backend
   const fetchSyncStatus = async () => {
@@ -315,17 +370,24 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
             </div>
             
             <div className="flex items-center gap-2">
-              <Button
-                data-testid="sync-button"
-                variant="outline"
-                size="sm"
-                onClick={onSync}
-                disabled={syncing}
-                className="gap-2 border-green-500/30 text-green-400 hover:bg-green-500/10 hover:text-green-300"
-              >
-                <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
-                {syncing ? 'SYNKAR...' : 'SYNKA'}
-              </Button>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      data-testid="wake-lock-button"
+                      variant="outline"
+                      size="sm"
+                      onClick={toggleWakeLock}
+                      className={`gap-2 border-green-500/30 hover:bg-green-500/10 ${wakeLockActive ? 'text-yellow-400 border-yellow-500/50' : 'text-green-400'}`}
+                    >
+                      <Lightbulb className={`w-4 h-4 ${wakeLockActive ? 'fill-yellow-400' : ''}`} />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-[#141e14] border-green-500/30 text-green-400">
+                    <p>{wakeLockActive ? 'Skärmlås aktivt - klicka för att stänga av' : 'Håll skärmen tänd'}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
               
               <TooltipProvider>
                 <Tooltip>
