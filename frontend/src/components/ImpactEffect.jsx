@@ -37,7 +37,7 @@ export const ImpactEffect = ({ trigger, onComplete }) => {
             setPhase('idle');
             setRebootProgress(0);
             if (onComplete) onComplete();
-          }, 500);
+          }, 1000);
         }, 5000);
       }, 3000);
     }, 2000);
@@ -400,7 +400,7 @@ export const ImpactEffect = ({ trigger, onComplete }) => {
         }
 
         .animate-fade-out {
-          animation: fadeOut 0.5s ease-out forwards;
+          animation: fadeOut 1s ease-out forwards;
         }
 
         @keyframes fadeOut {
