@@ -22,7 +22,18 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const [wakeLockActive, setWakeLockActive] = useState(false);
   const [wakeLockObj, setWakeLockObj] = useState(null);
   
-  const calendar1Events = events.filter(e => e.calendar_index === 1);
+  // TEMP: Fake test event for Vault Boy
+  const fakeTestEvent = {
+    id: 'test-vault-boy',
+    summary: 'TEST: Dansande Vault Boy',
+    start: '2025-01-01T10:00:00',
+    status: 'normal',
+    calendar_index: 1,
+    subject_name: 'Test',
+    location: 'Vault 111'
+  };
+  
+  const calendar1Events = [fakeTestEvent, ...events.filter(e => e.calendar_index === 1)];
   const calendar2Events = events.filter(e => e.calendar_index === 2);
   
   // Wake Lock functionality
