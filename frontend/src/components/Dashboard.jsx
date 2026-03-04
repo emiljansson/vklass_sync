@@ -318,11 +318,13 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           </div>
           
           {showVaultBoy && (
-            <div className="flex-shrink-0" style={{ isolation: 'isolate' }}>
+            <div className="flex-shrink-0">
               <img 
+                key="vault-boy-static"
                 src="/vault-boy.png"
                 alt="Vault Boy"
                 className="w-16 h-16 object-contain"
+                loading="eager"
               />
             </div>
           )}
