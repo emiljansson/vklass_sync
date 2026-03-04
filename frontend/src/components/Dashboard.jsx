@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { Settings as SettingsIcon, RefreshCw, LogOut, Calendar, MapPin, Check, Lock, Radio, Clock, Lightbulb, Sun } from "lucide-react";
+import { Settings as SettingsIcon, RefreshCw, LogOut, Calendar, MapPin, Check, Lock, Radio, Clock, Lightbulb, LightbulbOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -405,9 +405,9 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
                       className={`gap-2 border-green-500/30 hover:bg-green-500/10 ${wakeLockActive ? 'text-yellow-400 border-yellow-500' : 'text-green-400'}`}
                     >
                       {wakeLockActive ? (
-                        <Sun className="w-4 h-4" />
-                      ) : (
                         <Lightbulb className="w-4 h-4" />
+                      ) : (
+                        <LightbulbOff className="w-4 h-4" />
                       )}
                     </Button>
                   </TooltipTrigger>
