@@ -155,18 +155,113 @@ const TEST_EVENT = {
   subject_name: 'Test'
 };
 
-export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, authEnabled, isAuthenticated, onLogout, onRefreshEvents }) => {
-  const [countdown, setCountdown] = useState(null);
+// Separate countdown component to isolate re-renders
+const CountdownTimer = memo(({ settings, onRefreshEvents, onTriggerImpact, syncing }) => {
+  const [countdown, setCountdown] = useState('--:--');
   const [nextSyncTime, setNextSyncTime] = useState(null);
-  const [wasSyncing, setWasSyncing] = useState(false);
-  const [triggerImpact, setTriggerImpact] = useState(false);
-  const [impactInProgress, setImpactInProgress] = useState(false);
   const [hasTriggeredAtZero, setHasTriggeredAtZero] = useState(false);
+  const [impactInProgress, setImpactInProgress] = useState(false);
+  const [wasSyncing, setWasSyncing] = useState(false);
+  
+  const fetchSyncStatus = useCallback(async () => {
+    try {
+      const response = await axios.get(`${API}/sync-status`);
+      setNextSyncTime(response.data.next_sync * 1000);
+      return response.data;
+    } catch (e) {
+      console.error("Error fetching sync status:", e);
+      return null;
+    }
+  }, []);
+  
+  useEffect(() => {
+    fetchSyncStatus();
+  }, [fetchSyncStatus]);
+  
+  useEffect(() => {
+    if (!nextSyncTime) return;
+    
+    let pollTimeout = null;
+    let pollCount = 0;
+    const MAX_POLLS = 30;
+    
+    const updateCountdown = () => {
+      const now = Date.now();
+      const remaining = Math.max(0, Math.floor((nextSyncTime - now) / 1000));
+      
+      const minutes = Math.floor(remaining / 60);
+      const seconds = remaining % 60;
+      setCountdown(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+      
+      if (remaining > 0) {
+        setHasTriggeredAtZero(false);
+        pollCount = 0;
+      }
+      
+      if (remaining === 0 && !hasTriggeredAtZero && !impactInProgress) {
+        setHasTriggeredAtZero(true);
+        
+        if (settings?.impact_effect_enabled && onTriggerImpact) {
+          onTriggerImpact();
+          setImpactInProgress(true);
+        }
+        
+        const pollForNewSync = async () => {
+          pollCount++;
+          const currentTime = Date.now();
+          const status = await fetchSyncStatus();
+          
+          if (status && status.next_sync * 1000 > currentTime) {
+            if (onRefreshEvents) onRefreshEvents();
+            setImpactInProgress(false);
+          } else if (pollCount < MAX_POLLS) {
+            pollTimeout = setTimeout(pollForNewSync, 2000);
+          } else {
+            await fetchSyncStatus();
+            setImpactInProgress(false);
+          }
+        };
+        
+        pollTimeout = setTimeout(pollForNewSync, 1000);
+      }
+    };
+    
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+    
+    return () => {
+      clearInterval(timer);
+      if (pollTimeout) clearTimeout(pollTimeout);
+    };
+  }, [nextSyncTime, onRefreshEvents, settings?.impact_effect_enabled, impactInProgress, hasTriggeredAtZero, onTriggerImpact, fetchSyncStatus]);
+  
+  useEffect(() => {
+    if (wasSyncing && !syncing) {
+      fetchSyncStatus();
+    }
+    setWasSyncing(syncing);
+  }, [syncing, wasSyncing, fetchSyncStatus]);
+  
+  return (
+    <span className="text-lg font-bold text-green-400 pip-glow font-mono">{countdown}</span>
+  );
+});
+
+export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, authEnabled, isAuthenticated, onLogout, onRefreshEvents }) => {
+  const [triggerImpact, setTriggerImpact] = useState(false);
   const [wakeLockActive, setWakeLockActive] = useState(false);
   const [wakeLockObj, setWakeLockObj] = useState(null);
   
   const calendar1Events = useMemo(() => [TEST_EVENT, ...events.filter(e => e.calendar_index === 1)], [events]);
   const calendar2Events = useMemo(() => events.filter(e => e.calendar_index === 2), [events]);
+  
+  const handleTriggerImpact = useCallback(() => {
+    setTriggerImpact(true);
+  }, []);
+  
+  const handleImpactComplete = useCallback(() => {
+    setTriggerImpact(false);
+  }, []);
   
   // Wake Lock functionality
   const toggleWakeLock = useCallback(async () => {
@@ -232,110 +327,6 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, [wakeLockActive, wakeLockObj]);
-  
-  // Fetch sync status from backend
-  const fetchSyncStatus = async () => {
-    try {
-      const response = await axios.get(`${API}/sync-status`);
-      setNextSyncTime(response.data.next_sync * 1000); // Convert to milliseconds
-      return response.data;
-    } catch (e) {
-      console.error("Error fetching sync status:", e);
-      return null;
-    }
-  };
-  
-  // Fetch sync status on mount
-  useEffect(() => {
-    fetchSyncStatus();
-  }, []);
-  
-  // Countdown timer
-  useEffect(() => {
-    if (!nextSyncTime) return;
-    
-    let pollTimeout = null;
-    let pollCount = 0;
-    const MAX_POLLS = 30; // Max 30 attempts (60 seconds)
-    
-    const updateCountdown = () => {
-      const now = Date.now();
-      const remaining = Math.max(0, Math.floor((nextSyncTime - now) / 1000));
-      
-      const minutes = Math.floor(remaining / 60);
-      const seconds = remaining % 60;
-      setCountdown(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
-      
-      // Reset trigger flag when timer is above 0
-      if (remaining > 0) {
-        setHasTriggeredAtZero(false);
-        pollCount = 0;
-      }
-      
-      // If countdown reaches 0, trigger impact effect ONCE
-      if (remaining === 0 && !hasTriggeredAtZero && !impactInProgress) {
-        setHasTriggeredAtZero(true);
-        
-        // Trigger impact effect if enabled
-        if (settings?.impact_effect_enabled) {
-          setTriggerImpact(true);
-          setImpactInProgress(true);
-        }
-        
-        // Poll for new sync time
-        const pollForNewSync = async () => {
-          pollCount++;
-          const currentTime = Date.now();
-          const status = await fetchSyncStatus();
-          
-          if (status && status.next_sync * 1000 > currentTime) {
-            // Got a new sync time in the future
-            console.log('Got new sync time, refreshing events');
-            if (onRefreshEvents) {
-              onRefreshEvents();
-            }
-          } else if (pollCount < MAX_POLLS) {
-            // Backend hasn't synced yet, try again
-            console.log(`Polling for sync... attempt ${pollCount}`);
-            pollTimeout = setTimeout(pollForNewSync, 2000);
-          } else {
-            // Give up and force refresh
-            console.log('Max polls reached, forcing refresh');
-            await fetchSyncStatus();
-          }
-        };
-        
-        // Start polling after 1 second
-        pollTimeout = setTimeout(pollForNewSync, 1000);
-      }
-    };
-    
-    updateCountdown();
-    const timer = setInterval(updateCountdown, 1000);
-    
-    return () => {
-      clearInterval(timer);
-      if (pollTimeout) {
-        clearTimeout(pollTimeout);
-      }
-    };
-  }, [nextSyncTime, onRefreshEvents, settings?.impact_effect_enabled, impactInProgress, hasTriggeredAtZero]);
-  
-  // Handle impact effect completion
-  const handleImpactComplete = async () => {
-    setTriggerImpact(false);
-    setImpactInProgress(false);
-    // Force fetch new sync status after effect completes
-    await fetchSyncStatus();
-  };
-  
-  // Refetch sync status when manual sync completes
-  useEffect(() => {
-    if (wasSyncing && !syncing) {
-      fetchSyncStatus();
-    }
-    setWasSyncing(syncing);
-  }, [syncing, wasSyncing]);
 
   const CalendarColumn = ({ title, events, isEmpty }) => (
     <div className="flex flex-col gap-[5px]">
@@ -467,7 +458,12 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           <div className="flex items-center justify-center gap-3 mb-3 pb-3 border-b border-green-500/20 px-0.5">
             <Clock className="w-4 h-4 text-green-400" />
             <span className="text-sm text-green-500/70 uppercase tracking-wider">Time to Impact:</span>
-            <span className="text-lg font-bold text-green-400 pip-glow font-mono">{countdown || '--:--'}</span>
+            <CountdownTimer 
+              settings={settings} 
+              onRefreshEvents={onRefreshEvents} 
+              onTriggerImpact={handleTriggerImpact}
+              syncing={syncing}
+            />
           </div>
           
           {/* Legend row */}
