@@ -392,7 +392,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
                       onClick={toggleWakeLock}
                       className={`gap-2 border-green-500/30 hover:bg-green-500/10 ${wakeLockActive ? 'text-yellow-400 border-yellow-500/50' : 'text-green-400'}`}
                     >
-                      <Lightbulb className={`w-4 h-4 ${wakeLockActive ? 'fill-yellow-400' : ''}`} />
+                      <Lightbulb className="w-4 h-4" style={wakeLockActive ? { fill: '#facc15', stroke: '#facc15' } : {}} />
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent className="bg-[#141e14] border-green-500/30 text-green-400">
