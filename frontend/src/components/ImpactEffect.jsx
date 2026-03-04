@@ -13,7 +13,7 @@ export const ImpactEffect = ({ trigger, onComplete }) => {
       setPhase('blackout');
       
       setTimeout(() => {
-        // Phase 3: Rebooting for 5 seconds
+        // Phase 3: Rebooting for 8 seconds
         setPhase('rebooting');
         setRebootProgress(0);
         
@@ -24,7 +24,7 @@ export const ImpactEffect = ({ trigger, onComplete }) => {
               clearInterval(progressInterval);
               return 100;
             }
-            return prev + 2; // 50 steps over 5 seconds (100ms each)
+            return prev + 1.25; // 80 steps over 8 seconds (100ms each)
           });
         }, 100);
         
@@ -38,7 +38,7 @@ export const ImpactEffect = ({ trigger, onComplete }) => {
             setRebootProgress(0);
             if (onComplete) onComplete();
           }, 1000);
-        }, 5000);
+        }, 8000);
       }, 3000);
     }, 2000);
   }, [onComplete]);

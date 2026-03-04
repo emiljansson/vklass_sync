@@ -370,15 +370,6 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
             <Clock className="w-4 h-4 text-green-400" />
             <span className="text-sm text-green-500/70 uppercase tracking-wider">Time to Impact:</span>
             <span className="text-lg font-bold text-green-400 pip-glow font-mono">{countdown || '--:--'}</span>
-            {/* TEST BUTTON - REMOVE BEFORE LIVE */}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => { setTriggerImpact(true); setImpactInProgress(true); }}
-              className="ml-4 border-red-500/50 text-red-400 hover:bg-red-500/20 text-xs"
-            >
-              TEST IMPACT
-            </Button>
           </div>
           
           {/* Legend row */}
