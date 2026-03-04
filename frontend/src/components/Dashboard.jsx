@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, memo } from "react";
+import { useState, useEffect, useCallback, memo, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Settings as SettingsIcon, RefreshCw, LogOut, Calendar, MapPin, Check, Lock, Radio, Clock, Lightbulb, LightbulbOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -145,6 +145,16 @@ const EventCard = memo(({ event, onConfirmEvent }) => {
   );
 });
 
+// TEMP: Static test event (outside component to prevent re-renders)
+const TEST_EVENT = {
+  id: 'test-vault',
+  summary: 'TEST: Vault Boy',
+  start: '2025-01-01T10:00:00',
+  status: 'normal',
+  calendar_index: 1,
+  subject_name: 'Test'
+};
+
 export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, authEnabled, isAuthenticated, onLogout, onRefreshEvents }) => {
   const [countdown, setCountdown] = useState(null);
   const [nextSyncTime, setNextSyncTime] = useState(null);
@@ -155,18 +165,8 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const [wakeLockActive, setWakeLockActive] = useState(false);
   const [wakeLockObj, setWakeLockObj] = useState(null);
   
-  // TEMP: Test event for Vault Boy
-  const testEvent = {
-    id: 'test-vault',
-    summary: 'TEST: Vault Boy',
-    start: '2025-01-01T10:00:00',
-    status: 'normal',
-    calendar_index: 1,
-    subject_name: 'Test'
-  };
-  
-  const calendar1Events = [testEvent, ...events.filter(e => e.calendar_index === 1)];
-  const calendar2Events = events.filter(e => e.calendar_index === 2);
+  const calendar1Events = useMemo(() => [TEST_EVENT, ...events.filter(e => e.calendar_index === 1)], [events]);
+  const calendar2Events = useMemo(() => events.filter(e => e.calendar_index === 2), [events]);
   
   // Wake Lock functionality
   const toggleWakeLock = useCallback(async () => {
