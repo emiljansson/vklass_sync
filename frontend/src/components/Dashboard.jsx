@@ -405,9 +405,9 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
                       className={`gap-2 border-green-500/30 hover:bg-green-500/10 ${wakeLockActive ? 'text-yellow-400 border-yellow-500' : 'text-green-400'}`}
                     >
                       {wakeLockActive ? (
-                        <Lightbulb className="w-4 h-4" />
+                        <Lightbulb className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                       ) : (
-                        <LightbulbOff className="w-4 h-4" />
+                        <LightbulbOff className="w-4 h-4 text-green-400" />
                       )}
                     </Button>
                   </TooltipTrigger>
