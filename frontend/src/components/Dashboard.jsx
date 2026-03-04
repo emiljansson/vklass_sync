@@ -390,9 +390,17 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
                       variant="outline"
                       size="sm"
                       onClick={toggleWakeLock}
-                      className={`gap-2 border-green-500/30 hover:bg-green-500/10 ${wakeLockActive ? 'text-yellow-400 border-yellow-500/50' : 'text-green-400'}`}
+                      className={`gap-2 border-green-500/30 hover:bg-green-500/10 ${wakeLockActive ? 'bg-yellow-500/20 border-yellow-500' : 'text-green-400'}`}
                     >
-                      <Lightbulb className="w-4 h-4" style={wakeLockActive ? { fill: '#facc15', stroke: '#facc15' } : {}} />
+                      {wakeLockActive ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#facc15" stroke="#facc15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
+                          <path d="M9 18h6"/>
+                          <path d="M10 22h4"/>
+                        </svg>
+                      ) : (
+                        <Lightbulb className="w-4 h-4" />
+                      )}
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent className="bg-[#141e14] border-green-500/30 text-green-400">
