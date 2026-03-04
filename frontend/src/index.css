@@ -241,14 +241,14 @@ input:focus, select:focus, textarea:focus {
 /* Vault Boy gentle sway animation */
 @keyframes vault-boy-sway {
     0%, 100% {
-        transform: rotate(-2deg);
+        transform: rotate(-5deg);
     }
     50% {
-        transform: rotate(2deg);
+        transform: rotate(5deg);
     }
 }
 
 .vault-boy-sway {
-    animation: vault-boy-sway 2s ease-in-out infinite;
+    animation: vault-boy-sway 1.5s ease-in-out infinite;
     transform-origin: bottom center;
 }
