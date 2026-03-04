@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { Settings as SettingsIcon, LogOut, Calendar, MapPin, Check, Lock, Radio, Clock, Lightbulb } from "lucide-react";
+import { Settings as SettingsIcon, RefreshCw, LogOut, Calendar, MapPin, Check, Lock, Radio, Clock, Lightbulb } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -378,6 +378,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
                 disabled={syncing}
                 className="gap-2 border-green-500/30 text-green-400 hover:bg-green-500/10 hover:text-green-300"
               >
+                <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
                 {syncing ? 'SYNKAR...' : 'SYNKA'}
               </Button>
               
