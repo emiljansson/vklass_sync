@@ -339,7 +339,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
           {showVaultBoy && (
             <div className="flex-shrink-0 vault-boy-dance">
               <img 
-                src="/vault-boy.png"
+                src="https://customer-assets.emergentagent.com/job_a7217622-ec5d-4df3-84c4-cbfaa9d1f7a7/artifacts/lxpycsu9_74-746992_fallout4-vault-boy-vector-ai-vault-boy-middle-finger-fallout-4-fallout.png"
                 alt="Vault Boy"
                 className="w-16 h-16 object-contain"
               />
