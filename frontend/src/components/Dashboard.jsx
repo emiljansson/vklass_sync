@@ -126,11 +126,11 @@ const EventCard = memo(({ event, onConfirmEvent }) => {
             )}
             
             {event.description && (
-              <p className={`mt-2 text-sm line-clamp-2 ${
+              <p className={`mt-2 text-sm whitespace-pre-line ${
                 event.status === 'new' ? 'text-amber-500/70' : 
                 event.status === 'removed' ? 'text-gray-500/70' : 'text-green-500/70'
               }`}>
-                {event.description}
+                {event.description.replace(/(\d{4}\s+kl[:\s]*\d{1,2}:\d{2})\.\s*/i, '$1.\n')}
               </p>
             )}
           </div>
