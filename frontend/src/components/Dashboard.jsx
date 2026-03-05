@@ -401,10 +401,10 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
                 size="sm"
                 onClick={onSync}
                 disabled={syncing}
-                className="gap-2 border-green-500/30 text-green-400 hover:bg-green-500/10 hover:text-green-300"
+                className="border-green-500/30 text-green-400 hover:bg-green-500/10 hover:text-green-300 px-2"
+                title={syncing ? 'Synkar...' : 'Synka'}
               >
                 <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
-                {syncing ? 'SYNKAR...' : 'SYNKA'}
               </Button>
               
               <TooltipProvider>
