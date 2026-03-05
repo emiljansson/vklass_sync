@@ -412,7 +412,14 @@ async def check_and_notify_completed_events():
             else:
                 title = f"Utfört: {summary} ✓"
             
-            message = "Bra jobbat!"
+            # Get calendar name based on calendar_index
+            calendar_index = event.get('calendar_index', 1)
+            if calendar_index == 1:
+                calendar_name = settings.calendar_name_1 or "Kalender 1"
+            else:
+                calendar_name = settings.calendar_name_2 or "Kalender 2"
+            
+            message = f"Bra jobbat {calendar_name}!"
             
             await send_webpushr_notification(title, message, settings)
             
