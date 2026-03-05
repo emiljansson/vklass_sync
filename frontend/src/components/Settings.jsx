@@ -844,7 +844,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </div>
 
             {/* Date and Time */}
-            <div className="grid grid-cols-[45%_10%_45%] w-full border border-red-500 overflow-hidden">
+            <div className="grid grid-cols-[47.5%_5%_47.5%] w-full border border-red-500 overflow-hidden">
               <div className="space-y-2 border border-blue-500 overflow-hidden">
                 <Label className="text-green-400 block">Datum *</Label>
                 <input
