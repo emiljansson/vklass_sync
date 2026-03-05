@@ -256,14 +256,15 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             <div className="flex items-center gap-2">
               <Button
                 data-testid="create-event-button"
+                variant="outline"
                 onClick={() => {
                   fetchSubjectsAndTypes();
                   setShowCreateEvent(true);
                 }}
-                className="gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold"
+                className="gap-2 border-green-500/30 text-green-400 hover:bg-green-500/10 hover:text-green-300"
               >
                 <CalendarPlus className="w-4 h-4" />
-                NYTT EVENT
+                Nytt event
               </Button>
               
               <Button
