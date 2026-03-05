@@ -37,6 +37,7 @@ logger = logging.getLogger(__name__)
 
 # Global sync task reference
 sync_task = None
+completion_check_task = None
 
 # ----- Models -----
 
@@ -332,6 +333,99 @@ async def send_webpushr_notification(title: str, message: str, settings: Setting
         logger.error(f"Failed to send Webpushr notification: {e}")
         return False
 
+def is_event_past(start_date: str, event_time: Optional[str]) -> bool:
+    """Check if an event has passed (40 minutes after start time, or day after for all-day events)"""
+    if not start_date:
+        return False
+    try:
+        from datetime import datetime as dt
+        now = datetime.now(timezone.utc)
+        
+        # Parse the start date
+        if 'T' in start_date:
+            # Has time component
+            event_date = datetime.fromisoformat(start_date.replace('Z', '+00:00'))
+            event_plus_forty = event_date + timedelta(minutes=40)
+            return now >= event_plus_forty
+        else:
+            # Date only
+            event_date = dt.strptime(start_date, "%Y-%m-%d")
+            event_date = event_date.replace(tzinfo=timezone.utc)
+            
+            # If we have event_time, use it
+            if event_time:
+                try:
+                    hours, minutes = map(int, event_time.split(':'))
+                    event_date = event_date.replace(hour=hours, minute=minutes)
+                    event_plus_forty = event_date + timedelta(minutes=40)
+                    return now >= event_plus_forty
+                except:
+                    pass
+            
+            # For date-only events, check if the day has passed
+            today = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+            return event_date < today
+    except Exception as e:
+        logger.error(f"Error checking if event is past: {e}")
+        return False
+
+async def check_and_notify_completed_events():
+    """Check for events that have become 'Utfört' and send push notifications"""
+    try:
+        settings = await get_settings_from_db()
+        if not settings.webpushr_key or not settings.webpushr_auth_token:
+            return  # No push credentials configured
+        
+        # Get all events that are not removed and not already notified for completion
+        events = await db.events.find({
+            "status": {"$ne": "removed"},
+            "notified_utfort": {"$ne": True}
+        }, {"_id": 0}).to_list(10000)
+        
+        completed_events = []
+        for event in events:
+            start = event.get('start', '')
+            event_time = event.get('event_time')
+            
+            if is_event_past(start, event_time):
+                completed_events.append(event)
+        
+        if not completed_events:
+            return
+        
+        logger.info(f"Found {len(completed_events)} newly completed events")
+        
+        # Send notifications for each completed event
+        for event in completed_events:
+            # Build notification title
+            subject = event.get('subject_name', '')
+            event_type = event.get('event_type', '')
+            summary = event.get('summary', 'Event')
+            
+            # Format: "✓ Utfört: Matematik - Läxa kapitel 5"
+            if subject and event_type:
+                title = f"✓ Utfört: {subject} - {event_type}"
+            elif subject:
+                title = f"✓ Utfört: {subject} - {summary}"
+            elif event_type:
+                title = f"✓ Utfört: {summary} ({event_type})"
+            else:
+                title = f"✓ Utfört: {summary}"
+            
+            message = "Bra jobbat!"
+            
+            await send_webpushr_notification(title, message, settings)
+            
+            # Mark as notified
+            await db.events.update_one(
+                {"id": event.get('id')},
+                {"$set": {"notified_utfort": True}}
+            )
+            logger.info(f"Sent completion notification for: {summary}")
+        
+    except Exception as e:
+        logger.error(f"Error checking completed events: {e}")
+
 async def get_settings_from_db() -> Settings:
     """Get settings from database"""
     doc = await db.settings.find_one({"id": "app_settings"}, {"_id": 0})
@@ -584,6 +678,22 @@ async def periodic_sync():
         except Exception as e:
             logger.error(f"Periodic sync error: {e}")
             await asyncio.sleep(60)
+
+async def periodic_completion_check():
+    """Background task to check for completed events and send notifications"""
+    # Wait a bit before starting to let initial sync complete
+    await asyncio.sleep(30)
+    
+    while True:
+        try:
+            await check_and_notify_completed_events()
+        except asyncio.CancelledError:
+            break
+        except Exception as e:
+            logger.error(f"Completion check error: {e}")
+        
+        # Check every minute
+        await asyncio.sleep(60)
 
 # ----- API Routes -----
 
@@ -1089,18 +1199,27 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup_event():
-    global sync_task
+    global sync_task, completion_check_task
     # Start periodic sync task (will run initial sync immediately)
     sync_task = asyncio.create_task(periodic_sync())
     logger.info("Periodic sync task started")
+    # Start completion check task
+    completion_check_task = asyncio.create_task(periodic_completion_check())
+    logger.info("Completion check task started")
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
-    global sync_task
+    global sync_task, completion_check_task
     if sync_task:
         sync_task.cancel()
         try:
             await sync_task
+        except asyncio.CancelledError:
+            pass
+    if completion_check_task:
+        completion_check_task.cancel()
+        try:
+            await completion_check_task
         except asyncio.CancelledError:
             pass
     client.close()
