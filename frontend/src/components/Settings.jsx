@@ -809,8 +809,8 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-[#141e14] border-green-500/30">
-                  <SelectItem value="1" className="text-green-400">{formData.calendar_names?.[0] || 'Kalender 1'}</SelectItem>
-                  <SelectItem value="2" className="text-green-400">{formData.calendar_names?.[1] || 'Kalender 2'}</SelectItem>
+                  <SelectItem value="1" className="text-green-400">{formData.calendar_name_1 || 'Kalender 1'}</SelectItem>
+                  <SelectItem value="2" className="text-green-400">{formData.calendar_name_2 || 'Kalender 2'}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
