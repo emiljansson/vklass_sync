@@ -956,7 +956,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
 
       {/* Edit Custom Events Dialog */}
       <Dialog open={showEditEvents} onOpenChange={setShowEditEvents}>
-        <DialogContent className="bg-[#0a0f0a] border-green-500/30 text-green-400 w-[90vw] max-w-md mx-auto p-4 max-h-[80vh] overflow-y-auto">
+        <DialogContent className="bg-[#0a0f0a] border-green-500/30 text-green-400 w-[90vw] max-w-md mx-auto p-4 max-h-[80vh] overflow-y-auto z-[100]">
           <DialogHeader>
             <DialogTitle className="text-green-400 flex items-center gap-2">
               <FileText className="w-5 h-5" />
@@ -992,8 +992,11 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={() => handleDeleteEvent(event.id, event.summary)}
-                    className="flex-shrink-0 text-red-400 hover:bg-red-500/20 hover:text-red-300"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteEvent(event.id, event.summary);
+                    }}
+                    className="flex-shrink-0 text-red-400 hover:bg-red-500/20 hover:text-red-300 relative z-10"
                   >
                     <Trash2 className="w-4 h-4" />
                   </Button>
