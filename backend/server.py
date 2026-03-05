@@ -733,14 +733,21 @@ async def confirm_event(event_id: str):
 @api_router.post("/events/create")
 async def create_custom_event(event_data: CreateEventRequest):
     """Create a custom event manually"""
+    # Swedish day and month names
+    SWEDISH_DAYS = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag', 'Söndag']
+    SWEDISH_MONTHS = ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 
+                      'juli', 'augusti', 'september', 'oktober', 'november', 'december']
+    
     # Build description with time if provided
     description = event_data.description
     if event_data.event_time and "kl:" not in description.lower():
-        # Format date for description
+        # Format date for description in Swedish
         try:
             from datetime import datetime as dt
             date_obj = dt.strptime(event_data.start, "%Y-%m-%d")
-            date_str = date_obj.strftime("%A %d %B %Y").capitalize()
+            day_name = SWEDISH_DAYS[date_obj.weekday()]
+            month_name = SWEDISH_MONTHS[date_obj.month - 1]
+            date_str = f"{day_name} {date_obj.day} {month_name} {date_obj.year}"
             description = f"{date_str} kl: {event_data.event_time}. {description}".strip()
         except:
             description = f"kl: {event_data.event_time}. {description}".strip()
