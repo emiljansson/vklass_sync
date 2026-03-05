@@ -298,9 +298,10 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                   setShowCreateEvent(true);
                 }}
                 className="gap-2 border-green-500/30 text-green-400 hover:bg-green-500/10 hover:text-green-300"
+                title="Nytt event"
               >
                 <CalendarPlus className="w-4 h-4" />
-                Nytt event
+                <span className="hidden sm:inline">Nytt event</span>
               </Button>
 
               <Button
@@ -311,9 +312,10 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                   setShowEditEvents(true);
                 }}
                 className="gap-2 border-green-500/30 text-green-400 hover:bg-green-500/10 hover:text-green-300"
+                title="Editera"
               >
                 <FileText className="w-4 h-4" />
-                Editera
+                <span className="hidden sm:inline">Editera</span>
               </Button>
               
               <Button
@@ -321,9 +323,10 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                 onClick={handleSubmit}
                 disabled={saving}
                 className="gap-2 bg-green-600 hover:bg-green-500 text-black font-bold"
+                title="Spara"
               >
                 <Save className="w-4 h-4" />
-                {saving ? 'SPARAR...' : 'SPARA'}
+                <span className="hidden sm:inline">{saving ? 'SPARAR...' : 'SPARA'}</span>
               </Button>
             </div>
           </div>
