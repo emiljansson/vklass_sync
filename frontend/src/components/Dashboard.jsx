@@ -266,8 +266,41 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const [wakeLockActive, setWakeLockActive] = useState(false);
   const [wakeLockObj, setWakeLockObj] = useState(null);
   
-  const calendar1Events = useMemo(() => events.filter(e => e.calendar_index === 1), [events]);
-  const calendar2Events = useMemo(() => events.filter(e => e.calendar_index === 2), [events]);
+  const calendar1Events = useMemo(() => {
+    const filtered = events.filter(e => e.calendar_index === 1);
+    return filtered.sort((a, b) => {
+      const aIsPast = isEventPast(a.start, a.event_time);
+      const bIsPast = isEventPast(b.start, b.event_time);
+      
+      // Non-completed events first, then completed
+      if (aIsPast !== bIsPast) {
+        return aIsPast ? 1 : -1;
+      }
+      
+      // Within same group, sort by date (newest first for non-completed, oldest first for completed)
+      const dateA = new Date(a.start);
+      const dateB = new Date(b.start);
+      return aIsPast ? dateA - dateB : dateB - dateA;
+    });
+  }, [events]);
+  
+  const calendar2Events = useMemo(() => {
+    const filtered = events.filter(e => e.calendar_index === 2);
+    return filtered.sort((a, b) => {
+      const aIsPast = isEventPast(a.start, a.event_time);
+      const bIsPast = isEventPast(b.start, b.event_time);
+      
+      // Non-completed events first, then completed
+      if (aIsPast !== bIsPast) {
+        return aIsPast ? 1 : -1;
+      }
+      
+      // Within same group, sort by date (newest first for non-completed, oldest first for completed)
+      const dateA = new Date(a.start);
+      const dateB = new Date(b.start);
+      return aIsPast ? dateA - dateB : dateB - dateA;
+    });
+  }, [events]);
   
   const handleTriggerImpact = useCallback(() => {
     setTriggerImpact(true);

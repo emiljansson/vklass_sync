@@ -636,6 +636,30 @@ async def sync_calendars() -> SyncResult:
     if result.deleted_count > 0:
         logger.info(f"Auto-deleted {result.deleted_count} removed events older than 24 hours")
     
+    # Clean up old completed events (older than 1 month)
+    one_month_ago = (datetime.now(timezone.utc) - timedelta(days=30)).isoformat()
+    # Find events that have been notified as completed and are older than 1 month
+    all_events = await db.events.find({"notified_utfort": True}, {"_id": 0}).to_list(10000)
+    deleted_completed = 0
+    for event in all_events:
+        start = event.get('start', '')
+        event_time = event.get('event_time')
+        if is_event_past(start, event_time):
+            # Check if the event start date is more than 1 month old
+            try:
+                if 'T' in start:
+                    event_date = datetime.fromisoformat(start.replace('Z', '+00:00'))
+                else:
+                    event_date = datetime.strptime(start, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+                
+                if event_date < datetime.now(timezone.utc) - timedelta(days=30):
+                    await db.events.delete_one({"id": event.get('id')})
+                    deleted_completed += 1
+            except:
+                pass
+    if deleted_completed > 0:
+        logger.info(f"Auto-deleted {deleted_completed} completed events older than 1 month")
+    
     # Auto-discover new CIDs from events and add to settings
     await update_event_mappings_from_events()
     
@@ -1165,9 +1189,12 @@ async def migrate_fix_swedish_dates():
 
 @api_router.get("/events/custom")
 async def get_custom_events():
-    """Get all custom (manually created) events"""
+    """Get all custom (manually created) events that are not removed"""
     events = await db.events.find(
-        {"uid": {"$regex": "^custom-"}},
+        {
+            "uid": {"$regex": "^custom-"},
+            "status": {"$ne": "removed"}
+        },
         {"_id": 0}
     ).to_list(1000)
     return {"events": events}
