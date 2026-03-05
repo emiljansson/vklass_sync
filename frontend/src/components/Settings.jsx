@@ -786,7 +786,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
 
       {/* Create Event Dialog */}
       <Dialog open={showCreateEvent} onOpenChange={setShowCreateEvent}>
-        <DialogContent className="bg-[#0a0f0a] border-green-500/30 text-green-400 max-w-md">
+        <DialogContent className="bg-[#0a0f0a] border-green-500/30 text-green-400 w-[90vw] max-w-sm mx-auto p-4">
           <DialogHeader>
             <DialogTitle className="text-green-400 flex items-center gap-2">
               <CalendarPlus className="w-5 h-5" />
@@ -797,7 +797,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </DialogDescription>
           </DialogHeader>
           
-          <div className="space-y-4 mt-4">
+          <div className="space-y-3 mt-3">
             {/* Calendar selection */}
             <div className="space-y-2">
               <Label className="text-green-400">Kalender</Label>
@@ -902,7 +902,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </div>
 
             {/* Buttons */}
-            <div className="flex gap-3 pt-4">
+            <div className="flex gap-2 pt-3">
               <Button
                 type="button"
                 variant="outline"
