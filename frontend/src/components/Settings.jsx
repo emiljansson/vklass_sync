@@ -803,7 +803,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
 
       {/* Create Event Dialog */}
       <Dialog open={showCreateEvent} onOpenChange={setShowCreateEvent}>
-        <DialogContent className="bg-[#0a0f0a] border-green-500/30 text-green-400 w-[92vw] max-w-md mx-auto p-4 overflow-hidden">
+        <DialogContent className="bg-[#0a0f0a] border-green-500/30 text-green-400 w-[92vw] max-w-md mx-auto p-4 overflow-hidden box-border">
           <DialogHeader>
             <DialogTitle className="text-green-400 flex items-center gap-2">
               <CalendarPlus className="w-5 h-5" />
@@ -844,23 +844,25 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </div>
 
             {/* Date and Time */}
-            <div className="flex w-full gap-3">
-              <div className="flex-1 space-y-2">
+            <div className="grid grid-cols-2 gap-3 w-full overflow-hidden">
+              <div className="space-y-2 overflow-hidden">
                 <Label className="text-green-400">Datum *</Label>
-                <Input
+                <input
                   type="date"
                   value={newEvent.start}
                   onChange={(e) => setNewEvent({...newEvent, start: e.target.value})}
-                  className="bg-[#141e14] border-green-500/30 text-green-400 w-full px-3"
+                  className="w-full h-9 bg-[#141e14] border border-green-500/30 text-green-400 rounded-md px-2 text-sm box-border"
+                  style={{ maxWidth: '100%' }}
                 />
               </div>
-              <div className="flex-1 space-y-2">
+              <div className="space-y-2 overflow-hidden">
                 <Label className="text-green-400">Tid</Label>
-                <Input
+                <input
                   type="time"
                   value={newEvent.event_time}
                   onChange={(e) => setNewEvent({...newEvent, event_time: e.target.value})}
-                  className="bg-[#141e14] border-green-500/30 text-green-400 w-full px-3"
+                  className="w-full h-9 bg-[#141e14] border border-green-500/30 text-green-400 rounded-md px-2 text-sm box-border"
+                  style={{ maxWidth: '100%' }}
                 />
               </div>
             </div>
