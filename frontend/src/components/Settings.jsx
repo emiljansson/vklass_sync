@@ -800,7 +800,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
           <div className="space-y-4 mt-4">
             {/* Calendar selection */}
             <div className="space-y-2">
-              <Label className="text-green-400">Terminal</Label>
+              <Label className="text-green-400">Kalender</Label>
               <Select 
                 value={String(newEvent.calendar_index)} 
                 onValueChange={(v) => setNewEvent({...newEvent, calendar_index: parseInt(v)})}
@@ -809,8 +809,8 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-[#141e14] border-green-500/30">
-                  <SelectItem value="1" className="text-green-400">Terminal 1</SelectItem>
-                  <SelectItem value="2" className="text-green-400">Terminal 2</SelectItem>
+                  <SelectItem value="1" className="text-green-400">{formData.calendar_names?.[0] || 'Kalender 1'}</SelectItem>
+                  <SelectItem value="2" className="text-green-400">{formData.calendar_names?.[1] || 'Kalender 2'}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
