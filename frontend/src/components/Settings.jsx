@@ -844,7 +844,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </div>
 
             {/* Date and Time */}
-            <div className="flex" style={{ gap: '10px' }}>
+            <div className="flex gap-4">
               <div className="space-y-2" style={{ width: 'calc(45% - 15px)' }}>
                 <Label className="text-green-400">Datum *</Label>
                 <Input
