@@ -234,6 +234,39 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     }
   };
 
+  // Edit/manage custom events
+  const [showEditEvents, setShowEditEvents] = useState(false);
+  const [customEvents, setCustomEvents] = useState([]);
+  const [loadingCustomEvents, setLoadingCustomEvents] = useState(false);
+
+  const fetchCustomEvents = async () => {
+    setLoadingCustomEvents(true);
+    try {
+      const response = await axios.get(`${API}/events/custom`);
+      setCustomEvents(response.data.events || []);
+    } catch (e) {
+      console.error("Error fetching custom events:", e);
+      toast.error("Kunde inte hämta events", { duration: 3000 });
+    } finally {
+      setLoadingCustomEvents(false);
+    }
+  };
+
+  const handleDeleteEvent = async (eventId, eventSummary) => {
+    if (!window.confirm(`Radera "${eventSummary}"?`)) return;
+    
+    try {
+      const response = await axios.delete(`${API}/events/${eventId}`);
+      if (response.data.success) {
+        toast.success("Event raderat!", { duration: 3000 });
+        setCustomEvents(customEvents.filter(e => e.id !== eventId));
+      }
+    } catch (e) {
+      console.error("Error deleting event:", e);
+      toast.error("Fel vid radering", { duration: 3000 });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0f0a] fallout-scanlines">
       {/* Header */}
@@ -265,6 +298,19 @@ export const Settings = ({ settings, onUpdateSettings }) => {
               >
                 <CalendarPlus className="w-4 h-4" />
                 Nytt event
+              </Button>
+
+              <Button
+                data-testid="edit-events-button"
+                variant="outline"
+                onClick={() => {
+                  fetchCustomEvents();
+                  setShowEditEvents(true);
+                }}
+                className="gap-2 border-green-500/30 text-green-400 hover:bg-green-500/10 hover:text-green-300"
+              >
+                <FileText className="w-4 h-4" />
+                Editera
               </Button>
               
               <Button
@@ -885,6 +931,67 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                 {creatingEvent ? 'Skapar...' : 'Skapa event'}
               </Button>
             </div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Edit Custom Events Dialog */}
+      <Dialog open={showEditEvents} onOpenChange={setShowEditEvents}>
+        <DialogContent className="bg-[#0a0f0a] border-green-500/30 text-green-400 w-[90vw] max-w-md mx-auto p-4 max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-green-400 flex items-center gap-2">
+              <FileText className="w-5 h-5" />
+              Manuella events
+            </DialogTitle>
+            <DialogDescription className="text-green-500/70">
+              Events du har lagt till manuellt
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="mt-4 space-y-2">
+            {loadingCustomEvents ? (
+              <p className="text-green-500/50 text-center py-4">Laddar...</p>
+            ) : customEvents.length === 0 ? (
+              <p className="text-green-500/50 text-center py-4">Inga manuella events</p>
+            ) : (
+              customEvents.map((event) => (
+                <div 
+                  key={event.id} 
+                  className="flex items-center justify-between p-3 bg-[#141e14] rounded border border-green-500/20"
+                >
+                  <div className="flex-1 min-w-0 mr-3">
+                    <p className="text-green-400 font-medium truncate">{event.summary}</p>
+                    <p className="text-green-500/60 text-sm">
+                      {event.start} {event.event_time && `kl ${event.event_time}`}
+                    </p>
+                    {(event.subject_name || event.event_type) && (
+                      <p className="text-green-500/50 text-xs">
+                        {[event.subject_name, event.event_type].filter(Boolean).join(' • ')}
+                      </p>
+                    )}
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => handleDeleteEvent(event.id, event.summary)}
+                    className="flex-shrink-0 text-red-400 hover:bg-red-500/20 hover:text-red-300"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </div>
+              ))
+            )}
+          </div>
+
+          <div className="flex justify-end pt-4">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setShowEditEvents(false)}
+              className="border-green-500/30 text-green-400 hover:bg-green-500/10"
+            >
+              Stäng
+            </Button>
           </div>
         </DialogContent>
       </Dialog>

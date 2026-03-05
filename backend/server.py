@@ -1030,6 +1030,25 @@ async def migrate_fix_swedish_dates():
         "updated_count": updated_count
     }
 
+@api_router.get("/events/custom")
+async def get_custom_events():
+    """Get all custom (manually created) events"""
+    events = await db.events.find(
+        {"uid": {"$regex": "^custom-"}},
+        {"_id": 0}
+    ).to_list(1000)
+    return {"events": events}
+
+@api_router.delete("/events/{event_id}")
+async def delete_event(event_id: str):
+    """Delete a specific event"""
+    result = await db.events.delete_one({"id": event_id})
+    
+    if result.deleted_count == 0:
+        raise HTTPException(status_code=404, detail="Event not found")
+    
+    return {"success": True, "message": "Event raderat"}
+
 @api_router.delete("/events/removed")
 async def delete_removed_events():
     """Delete all events with status 'removed' from database"""
