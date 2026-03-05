@@ -402,15 +402,15 @@ async def check_and_notify_completed_events():
             event_type = event.get('event_type', '')
             summary = event.get('summary', 'Event')
             
-            # Format: "✓ Utfört: Matematik - Läxa kapitel 5"
+            # Format: "Utfört: Matematik - Läxa kapitel 5 ✓"
             if subject and event_type:
-                title = f"✓ Utfört: {subject} - {event_type}"
+                title = f"Utfört: {subject} - {event_type} ✓"
             elif subject:
-                title = f"✓ Utfört: {subject} - {summary}"
+                title = f"Utfört: {subject} - {summary} ✓"
             elif event_type:
-                title = f"✓ Utfört: {summary} ({event_type})"
+                title = f"Utfört: {summary} ({event_type}) ✓"
             else:
-                title = f"✓ Utfört: {summary}"
+                title = f"Utfört: {summary} ✓"
             
             message = "Bra jobbat!"
             
