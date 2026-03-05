@@ -265,6 +265,15 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const [triggerImpact, setTriggerImpact] = useState(false);
   const [wakeLockActive, setWakeLockActive] = useState(false);
   const [wakeLockObj, setWakeLockObj] = useState(null);
+  const [sortTrigger, setSortTrigger] = useState(0);
+  
+  // Update sort trigger every minute to re-evaluate which events are "Utfört"
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSortTrigger(prev => prev + 1);
+    }, 60000); // Every minute
+    return () => clearInterval(interval);
+  }, []);
   
   const calendar1Events = useMemo(() => {
     const filtered = events.filter(e => e.calendar_index === 1);
@@ -282,7 +291,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
       const dateB = new Date(b.start);
       return dateA - dateB;
     });
-  }, [events]);
+  }, [events, sortTrigger]);
   
   const calendar2Events = useMemo(() => {
     const filtered = events.filter(e => e.calendar_index === 2);
@@ -300,7 +309,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
       const dateB = new Date(b.start);
       return dateA - dateB;
     });
-  }, [events]);
+  }, [events, sortTrigger]);
   
   const handleTriggerImpact = useCallback(() => {
     setTriggerImpact(true);
