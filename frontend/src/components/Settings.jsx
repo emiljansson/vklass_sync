@@ -844,23 +844,25 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </div>
 
             {/* Date and Time */}
-            <div className="flex gap-3">
-              <div className="flex-1 min-w-0 space-y-1">
-                <Label className="text-green-400 text-sm">Datum *</Label>
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <div style={{ flex: '1 1 50%', minWidth: 0 }}>
+                <Label className="text-green-400 text-sm block mb-1">Datum *</Label>
                 <Input
                   type="date"
                   value={newEvent.start}
                   onChange={(e) => setNewEvent({...newEvent, start: e.target.value})}
-                  className="bg-[#141e14] border-green-500/30 text-green-400 text-sm px-2 h-10 w-full [&::-webkit-calendar-picker-indicator]:opacity-70"
+                  style={{ width: '100%', minWidth: 0 }}
+                  className="bg-[#141e14] border-green-500/30 text-green-400 text-sm h-10"
                 />
               </div>
-              <div className="flex-1 min-w-0 space-y-1">
-                <Label className="text-green-400 text-sm">Tid</Label>
+              <div style={{ flex: '1 1 50%', minWidth: 0 }}>
+                <Label className="text-green-400 text-sm block mb-1">Tid</Label>
                 <Input
                   type="time"
                   value={newEvent.event_time}
                   onChange={(e) => setNewEvent({...newEvent, event_time: e.target.value})}
-                  className="bg-[#141e14] border-green-500/30 text-green-400 text-sm px-2 h-10 w-full [&::-webkit-calendar-picker-indicator]:opacity-70"
+                  style={{ width: '100%', minWidth: 0 }}
+                  className="bg-[#141e14] border-green-500/30 text-green-400 text-sm h-10"
                 />
               </div>
             </div>
