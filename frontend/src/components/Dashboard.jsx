@@ -284,15 +284,12 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     
     filtered.forEach(event => {
       const isPast = isEventPast(event.start, event.event_time) && event.status !== 'removed';
-      console.log(`Event: ${event.summary}, start: ${event.start}, time: ${event.event_time}, isPast: ${isPast}`);
       if (isPast) {
         completed.push(event);
       } else {
         active.push(event);
       }
     });
-    
-    console.log(`Calendar 1 - Active: ${active.length}, Completed: ${completed.length}`);
     
     // Sort active by date (soonest first)
     active.sort((a, b) => new Date(a.start) - new Date(b.start));
