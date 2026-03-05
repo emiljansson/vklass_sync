@@ -845,7 +845,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
 
             {/* Date and Time */}
             <div className="flex gap-6">
-              <div className="space-y-2" style={{ width: 'calc(40% - 10px)' }}>
+              <div className="space-y-2" style={{ width: 'calc(45% + 10px)' }}>
                 <Label className="text-green-400">Datum *</Label>
                 <Input
                   type="date"
@@ -854,7 +854,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                   className="bg-[#141e14] border-green-500/30 text-green-400 w-full"
                 />
               </div>
-              <div className="space-y-2" style={{ width: 'calc(40% - 10px)' }}>
+              <div className="space-y-2" style={{ width: 'calc(45% + 10px)' }}>
                 <Label className="text-green-400">Tid</Label>
                 <Input
                   type="time"
