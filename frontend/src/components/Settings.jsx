@@ -844,8 +844,8 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </div>
 
             {/* Date and Time */}
-            <div className="grid grid-cols-2 gap-4 w-full">
-              <div className="space-y-2">
+            <div className="grid grid-cols-2 gap-4 w-full border border-red-500">
+              <div className="space-y-2 border border-blue-500">
                 <Label className="text-green-400 block">Datum *</Label>
                 <input
                   type="date"
@@ -854,7 +854,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                   className="w-[85%] h-9 bg-[#141e14] border border-green-500/30 text-green-400 rounded-md px-2 text-sm"
                 />
               </div>
-              <div className="space-y-2">
+              <div className="space-y-2 border border-yellow-500">
                 <Label className="text-green-400 block">Tid</Label>
                 <input
                   type="time"
