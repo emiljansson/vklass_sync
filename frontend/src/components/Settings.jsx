@@ -844,24 +844,24 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </div>
 
             {/* Date and Time */}
-            <div className="grid grid-cols-[47.5%_5%_47.5%] w-full">
-              <div className="space-y-2">
+            <div className="grid grid-cols-[47.5%_5%_47.5%] w-full overflow-hidden">
+              <div className="space-y-2 overflow-hidden">
                 <Label className="text-green-400 block">Datum *</Label>
                 <input
                   type="date"
                   value={newEvent.start}
                   onChange={(e) => setNewEvent({...newEvent, start: e.target.value})}
-                  className="w-full h-9 bg-[#141e14] border border-green-500/30 text-green-400 rounded-md px-2 text-sm"
+                  className="w-full max-w-full h-9 bg-[#141e14] border border-green-500/30 text-green-400 rounded-md px-2 text-sm box-border"
                 />
               </div>
               <div></div>
-              <div className="space-y-2">
+              <div className="space-y-2 overflow-hidden">
                 <Label className="text-green-400 block">Tid</Label>
                 <input
                   type="time"
                   value={newEvent.event_time}
                   onChange={(e) => setNewEvent({...newEvent, event_time: e.target.value})}
-                  className="w-full h-9 bg-[#141e14] border border-green-500/30 text-green-400 rounded-md px-2 text-sm"
+                  className="w-full max-w-full h-9 bg-[#141e14] border border-green-500/30 text-green-400 rounded-md px-2 text-sm box-border"
                 />
               </div>
             </div>
