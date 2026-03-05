@@ -184,7 +184,8 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     start: "",
     event_time: "",
     subject_name: "",
-    event_type: ""
+    event_type: "",
+    send_push: false
   });
 
   // Fetch subjects and event types when dialog opens
