@@ -890,17 +890,6 @@ export const Settings = ({ settings, onUpdateSettings }) => {
               </RadioGroup>
             </div>
 
-            {/* Location */}
-            <div className="space-y-2">
-              <Label className="text-green-400">Plats</Label>
-              <Input
-                value={newEvent.location}
-                onChange={(e) => setNewEvent({...newEvent, location: e.target.value})}
-                placeholder="T.ex. Sal 101"
-                className="bg-[#141e14] border-green-500/30 text-green-400 placeholder:text-green-600/50"
-              />
-            </div>
-
             {/* Description */}
             <div className="space-y-2">
               <Label className="text-green-400">Beskrivning</Label>
