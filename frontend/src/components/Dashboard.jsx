@@ -93,7 +93,7 @@ const EventCard = memo(({ event, onConfirmEvent }) => {
     >
       <CardContent className="p-4 relative">
         {showVaultBoy && (
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
             <VaultBoyImage />
           </div>
         )}
