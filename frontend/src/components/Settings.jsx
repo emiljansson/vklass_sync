@@ -844,7 +844,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </div>
 
             {/* Date and Time */}
-            <div className="grid grid-cols-[40%_10%_45%] md:grid-cols-[45%_10%_45%] lg:grid-cols-[47.5%_5%_47.5%] w-full overflow-visible">
+            <div className="grid grid-cols-[40%_10%_45%] md:grid-cols-[45%_7%_45%] lg:grid-cols-[47.5%_5%_47.5%] w-full overflow-visible">
               <div className="space-y-2 overflow-visible">
                 <Label className="text-green-400 block">Datum *</Label>
                 <input
