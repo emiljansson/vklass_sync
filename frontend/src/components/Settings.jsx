@@ -12,6 +12,7 @@ import { Slider } from "@/components/ui/slider";
 import { toast } from "@/components/ui/sonner";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Checkbox } from "@/components/ui/checkbox";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -911,6 +912,19 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                 placeholder="Valfri beskrivning..."
                 className="bg-[#141e14] border-green-500/30 text-green-400 placeholder:text-green-600/50"
               />
+            </div>
+
+            {/* Send push notification checkbox */}
+            <div className="flex items-center space-x-2 pt-1">
+              <Checkbox
+                id="send_push"
+                checked={newEvent.send_push}
+                onCheckedChange={(checked) => setNewEvent({...newEvent, send_push: checked})}
+                className="border-green-500/50 data-[state=checked]:bg-green-600 data-[state=checked]:border-green-600"
+              />
+              <Label htmlFor="send_push" className="text-green-400 cursor-pointer text-sm">
+                Skicka push-notis vid skapande
+              </Label>
             </div>
 
             {/* Buttons */}
