@@ -984,6 +984,61 @@ async def migrate_extract_event_times():
         "updated_count": updated_count
     }
 
+@api_router.post("/migrate/fix-swedish-dates")
+async def migrate_fix_swedish_dates():
+    """Convert English dates to Swedish in event descriptions"""
+    import re
+    
+    ENGLISH_TO_SWEDISH_DAYS = {
+        'Monday': 'Måndag', 'Tuesday': 'Tisdag', 'Wednesday': 'Onsdag',
+        'Thursday': 'Torsdag', 'Friday': 'Fredag', 'Saturday': 'Lördag', 'Sunday': 'Söndag'
+    }
+    ENGLISH_TO_SWEDISH_MONTHS = {
+        'january': 'januari', 'february': 'februari', 'march': 'mars',
+        'april': 'april', 'may': 'maj', 'june': 'juni',
+        'july': 'juli', 'august': 'augusti', 'september': 'september',
+        'october': 'oktober', 'november': 'november', 'december': 'december'
+    }
+    
+    events = await db.events.find({}).to_list(1000)
+    updated_count = 0
+    
+    for event in events:
+        description = event.get('description', '')
+        new_description = description
+        
+        # Replace English day names
+        for eng, swe in ENGLISH_TO_SWEDISH_DAYS.items():
+            new_description = re.sub(eng, swe, new_description, flags=re.IGNORECASE)
+        
+        # Replace English month names
+        for eng, swe in ENGLISH_TO_SWEDISH_MONTHS.items():
+            new_description = re.sub(eng, swe, new_description, flags=re.IGNORECASE)
+        
+        if new_description != description:
+            await db.events.update_one(
+                {"_id": event["_id"]},
+                {"$set": {"description": new_description}}
+            )
+            updated_count += 1
+    
+    return {
+        "success": True,
+        "message": f"Konverterade {updated_count} events till svenska datum",
+        "updated_count": updated_count
+    }
+
+@api_router.delete("/events/removed")
+async def delete_removed_events():
+    """Delete all events with status 'removed' from database"""
+    result = await db.events.delete_many({"status": "removed"})
+    
+    return {
+        "success": True,
+        "message": f"Raderade {result.deleted_count} borttagna events",
+        "deleted_count": result.deleted_count
+    }
+
 # Include the router in the main app
 app.include_router(api_router)
 
