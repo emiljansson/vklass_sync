@@ -844,8 +844,8 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </div>
 
             {/* Date and Time */}
-            <div className="grid grid-cols-[47.5%_5%_47.5%] w-full overflow-auto">
-              <div className="space-y-2 overflow-auto">
+            <div className="grid grid-cols-[47.5%_5%_47.5%] w-full overflow-visible">
+              <div className="space-y-2 overflow-visible">
                 <Label className="text-green-400 block">Datum *</Label>
                 <input
                   type="date"
@@ -855,7 +855,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                 />
               </div>
               <div></div>
-              <div className="space-y-2 overflow-auto">
+              <div className="space-y-2 overflow-visible">
                 <Label className="text-green-400 block">Tid</Label>
                 <input
                   type="time"
