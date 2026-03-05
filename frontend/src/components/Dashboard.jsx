@@ -91,8 +91,13 @@ const EventCard = memo(({ event, onConfirmEvent }) => {
       data-testid={`event-card-${event.id}`}
       className={`event-card relative transition-all duration-200 bg-[#0f1a0f] rounded-lg border-2 border-green-500/40 ${getStatusStyles(event.status, event.start, event.event_time)}`}
     >
-      <CardContent className="p-4">
-        <div className="flex items-start justify-between gap-2">
+      <CardContent className="p-4 relative">
+        {showVaultBoy && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <VaultBoyImage />
+          </div>
+        )}
+        <div className="flex items-start justify-between gap-2 relative z-10">
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 mb-1 flex-wrap">
               {getStatusBadge(event.status, event.start, event.event_time)}
@@ -134,8 +139,6 @@ const EventCard = memo(({ event, onConfirmEvent }) => {
               </p>
             )}
           </div>
-          
-          {showVaultBoy && <VaultBoyImage />}
           
           {event.status === 'new' && (
             <TooltipProvider>
