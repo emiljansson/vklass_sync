@@ -105,6 +105,16 @@ class CalendarEvent(BaseModel):
 class EventConfirm(BaseModel):
     event_id: str
 
+class CreateEventRequest(BaseModel):
+    calendar_index: int
+    summary: str
+    description: str = ""
+    location: str = ""
+    start: str  # Date in YYYY-MM-DD format
+    event_time: Optional[str] = None  # Time like "09:25"
+    subject_name: Optional[str] = None
+    event_type: Optional[str] = None  # Läxa, Prov, etc.
+
 class AuthLogin(BaseModel):
     password: str
 
@@ -709,6 +719,68 @@ async def confirm_event(event_id: str):
         raise HTTPException(status_code=404, detail="Event not found or already confirmed")
     
     return {"success": True, "message": "Händelse bekräftad"}
+
+@api_router.post("/events/create")
+async def create_custom_event(event_data: CreateEventRequest):
+    """Create a custom event manually"""
+    # Build description with time if provided
+    description = event_data.description
+    if event_data.event_time and "kl:" not in description.lower():
+        # Format date for description
+        try:
+            from datetime import datetime as dt
+            date_obj = dt.strptime(event_data.start, "%Y-%m-%d")
+            date_str = date_obj.strftime("%A %d %B %Y").capitalize()
+            description = f"{date_str} kl: {event_data.event_time}. {description}".strip()
+        except:
+            description = f"kl: {event_data.event_time}. {description}".strip()
+    
+    new_event = CalendarEvent(
+        uid=f"custom-{uuid.uuid4()}",
+        calendar_index=event_data.calendar_index,
+        summary=event_data.summary,
+        description=description,
+        location=event_data.location,
+        start=event_data.start,
+        end=event_data.start,  # Same as start for custom events
+        event_time=event_data.event_time,
+        status="normal",
+        status_changed_at=datetime.now(timezone.utc).isoformat()
+    )
+    
+    event_dict = new_event.model_dump()
+    
+    # Add subject_name and event_type if provided
+    if event_data.subject_name:
+        event_dict['subject_name'] = event_data.subject_name
+    if event_data.event_type:
+        event_dict['event_type'] = event_data.event_type
+    
+    await db.events.insert_one(event_dict)
+    
+    logger.info(f"Created custom event: {event_data.summary}")
+    
+    return {"success": True, "message": "Event skapat", "event_id": new_event.id}
+
+@api_router.get("/event-types")
+async def get_event_types():
+    """Get unique event types from mappings"""
+    settings = await get_settings_from_db()
+    event_types = set()
+    for mapping in (settings.event_mappings or []):
+        if mapping.get('event_type'):
+            event_types.add(mapping['event_type'])
+    return {"event_types": sorted(list(event_types))}
+
+@api_router.get("/subjects")
+async def get_subjects():
+    """Get unique subjects from mappings"""
+    settings = await get_settings_from_db()
+    subjects = set()
+    for mapping in (settings.event_mappings or []):
+        if mapping.get('subject'):
+            subjects.add(mapping['subject'])
+    return {"subjects": sorted(list(subjects))}
 
 @api_router.post("/sync", response_model=SyncResult)
 async def trigger_sync():

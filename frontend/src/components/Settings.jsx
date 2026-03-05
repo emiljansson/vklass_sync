@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Save, Link as LinkIcon, Bell, Clock, Lock, Eye, EyeOff, Send, Volume2, VolumeX, Plus, BookOpen, Trash2, Database, RefreshCw, FileText } from "lucide-react";
+import { ArrowLeft, Save, Link as LinkIcon, Bell, Clock, Lock, Eye, EyeOff, Send, Volume2, VolumeX, Plus, BookOpen, Trash2, Database, RefreshCw, FileText, CalendarPlus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,6 +10,8 @@ import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
 import { Slider } from "@/components/ui/slider";
 import { toast } from "@/components/ui/sonner";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import axios from "axios";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -169,6 +171,69 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     { value: 60, label: "1 timme" }
   ];
 
+  // Create Event Dialog state
+  const [showCreateEvent, setShowCreateEvent] = useState(false);
+  const [creatingEvent, setCreatingEvent] = useState(false);
+  const [subjects, setSubjects] = useState([]);
+  const [eventTypes, setEventTypes] = useState([]);
+  const [newEvent, setNewEvent] = useState({
+    calendar_index: 1,
+    summary: "",
+    description: "",
+    location: "",
+    start: "",
+    event_time: "",
+    subject_name: "",
+    event_type: ""
+  });
+
+  // Fetch subjects and event types when dialog opens
+  const fetchSubjectsAndTypes = async () => {
+    try {
+      const [subjectsRes, typesRes] = await Promise.all([
+        axios.get(`${API}/subjects`),
+        axios.get(`${API}/event-types`)
+      ]);
+      setSubjects(subjectsRes.data.subjects || []);
+      setEventTypes(typesRes.data.event_types || []);
+    } catch (e) {
+      console.error("Error fetching subjects/types:", e);
+    }
+  };
+
+  const handleCreateEvent = async () => {
+    if (!newEvent.summary || !newEvent.start) {
+      toast.error("Fyll i titel och datum", { duration: 3000 });
+      return;
+    }
+    
+    setCreatingEvent(true);
+    try {
+      const response = await axios.post(`${API}/events/create`, newEvent);
+      if (response.data.success) {
+        toast.success("Event skapat!", { duration: 3000 });
+        setShowCreateEvent(false);
+        setNewEvent({
+          calendar_index: 1,
+          summary: "",
+          description: "",
+          location: "",
+          start: "",
+          event_time: "",
+          subject_name: "",
+          event_type: ""
+        });
+        // Refresh to show new event
+        window.location.reload();
+      }
+    } catch (e) {
+      console.error("Error creating event:", e);
+      toast.error("Fel vid skapande av event", { duration: 3000 });
+    } finally {
+      setCreatingEvent(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0f0a] fallout-scanlines">
       {/* Header */}
@@ -188,15 +253,29 @@ export const Settings = ({ settings, onUpdateSettings }) => {
               <h1 className="text-lg font-bold text-green-400 pip-glow tracking-tight">INSTÄLLNINGAR</h1>
             </div>
             
-            <Button
-              data-testid="save-settings-button"
-              onClick={handleSubmit}
-              disabled={saving}
-              className="gap-2 bg-green-600 hover:bg-green-500 text-black font-bold"
-            >
-              <Save className="w-4 h-4" />
-              {saving ? 'SPARAR...' : 'SPARA'}
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                data-testid="create-event-button"
+                onClick={() => {
+                  fetchSubjectsAndTypes();
+                  setShowCreateEvent(true);
+                }}
+                className="gap-2 bg-blue-600 hover:bg-blue-500 text-white font-bold"
+              >
+                <CalendarPlus className="w-4 h-4" />
+                NYTT EVENT
+              </Button>
+              
+              <Button
+                data-testid="save-settings-button"
+                onClick={handleSubmit}
+                disabled={saving}
+                className="gap-2 bg-green-600 hover:bg-green-500 text-black font-bold"
+              >
+                <Save className="w-4 h-4" />
+                {saving ? 'SPARAR...' : 'SPARA'}
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -704,6 +783,157 @@ export const Settings = ({ settings, onUpdateSettings }) => {
           </Card>
         </form>
       </main>
+
+      {/* Create Event Dialog */}
+      <Dialog open={showCreateEvent} onOpenChange={setShowCreateEvent}>
+        <DialogContent className="bg-[#0a0f0a] border-green-500/30 text-green-400 max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-green-400 flex items-center gap-2">
+              <CalendarPlus className="w-5 h-5" />
+              Skapa nytt event
+            </DialogTitle>
+            <DialogDescription className="text-green-500/70">
+              Lägg till ett eget event i kalendern
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4 mt-4">
+            {/* Calendar selection */}
+            <div className="space-y-2">
+              <Label className="text-green-400">Terminal</Label>
+              <Select 
+                value={String(newEvent.calendar_index)} 
+                onValueChange={(v) => setNewEvent({...newEvent, calendar_index: parseInt(v)})}
+              >
+                <SelectTrigger className="bg-[#141e14] border-green-500/30 text-green-400">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-[#141e14] border-green-500/30">
+                  <SelectItem value="1" className="text-green-400">Terminal 1</SelectItem>
+                  <SelectItem value="2" className="text-green-400">Terminal 2</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Title */}
+            <div className="space-y-2">
+              <Label className="text-green-400">Titel *</Label>
+              <Input
+                value={newEvent.summary}
+                onChange={(e) => setNewEvent({...newEvent, summary: e.target.value})}
+                placeholder="T.ex. Matteprov kapitel 5"
+                className="bg-[#141e14] border-green-500/30 text-green-400 placeholder:text-green-600/50"
+              />
+            </div>
+
+            {/* Date and Time */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-2">
+                <Label className="text-green-400">Datum *</Label>
+                <Input
+                  type="date"
+                  value={newEvent.start}
+                  onChange={(e) => setNewEvent({...newEvent, start: e.target.value})}
+                  className="bg-[#141e14] border-green-500/30 text-green-400"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label className="text-green-400">Tid</Label>
+                <Input
+                  type="time"
+                  value={newEvent.event_time}
+                  onChange={(e) => setNewEvent({...newEvent, event_time: e.target.value})}
+                  className="bg-[#141e14] border-green-500/30 text-green-400"
+                />
+              </div>
+            </div>
+
+            {/* Subject dropdown */}
+            <div className="space-y-2">
+              <Label className="text-green-400">Ämne</Label>
+              <Select 
+                value={newEvent.subject_name || "none"} 
+                onValueChange={(v) => setNewEvent({...newEvent, subject_name: v === "none" ? "" : v})}
+              >
+                <SelectTrigger className="bg-[#141e14] border-green-500/30 text-green-400">
+                  <SelectValue placeholder="Välj ämne..." />
+                </SelectTrigger>
+                <SelectContent className="bg-[#141e14] border-green-500/30">
+                  <SelectItem value="none" className="text-green-500/50">Inget ämne</SelectItem>
+                  {subjects.map((subject) => (
+                    <SelectItem key={subject} value={subject} className="text-green-400">
+                      {subject}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            {/* Event type radio buttons */}
+            <div className="space-y-2">
+              <Label className="text-green-400">Typ</Label>
+              <RadioGroup
+                value={newEvent.event_type || ""}
+                onValueChange={(v) => setNewEvent({...newEvent, event_type: v})}
+                className="flex flex-wrap gap-3"
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="" id="type-none" className="border-green-500/50 text-green-400" />
+                  <Label htmlFor="type-none" className="text-green-500/70 cursor-pointer">Ingen</Label>
+                </div>
+                {eventTypes.map((type) => (
+                  <div key={type} className="flex items-center space-x-2">
+                    <RadioGroupItem value={type} id={`type-${type}`} className="border-green-500/50 text-green-400" />
+                    <Label htmlFor={`type-${type}`} className="text-green-400 cursor-pointer">{type}</Label>
+                  </div>
+                ))}
+              </RadioGroup>
+            </div>
+
+            {/* Location */}
+            <div className="space-y-2">
+              <Label className="text-green-400">Plats</Label>
+              <Input
+                value={newEvent.location}
+                onChange={(e) => setNewEvent({...newEvent, location: e.target.value})}
+                placeholder="T.ex. Sal 101"
+                className="bg-[#141e14] border-green-500/30 text-green-400 placeholder:text-green-600/50"
+              />
+            </div>
+
+            {/* Description */}
+            <div className="space-y-2">
+              <Label className="text-green-400">Beskrivning</Label>
+              <Input
+                value={newEvent.description}
+                onChange={(e) => setNewEvent({...newEvent, description: e.target.value})}
+                placeholder="Valfri beskrivning..."
+                className="bg-[#141e14] border-green-500/30 text-green-400 placeholder:text-green-600/50"
+              />
+            </div>
+
+            {/* Buttons */}
+            <div className="flex gap-3 pt-4">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setShowCreateEvent(false)}
+                className="flex-1 border-green-500/30 text-green-400 hover:bg-green-500/10"
+              >
+                Avbryt
+              </Button>
+              <Button
+                type="button"
+                onClick={handleCreateEvent}
+                disabled={creatingEvent}
+                className="flex-1 bg-green-600 hover:bg-green-500 text-black font-bold"
+              >
+                {creatingEvent ? 'Skapar...' : 'Skapa event'}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
