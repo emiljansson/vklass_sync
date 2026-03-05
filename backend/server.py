@@ -13,6 +13,10 @@ from datetime import datetime, timezone, timedelta
 import asyncio
 from icalendar import Calendar
 import hashlib
+import pytz
+
+# Swedish timezone
+SWEDISH_TZ = pytz.timezone('Europe/Stockholm')
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -334,23 +338,26 @@ async def send_webpushr_notification(title: str, message: str, settings: Setting
         return False
 
 def is_event_past(start_date: str, event_time: Optional[str]) -> bool:
-    """Check if an event has passed (40 minutes after start time, or day after for all-day events)"""
+    """Check if an event has passed (40 minutes after start time, or day after for all-day events)
+    Uses Swedish timezone for all comparisons since events are in Swedish time."""
     if not start_date:
         return False
     try:
         from datetime import datetime as dt
-        now = datetime.now(timezone.utc)
+        # Use Swedish time for comparison
+        now = datetime.now(SWEDISH_TZ)
         
         # Parse the start date
         if 'T' in start_date:
             # Has time component
             event_date = datetime.fromisoformat(start_date.replace('Z', '+00:00'))
+            event_date = event_date.astimezone(SWEDISH_TZ)
             event_plus_forty = event_date + timedelta(minutes=40)
             return now >= event_plus_forty
         else:
-            # Date only
+            # Date only - treat as Swedish local time
             event_date = dt.strptime(start_date, "%Y-%m-%d")
-            event_date = event_date.replace(tzinfo=timezone.utc)
+            event_date = SWEDISH_TZ.localize(event_date)
             
             # If we have event_time, use it
             if event_time:
@@ -363,7 +370,7 @@ def is_event_past(start_date: str, event_time: Optional[str]) -> bool:
                     pass
             
             # For date-only events, check if the day has passed
-            today = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+            today = now.replace(hour=0, minute=0, second=0, microsecond=0)
             return event_date < today
     except Exception as e:
         logger.error(f"Error checking if event is past: {e}")
