@@ -844,23 +844,23 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </div>
 
             {/* Date and Time */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="space-y-2">
-                <Label className="text-green-400">Datum *</Label>
+            <div className="grid grid-cols-2 gap-2">
+              <div className="space-y-1">
+                <Label className="text-green-400 text-sm">Datum *</Label>
                 <Input
                   type="date"
                   value={newEvent.start}
                   onChange={(e) => setNewEvent({...newEvent, start: e.target.value})}
-                  className="bg-[#141e14] border-green-500/30 text-green-400 w-full"
+                  className="bg-[#141e14] border-green-500/30 text-green-400 text-sm px-2"
                 />
               </div>
-              <div className="space-y-2">
-                <Label className="text-green-400">Tid</Label>
+              <div className="space-y-1">
+                <Label className="text-green-400 text-sm">Tid</Label>
                 <Input
                   type="time"
                   value={newEvent.event_time}
                   onChange={(e) => setNewEvent({...newEvent, event_time: e.target.value})}
-                  className="bg-[#141e14] border-green-500/30 text-green-400 w-full"
+                  className="bg-[#141e14] border-green-500/30 text-green-400 text-sm px-2"
                 />
               </div>
             </div>
