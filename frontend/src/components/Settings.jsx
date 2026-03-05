@@ -844,23 +844,23 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </div>
 
             {/* Date and Time */}
-            <div className="flex flex-col gap-3">
-              <div className="space-y-1">
+            <div className="flex gap-2">
+              <div className="flex-1 min-w-0 space-y-1">
                 <Label className="text-green-400 text-sm">Datum *</Label>
                 <Input
                   type="date"
                   value={newEvent.start}
                   onChange={(e) => setNewEvent({...newEvent, start: e.target.value})}
-                  className="bg-[#141e14] border-green-500/30 text-green-400 text-sm px-3 h-10 w-full"
+                  className="bg-[#141e14] border-green-500/30 text-green-400 text-xs sm:text-sm px-1 sm:px-2 h-9 w-full"
                 />
               </div>
-              <div className="space-y-1">
+              <div className="flex-1 min-w-0 space-y-1">
                 <Label className="text-green-400 text-sm">Tid</Label>
                 <Input
                   type="time"
                   value={newEvent.event_time}
                   onChange={(e) => setNewEvent({...newEvent, event_time: e.target.value})}
-                  className="bg-[#141e14] border-green-500/30 text-green-400 text-sm px-3 h-10 w-full"
+                  className="bg-[#141e14] border-green-500/30 text-green-400 text-xs sm:text-sm px-1 sm:px-2 h-9 w-full"
                 />
               </div>
             </div>
