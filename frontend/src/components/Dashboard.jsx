@@ -426,16 +426,9 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
         </div>
       ) : (
         <div className="flex flex-col gap-[5px]">
-          {events
-            .sort((a, b) => {
-              const statusOrder = { new: 0, normal: 1, removed: 2 };
-              const statusDiff = statusOrder[a.status] - statusOrder[b.status];
-              if (statusDiff !== 0) return statusDiff;
-              return new Date(a.start) - new Date(b.start);
-            })
-            .map(event => (
-              <EventCard key={event.id} event={event} onConfirmEvent={onConfirmEvent} />
-            ))}
+          {events.map(event => (
+            <EventCard key={event.id} event={event} onConfirmEvent={onConfirmEvent} />
+          ))}
         </div>
       )}
     </div>
