@@ -803,7 +803,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
 
       {/* Create Event Dialog */}
       <Dialog open={showCreateEvent} onOpenChange={setShowCreateEvent}>
-        <DialogContent className="bg-[#0a0f0a] border-green-500/30 text-green-400 w-[90vw] max-w-sm mx-auto p-4">
+        <DialogContent className="bg-[#0a0f0a] border-green-500/30 text-green-400 w-[92vw] max-w-md mx-auto p-4 overflow-hidden">
           <DialogHeader>
             <DialogTitle className="text-green-400 flex items-center gap-2">
               <CalendarPlus className="w-5 h-5" />
@@ -844,25 +844,23 @@ export const Settings = ({ settings, onUpdateSettings }) => {
             </div>
 
             {/* Date and Time */}
-            <div style={{ display: 'flex', gap: '12px' }}>
-              <div style={{ flex: '1 1 50%', minWidth: 0 }}>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
                 <Label className="text-green-400 text-sm block mb-1">Datum *</Label>
-                <Input
+                <input
                   type="date"
                   value={newEvent.start}
                   onChange={(e) => setNewEvent({...newEvent, start: e.target.value})}
-                  style={{ width: '100%', minWidth: 0 }}
-                  className="bg-[#141e14] border-green-500/30 text-green-400 text-sm h-10"
+                  className="w-full bg-[#141e14] border border-green-500/30 text-green-400 text-sm h-10 px-2 rounded-md"
                 />
               </div>
-              <div style={{ flex: '1 1 50%', minWidth: 0 }}>
+              <div>
                 <Label className="text-green-400 text-sm block mb-1">Tid</Label>
-                <Input
+                <input
                   type="time"
                   value={newEvent.event_time}
                   onChange={(e) => setNewEvent({...newEvent, event_time: e.target.value})}
-                  style={{ width: '100%', minWidth: 0 }}
-                  className="bg-[#141e14] border-green-500/30 text-green-400 text-sm h-10"
+                  className="w-full bg-[#141e14] border border-green-500/30 text-green-400 text-sm h-10 px-2 rounded-md"
                 />
               </div>
             </div>
