@@ -525,12 +525,14 @@ async def sync_calendars() -> SyncResult:
             settings
         )
     
-    # Clean up old removed events (older than 6 hours)
-    six_hours_ago = (datetime.now(timezone.utc) - timedelta(hours=6)).isoformat()
-    await db.events.delete_many({
+    # Clean up old removed events (older than 24 hours)
+    twenty_four_hours_ago = (datetime.now(timezone.utc) - timedelta(hours=24)).isoformat()
+    result = await db.events.delete_many({
         "status": "removed",
-        "status_changed_at": {"$lt": six_hours_ago}
+        "status_changed_at": {"$lt": twenty_four_hours_ago}
     })
+    if result.deleted_count > 0:
+        logger.info(f"Auto-deleted {result.deleted_count} removed events older than 24 hours")
     
     # Auto-discover new CIDs from events and add to settings
     await update_event_mappings_from_events()
