@@ -213,7 +213,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     try {
       const response = await axios.post(`${API}/events/create`, newEvent);
       if (response.data.success) {
-        toast.success("Event skapat!", { duration: 3000 });
+        toast.success(newEvent.send_push ? "Event skapat och push-notis skickad!" : "Event skapat!", { duration: 3000 });
         setShowCreateEvent(false);
         setNewEvent({
           calendar_index: 1,
@@ -223,7 +223,8 @@ export const Settings = ({ settings, onUpdateSettings }) => {
           start: "",
           event_time: "",
           subject_name: "",
-          event_type: ""
+          event_type: "",
+          send_push: false
         });
         // Refresh to show new event
         window.location.reload();

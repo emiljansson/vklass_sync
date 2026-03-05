@@ -114,6 +114,7 @@ class CreateEventRequest(BaseModel):
     event_time: Optional[str] = None  # Time like "09:25"
     subject_name: Optional[str] = None
     event_type: Optional[str] = None  # Läxa, Prov, etc.
+    send_push: bool = False  # Whether to send push notification
 
 class AuthLogin(BaseModel):
     password: str
@@ -778,6 +779,21 @@ async def create_custom_event(event_data: CreateEventRequest):
     await db.events.insert_one(event_dict)
     
     logger.info(f"Created custom event: {event_data.summary}")
+    
+    # Send push notification if requested
+    if event_data.send_push:
+        settings = await get_settings_from_db()
+        if settings.webpushr_key and settings.webpushr_auth_token:
+            # Format the notification message
+            time_str = f" kl {event_data.event_time}" if event_data.event_time else ""
+            type_str = f" ({event_data.event_type})" if event_data.event_type else ""
+            subject_str = f"{event_data.subject_name}: " if event_data.subject_name else ""
+            
+            title = f"Nytt event: {subject_str}{event_data.summary}{type_str}"
+            message = f"Datum: {event_data.start}{time_str}"
+            
+            await send_webpushr_notification(title, message, settings)
+            logger.info(f"Push notification sent for custom event: {event_data.summary}")
     
     return {"success": True, "message": "Event skapat", "event_id": new_event.id}
 
