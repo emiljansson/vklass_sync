@@ -277,38 +277,54 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   
   const calendar1Events = useMemo(() => {
     const filtered = events.filter(e => e.calendar_index === 1);
-    return filtered.sort((a, b) => {
-      const aIsPast = isEventPast(a.start, a.event_time) && a.status !== 'removed';
-      const bIsPast = isEventPast(b.start, b.event_time) && b.status !== 'removed';
-      
-      // Non-completed events first, then completed at bottom
-      if (aIsPast !== bIsPast) {
-        return aIsPast ? 1 : -1;
+    
+    // Split into active and completed
+    const active = [];
+    const completed = [];
+    
+    filtered.forEach(event => {
+      const isPast = isEventPast(event.start, event.event_time) && event.status !== 'removed';
+      if (isPast) {
+        completed.push(event);
+      } else {
+        active.push(event);
       }
-      
-      // Within same group, sort by date (soonest first for active, oldest completed first)
-      const dateA = new Date(a.start);
-      const dateB = new Date(b.start);
-      return dateA - dateB;
     });
+    
+    // Sort active by date (soonest first)
+    active.sort((a, b) => new Date(a.start) - new Date(b.start));
+    
+    // Sort completed by date (soonest first)
+    completed.sort((a, b) => new Date(a.start) - new Date(b.start));
+    
+    // Active first, then completed at bottom
+    return [...active, ...completed];
   }, [events, sortTrigger]);
   
   const calendar2Events = useMemo(() => {
     const filtered = events.filter(e => e.calendar_index === 2);
-    return filtered.sort((a, b) => {
-      const aIsPast = isEventPast(a.start, a.event_time) && a.status !== 'removed';
-      const bIsPast = isEventPast(b.start, b.event_time) && b.status !== 'removed';
-      
-      // Non-completed events first, then completed at bottom
-      if (aIsPast !== bIsPast) {
-        return aIsPast ? 1 : -1;
+    
+    // Split into active and completed
+    const active = [];
+    const completed = [];
+    
+    filtered.forEach(event => {
+      const isPast = isEventPast(event.start, event.event_time) && event.status !== 'removed';
+      if (isPast) {
+        completed.push(event);
+      } else {
+        active.push(event);
       }
-      
-      // Within same group, sort by date (soonest first for active, oldest completed first)
-      const dateA = new Date(a.start);
-      const dateB = new Date(b.start);
-      return dateA - dateB;
     });
+    
+    // Sort active by date (soonest first)
+    active.sort((a, b) => new Date(a.start) - new Date(b.start));
+    
+    // Sort completed by date (soonest first)
+    completed.sort((a, b) => new Date(a.start) - new Date(b.start));
+    
+    // Active first, then completed at bottom
+    return [...active, ...completed];
   }, [events, sortTrigger]);
   
   const handleTriggerImpact = useCallback(() => {
