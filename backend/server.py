@@ -368,9 +368,13 @@ async def sync_calendars() -> SyncResult:
             key = generate_event_key(e['summary'], e['start'], cal_index)
             feed_keys[key] = e
         
-        # Get existing events from database
+        # Get existing events from database (excluding custom events)
         existing_events = await db.events.find(
-            {"calendar_index": cal_index, "status": {"$ne": "removed"}},
+            {
+                "calendar_index": cal_index, 
+                "status": {"$ne": "removed"},
+                "uid": {"$not": {"$regex": "^custom-"}}
+            },
             {"_id": 0}
         ).to_list(10000)
         
@@ -683,6 +687,12 @@ async def get_events():
             changed_at = event.get('status_changed_at', '')
             if changed_at and changed_at < six_hours_ago:
                 continue
+        
+        # For custom events, keep existing subject_name and event_type
+        if event.get('uid', '').startswith('custom-'):
+            # Keep values from database
+            filtered_events.append(event)
+            continue
         
         # Add subject_name and event_type from mappings
         url = event.get('url', '')
