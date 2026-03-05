@@ -269,36 +269,36 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   const calendar1Events = useMemo(() => {
     const filtered = events.filter(e => e.calendar_index === 1);
     return filtered.sort((a, b) => {
-      const aIsPast = isEventPast(a.start, a.event_time);
-      const bIsPast = isEventPast(b.start, b.event_time);
+      const aIsPast = isEventPast(a.start, a.event_time) && a.status !== 'removed';
+      const bIsPast = isEventPast(b.start, b.event_time) && b.status !== 'removed';
       
-      // Non-completed events first, then completed
+      // Non-completed events first, then completed at bottom
       if (aIsPast !== bIsPast) {
         return aIsPast ? 1 : -1;
       }
       
-      // Within same group, sort by date (newest first for non-completed, oldest first for completed)
+      // Within same group, sort by date (soonest first for active, oldest completed first)
       const dateA = new Date(a.start);
       const dateB = new Date(b.start);
-      return aIsPast ? dateA - dateB : dateB - dateA;
+      return dateA - dateB;
     });
   }, [events]);
   
   const calendar2Events = useMemo(() => {
     const filtered = events.filter(e => e.calendar_index === 2);
     return filtered.sort((a, b) => {
-      const aIsPast = isEventPast(a.start, a.event_time);
-      const bIsPast = isEventPast(b.start, b.event_time);
+      const aIsPast = isEventPast(a.start, a.event_time) && a.status !== 'removed';
+      const bIsPast = isEventPast(b.start, b.event_time) && b.status !== 'removed';
       
-      // Non-completed events first, then completed
+      // Non-completed events first, then completed at bottom
       if (aIsPast !== bIsPast) {
         return aIsPast ? 1 : -1;
       }
       
-      // Within same group, sort by date (newest first for non-completed, oldest first for completed)
+      // Within same group, sort by date (soonest first for active, oldest completed first)
       const dateA = new Date(a.start);
       const dateB = new Date(b.start);
-      return aIsPast ? dateA - dateB : dateB - dateA;
+      return dateA - dateB;
     });
   }, [events]);
   
