@@ -151,6 +151,15 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
         </CardTitle>
       </CardHeader>
       <CardContent>
+        {/* Events List - Moved to top */}
+        <div className="mb-6 pb-4 border-b border-green-500/20">
+          <h3 className="text-green-400 font-mono text-sm mb-3 flex items-center gap-2">
+            <FileText className="w-4 h-4" />
+            Uppgifter denna vecka
+          </h3>
+          <EventsList events={events} calendarName={name} />
+        </div>
+        
         {subjects.length === 0 ? (
           <p className="text-green-500/60 font-mono text-center py-8">
             Inga lektioner denna vecka
@@ -208,15 +217,6 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
             </div>
           </>
         )}
-        
-        {/* Events List */}
-        <div className="mt-6 pt-4 border-t border-green-500/20">
-          <h3 className="text-green-400 font-mono text-sm mb-3 flex items-center gap-2">
-            <FileText className="w-4 h-4" />
-            Uppgifter denna vecka
-          </h3>
-          <EventsList events={events} calendarName={name} />
-        </div>
       </CardContent>
     </Card>
   );
