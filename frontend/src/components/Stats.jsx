@@ -183,19 +183,21 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
                 {chartData.map((entry, index) => {
                   const barWidth = Math.max((entry.minutes / maxMinutes) * 45, 2);
                   return (
-                    <div key={index} className="flex items-center h-9 border-b border-green-500/10">
+                    <div key={index} className="flex items-center h-12 border-b border-green-500/10">
                       {/* Left half */}
                       <div className="w-1/2 flex items-center justify-end pr-1">
                         {entry.isLeft ? (
                           <>
-                            <span className="font-mono text-[11px] text-green-400 mr-2 whitespace-nowrap">
-                              {entry.name}
-                            </span>
-                            <span className="font-mono text-[11px] text-green-400 mr-2 whitespace-nowrap">
-                              {entry.label}
-                            </span>
+                            <div className="text-right mr-2">
+                              <div className="font-mono text-[11px] text-green-400 whitespace-nowrap">
+                                {entry.name}
+                              </div>
+                              <div className="font-mono text-[10px] text-green-400/70 whitespace-nowrap">
+                                {entry.label}
+                              </div>
+                            </div>
                             <div 
-                              className="h-7 rounded-l"
+                              className="h-8 rounded-l"
                               style={{ 
                                 width: `${barWidth}%`, 
                                 backgroundColor: entry.fill,
@@ -211,19 +213,21 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
                         {!entry.isLeft ? (
                           <>
                             <div 
-                              className="h-7 rounded-r"
+                              className="h-8 rounded-r"
                               style={{ 
                                 width: `${barWidth}%`, 
                                 backgroundColor: entry.fill,
                                 minWidth: '8px'
                               }}
                             />
-                            <span className="font-mono text-[11px] text-green-400 ml-2 whitespace-nowrap">
-                              {entry.label}
-                            </span>
-                            <span className="font-mono text-[11px] text-green-400 ml-2 whitespace-nowrap">
-                              {entry.name}
-                            </span>
+                            <div className="text-left ml-2">
+                              <div className="font-mono text-[11px] text-green-400 whitespace-nowrap">
+                                {entry.name}
+                              </div>
+                              <div className="font-mono text-[10px] text-green-400/70 whitespace-nowrap">
+                                {entry.label}
+                              </div>
+                            </div>
                           </>
                         ) : null}
                       </div>
