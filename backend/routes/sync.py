@@ -122,8 +122,12 @@ async def health_check():
 
 
 @router.post("/test-stats-notification")
-async def test_stats_notification():
-    """Send weekly stats notification to specific user"""
+async def test_stats_notification(week_offset: int = 0):
+    """Send weekly stats notification to specific user
+    
+    Args:
+        week_offset: Week offset (0 = current week, 1 = next week, -1 = last week)
+    """
     from services.sync_service import generate_weekly_summary
-    await generate_weekly_summary()
-    return {"success": True, "message": "Stats-notifikation skickad till 197920509"}
+    await generate_weekly_summary(week_offset=week_offset)
+    return {"success": True, "message": f"Stats-notifikation skickad till 197920509 (vecka offset: {week_offset})"}

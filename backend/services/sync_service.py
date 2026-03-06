@@ -293,27 +293,35 @@ async def sync_calendars() -> SyncResult:
 
 from config import SWEDISH_TZ
 
-async def generate_weekly_summary():
-    """Send a simple push notification linking to the stats page"""
+async def generate_weekly_summary(week_offset: int = 0):
+    """Send a simple push notification linking to the stats page
+    
+    Args:
+        week_offset: Week offset (0 = current week, 1 = next week, -1 = last week)
+    """
     settings = await get_settings_from_db()
     
     now = datetime.now(SWEDISH_TZ)
     days_since_monday = now.weekday()
-    monday = (now - timedelta(days=days_since_monday)).replace(hour=0, minute=0, second=0, microsecond=0)
+    monday = (now - timedelta(days=days_since_monday) + timedelta(weeks=week_offset)).replace(hour=0, minute=0, second=0, microsecond=0)
     sunday = monday + timedelta(days=6)
     
     monday_str = monday.strftime("%Y-%m-%d")
     sunday_str = sunday.strftime("%Y-%m-%d")
+    week_num = monday.isocalendar()[1]
     
-    title = "Veckans statistik"
+    title = f"Vecka {week_num} statistik"
     message = f"Datum: {monday_str} - {sunday_str}"
+    
+    # Build target path with week parameter
+    target_path = f"/stats?week={week_offset}" if week_offset != 0 else "/stats"
     
     # Send to specific user ID with link to stats page
     original_test_id = settings.webpushr_test_user_id
     settings.webpushr_test_user_id = "197920509"
     
-    await send_webpushr_notification(title, message, settings, target_path="/stats")
-    logger.info(f"Weekly summary notification sent: {title}")
+    await send_webpushr_notification(title, message, settings, target_path=target_path)
+    logger.info(f"Weekly summary notification sent: {title} -> {target_path}")
     
     settings.webpushr_test_user_id = original_test_id
 

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import { ArrowLeft, RefreshCw, BarChart3, BookOpen, ChevronLeft, ChevronRight, Calendar, Clock, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -245,14 +245,18 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
 
 export function Stats() {
   const { calendarIndex } = useParams();
+  const [searchParams] = useSearchParams();
   const showBoth = !calendarIndex;
   const calIndex = parseInt(calendarIndex) || 1;
   const calKey = `calendar_${calIndex}`;
   
+  // Read initial week offset from URL parameter
+  const initialOffset = parseInt(searchParams.get('week') || '0');
+  
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [weekOffset, setWeekOffset] = useState(0);
+  const [weekOffset, setWeekOffset] = useState(initialOffset);
 
   const fetchStats = useCallback(async (offset = 0) => {
     setLoading(true);
