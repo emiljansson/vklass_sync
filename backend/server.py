@@ -1247,6 +1247,68 @@ async def send_test_notification(notification_type: str = "utfort"):
     else:
         return {"success": False, "message": "Kunde inte skicka notifikation"}
 
+@api_router.get("/stats/weekly")
+async def get_weekly_stats():
+    """Get weekly statistics for the stats page"""
+    settings = await get_settings_from_db()
+    
+    # Get current week's Monday and Friday
+    now = datetime.now(SWEDISH_TZ)
+    days_since_monday = now.weekday()
+    monday = (now - timedelta(days=days_since_monday)).replace(hour=0, minute=0, second=0, microsecond=0)
+    friday = monday + timedelta(days=4, hours=23, minutes=59, seconds=59)
+    
+    monday_str = monday.strftime("%Y-%m-%d")
+    friday_str = friday.strftime("%Y-%m-%d")
+    
+    # Get all events for this week
+    events = await db.events.find({
+        "start": {"$gte": monday_str, "$lte": friday_str},
+        "status": {"$ne": "removed"}
+    }, {"_id": 0}).to_list(10000)
+    
+    # Calculate minutes per subject per calendar
+    calendar_summaries = {1: {}, 2: {}}
+    
+    for event in events:
+        cal_index = event.get('calendar_index', 1)
+        subject = event.get('subject_name', 'Okänt ämne')
+        
+        # Assume each event is 60 minutes if no specific duration
+        minutes = 60
+        
+        if subject not in calendar_summaries[cal_index]:
+            calendar_summaries[cal_index][subject] = 0
+        calendar_summaries[cal_index][subject] += minutes
+    
+    # Format response
+    return {
+        "week_number": now.isocalendar()[1],
+        "year": now.year,
+        "period": {
+            "start": monday_str,
+            "end": friday_str
+        },
+        "calendars": {
+            "calendar_1": {
+                "name": settings.calendar_name_1 or "Kalender 1",
+                "subjects": [
+                    {"name": subject, "minutes": mins}
+                    for subject, mins in sorted(calendar_summaries[1].items())
+                ],
+                "total_minutes": sum(calendar_summaries[1].values())
+            },
+            "calendar_2": {
+                "name": settings.calendar_name_2 or "Kalender 2",
+                "subjects": [
+                    {"name": subject, "minutes": mins}
+                    for subject, mins in sorted(calendar_summaries[2].items())
+                ],
+                "total_minutes": sum(calendar_summaries[2].values())
+            }
+        }
+    }
+
 @api_router.post("/migrate/fix-past-new-events")
 async def fix_past_new_events():
     """Fix past events that still have status 'new' - change them to 'normal' and mark as notified"""
