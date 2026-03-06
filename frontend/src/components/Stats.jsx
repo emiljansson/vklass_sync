@@ -12,7 +12,8 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Cell
+  Cell,
+  LabelList
 } from "recharts";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -57,11 +58,17 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const CalendarStats = ({ name, subjects, totalMinutes, colorOffset = 0 }) => {
-  const chartData = subjects.map((s, index) => ({
-    name: s.name || "Okänt ämne",
-    minutes: s.minutes,
-    fill: CHART_COLORS[(index + colorOffset) % CHART_COLORS.length]
-  }));
+  const chartData = subjects.map((s, index) => {
+    const percent = totalMinutes > 0 ? Math.round((s.minutes / totalMinutes) * 100) : 0;
+    const timeStr = formatMinutes(s.minutes);
+    return {
+      name: s.name || "Okänt ämne",
+      minutes: s.minutes,
+      percent: percent,
+      label: `${timeStr} (${percent}%)`,
+      fill: CHART_COLORS[(index + colorOffset) % CHART_COLORS.length]
+    };
+  });
 
   if (subjects.length === 0) {
     return (
@@ -132,17 +139,17 @@ const CalendarStats = ({ name, subjects, totalMinutes, colorOffset = 0 }) => {
                 radius={[0, 4, 4, 0]}
                 isAnimationActive={false}
                 barSize={28}
-                label={{
-                  position: 'right',
-                  fill: '#4ade80',
-                  fontSize: 12,
-                  fontFamily: 'Share Tech Mono, monospace',
-                  formatter: (value) => formatMinutes(value)
-                }}
               >
                 {chartData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.fill} />
                 ))}
+                <LabelList 
+                  dataKey="label" 
+                  position="right" 
+                  fill="#4ade80" 
+                  fontSize={12}
+                  style={{ fontFamily: 'Share Tech Mono, monospace' }}
+                />
               </Bar>
             </BarChart>
           </ResponsiveContainer>
