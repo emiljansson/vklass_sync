@@ -49,8 +49,9 @@ async def get_weekly_stats(week_offset: int = 0):
     monday_str = monday.strftime("%Y-%m-%d")
     sunday_str = sunday.strftime("%Y-%m-%d")
     
-    # Create CID to subject lookup
+    # Create CID to subject lookup and event_id to event_type lookup
     cid_lookup = {m.get('cid'): m.get('subject', '') for m in (settings.event_mappings or []) if m.get('cid') and m.get('subject')}
+    event_type_lookup = {m.get('event_id'): m.get('event_type', '') for m in (settings.event_mappings or []) if m.get('event_id') and m.get('event_type')}
     
     # Fetch scheduled activities from both calendars
     calendar_summaries = {1: {}, 2: {}}
@@ -157,18 +158,21 @@ async def get_weekly_stats(week_offset: int = 0):
         except:
             formatted_date = start_date
         
-        # Get subject name
+        # Get subject name and event_type from mappings
         subject_name = event.get('subject_name', '')
-        if not subject_name:
-            url = event.get('url', '')
-            if url:
-                try:
-                    params = parse_qs(urlparse(url).query)
-                    cid = params.get('cid', [''])[0]
-                    if cid and cid in cid_lookup:
-                        subject_name = cid_lookup[cid]
-                except:
-                    pass
+        event_type = event.get('event_type', '')
+        url = event.get('url', '')
+        if url:
+            try:
+                params = parse_qs(urlparse(url).query)
+                cid = params.get('cid', [''])[0]
+                event_id = params.get('id', [''])[0]
+                if cid and cid in cid_lookup and not subject_name:
+                    subject_name = cid_lookup[cid]
+                if event_id and event_id in event_type_lookup and not event_type:
+                    event_type = event_type_lookup[event_id]
+            except:
+                pass
         
         calendar_events_raw[cal_index].append({
             "summary": event.get('summary', ''),
@@ -176,7 +180,7 @@ async def get_weekly_stats(week_offset: int = 0):
             "start_raw": start_date,
             "event_time": event_time,
             "subject_name": subject_name,
-            "event_type": event.get('event_type', ''),
+            "event_type": event_type,
             "status": event.get('status', 'normal')
         })
     
