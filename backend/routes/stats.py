@@ -54,7 +54,7 @@ async def get_weekly_stats(week_offset: int = 0):
     
     # Fetch scheduled activities from both calendars
     calendar_summaries = {1: {}, 2: {}}
-    calendar_daily = {1: {}, 2: {}}  # Daily time per calendar
+    calendar_daily = {1: {}, 2: {}}  # Daily school time per calendar (first start to last end)
     calendar_events_raw = {1: [], 2: []}  # Raw events for the list
     
     for cal_index in [1, 2]:
@@ -63,6 +63,9 @@ async def get_weekly_stats(week_offset: int = 0):
             continue
         
         events = await parse_ical_for_stats(url, monday, sunday)
+        
+        # Group events by date for school time calculation
+        daily_events = {}
         
         for event in events:
             subject = None
@@ -98,14 +101,37 @@ async def get_weekly_stats(week_offset: int = 0):
                 calendar_summaries[cal_index][subject] = 0
             calendar_summaries[cal_index][subject] += duration
             
-            # Daily summary
-            event_date = event.get('start')
-            if event_date:
-                day_key = event_date.strftime("%Y-%m-%d")
-                day_name = SWEDISH_DAYS[event_date.weekday()]
-                if day_key not in calendar_daily[cal_index]:
-                    calendar_daily[cal_index][day_key] = {"name": day_name, "minutes": 0}
-                calendar_daily[cal_index][day_key]["minutes"] += duration
+            # Group events by date for school time calculation
+            event_start = event.get('start')
+            event_end = event.get('end')
+            if event_start and event_end:
+                day_key = event_start.strftime("%Y-%m-%d")
+                if day_key not in daily_events:
+                    daily_events[day_key] = []
+                daily_events[day_key].append({
+                    'start': event_start,
+                    'end': event_end
+                })
+        
+        # Calculate school time per day (from first lesson start to last lesson end)
+        for day_key, day_event_list in daily_events.items():
+            if not day_event_list:
+                continue
+            
+            # Find earliest start and latest end
+            first_start = min(e['start'] for e in day_event_list)
+            last_end = max(e['end'] for e in day_event_list)
+            
+            # Calculate school time in minutes
+            school_time_minutes = int((last_end - first_start).total_seconds() / 60)
+            day_name = SWEDISH_DAYS[first_start.weekday()]
+            
+            calendar_daily[cal_index][day_key] = {
+                "name": day_name, 
+                "minutes": school_time_minutes,
+                "first_start": first_start.strftime("%H:%M"),
+                "last_end": last_end.strftime("%H:%M")
+            }
     
     # Fetch task events from database for this week
     db_events = await db.events.find({
@@ -174,7 +200,17 @@ async def get_weekly_stats(week_offset: int = 0):
     # Format daily data sorted by date
     def format_daily(daily_dict):
         sorted_days = sorted(daily_dict.items())
-        return [{"date": k, "name": v["name"], "minutes": v["minutes"]} for k, v in sorted_days]
+        return [{
+            "date": k, 
+            "name": v["name"], 
+            "minutes": v["minutes"],
+            "first_start": v.get("first_start", ""),
+            "last_end": v.get("last_end", "")
+        } for k, v in sorted_days]
+    
+    # Calculate total school time (sum of daily school time)
+    def calc_school_time(daily_dict):
+        return sum(v["minutes"] for v in daily_dict.values())
     
     return {
         "week_number": monday.isocalendar()[1],
@@ -193,6 +229,7 @@ async def get_weekly_stats(week_offset: int = 0):
                     for subject, mins in sorted(calendar_summaries[1].items())
                 ],
                 "total_minutes": sum(calendar_summaries[1].values()),
+                "school_time_minutes": calc_school_time(calendar_daily[1]),
                 "daily": format_daily(calendar_daily[1]),
                 "events": calendar_events_raw[1]
             },
@@ -203,6 +240,7 @@ async def get_weekly_stats(week_offset: int = 0):
                     for subject, mins in sorted(calendar_summaries[2].items())
                 ],
                 "total_minutes": sum(calendar_summaries[2].values()),
+                "school_time_minutes": calc_school_time(calendar_daily[2]),
                 "daily": format_daily(calendar_daily[2]),
                 "events": calendar_events_raw[2]
             }

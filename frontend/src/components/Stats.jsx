@@ -58,16 +58,19 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-// Daily time breakdown component
-const DailyBreakdown = ({ daily }) => {
+// Daily time breakdown component (shows school time: first start to last end)
+const DailyBreakdown = ({ daily, showTimes = false }) => {
   if (!daily || daily.length === 0) return null;
   
   return (
-    <div className="flex flex-wrap gap-2 mt-2">
+    <div className="grid grid-cols-5 gap-1 mt-2">
       {daily.map((day, index) => (
-        <div key={index} className="flex items-center gap-1 text-xs font-mono">
-          <span className="text-green-500/70">{day.name.substring(0, 3)}:</span>
-          <span className="text-green-400">{formatMinutes(day.minutes)}</span>
+        <div key={index} className="text-center">
+          <div className="text-green-500/60 text-[10px] font-mono">{day.name.substring(0, 3)}</div>
+          <div className="text-green-400 text-xs font-mono">{formatMinutes(day.minutes)}</div>
+          {showTimes && day.first_start && day.last_end && (
+            <div className="text-green-500/40 text-[9px] font-mono">{day.first_start}-{day.last_end}</div>
+          )}
         </div>
       ))}
     </div>
@@ -371,16 +374,26 @@ export function Stats() {
                     <div className="p-2 bg-green-500/10 rounded-lg">
                       <Clock className="w-5 h-5 text-green-400" />
                     </div>
-                    <div>
-                      <p className="text-green-500/60 font-mono text-xs uppercase">
-                        {stats.calendars.calendar_1?.name || "Kalender 1"}
-                      </p>
-                      <p className="text-green-400 font-mono text-xl">
-                        {formatMinutes(stats.calendars.calendar_1?.total_minutes || 0)}
-                      </p>
+                    <div className="flex-1">
+                      <div className="flex items-baseline justify-between">
+                        <p className="text-green-500/60 font-mono text-xs uppercase">
+                          {stats.calendars.calendar_1?.name || "Kalender 1"}
+                        </p>
+                        <p className="text-green-500/60 font-mono text-xs uppercase">
+                          Skoltid
+                        </p>
+                      </div>
+                      <div className="flex items-baseline justify-between">
+                        <p className="text-green-400 font-mono text-xl">
+                          {formatMinutes(stats.calendars.calendar_1?.total_minutes || 0)}
+                        </p>
+                        <p className="text-green-400 font-mono text-xl">
+                          {formatMinutes(stats.calendars.calendar_1?.school_time_minutes || 0)}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                  <DailyBreakdown daily={stats.calendars.calendar_1?.daily} />
+                  <DailyBreakdown daily={stats.calendars.calendar_1?.daily} showTimes={true} />
                 </CardContent>
               </Card>
               
@@ -391,16 +404,26 @@ export function Stats() {
                     <div className="p-2 bg-green-500/10 rounded-lg">
                       <Clock className="w-5 h-5 text-green-400" />
                     </div>
-                    <div>
-                      <p className="text-green-500/60 font-mono text-xs uppercase">
-                        {stats.calendars.calendar_2?.name || "Kalender 2"}
-                      </p>
-                      <p className="text-green-400 font-mono text-xl">
-                        {formatMinutes(stats.calendars.calendar_2?.total_minutes || 0)}
-                      </p>
+                    <div className="flex-1">
+                      <div className="flex items-baseline justify-between">
+                        <p className="text-green-500/60 font-mono text-xs uppercase">
+                          {stats.calendars.calendar_2?.name || "Kalender 2"}
+                        </p>
+                        <p className="text-green-500/60 font-mono text-xs uppercase">
+                          Skoltid
+                        </p>
+                      </div>
+                      <div className="flex items-baseline justify-between">
+                        <p className="text-green-400 font-mono text-xl">
+                          {formatMinutes(stats.calendars.calendar_2?.total_minutes || 0)}
+                        </p>
+                        <p className="text-green-400 font-mono text-xl">
+                          {formatMinutes(stats.calendars.calendar_2?.school_time_minutes || 0)}
+                        </p>
+                      </div>
                     </div>
                   </div>
-                  <DailyBreakdown daily={stats.calendars.calendar_2?.daily} />
+                  <DailyBreakdown daily={stats.calendars.calendar_2?.daily} showTimes={true} />
                 </CardContent>
               </Card>
             </div>
