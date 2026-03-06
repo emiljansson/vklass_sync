@@ -1,268 +1,15 @@
-import { useState, useEffect, useCallback, memo, useMemo, useRef } from "react";
+/**
+ * Dashboard - Refactored version
+ */
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { Settings as SettingsIcon, RefreshCw, LogOut, Calendar, MapPin, Check, Lock, Radio, Clock, Lightbulb, LightbulbOff } from "lucide-react";
+import { Settings as SettingsIcon, RefreshCw, LogOut, Radio, Clock, Lightbulb, LightbulbOff, Check, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { ImpactEffect } from "./ImpactEffect";
-import axios from "axios";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-
-// Memoized Vault Boy image component to prevent re-renders
-const VaultBoyImage = memo(() => (
-  <div className="flex-shrink-0 vault-boy-sway">
-    <img 
-      src="/vault-boy.png"
-      alt="Vault Boy"
-      className="w-16 h-16 object-contain"
-    />
-  </div>
-));
-
-// Helper functions moved outside component
-const isEventPast = (startDate, eventTime) => {
-  if (!startDate) return false;
-  try {
-    const eventDate = new Date(startDate);
-    const now = new Date();
-    
-    // Use event_time field if available
-    if (eventTime) {
-      const [hours, minutes] = eventTime.split(':').map(Number);
-      eventDate.setHours(hours, minutes, 0, 0);
-      // Add 40 minutes
-      const eventPlusFortyMin = new Date(eventDate.getTime() + 40 * 60 * 1000);
-      return now >= eventPlusFortyMin;
-    }
-    
-    // If event has time component in start field
-    if (startDate.includes('T') || startDate.includes(':')) {
-      const eventPlusFortyMin = new Date(eventDate.getTime() + 40 * 60 * 1000);
-      return now >= eventPlusFortyMin;
-    }
-    
-    // For date-only events, check if the day has passed
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    return eventDate < today;
-  } catch {
-    return false;
-  }
-};
-
-const getStatusStyles = (status, start, eventTime) => {
-  if (isEventPast(start, eventTime) && status !== 'removed') {
-    return 'event-card-past';
-  }
-  switch (status) {
-    case 'new':
-      return 'event-card-new';
-    case 'removed':
-      return 'event-card-removed';
-    default:
-      return 'bg-[#141e14] border-green-900/50 hover:border-green-500/50';
-  }
-};
-
-const getStatusBadge = (status, start, eventTime) => {
-  if (isEventPast(start, eventTime) && status !== 'removed') {
-    return <Badge className="bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 uppercase text-xs tracking-wider">Utfört</Badge>;
-  }
-  switch (status) {
-    case 'new':
-      return <Badge className="bg-amber-500/20 text-amber-400 border border-amber-500/30 uppercase text-xs tracking-wider">Nytt</Badge>;
-    case 'removed':
-      return <Badge className="bg-gray-500/20 text-gray-400 border border-gray-500/30 uppercase text-xs tracking-wider">Borttagen</Badge>;
-    default:
-      return null;
-  }
-};
-
-// Memoized EventCard to prevent re-renders from countdown timer
-const EventCard = memo(({ event, onConfirmEvent }) => {
-  const showVaultBoy = isEventPast(event.start, event.event_time) && event.status !== 'removed';
-  
-  return (
-    <Card 
-      data-testid={`event-card-${event.id}`}
-      className={`event-card relative transition-all duration-200 bg-[#0f1a0f] rounded-lg border-2 border-green-500/40 ${getStatusStyles(event.status, event.start, event.event_time)}`}
-    >
-      <CardContent className="p-4 relative">
-        {showVaultBoy && (
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-            <VaultBoyImage />
-          </div>
-        )}
-        <div className="flex items-start justify-between gap-2 relative z-10">
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-1 flex-wrap">
-              {getStatusBadge(event.status, event.start, event.event_time)}
-              {event.subject_name && (
-                <Badge className="bg-green-500/20 text-green-300 border border-green-500/30 uppercase text-xs tracking-wider">
-                  {event.subject_name}
-                </Badge>
-              )}
-              {event.event_type && (
-                <Badge className="bg-purple-500/20 text-purple-300 border border-purple-500/30 uppercase text-xs tracking-wider">
-                  {event.event_type}
-                </Badge>
-              )}
-            </div>
-            <h3 className={`font-semibold text-base truncate ${
-              event.status === 'new' ? 'text-amber-400' : 
-              event.status === 'removed' ? 'text-gray-400' : 
-              isEventPast(event.start, event.event_time) ? 'text-cyan-400' : 'text-green-400'
-            }`}>
-              {event.summary}
-            </h3>
-            
-            {event.location && (
-              <div className={`flex items-center gap-1.5 mt-1 text-sm ${
-                event.status === 'new' ? 'text-amber-500/70' : 
-                event.status === 'removed' ? 'text-gray-500/70' : 'text-green-500/70'
-              }`}>
-                <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
-                <span className="truncate">{event.location}</span>
-              </div>
-            )}
-            
-            {event.description && (
-              <p className={`mt-2 text-sm whitespace-pre-line ${
-                event.status === 'new' ? 'text-amber-500/70' : 
-                event.status === 'removed' ? 'text-gray-500/70' : 'text-green-500/70'
-              }`}>
-                {event.description.replace(/(\d{4}\s+kl[:\s]*\d{1,2}:\d{2})\.\s*/i, '$1.\n')}
-              </p>
-            )}
-          </div>
-          
-          {event.status === 'new' && (
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    data-testid={`confirm-event-${event.id}`}
-                    variant="ghost"
-                    size="icon"
-                    className="flex-shrink-0 h-8 w-8 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-400 border border-amber-500/30"
-                    onClick={() => onConfirmEvent(event.id)}
-                  >
-                    <Check className="w-4 h-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent className="bg-[#141e14] border-green-500/30 text-green-400">
-                  <p>Bekräfta händelse</p>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-          )}
-        </div>
-      </CardContent>
-    </Card>
-  );
-});
-
-// Separate countdown component to isolate re-renders
-const CountdownTimer = memo(({ settings, onRefreshEvents, onTriggerImpact, syncing }) => {
-  const [countdown, setCountdown] = useState('--:--');
-  const [nextSyncTime, setNextSyncTime] = useState(null);
-  const [wasSyncing, setWasSyncing] = useState(false);
-  const hasTriggeredRef = useRef(false);
-  const pollTimeoutRef = useRef(null);
-  const pollCountRef = useRef(0);
-  
-  const fetchSyncStatus = useCallback(async () => {
-    try {
-      const response = await axios.get(`${API}/sync-status`);
-      const newSyncTime = response.data.next_sync * 1000;
-      setNextSyncTime(newSyncTime);
-      return response.data;
-    } catch (e) {
-      console.error("Error fetching sync status:", e);
-      return null;
-    }
-  }, []);
-  
-  useEffect(() => {
-    fetchSyncStatus();
-  }, [fetchSyncStatus]);
-  
-  useEffect(() => {
-    if (!nextSyncTime) return;
-    
-    const MAX_POLLS = 30;
-    
-    const pollForNewSync = async () => {
-      pollCountRef.current++;
-      const currentTime = Date.now();
-      const status = await fetchSyncStatus();
-      
-      if (status && status.next_sync * 1000 > currentTime) {
-        // Got new sync time, reset trigger flag
-        hasTriggeredRef.current = false;
-        pollCountRef.current = 0;
-        if (onRefreshEvents) onRefreshEvents();
-      } else if (pollCountRef.current < MAX_POLLS) {
-        pollTimeoutRef.current = setTimeout(pollForNewSync, 2000);
-      } else {
-        // Max polls reached, force reset
-        hasTriggeredRef.current = false;
-        pollCountRef.current = 0;
-        await fetchSyncStatus();
-      }
-    };
-    
-    const updateCountdown = () => {
-      const now = Date.now();
-      const remaining = Math.max(0, Math.floor((nextSyncTime - now) / 1000));
-      
-      const minutes = Math.floor(remaining / 60);
-      const seconds = remaining % 60;
-      setCountdown(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
-      
-      if (remaining > 0) {
-        hasTriggeredRef.current = false;
-        pollCountRef.current = 0;
-      }
-      
-      if (remaining === 0 && !hasTriggeredRef.current) {
-        hasTriggeredRef.current = true;
-        
-        if (settings?.impact_effect_enabled && onTriggerImpact) {
-          onTriggerImpact();
-        }
-        
-        // Start polling after 1 second
-        pollTimeoutRef.current = setTimeout(pollForNewSync, 1000);
-      }
-    };
-    
-    updateCountdown();
-    const timer = setInterval(updateCountdown, 1000);
-    
-    return () => {
-      clearInterval(timer);
-      if (pollTimeoutRef.current) {
-        clearTimeout(pollTimeoutRef.current);
-      }
-    };
-  }, [nextSyncTime, onRefreshEvents, settings?.impact_effect_enabled, onTriggerImpact, fetchSyncStatus]);
-  
-  useEffect(() => {
-    if (wasSyncing && !syncing) {
-      fetchSyncStatus();
-    }
-    setWasSyncing(syncing);
-  }, [syncing, wasSyncing, fetchSyncStatus]);
-  
-  return (
-    <span className="text-lg font-bold text-green-400 pip-glow font-mono">{countdown}</span>
-  );
-});
+// Import refactored dashboard components
+import { EventCard, CountdownTimer, isEventPast } from "./dashboard";
 
 export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, authEnabled, isAuthenticated, onLogout, onRefreshEvents }) => {
   const [triggerImpact, setTriggerImpact] = useState(false);
@@ -274,18 +21,16 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   useEffect(() => {
     const interval = setInterval(() => {
       setSortTrigger(prev => prev + 1);
-    }, 60000); // Every minute
+    }, 60000);
     return () => clearInterval(interval);
   }, []);
   
-  const calendar1Events = useMemo(() => {
-    const filtered = events.filter(e => e.calendar_index === 1);
-    
-    // Split into active and completed
+  // Sort events: active first (sorted by date), then completed at bottom
+  const sortEvents = useCallback((eventsList) => {
     const active = [];
     const completed = [];
     
-    filtered.forEach(event => {
+    eventsList.forEach(event => {
       const isPast = isEventPast(event.start, event.event_time) && event.status !== 'removed';
       if (isPast) {
         completed.push(event);
@@ -294,41 +39,19 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
       }
     });
     
-    // Sort active by date (soonest first)
     active.sort((a, b) => new Date(a.start) - new Date(b.start));
-    
-    // Sort completed by date (soonest first)
     completed.sort((a, b) => new Date(a.start) - new Date(b.start));
     
-    // Active first, then completed at bottom
     return [...active, ...completed];
-  }, [events, sortTrigger]);
+  }, []);
+  
+  const calendar1Events = useMemo(() => {
+    return sortEvents(events.filter(e => e.calendar_index === 1));
+  }, [events, sortTrigger, sortEvents]);
   
   const calendar2Events = useMemo(() => {
-    const filtered = events.filter(e => e.calendar_index === 2);
-    
-    // Split into active and completed
-    const active = [];
-    const completed = [];
-    
-    filtered.forEach(event => {
-      const isPast = isEventPast(event.start, event.event_time) && event.status !== 'removed';
-      if (isPast) {
-        completed.push(event);
-      } else {
-        active.push(event);
-      }
-    });
-    
-    // Sort active by date (soonest first)
-    active.sort((a, b) => new Date(a.start) - new Date(b.start));
-    
-    // Sort completed by date (soonest first)
-    completed.sort((a, b) => new Date(a.start) - new Date(b.start));
-    
-    // Active first, then completed at bottom
-    return [...active, ...completed];
-  }, [events, sortTrigger]);
+    return sortEvents(events.filter(e => e.calendar_index === 2));
+  }, [events, sortTrigger, sortEvents]);
   
   const handleTriggerImpact = useCallback(() => {
     setTriggerImpact(true);
@@ -340,51 +63,38 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   
   // Wake Lock functionality
   const toggleWakeLock = useCallback(async () => {
-    console.log('toggleWakeLock called, current state:', wakeLockActive);
-    
     if (wakeLockActive && wakeLockObj) {
-      // Release wake lock
       try {
         await wakeLockObj.release();
         setWakeLockObj(null);
         setWakeLockActive(false);
-        console.log('Wake lock released');
       } catch (e) {
         console.warn('Error releasing wake lock:', e);
       }
     } else {
-      // Request wake lock
-      console.log('Checking wakeLock support:', 'wakeLock' in navigator);
       try {
         if ('wakeLock' in navigator) {
-          console.log('Requesting wake lock...');
           const lock = await navigator.wakeLock.request('screen');
           setWakeLockObj(lock);
           setWakeLockActive(true);
-          console.log('Wake lock activated successfully');
           
-          // Handle visibility change (re-acquire lock when page becomes visible)
           lock.addEventListener('release', () => {
-            console.log('Wake lock was released');
             setWakeLockActive(false);
             setWakeLockObj(null);
           });
         } else {
-          console.warn('Wake Lock API not supported');
-          alert('Skärmlås stöds inte av denna webbläsare. Prova Chrome, Edge eller Safari på iOS/macOS.');
+          alert('Skärmlås stöds inte av denna webbläsare.');
         }
       } catch (e) {
-        console.warn('Error requesting wake lock:', e.name, e.message);
+        console.warn('Error requesting wake lock:', e);
         if (e.name === 'NotAllowedError') {
-          alert('Skärmlås blockerades. Kontrollera webbläsarens inställningar.');
-        } else {
-          alert('Kunde inte aktivera skärmlås: ' + e.message);
+          alert('Skärmlås blockerades.');
         }
       }
     }
   }, [wakeLockActive, wakeLockObj]);
 
-  // Re-acquire wake lock when page becomes visible again
+  // Re-acquire wake lock when page becomes visible
   useEffect(() => {
     const handleVisibilityChange = async () => {
       if (document.visibilityState === 'visible' && wakeLockActive && !wakeLockObj) {
@@ -403,18 +113,17 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
     return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
   }, [wakeLockActive, wakeLockObj]);
 
-  const CalendarColumn = ({ title, events, isEmpty }) => (
+  // Calendar column component
+  const CalendarColumn = ({ title, calendarEvents, isEmpty }) => (
     <div className="flex flex-col gap-[5px]">
-      {/* Header box */}
       <div className="bg-[#1a2a1a] rounded-lg border-2 border-green-500/50 border-t-4 border-t-green-400 px-4 py-4">
         <h2 className="text-xl font-bold text-green-400 pip-glow tracking-tight">{title}</h2>
         <p className="text-sm text-green-500/60 mt-1">
-          {events.length} händelse{events.length !== 1 ? 'r' : ''}
+          {calendarEvents.length} händelse{calendarEvents.length !== 1 ? 'r' : ''}
         </p>
       </div>
       
-      {/* Events */}
-      {events.length === 0 ? (
+      {calendarEvents.length === 0 ? (
         <div className="bg-[#141e14] rounded border border-green-500/30 p-4">
           <div className="empty-state">
             <Radio className="empty-state-icon radiation-icon" />
@@ -426,7 +135,7 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
         </div>
       ) : (
         <div className="flex flex-col gap-[5px]">
-          {events.map(event => (
+          {calendarEvents.map(event => (
             <EventCard key={event.id} event={event} onConfirmEvent={onConfirmEvent} />
           ))}
         </div>
@@ -436,7 +145,6 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
 
   return (
     <div className="min-h-screen bg-[#0a0f0a] fallout-scanlines">
-      {/* Impact Effect */}
       <ImpactEffect trigger={triggerImpact} onComplete={handleImpactComplete} />
       
       {/* Header */}
@@ -522,7 +230,6 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Status & Legend */}
         <div className="mb-6 p-4 bg-[#141e14] rounded border border-green-500/30">
-          {/* Countdown row */}
           <div className="flex items-center justify-center gap-3 mb-3 pb-3 border-b border-green-500/20 px-0.5">
             <Clock className="w-4 h-4 text-green-400" />
             <span className="text-sm text-green-500/70 uppercase tracking-wider">Time to Impact:</span>
@@ -534,7 +241,6 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
             />
           </div>
           
-          {/* Legend row */}
           <div className="flex items-center justify-center gap-3 overflow-x-auto whitespace-nowrap">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded bg-amber-500/30 border border-amber-500/50"></div>
@@ -559,12 +265,12 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <CalendarColumn
             title={settings?.calendar_name_1 || "TERMINAL 1"}
-            events={calendar1Events}
+            calendarEvents={calendar1Events}
             isEmpty={!settings?.ical_url_1}
           />
           <CalendarColumn
             title={settings?.calendar_name_2 || "TERMINAL 2"}
-            events={calendar2Events}
+            calendarEvents={calendar2Events}
             isEmpty={!settings?.ical_url_2}
           />
         </div>

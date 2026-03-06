@@ -289,3 +289,31 @@ async def sync_calendars() -> SyncResult:
         new_events=new_count,
         removed_events=removed_count
     )
+
+
+from config import SWEDISH_TZ
+
+async def generate_weekly_summary():
+    """Send a simple push notification linking to the stats page"""
+    settings = await get_settings_from_db()
+    
+    now = datetime.now(SWEDISH_TZ)
+    days_since_monday = now.weekday()
+    monday = (now - timedelta(days=days_since_monday)).replace(hour=0, minute=0, second=0, microsecond=0)
+    sunday = monday + timedelta(days=6)
+    
+    monday_str = monday.strftime("%Y-%m-%d")
+    sunday_str = sunday.strftime("%Y-%m-%d")
+    
+    title = "Veckans statistik"
+    message = f"Datum: {monday_str} - {sunday_str}"
+    
+    # Send to specific user ID with link to stats page
+    original_test_id = settings.webpushr_test_user_id
+    settings.webpushr_test_user_id = "197920509"
+    
+    await send_webpushr_notification(title, message, settings, target_path="/stats")
+    logger.info(f"Weekly summary notification sent: {title}")
+    
+    settings.webpushr_test_user_id = original_test_id
+

@@ -100,15 +100,21 @@ The user requested a full-stack application to monitor two user-provided iCal ca
 │   │   ├── notification_service.py
 │   │   ├── event_service.py
 │   │   └── sync_service.py
-│   ├── server.py           # FastAPI app with routes
+│   ├── routes/             # API routes
+│   │   ├── settings.py
+│   │   ├── events.py
+│   │   ├── auth.py
+│   │   ├── sync.py
+│   │   ├── stats.py
+│   │   └── migrations.py
+│   ├── server.py           # FastAPI app (160 lines)
 │   └── .env
 ├── frontend/
 │   └── src/
 │       ├── App.js
-│       ├── index.css    # Fallout theme styles
+│       ├── index.css
 │       └── components/
-│           ├── settings/           # NEW: Refactored settings components
-│           │   ├── index.js
+│           ├── settings/           # Settings components
 │           │   ├── SettingsCard.jsx
 │           │   ├── SoundSettings.jsx
 │           │   ├── ImpactEffectSettings.jsx
@@ -118,8 +124,14 @@ The user requested a full-stack application to monitor two user-provided iCal ca
 │           │   ├── AuthSettings.jsx
 │           │   ├── WebpushrSettings.jsx
 │           │   └── DatabaseToolsSettings.jsx
-│           ├── Dashboard.jsx
-│           ├── Settings.jsx     # Refactored: 1053 → 525 lines
+│           ├── dashboard/          # Dashboard components
+│           │   ├── utils.js
+│           │   ├── VaultBoyImage.jsx
+│           │   ├── StatusBadge.jsx
+│           │   ├── EventCard.jsx
+│           │   └── CountdownTimer.jsx
+│           ├── Dashboard.jsx    # 280 lines (was 575)
+│           ├── Settings.jsx     # 525 lines (was 1053)
 │           ├── Stats.jsx
 │           ├── Login.jsx
 │           ├── AddToHomeScreen.js
@@ -162,10 +174,11 @@ The user requested a full-stack application to monitor two user-provided iCal ca
 - [x] **Stats week navigation** - Bläddra framåt/bakåt mellan veckor (2026-03-06)
 - [x] **Backend refaktorering** - Uppdelad i config.py, models/, services/ (2026-03-06)
 - [x] **Frontend refaktorering** - Settings.jsx uppdelad i 9 komponenter under settings/ (2026-03-06)
+- [x] **Backend routes refaktorering** - Routes migrerade från server.py till routes/ (2026-03-06)
+- [x] **Dashboard refaktorering** - Dashboard.jsx uppdelad i 5 komponenter under dashboard/ (2026-03-06)
 
 ## Backlog / Future Tasks
-- [ ] Refactoring: Migrera routes från server.py till routes/
-- [ ] Refactoring: Dela upp Dashboard.jsx i mindre komponenter
+- [ ] Ytterligare optimering av komponenter vid behov
 
 ## Known Credentials
 - **Settings Password:** 2378
