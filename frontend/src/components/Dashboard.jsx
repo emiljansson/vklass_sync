@@ -114,14 +114,16 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
   }, [wakeLockActive, wakeLockObj]);
 
   // Calendar column component
-  const CalendarColumn = ({ title, calendarEvents, isEmpty }) => (
+  const CalendarColumn = ({ title, calendarEvents, isEmpty, calendarIndex }) => (
     <div className="flex flex-col gap-[5px]">
-      <div className="bg-[#1a2a1a] rounded-lg border-2 border-green-500/50 border-t-4 border-t-green-400 px-4 py-4">
-        <h2 className="text-xl font-bold text-green-400 pip-glow tracking-tight">{title}</h2>
-        <p className="text-sm text-green-500/60 mt-1">
-          {calendarEvents.length} händelse{calendarEvents.length !== 1 ? 'r' : ''}
-        </p>
-      </div>
+      <Link to={`/stats/${calendarIndex}`} className="block">
+        <div className="bg-[#1a2a1a] rounded-lg border-2 border-green-500/50 border-t-4 border-t-green-400 px-4 py-4 hover:bg-[#1f3520] hover:border-green-400/70 transition-colors cursor-pointer">
+          <h2 className="text-xl font-bold text-green-400 pip-glow tracking-tight hover:text-green-300">{title}</h2>
+          <p className="text-sm text-green-500/60 mt-1">
+            {calendarEvents.length} händelse{calendarEvents.length !== 1 ? 'r' : ''} • Tryck för statistik
+          </p>
+        </div>
+      </Link>
       
       {calendarEvents.length === 0 ? (
         <div className="bg-[#141e14] rounded border border-green-500/30 p-4">
@@ -267,11 +269,13 @@ export const Dashboard = ({ settings, events, syncing, onSync, onConfirmEvent, a
             title={settings?.calendar_name_1 || "TERMINAL 1"}
             calendarEvents={calendar1Events}
             isEmpty={!settings?.ical_url_1}
+            calendarIndex={1}
           />
           <CalendarColumn
             title={settings?.calendar_name_2 || "TERMINAL 2"}
             calendarEvents={calendar2Events}
             isEmpty={!settings?.ical_url_2}
+            calendarIndex={2}
           />
         </div>
       </main>

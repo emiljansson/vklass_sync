@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, RefreshCw, BarChart3, BookOpen, ChevronLeft, ChevronRight, Calendar, Clock, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -240,6 +240,10 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
 };
 
 export function Stats() {
+  const { calendarIndex } = useParams();
+  const calIndex = parseInt(calendarIndex) || 1;
+  const calKey = `calendar_${calIndex}`;
+  
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -277,9 +281,12 @@ export function Stats() {
     setWeekOffset(0);
   };
 
+  const calendarData = stats?.calendars?.[calKey];
+  const calendarName = calendarData?.name || `Kalender ${calIndex}`;
+
   return (
     <div className="min-h-screen bg-[#0a120a] fallout-scanlines p-4">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         {/* Header */}
         <header className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-4">
@@ -296,11 +303,11 @@ export function Stats() {
             <div>
               <h1 className="text-2xl font-mono text-green-400 pip-glow flex items-center gap-2">
                 <BarChart3 className="w-6 h-6" />
-                VECKOSTATISTIK
+                {calendarName}
               </h1>
               {stats && (
                 <p className="text-green-500/60 font-mono text-sm">
-                  Vecka {stats.week_number}, {stats.year} ({stats.period.start} - {stats.period.end})
+                  Vecka {stats.week_number}, {stats.year}
                 </p>
               )}
             </div>
@@ -316,6 +323,52 @@ export function Stats() {
             <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
           </Button>
         </header>
+
+        {/* Week Navigation */}
+        <Card className="bg-[#0f1a0f] border-2 border-green-500/30 mb-6">
+          <CardContent className="p-4 flex items-center justify-between">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={goToPreviousWeek}
+              className="text-green-500 hover:text-green-400 hover:bg-green-500/10"
+              data-testid="prev-week-button"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </Button>
+            
+            <div className="text-center flex-1">
+              <p className="text-green-500/60 font-mono text-xs uppercase">
+                {weekOffset === 0 ? "Denna vecka" : weekOffset > 0 ? `+${weekOffset} vecka` : `${weekOffset} vecka`}
+              </p>
+              <p className="text-green-400 font-mono text-2xl">
+                V{stats?.week_number || '-'}
+              </p>
+              <p className="text-green-500/50 font-mono text-xs">
+                {stats?.period?.start} - {stats?.period?.end}
+              </p>
+              {weekOffset !== 0 && (
+                <button
+                  onClick={goToCurrentWeek}
+                  className="text-green-500/50 hover:text-green-400 font-mono text-xs underline mt-1"
+                >
+                  Tillbaka till idag
+                </button>
+              )}
+            </div>
+            
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={goToNextWeek}
+              disabled={!stats?.has_next_week}
+              className={`text-green-500 hover:text-green-400 hover:bg-green-500/10 ${!stats?.has_next_week ? 'opacity-30 cursor-not-allowed' : ''}`}
+              data-testid="next-week-button"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </Button>
+          </CardContent>
+        </Card>
 
         {/* Content */}
         {loading ? (
@@ -337,135 +390,55 @@ export function Stats() {
               </Button>
             </CardContent>
           </Card>
-        ) : stats ? (
+        ) : calendarData ? (
           <div className="space-y-6">
-            {/* Summary Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Week Navigation */}
-              <Card className="bg-[#0f1a0f] border-2 border-green-500/30">
-                <CardContent className="p-4 flex items-center justify-between">
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={goToPreviousWeek}
-                    className="text-green-500 hover:text-green-400 hover:bg-green-500/10"
-                    data-testid="prev-week-button"
-                  >
-                    <ChevronLeft className="w-6 h-6" />
-                  </Button>
-                  
-                  <div className="text-center flex-1">
-                    <p className="text-green-500/60 font-mono text-xs uppercase">
-                      {weekOffset === 0 ? "Denna vecka" : weekOffset > 0 ? `+${weekOffset} vecka` : `${weekOffset} vecka`}
-                    </p>
-                    <p className="text-green-400 font-mono text-lg">
-                      V{stats.week_number}
-                    </p>
-                    {weekOffset !== 0 && (
-                      <button
-                        onClick={goToCurrentWeek}
-                        className="text-green-500/50 hover:text-green-400 font-mono text-xs underline mt-1"
-                      >
-                        Tillbaka till idag
-                      </button>
-                    )}
+            {/* Summary Card */}
+            <Card className="bg-[#0f1a0f] border-2 border-green-500/30">
+              <CardContent className="p-4">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-green-500/10 rounded-lg">
+                    <Clock className="w-5 h-5 text-green-400" />
                   </div>
-                  
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={goToNextWeek}
-                    disabled={!stats?.has_next_week}
-                    className={`text-green-500 hover:text-green-400 hover:bg-green-500/10 ${!stats?.has_next_week ? 'opacity-30 cursor-not-allowed' : ''}`}
-                    data-testid="next-week-button"
-                  >
-                    <ChevronRight className="w-6 h-6" />
-                  </Button>
-                </CardContent>
-              </Card>
-              
-              {/* Calendar 1 Summary with daily breakdown */}
-              <Card className="bg-[#0f1a0f] border-2 border-green-500/30">
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2 bg-green-500/10 rounded-lg">
-                      <Clock className="w-5 h-5 text-green-400" />
+                  <div className="flex-1">
+                    <div className="flex items-baseline justify-between">
+                      <p className="text-green-500/60 font-mono text-xs uppercase">
+                        Lektionstid
+                      </p>
+                      <p className="text-green-500/60 font-mono text-xs uppercase">
+                        Skoltid
+                      </p>
                     </div>
-                    <div className="flex-1">
-                      <div className="flex items-baseline justify-between">
-                        <p className="text-green-500/60 font-mono text-xs uppercase">
-                          {stats.calendars.calendar_1?.name || "Kalender 1"} - Lektionstid
-                        </p>
-                        <p className="text-green-500/60 font-mono text-xs uppercase">
-                          Skoltid
-                        </p>
-                      </div>
-                      <div className="flex items-baseline justify-between">
-                        <p className="text-green-400 font-mono text-xl">
-                          {formatMinutes(stats.calendars.calendar_1?.total_minutes || 0)}
-                        </p>
-                        <p className="text-green-400 font-mono text-xl">
-                          {formatMinutes(stats.calendars.calendar_1?.school_time_minutes || 0)}
-                        </p>
-                      </div>
+                    <div className="flex items-baseline justify-between">
+                      <p className="text-green-400 font-mono text-2xl">
+                        {formatMinutes(calendarData.total_minutes || 0)}
+                      </p>
+                      <p className="text-green-400 font-mono text-2xl">
+                        {formatMinutes(calendarData.school_time_minutes || 0)}
+                      </p>
                     </div>
                   </div>
-                  <DailyBreakdown daily={stats.calendars.calendar_1?.daily} showTimes={true} />
-                </CardContent>
-              </Card>
-              
-              {/* Calendar 2 Summary with daily breakdown */}
-              <Card className="bg-[#0f1a0f] border-2 border-green-500/30">
-                <CardContent className="p-4">
-                  <div className="flex items-center gap-3 mb-2">
-                    <div className="p-2 bg-green-500/10 rounded-lg">
-                      <Clock className="w-5 h-5 text-green-400" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-baseline justify-between">
-                        <p className="text-green-500/60 font-mono text-xs uppercase">
-                          {stats.calendars.calendar_2?.name || "Kalender 2"} - Lektionstid
-                        </p>
-                        <p className="text-green-500/60 font-mono text-xs uppercase">
-                          Skoltid
-                        </p>
-                      </div>
-                      <div className="flex items-baseline justify-between">
-                        <p className="text-green-400 font-mono text-xl">
-                          {formatMinutes(stats.calendars.calendar_2?.total_minutes || 0)}
-                        </p>
-                        <p className="text-green-400 font-mono text-xl">
-                          {formatMinutes(stats.calendars.calendar_2?.school_time_minutes || 0)}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <DailyBreakdown daily={stats.calendars.calendar_2?.daily} showTimes={true} />
-                </CardContent>
-              </Card>
-            </div>
+                </div>
+                <DailyBreakdown daily={calendarData.daily} showTimes={true} />
+              </CardContent>
+            </Card>
 
             {/* Calendar Stats with Events */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <CalendarStats
-                name={stats.calendars.calendar_1?.name || "Kalender 1"}
-                subjects={stats.calendars.calendar_1?.subjects || []}
-                totalMinutes={stats.calendars.calendar_1?.total_minutes || 0}
-                daily={stats.calendars.calendar_1?.daily || []}
-                events={stats.calendars.calendar_1?.events || []}
-                colorOffset={0}
-              />
-              <CalendarStats
-                name={stats.calendars.calendar_2?.name || "Kalender 2"}
-                subjects={stats.calendars.calendar_2?.subjects || []}
-                totalMinutes={stats.calendars.calendar_2?.total_minutes || 0}
-                daily={stats.calendars.calendar_2?.daily || []}
-                events={stats.calendars.calendar_2?.events || []}
-                colorOffset={3}
-              />
-            </div>
+            <CalendarStats
+              name={calendarName}
+              subjects={calendarData.subjects || []}
+              totalMinutes={calendarData.total_minutes || 0}
+              daily={calendarData.daily || []}
+              events={calendarData.events || []}
+              colorOffset={calIndex === 1 ? 0 : 3}
+            />
           </div>
-        ) : null}
+        ) : (
+          <Card className="bg-[#0f1a0f] border-2 border-green-500/30">
+            <CardContent className="py-8 text-center">
+              <p className="text-green-500/60 font-mono">Ingen data för denna kalender</p>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </div>
   );

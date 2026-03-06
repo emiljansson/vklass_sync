@@ -200,8 +200,12 @@ function App() {
             }
           />
           <Route
-            path="/stats"
+            path="/stats/:calendarIndex"
             element={<Stats />}
+          />
+          <Route
+            path="/stats"
+            element={<Navigate to="/stats/1" replace />}
           />
         </Routes>
       </BrowserRouter>
