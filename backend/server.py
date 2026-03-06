@@ -42,6 +42,7 @@ logger = logging.getLogger(__name__)
 # Global sync task reference
 sync_task = None
 completion_check_task = None
+weekly_summary_task = None
 
 # ----- Models -----
 
@@ -796,6 +797,111 @@ async def periodic_completion_check():
         # Check every minute
         await asyncio.sleep(60)
 
+async def generate_weekly_summary():
+    """Generate weekly summary of subject minutes per calendar"""
+    settings = await get_settings_from_db()
+    
+    # Get current week's Monday and Friday
+    now = datetime.now(SWEDISH_TZ)
+    days_since_monday = now.weekday()
+    monday = (now - timedelta(days=days_since_monday)).replace(hour=0, minute=0, second=0, microsecond=0)
+    friday = monday + timedelta(days=4, hours=23, minutes=59, seconds=59)
+    
+    monday_str = monday.strftime("%Y-%m-%d")
+    friday_str = friday.strftime("%Y-%m-%d")
+    
+    # Get all events for this week
+    events = await db.events.find({
+        "start": {"$gte": monday_str, "$lte": friday_str},
+        "status": {"$ne": "removed"}
+    }, {"_id": 0}).to_list(10000)
+    
+    # Calculate minutes per subject per calendar
+    calendar_summaries = {1: {}, 2: {}}
+    
+    for event in events:
+        cal_index = event.get('calendar_index', 1)
+        subject = event.get('subject_name', 'Okänt ämne')
+        event_time = event.get('event_time', '')
+        
+        # Assume each event is 60 minutes if no specific duration
+        # You could parse actual duration if available
+        minutes = 60
+        
+        if subject not in calendar_summaries[cal_index]:
+            calendar_summaries[cal_index][subject] = 0
+        calendar_summaries[cal_index][subject] += minutes
+    
+    # Build notification message
+    cal1_name = settings.calendar_name_1 or "Kalender 1"
+    cal2_name = settings.calendar_name_2 or "Kalender 2"
+    
+    message_parts = [f"Vecka {now.isocalendar()[1]} ({monday_str} - {friday_str})"]
+    message_parts.append("")
+    
+    # Calendar 1
+    message_parts.append(f"📚 {cal1_name}:")
+    if calendar_summaries[1]:
+        for subject, mins in sorted(calendar_summaries[1].items()):
+            hours = mins // 60
+            remaining_mins = mins % 60
+            if hours > 0:
+                message_parts.append(f"  • {subject}: {hours}h {remaining_mins}min")
+            else:
+                message_parts.append(f"  • {subject}: {mins}min")
+    else:
+        message_parts.append("  Inga events")
+    
+    message_parts.append("")
+    
+    # Calendar 2
+    message_parts.append(f"📚 {cal2_name}:")
+    if calendar_summaries[2]:
+        for subject, mins in sorted(calendar_summaries[2].items()):
+            hours = mins // 60
+            remaining_mins = mins % 60
+            if hours > 0:
+                message_parts.append(f"  • {subject}: {hours}h {remaining_mins}min")
+            else:
+                message_parts.append(f"  • {subject}: {mins}min")
+    else:
+        message_parts.append("  Inga events")
+    
+    title = "📊 Veckosammanfattning"
+    message = "\n".join(message_parts)
+    
+    # Send to specific user ID
+    original_test_id = settings.webpushr_test_user_id
+    settings.webpushr_test_user_id = "197920509"  # Always send to this user
+    
+    await send_webpushr_notification(title, message, settings)
+    logger.info(f"Weekly summary sent: {title}")
+    
+    # Restore original setting
+    settings.webpushr_test_user_id = original_test_id
+
+async def periodic_weekly_summary():
+    """Background task to send weekly summary on Fridays at 16:00"""
+    while True:
+        try:
+            now = datetime.now(SWEDISH_TZ)
+            
+            # Check if it's Friday at 16:00
+            if now.weekday() == 4 and now.hour == 16 and now.minute == 0:
+                logger.info("Running weekly summary...")
+                await generate_weekly_summary()
+                # Wait 61 seconds to avoid running twice in the same minute
+                await asyncio.sleep(61)
+            else:
+                # Check every 30 seconds
+                await asyncio.sleep(30)
+                
+        except asyncio.CancelledError:
+            break
+        except Exception as e:
+            logger.error(f"Weekly summary error: {e}")
+            await asyncio.sleep(60)
+
 # ----- API Routes -----
 
 # Internal offset added to sync intervals to account for effect duration (~20 seconds)
@@ -1126,6 +1232,10 @@ async def send_test_notification(notification_type: str = "utfort"):
         # Test notification for past event from iCal
         title = "Utfört: Måndag 2 mars 2026 kl: 10:00."
         message = f"{settings.calendar_name_1 or 'Anton'}\n[Engelska] Test \"Animals\""
+    elif notification_type == "weekly":
+        # Test weekly summary
+        await generate_weekly_summary()
+        return {"success": True, "message": "Veckosammanfattning skickad"}
     else:
         title = "Test Notifikation"
         message = "Detta är en testnotis"
@@ -1347,17 +1457,20 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup_event():
-    global sync_task, completion_check_task
+    global sync_task, completion_check_task, weekly_summary_task
     # Start periodic sync task (will run initial sync immediately)
     sync_task = asyncio.create_task(periodic_sync())
     logger.info("Periodic sync task started")
     # Start completion check task
     completion_check_task = asyncio.create_task(periodic_completion_check())
     logger.info("Completion check task started")
+    # Start weekly summary task
+    weekly_summary_task = asyncio.create_task(periodic_weekly_summary())
+    logger.info("Weekly summary task started")
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
-    global sync_task, completion_check_task
+    global sync_task, completion_check_task, weekly_summary_task
     if sync_task:
         sync_task.cancel()
         try:
@@ -1368,6 +1481,12 @@ async def shutdown_db_client():
         completion_check_task.cancel()
         try:
             await completion_check_task
+        except asyncio.CancelledError:
+            pass
+    if weekly_summary_task:
+        weekly_summary_task.cancel()
+        try:
+            await weekly_summary_task
         except asyncio.CancelledError:
             pass
     client.close()
