@@ -14,7 +14,8 @@ import {
   Tooltip,
   ResponsiveContainer,
   Cell,
-  LabelList
+  LabelList,
+  ReferenceLine
 } from "recharts";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -123,15 +124,24 @@ const EventsList = ({ events, calendarName }) => {
 };
 
 const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffset = 0 }) => {
+  // Create diverging chart data - alternating left/right
+  const maxMinutes = Math.max(...subjects.map(s => s.minutes), 1);
+  
   const chartData = subjects.map((s, index) => {
     const percent = totalMinutes > 0 ? Math.round((s.minutes / totalMinutes) * 100) : 0;
     const timeStr = formatMinutes(s.minutes);
+    const isLeft = index % 2 === 0; // Even indices go left, odd go right
+    
     return {
       name: s.name || "Okänt ämne",
       minutes: s.minutes,
+      // For diverging chart: left side is negative, right side is positive
+      leftMinutes: isLeft ? -s.minutes : 0,
+      rightMinutes: isLeft ? 0 : s.minutes,
       percent: percent,
       label: `${timeStr} (${percent}%)`,
-      fill: CHART_COLORS[(index + colorOffset) % CHART_COLORS.length]
+      fill: CHART_COLORS[(index + colorOffset) % CHART_COLORS.length],
+      isLeft: isLeft
     };
   });
 
@@ -161,54 +171,59 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
           </p>
         ) : (
           <>
-            {/* Bar Chart */}
-            <div style={{ height: `${chartHeight}px` }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={chartData}
-                  layout="vertical"
-                  margin={{ top: 5, right: 80, left: 10, bottom: 5 }}
-                >
-                  <CartesianGrid 
-                    strokeDasharray="3 3" 
-                    stroke="rgba(34, 197, 94, 0.2)"
-                    horizontal={true}
-                    vertical={false}
-                  />
-                  <XAxis 
-                    type="number" 
-                    stroke="#22c55e"
-                    tick={{ fill: "#22c55e", fontSize: 12 }}
-                    tickFormatter={(value) => `${Math.floor(value / 60)}h`}
-                    hide
-                  />
-                  <YAxis 
-                    dataKey="name" 
-                    type="category" 
-                    width={180}
-                    stroke="#22c55e"
-                    tick={{ fill: "#4ade80", fontSize: 12 }}
-                  />
-                  <Tooltip content={<CustomTooltip />} />
-                  <Bar 
-                    dataKey="minutes" 
-                    radius={[0, 4, 4, 0]}
-                    isAnimationActive={false}
-                    barSize={28}
-                  >
-                    {chartData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.fill} />
-                    ))}
-                    <LabelList 
-                      dataKey="label" 
-                      position="right" 
-                      fill="#4ade80" 
-                      fontSize={12}
-                      style={{ fontFamily: 'Share Tech Mono, monospace' }}
-                    />
-                  </Bar>
-                </BarChart>
-              </ResponsiveContainer>
+            {/* Diverging Bar Chart - Custom Implementation */}
+            <div className="space-y-2">
+              {chartData.map((entry, index) => {
+                const barWidth = (entry.minutes / maxMinutes) * 100;
+                return (
+                  <div key={index} className="flex items-center h-8">
+                    {/* Left side - label for left bars */}
+                    <div className="w-[100px] text-right pr-2 font-mono text-xs text-green-400 truncate">
+                      {entry.isLeft ? entry.label : ''}
+                    </div>
+                    
+                    {/* Left bar area */}
+                    <div className="w-[35%] flex justify-end">
+                      {entry.isLeft && (
+                        <div 
+                          className="h-7 rounded-l"
+                          style={{ 
+                            width: `${barWidth}%`, 
+                            backgroundColor: entry.fill,
+                            minWidth: '4px'
+                          }}
+                        />
+                      )}
+                    </div>
+                    
+                    {/* Center line and name */}
+                    <div className="w-[140px] flex items-center justify-center border-l-2 border-r-2 border-green-500 px-2">
+                      <span className="font-mono text-xs text-green-400 text-center truncate">
+                        {entry.name}
+                      </span>
+                    </div>
+                    
+                    {/* Right bar area */}
+                    <div className="w-[35%] flex justify-start">
+                      {!entry.isLeft && (
+                        <div 
+                          className="h-7 rounded-r"
+                          style={{ 
+                            width: `${barWidth}%`, 
+                            backgroundColor: entry.fill,
+                            minWidth: '4px'
+                          }}
+                        />
+                      )}
+                    </div>
+                    
+                    {/* Right side - label for right bars */}
+                    <div className="w-[100px] text-left pl-2 font-mono text-xs text-green-400 truncate">
+                      {!entry.isLeft ? entry.label : ''}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </>
         )}
