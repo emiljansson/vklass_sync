@@ -28,6 +28,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
     sync_interval: 15,
     webpushr_key: "",
     webpushr_auth_token: "",
+    webpushr_test_user_id: "",
     auth_enabled: false,
     auth_password: "",
     sound_enabled: true,
@@ -54,6 +55,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
         sync_interval: settings.sync_interval || 15,
         webpushr_key: settings.webpushr_key || "",
         webpushr_auth_token: settings.webpushr_auth_token || "",
+        webpushr_test_user_id: settings.webpushr_test_user_id || "",
         auth_enabled: settings.auth_enabled || false,
         auth_password: settings.auth_password || "",
         sound_enabled: settings.sound_enabled !== undefined ? settings.sound_enabled : true,
@@ -724,6 +726,19 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                   </Button>
                 </div>
               </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="webpushr_test_user_id" className="text-green-400">Test User ID (valfritt)</Label>
+                <Input
+                  id="webpushr_test_user_id"
+                  value={formData.webpushr_test_user_id}
+                  onChange={(e) => handleChange('webpushr_test_user_id', e.target.value)}
+                  placeholder="Lämna tomt för att skicka till alla"
+                  className="bg-[#0a0f0a] border-green-500/40 text-green-400 placeholder:text-green-500/40 focus:border-green-400"
+                />
+                <p className="text-xs text-green-500/60">Om satt skickas notiser bara till denna användare</p>
+              </div>
+              
               <Separator className="bg-green-500/20" />
               <div className="flex items-center justify-between">
                 <div className="space-y-0.5">

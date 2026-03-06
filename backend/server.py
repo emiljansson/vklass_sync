@@ -55,6 +55,7 @@ class Settings(BaseModel):
     sync_interval: Optional[int] = 15  # minutes
     webpushr_key: Optional[str] = ""
     webpushr_auth_token: Optional[str] = ""
+    webpushr_test_user_id: Optional[str] = ""  # If set, send notifications only to this user
     auth_enabled: Optional[bool] = False
     auth_password: Optional[str] = ""
     sound_enabled: Optional[bool] = True
@@ -83,6 +84,7 @@ class SettingsUpdate(BaseModel):
     sync_interval: Optional[int] = None
     webpushr_key: Optional[str] = None
     webpushr_auth_token: Optional[str] = None
+    webpushr_test_user_id: Optional[str] = None
     auth_enabled: Optional[bool] = None
     auth_password: Optional[str] = None
     sound_enabled: Optional[bool] = None
@@ -324,9 +326,16 @@ async def send_webpushr_notification(title: str, message: str, settings: Setting
             "icon": "https://static.prod-images.emergentagent.com/jobs/a7217622-ec5d-4df3-84c4-cbfaa9d1f7a7/images/2eb5e5e259cf1239f680c86c85179d293784a3191b9167aa6a376f8aece287d3.png"
         }
         
+        # Determine endpoint based on test user setting
+        if settings.webpushr_test_user_id:
+            endpoint = f"https://api.webpushr.com/v1/notification/send/sid/{settings.webpushr_test_user_id}"
+            logger.info(f"Sending to test user: {settings.webpushr_test_user_id}")
+        else:
+            endpoint = "https://api.webpushr.com/v1/notification/send/all"
+        
         async with httpx.AsyncClient(timeout=30.0) as client:
             response = await client.post(
-                "https://api.webpushr.com/v1/notification/send/all",
+                endpoint,
                 json=payload,
                 headers=headers
             )
