@@ -79,26 +79,28 @@ async def periodic_completion_check():
 
 
 async def generate_weekly_summary():
-    """Send a simple push notification linking to the stats page"""
+    """Send a simple push notification linking to next week's stats page"""
     settings = await get_settings_from_db()
     
     now = datetime.now(SWEDISH_TZ)
     days_since_monday = now.weekday()
-    monday = (now - timedelta(days=days_since_monday)).replace(hour=0, minute=0, second=0, microsecond=0)
+    # Next week (week_offset=1)
+    monday = (now - timedelta(days=days_since_monday) + timedelta(weeks=1)).replace(hour=0, minute=0, second=0, microsecond=0)
     sunday = monday + timedelta(days=6)
     
     monday_str = monday.strftime("%Y-%m-%d")
     sunday_str = sunday.strftime("%Y-%m-%d")
+    week_num = monday.isocalendar()[1]
     
-    title = "Veckans statistik"
+    title = f"Vecka {week_num} statistik"
     message = f"Datum: {monday_str} - {sunday_str}"
     
-    # Send to specific user ID with link to stats page
+    # Send to specific user ID with link to next week's stats page
     original_test_id = settings.webpushr_test_user_id
     settings.webpushr_test_user_id = "197920509"
     
-    await send_webpushr_notification(title, message, settings, target_path="/stats")
-    logger.info(f"Weekly summary notification sent: {title}")
+    await send_webpushr_notification(title, message, settings, target_path="/stats?week=1")
+    logger.info(f"Weekly summary notification sent: {title} -> /stats?week=1")
     
     settings.webpushr_test_user_id = original_test_id
 
