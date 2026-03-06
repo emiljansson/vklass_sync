@@ -809,45 +809,72 @@ async def periodic_completion_check():
         await asyncio.sleep(60)
 
 async def generate_weekly_summary():
-    """Generate weekly summary of subject minutes per calendar"""
+    """Generate weekly summary of subject minutes per calendar - uses scheduled activities with actual duration"""
+    from urllib.parse import urlparse, parse_qs
+    
     settings = await get_settings_from_db()
     
-    # Get current week's Monday and Friday
+    # Get current week's Monday and Sunday
     now = datetime.now(SWEDISH_TZ)
     days_since_monday = now.weekday()
     monday = (now - timedelta(days=days_since_monday)).replace(hour=0, minute=0, second=0, microsecond=0)
-    friday = monday + timedelta(days=4, hours=23, minutes=59, seconds=59)
+    sunday = monday + timedelta(days=6, hours=23, minutes=59, seconds=59)
     
     monday_str = monday.strftime("%Y-%m-%d")
-    friday_str = friday.strftime("%Y-%m-%d")
+    sunday_str = sunday.strftime("%Y-%m-%d")
     
-    # Get all events for this week
-    events = await db.events.find({
-        "start": {"$gte": monday_str, "$lte": friday_str},
-        "status": {"$ne": "removed"}
-    }, {"_id": 0}).to_list(10000)
+    # Create CID to subject lookup
+    cid_lookup = {m.get('cid'): m.get('subject', '') for m in (settings.event_mappings or []) if m.get('cid') and m.get('subject')}
     
-    # Calculate minutes per subject per calendar
+    # Fetch scheduled activities from both calendars
     calendar_summaries = {1: {}, 2: {}}
     
-    for event in events:
-        cal_index = event.get('calendar_index', 1)
-        subject = event.get('subject_name', 'Okänt ämne')
-        event_time = event.get('event_time', '')
+    for cal_index in [1, 2]:
+        url = settings.ical_url_1 if cal_index == 1 else settings.ical_url_2
+        if not url:
+            continue
         
-        # Assume each event is 60 minutes if no specific duration
-        # You could parse actual duration if available
-        minutes = 60
+        events = await parse_ical_for_stats(url, monday, sunday)
         
-        if subject not in calendar_summaries[cal_index]:
-            calendar_summaries[cal_index][subject] = 0
-        calendar_summaries[cal_index][subject] += minutes
+        for event in events:
+            subject = None
+            
+            # Method 1: Try to get subject from CID in URL
+            event_url = event.get('url', '')
+            if event_url:
+                try:
+                    params = parse_qs(urlparse(event_url).query)
+                    cid = params.get('cid', [''])[0]
+                    if cid and cid in cid_lookup:
+                        subject = cid_lookup[cid]
+                except:
+                    pass
+            
+            # Method 2: Use summary as subject (common for scheduled lessons)
+            if not subject:
+                summary = event.get('summary', '').strip()
+                if '(' in summary:
+                    subject = summary.split('(')[0].strip()
+                elif '\n' in summary:
+                    subject = summary.split('\n')[0].strip()
+                else:
+                    subject = summary
+            
+            if not subject:
+                subject = 'Okänt ämne'
+            
+            # Use actual duration from event
+            duration = event.get('duration_minutes', 0)
+            
+            if subject not in calendar_summaries[cal_index]:
+                calendar_summaries[cal_index][subject] = 0
+            calendar_summaries[cal_index][subject] += duration
     
     # Build notification message
     cal1_name = settings.calendar_name_1 or "Kalender 1"
     cal2_name = settings.calendar_name_2 or "Kalender 2"
     
-    message_parts = [f"Vecka {now.isocalendar()[1]} ({monday_str} - {friday_str})"]
+    message_parts = [f"Vecka {now.isocalendar()[1]} ({monday_str} - {sunday_str})"]
     message_parts.append("")
     
     # Calendar 1
@@ -861,7 +888,7 @@ async def generate_weekly_summary():
             else:
                 message_parts.append(f"  • {subject}: {mins}min")
     else:
-        message_parts.append("  Inga events")
+        message_parts.append("  Inga aktiviteter")
     
     message_parts.append("")
     
@@ -876,7 +903,7 @@ async def generate_weekly_summary():
             else:
                 message_parts.append(f"  • {subject}: {mins}min")
     else:
-        message_parts.append("  Inga events")
+        message_parts.append("  Inga aktiviteter")
     
     title = "📊 Veckosammanfattning"
     message = "\n".join(message_parts)
@@ -1258,39 +1285,140 @@ async def send_test_notification(notification_type: str = "utfort"):
     else:
         return {"success": False, "message": "Kunde inte skicka notifikation"}
 
+async def parse_ical_for_stats(url: str, week_start: datetime, week_end: datetime) -> List[Dict[str, Any]]:
+    """Fetch and parse iCal feed for stats - ONLY events with both start AND end time (scheduled activities)"""
+    if not url:
+        return []
+    
+    try:
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.get(url)
+            response.raise_for_status()
+            
+        cal = Calendar.from_ical(response.text)
+        events = []
+        
+        for component in cal.walk():
+            if component.name == "VEVENT":
+                summary = str(component.get('summary', 'Ingen titel'))
+                description = str(component.get('description', ''))
+                
+                dtstart = component.get('dtstart')
+                dtend = component.get('dtend')
+                
+                start_dt = dtstart.dt if dtstart else None
+                end_dt = dtend.dt if dtend else None
+                
+                # For stats, we ONLY want events with both start AND end TIME
+                has_start_time = start_dt and hasattr(start_dt, 'hour')
+                has_end_time = end_dt and hasattr(end_dt, 'hour')
+                
+                if not (has_start_time and has_end_time):
+                    # Skip events without duration (all-day tasks)
+                    continue
+                
+                # Convert to Swedish timezone for comparison
+                if hasattr(start_dt, 'tzinfo') and start_dt.tzinfo:
+                    start_dt = start_dt.astimezone(SWEDISH_TZ)
+                else:
+                    start_dt = SWEDISH_TZ.localize(start_dt)
+                    
+                if hasattr(end_dt, 'tzinfo') and end_dt.tzinfo:
+                    end_dt = end_dt.astimezone(SWEDISH_TZ)
+                else:
+                    end_dt = SWEDISH_TZ.localize(end_dt)
+                
+                # Check if event is within the week
+                if start_dt.date() < week_start.date() or start_dt.date() > week_end.date():
+                    continue
+                
+                # Calculate duration in minutes
+                duration_minutes = int((end_dt - start_dt).total_seconds() / 60)
+                
+                # Get URL for CID lookup
+                event_url = str(component.get('url', '')) if component.get('url') else ''
+                
+                events.append({
+                    'summary': summary,
+                    'description': description,
+                    'start': start_dt,
+                    'end': end_dt,
+                    'duration_minutes': duration_minutes,
+                    'url': event_url
+                })
+        
+        return events
+    except Exception as e:
+        logger.error(f"Error parsing iCal feed for stats {url}: {e}")
+        return []
+
+
 @api_router.get("/stats/weekly")
 async def get_weekly_stats():
-    """Get weekly statistics for the stats page"""
+    """Get weekly statistics for the stats page - uses scheduled activities with actual duration"""
+    from urllib.parse import urlparse, parse_qs
+    
     settings = await get_settings_from_db()
     
-    # Get current week's Monday and Friday
+    # Get current week's Monday and Sunday
     now = datetime.now(SWEDISH_TZ)
     days_since_monday = now.weekday()
     monday = (now - timedelta(days=days_since_monday)).replace(hour=0, minute=0, second=0, microsecond=0)
-    friday = monday + timedelta(days=4, hours=23, minutes=59, seconds=59)
+    sunday = monday + timedelta(days=6, hours=23, minutes=59, seconds=59)
     
     monday_str = monday.strftime("%Y-%m-%d")
-    friday_str = friday.strftime("%Y-%m-%d")
+    sunday_str = sunday.strftime("%Y-%m-%d")
     
-    # Get all events for this week
-    events = await db.events.find({
-        "start": {"$gte": monday_str, "$lte": friday_str},
-        "status": {"$ne": "removed"}
-    }, {"_id": 0}).to_list(10000)
+    # Create CID to subject lookup
+    cid_lookup = {m.get('cid'): m.get('subject', '') for m in (settings.event_mappings or []) if m.get('cid') and m.get('subject')}
     
-    # Calculate minutes per subject per calendar
+    # Fetch scheduled activities from both calendars
     calendar_summaries = {1: {}, 2: {}}
     
-    for event in events:
-        cal_index = event.get('calendar_index', 1)
-        subject = event.get('subject_name', 'Okänt ämne')
+    for cal_index in [1, 2]:
+        url = settings.ical_url_1 if cal_index == 1 else settings.ical_url_2
+        if not url:
+            continue
         
-        # Assume each event is 60 minutes if no specific duration
-        minutes = 60
+        events = await parse_ical_for_stats(url, monday, sunday)
         
-        if subject not in calendar_summaries[cal_index]:
-            calendar_summaries[cal_index][subject] = 0
-        calendar_summaries[cal_index][subject] += minutes
+        for event in events:
+            subject = None
+            
+            # Method 1: Try to get subject from CID in URL
+            event_url = event.get('url', '')
+            if event_url:
+                try:
+                    params = parse_qs(urlparse(event_url).query)
+                    cid = params.get('cid', [''])[0]
+                    if cid and cid in cid_lookup:
+                        subject = cid_lookup[cid]
+                except:
+                    pass
+            
+            # Method 2: Use summary as subject (common for scheduled lessons)
+            # Lessons are often named like "Matematik (7A 2526_MA)\nMA\nVJ"
+            # We want just "Matematik"
+            if not subject:
+                summary = event.get('summary', '').strip()
+                # Extract just the subject name (before the first parenthesis or newline)
+                if '(' in summary:
+                    subject = summary.split('(')[0].strip()
+                elif '\n' in summary:
+                    subject = summary.split('\n')[0].strip()
+                else:
+                    subject = summary
+            
+            # Skip if still empty
+            if not subject:
+                subject = 'Okänt ämne'
+            
+            # Use actual duration from event
+            duration = event.get('duration_minutes', 0)
+            
+            if subject not in calendar_summaries[cal_index]:
+                calendar_summaries[cal_index][subject] = 0
+            calendar_summaries[cal_index][subject] += duration
     
     # Format response
     return {
@@ -1298,7 +1426,7 @@ async def get_weekly_stats():
         "year": now.year,
         "period": {
             "start": monday_str,
-            "end": friday_str
+            "end": sunday_str
         },
         "calendars": {
             "calendar_1": {
@@ -1319,6 +1447,7 @@ async def get_weekly_stats():
             }
         }
     }
+
 
 @api_router.post("/migrate/fix-past-new-events")
 async def fix_past_new_events():
