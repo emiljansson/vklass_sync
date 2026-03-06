@@ -607,9 +607,40 @@ async def sync_calendars() -> SyncResult:
     # Send notification for past events (already completed)
     if past_new_events:
         for event in past_new_events:
+            # Format date in Swedish
+            start_date = event['start']
+            event_time = event.get('event_time', '')
+            
+            # Parse and format the date in Swedish
+            try:
+                from datetime import datetime as dt
+                date_obj = dt.strptime(start_date, "%Y-%m-%d")
+                weekdays_sv = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag', 'Söndag']
+                months_sv = ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 
+                            'juli', 'augusti', 'september', 'oktober', 'november', 'december']
+                weekday = weekdays_sv[date_obj.weekday()]
+                day = date_obj.day
+                month = months_sv[date_obj.month - 1]
+                year = date_obj.year
+                
+                if event_time:
+                    formatted_date = f"{weekday} {day} {month} {year} kl: {event_time}"
+                else:
+                    formatted_date = f"{weekday} {day} {month} {year}"
+            except:
+                formatted_date = start_date
+            
+            title = f"Utfört: {formatted_date}."
+            
+            # Build message with calendar name and subject/summary
+            cal_name = event.get('calendar_name', 'Kalender')
             subject = event.get('subject_name', '')
-            title = subject if subject else event.get('calendar_name', 'Kalender')
-            message = f"Utfört ({event['start']})"
+            summary = event.get('summary', '')
+            
+            if subject:
+                message = f"{cal_name}\n[{subject}] {summary}"
+            else:
+                message = f"{cal_name}\n{summary}"
             
             await send_webpushr_notification(title, message, settings)
             logger.info(f"Sent past event notification: {title} - {message}")
