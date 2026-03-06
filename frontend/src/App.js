@@ -204,6 +204,10 @@ function App() {
             element={<Stats />}
           />
           <Route
+            path="/stats/week/:weekParam"
+            element={<Stats />}
+          />
+          <Route
             path="/stats"
             element={<Stats />}
           />

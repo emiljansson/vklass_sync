@@ -99,8 +99,8 @@ async def generate_weekly_summary():
     original_test_id = settings.webpushr_test_user_id
     settings.webpushr_test_user_id = "197920509"
     
-    await send_webpushr_notification(title, message, settings, target_path="/stats?week=1")
-    logger.info(f"Weekly summary notification sent: {title} -> /stats?week=1")
+    await send_webpushr_notification(title, message, settings, target_path="/stats/week/1")
+    logger.info(f"Weekly summary notification sent: {title} -> /stats/week/1")
     
     settings.webpushr_test_user_id = original_test_id
 

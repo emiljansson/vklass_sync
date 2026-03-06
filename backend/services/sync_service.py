@@ -313,8 +313,8 @@ async def generate_weekly_summary(week_offset: int = 0):
     title = f"Vecka {week_num} statistik"
     message = f"Datum: {monday_str} - {sunday_str}"
     
-    # Build target path with week parameter
-    target_path = f"/stats?week={week_offset}" if week_offset != 0 else "/stats"
+    # Build target path - use path-based routing for week offset
+    target_path = f"/stats/week/{week_offset}" if week_offset != 0 else "/stats"
     
     # Send to specific user ID with link to stats page
     original_test_id = settings.webpushr_test_user_id
