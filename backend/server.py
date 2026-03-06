@@ -92,7 +92,7 @@ async def generate_weekly_summary():
     sunday_str = sunday.strftime("%Y-%m-%d")
     week_num = monday.isocalendar()[1]
     
-    title = f"Vecka {week_num} statistik"
+    title = "Nästa veckas statistik"
     message = f"Datum: {monday_str} - {sunday_str}"
     
     # Send to specific user ID with link to next week's stats page

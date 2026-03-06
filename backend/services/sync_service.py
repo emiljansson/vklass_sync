@@ -310,7 +310,7 @@ async def generate_weekly_summary(week_offset: int = 0):
     sunday_str = sunday.strftime("%Y-%m-%d")
     week_num = monday.isocalendar()[1]
     
-    title = f"Vecka {week_num} statistik"
+    title = "Nästa veckas statistik"
     message = f"Datum: {monday_str} - {sunday_str}"
     
     # Build target path - use path-based routing for week offset
