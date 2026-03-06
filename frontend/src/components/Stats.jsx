@@ -189,6 +189,9 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
                         {entry.isLeft ? (
                           <>
                             <span className="font-mono text-[11px] text-green-400 mr-2 whitespace-nowrap">
+                              {entry.name}
+                            </span>
+                            <span className="font-mono text-[11px] text-green-400 mr-2 whitespace-nowrap">
                               {entry.label}
                             </span>
                             <div 
@@ -199,9 +202,6 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
                                 minWidth: '8px'
                               }}
                             />
-                            <span className="font-mono text-[11px] text-green-400 ml-2 whitespace-nowrap">
-                              {entry.name}
-                            </span>
                           </>
                         ) : null}
                       </div>
@@ -210,9 +210,6 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
                       <div className="w-1/2 flex items-center justify-start pl-1">
                         {!entry.isLeft ? (
                           <>
-                            <span className="font-mono text-[11px] text-green-400 mr-2 whitespace-nowrap">
-                              {entry.name}
-                            </span>
                             <div 
                               className="h-7 rounded-r"
                               style={{ 
@@ -223,6 +220,9 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
                             />
                             <span className="font-mono text-[11px] text-green-400 ml-2 whitespace-nowrap">
                               {entry.label}
+                            </span>
+                            <span className="font-mono text-[11px] text-green-400 ml-2 whitespace-nowrap">
+                              {entry.name}
                             </span>
                           </>
                         ) : null}
