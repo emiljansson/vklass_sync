@@ -97,10 +97,7 @@ const CalendarStats = ({ name, subjects, totalMinutes, colorOffset = 0 }) => {
         <CardTitle className="text-green-400 font-mono text-lg flex items-center gap-2 justify-between">
           <span className="flex items-center gap-2">
             <BookOpen className="w-5 h-5" />
-            {name}
-            <span className="text-green-500/60 text-sm font-normal">
-              Ämnen: {subjects.length}st
-            </span>
+            {name}, Ämnen: {subjects.length}st
           </span>
           <span className="text-green-300 text-base">
             Totalt: {formatMinutes(totalMinutes)}
