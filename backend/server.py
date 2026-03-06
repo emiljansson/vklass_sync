@@ -305,8 +305,15 @@ def extract_time_from_description(description: str) -> Optional[str]:
         return f"{hours:02d}:{minutes:02d}"
     return None
 
-async def send_webpushr_notification(title: str, message: str, settings: Settings):
-    """Send push notification via Webpushr"""
+async def send_webpushr_notification(title: str, message: str, settings: Settings, target_path: str = ""):
+    """Send push notification via Webpushr
+    
+    Args:
+        title: Notification title
+        message: Notification message
+        settings: App settings with Webpushr credentials
+        target_path: Optional path to append to base URL (e.g., "/stats")
+    """
     if not settings.webpushr_key or not settings.webpushr_auth_token:
         logger.warning("Webpushr credentials not configured")
         return False
@@ -318,10 +325,14 @@ async def send_webpushr_notification(title: str, message: str, settings: Setting
             "Content-Type": "application/json"
         }
         
+        # Build target URL with optional path
+        base_url = "https://vklass.frontproduction.se"
+        target_url = f"{base_url}{target_path}" if target_path else base_url
+        
         payload = {
             "title": title,
             "message": message,
-            "target_url": "https://vklass.frontproduction.se",
+            "target_url": target_url,
             "expire_push": "24h",
             "auto_hide": 1,
             "icon": "https://static.prod-images.emergentagent.com/jobs/a7217622-ec5d-4df3-84c4-cbfaa9d1f7a7/images/2eb5e5e259cf1239f680c86c85179d293784a3191b9167aa6a376f8aece287d3.png"
@@ -342,7 +353,7 @@ async def send_webpushr_notification(title: str, message: str, settings: Setting
                 headers=headers
             )
             response.raise_for_status()
-            logger.info(f"Webpushr notification sent: {title}")
+            logger.info(f"Webpushr notification sent: {title} -> {target_url}")
             return True
     except Exception as e:
         logger.error(f"Failed to send Webpushr notification: {e}")
@@ -870,11 +881,11 @@ async def generate_weekly_summary():
     title = "📊 Veckosammanfattning"
     message = "\n".join(message_parts)
     
-    # Send to specific user ID
+    # Send to specific user ID with link to stats page
     original_test_id = settings.webpushr_test_user_id
     settings.webpushr_test_user_id = "197920509"  # Always send to this user
     
-    await send_webpushr_notification(title, message, settings)
+    await send_webpushr_notification(title, message, settings, target_path="/stats")
     logger.info(f"Weekly summary sent: {title}")
     
     # Restore original setting

@@ -6,6 +6,7 @@ import { Toaster, toast } from "@/components/ui/sonner";
 import { Dashboard } from "@/components/Dashboard";
 import { Settings } from "@/components/Settings";
 import { Login } from "@/components/Login";
+import { Stats } from "@/components/Stats";
 import { AddToHomeScreen } from "@/components/AddToHomeScreen";
 import { ScreenFlicker } from "@/components/ScreenFlicker";
 
@@ -197,6 +198,10 @@ function App() {
             element={
               <Login onLogin={handleLogin} />
             }
+          />
+          <Route
+            path="/stats"
+            element={<Stats />}
           />
         </Routes>
       </BrowserRouter>
