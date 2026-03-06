@@ -377,7 +377,7 @@ export function Stats() {
                     <div className="flex-1">
                       <div className="flex items-baseline justify-between">
                         <p className="text-green-500/60 font-mono text-xs uppercase">
-                          {stats.calendars.calendar_1?.name || "Kalender 1"}
+                          {stats.calendars.calendar_1?.name || "Kalender 1"} - Lektionstid
                         </p>
                         <p className="text-green-500/60 font-mono text-xs uppercase">
                           Skoltid
@@ -407,7 +407,7 @@ export function Stats() {
                     <div className="flex-1">
                       <div className="flex items-baseline justify-between">
                         <p className="text-green-500/60 font-mono text-xs uppercase">
-                          {stats.calendars.calendar_2?.name || "Kalender 2"}
+                          {stats.calendars.calendar_2?.name || "Kalender 2"} - Lektionstid
                         </p>
                         <p className="text-green-500/60 font-mono text-xs uppercase">
                           Skoltid
