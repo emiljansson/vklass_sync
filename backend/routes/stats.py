@@ -2,12 +2,15 @@
 from fastapi import APIRouter
 from datetime import datetime, timedelta
 from urllib.parse import urlparse, parse_qs
-from config import logger, SWEDISH_TZ
+from config import db, logger, SWEDISH_TZ
 from services.settings_service import get_settings_from_db
 from services.ical_service import parse_ical_for_stats
-from services.notification_service import send_webpushr_notification
 
 router = APIRouter(tags=["stats"])
+
+SWEDISH_DAYS = ['Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag', 'Söndag']
+SWEDISH_MONTHS = ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 
+                  'juli', 'augusti', 'september', 'oktober', 'november', 'december']
 
 
 def format_minutes(minutes: int) -> str:
@@ -19,6 +22,15 @@ def format_minutes(minutes: int) -> str:
     if mins > 0:
         return f"{hours}h {mins}min"
     return f"{hours}h"
+
+
+def format_swedish_date(dt: datetime) -> str:
+    """Format datetime to Swedish date string"""
+    day_name = SWEDISH_DAYS[dt.weekday()]
+    day = dt.day
+    month = SWEDISH_MONTHS[dt.month - 1]
+    year = dt.year
+    return f"{day_name} {day} {month} {year}"
 
 
 @router.get("/stats/weekly")
@@ -42,6 +54,8 @@ async def get_weekly_stats(week_offset: int = 0):
     
     # Fetch scheduled activities from both calendars
     calendar_summaries = {1: {}, 2: {}}
+    calendar_daily = {1: {}, 2: {}}  # Daily time per calendar
+    calendar_events_raw = {1: [], 2: []}  # Raw events for the list
     
     for cal_index in [1, 2]:
         url = settings.ical_url_1 if cal_index == 1 else settings.ical_url_2
@@ -79,9 +93,70 @@ async def get_weekly_stats(week_offset: int = 0):
             
             duration = event.get('duration_minutes', 0)
             
+            # Subject summary
             if subject not in calendar_summaries[cal_index]:
                 calendar_summaries[cal_index][subject] = 0
             calendar_summaries[cal_index][subject] += duration
+            
+            # Daily summary
+            event_date = event.get('start')
+            if event_date:
+                day_key = event_date.strftime("%Y-%m-%d")
+                day_name = SWEDISH_DAYS[event_date.weekday()]
+                if day_key not in calendar_daily[cal_index]:
+                    calendar_daily[cal_index][day_key] = {"name": day_name, "minutes": 0}
+                calendar_daily[cal_index][day_key]["minutes"] += duration
+    
+    # Fetch task events from database for this week
+    db_events = await db.events.find({
+        "start": {"$gte": monday_str, "$lte": sunday_str},
+        "status": {"$ne": "removed"}
+    }, {"_id": 0}).to_list(10000)
+    
+    # Format events for the list
+    for event in db_events:
+        cal_index = event.get('calendar_index', 1)
+        start_date = event.get('start', '')
+        event_time = event.get('event_time', '')
+        
+        # Format the date nicely
+        try:
+            if 'T' in start_date:
+                dt = datetime.fromisoformat(start_date.replace('Z', '+00:00'))
+            else:
+                dt = datetime.strptime(start_date, "%Y-%m-%d")
+            formatted_date = format_swedish_date(dt)
+            if event_time:
+                formatted_date += f" kl: {event_time}"
+        except:
+            formatted_date = start_date
+        
+        # Get subject name
+        subject_name = event.get('subject_name', '')
+        if not subject_name:
+            url = event.get('url', '')
+            if url:
+                try:
+                    params = parse_qs(urlparse(url).query)
+                    cid = params.get('cid', [''])[0]
+                    if cid and cid in cid_lookup:
+                        subject_name = cid_lookup[cid]
+                except:
+                    pass
+        
+        calendar_events_raw[cal_index].append({
+            "summary": event.get('summary', ''),
+            "date": formatted_date,
+            "start_raw": start_date,
+            "event_time": event_time,
+            "subject_name": subject_name,
+            "event_type": event.get('event_type', ''),
+            "status": event.get('status', 'normal')
+        })
+    
+    # Sort events by date
+    for cal_index in [1, 2]:
+        calendar_events_raw[cal_index].sort(key=lambda x: (x.get('start_raw', ''), x.get('event_time', '')))
     
     # Check if there's data for next week
     next_monday = monday + timedelta(weeks=1)
@@ -95,6 +170,11 @@ async def get_weekly_stats(week_offset: int = 0):
             if next_week_events:
                 has_next_week = True
                 break
+    
+    # Format daily data sorted by date
+    def format_daily(daily_dict):
+        sorted_days = sorted(daily_dict.items())
+        return [{"date": k, "name": v["name"], "minutes": v["minutes"]} for k, v in sorted_days]
     
     return {
         "week_number": monday.isocalendar()[1],
@@ -112,7 +192,9 @@ async def get_weekly_stats(week_offset: int = 0):
                     {"name": subject, "minutes": mins}
                     for subject, mins in sorted(calendar_summaries[1].items())
                 ],
-                "total_minutes": sum(calendar_summaries[1].values())
+                "total_minutes": sum(calendar_summaries[1].values()),
+                "daily": format_daily(calendar_daily[1]),
+                "events": calendar_events_raw[1]
             },
             "calendar_2": {
                 "name": settings.calendar_name_2 or "Kalender 2",
@@ -120,7 +202,9 @@ async def get_weekly_stats(week_offset: int = 0):
                     {"name": subject, "minutes": mins}
                     for subject, mins in sorted(calendar_summaries[2].items())
                 ],
-                "total_minutes": sum(calendar_summaries[2].values())
+                "total_minutes": sum(calendar_summaries[2].values()),
+                "daily": format_daily(calendar_daily[2]),
+                "events": calendar_events_raw[2]
             }
         }
     }
@@ -130,6 +214,7 @@ async def get_weekly_stats(week_offset: int = 0):
 async def send_test_notification(notification_type: str = "utfort"):
     """Send a test notification"""
     from services.sync_service import generate_weekly_summary
+    from services.notification_service import send_webpushr_notification
     
     settings = await get_settings_from_db()
     

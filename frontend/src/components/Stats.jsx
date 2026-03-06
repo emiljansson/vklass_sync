@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, RefreshCw, BarChart3, BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, RefreshCw, BarChart3, BookOpen, ChevronLeft, ChevronRight, Calendar, Clock, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import axios from "axios";
 import {
   BarChart,
@@ -57,7 +58,68 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-const CalendarStats = ({ name, subjects, totalMinutes, colorOffset = 0 }) => {
+// Daily time breakdown component
+const DailyBreakdown = ({ daily }) => {
+  if (!daily || daily.length === 0) return null;
+  
+  return (
+    <div className="flex flex-wrap gap-2 mt-2">
+      {daily.map((day, index) => (
+        <div key={index} className="flex items-center gap-1 text-xs font-mono">
+          <span className="text-green-500/70">{day.name.substring(0, 3)}:</span>
+          <span className="text-green-400">{formatMinutes(day.minutes)}</span>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// Events list component
+const EventsList = ({ events, calendarName }) => {
+  if (!events || events.length === 0) {
+    return (
+      <p className="text-green-500/50 font-mono text-sm text-center py-4">
+        Inga uppgifter denna vecka
+      </p>
+    );
+  }
+  
+  return (
+    <div className="space-y-2">
+      {events.map((event, index) => (
+        <div 
+          key={index}
+          className="p-3 bg-green-500/5 rounded border border-green-500/20 hover:border-green-500/40 transition-colors"
+        >
+          <div className="flex items-start justify-between gap-2">
+            <div className="flex-1 min-w-0">
+              <p className="text-green-400 font-mono text-sm font-medium truncate">
+                {event.summary}
+              </p>
+              <p className="text-green-500/60 font-mono text-xs mt-1">
+                {event.date}
+              </p>
+            </div>
+            <div className="flex gap-1 flex-shrink-0">
+              {event.subject_name && (
+                <Badge className="bg-green-500/20 text-green-300 border border-green-500/30 text-xs">
+                  {event.subject_name}
+                </Badge>
+              )}
+              {event.event_type && (
+                <Badge className="bg-purple-500/20 text-purple-300 border border-purple-500/30 text-xs">
+                  {event.event_type}
+                </Badge>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffset = 0 }) => {
   const chartData = subjects.map((s, index) => {
     const percent = totalMinutes > 0 ? Math.round((s.minutes / totalMinutes) * 100) : 0;
     const timeStr = formatMinutes(s.minutes);
@@ -70,26 +132,7 @@ const CalendarStats = ({ name, subjects, totalMinutes, colorOffset = 0 }) => {
     };
   });
 
-  if (subjects.length === 0) {
-    return (
-      <Card className="bg-[#0f1a0f] border-2 border-green-500/30">
-        <CardHeader className="pb-2">
-          <CardTitle className="text-green-400 font-mono text-lg flex items-center gap-2">
-            <BookOpen className="w-5 h-5" />
-            {name}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <p className="text-green-500/60 font-mono text-center py-8">
-            Inga events denna vecka
-          </p>
-        </CardContent>
-      </Card>
-    );
-  }
-
-  // Calculate dynamic height based on number of subjects (40px per bar minimum)
-  const chartHeight = Math.max(300, chartData.length * 45);
+  const chartHeight = Math.max(200, chartData.length * 45);
 
   return (
     <Card className="bg-[#0f1a0f] border-2 border-green-500/30">
@@ -105,54 +148,71 @@ const CalendarStats = ({ name, subjects, totalMinutes, colorOffset = 0 }) => {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        {/* Bar Chart with labels on bars */}
-        <div style={{ height: `${chartHeight}px` }}>
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              data={chartData}
-              layout="vertical"
-              margin={{ top: 5, right: 60, left: 10, bottom: 5 }}
-            >
-              <CartesianGrid 
-                strokeDasharray="3 3" 
-                stroke="rgba(34, 197, 94, 0.2)"
-                horizontal={true}
-                vertical={false}
-              />
-              <XAxis 
-                type="number" 
-                stroke="#22c55e"
-                tick={{ fill: "#22c55e", fontSize: 12 }}
-                tickFormatter={(value) => `${Math.floor(value / 60)}h`}
-                hide
-              />
-              <YAxis 
-                dataKey="name" 
-                type="category" 
-                width={180}
-                stroke="#22c55e"
-                tick={{ fill: "#4ade80", fontSize: 12 }}
-              />
-              <Tooltip content={<CustomTooltip />} />
-              <Bar 
-                dataKey="minutes" 
-                radius={[0, 4, 4, 0]}
-                isAnimationActive={false}
-                barSize={28}
-              >
-                {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.fill} />
-                ))}
-                <LabelList 
-                  dataKey="label" 
-                  position="right" 
-                  fill="#4ade80" 
-                  fontSize={12}
-                  style={{ fontFamily: 'Share Tech Mono, monospace' }}
-                />
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
+        {subjects.length === 0 ? (
+          <p className="text-green-500/60 font-mono text-center py-8">
+            Inga lektioner denna vecka
+          </p>
+        ) : (
+          <>
+            {/* Bar Chart */}
+            <div style={{ height: `${chartHeight}px` }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                  data={chartData}
+                  layout="vertical"
+                  margin={{ top: 5, right: 80, left: 10, bottom: 5 }}
+                >
+                  <CartesianGrid 
+                    strokeDasharray="3 3" 
+                    stroke="rgba(34, 197, 94, 0.2)"
+                    horizontal={true}
+                    vertical={false}
+                  />
+                  <XAxis 
+                    type="number" 
+                    stroke="#22c55e"
+                    tick={{ fill: "#22c55e", fontSize: 12 }}
+                    tickFormatter={(value) => `${Math.floor(value / 60)}h`}
+                    hide
+                  />
+                  <YAxis 
+                    dataKey="name" 
+                    type="category" 
+                    width={180}
+                    stroke="#22c55e"
+                    tick={{ fill: "#4ade80", fontSize: 12 }}
+                  />
+                  <Tooltip content={<CustomTooltip />} />
+                  <Bar 
+                    dataKey="minutes" 
+                    radius={[0, 4, 4, 0]}
+                    isAnimationActive={false}
+                    barSize={28}
+                  >
+                    {chartData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.fill} />
+                    ))}
+                    <LabelList 
+                      dataKey="label" 
+                      position="right" 
+                      fill="#4ade80" 
+                      fontSize={12}
+                      style={{ fontFamily: 'Share Tech Mono, monospace' }}
+                    />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </>
+        )}
+        
+        {/* Events List */}
+        <div className="mt-6 pt-4 border-t border-green-500/20">
+          <h3 className="text-green-400 font-mono text-sm mb-3 flex items-center gap-2">
+            <FileText className="w-4 h-4" />
+            Uppgifter denna vecka
+          </h3>
+          <EventsList events={events} calendarName={name} />
         </div>
       </CardContent>
     </Card>
@@ -250,7 +310,7 @@ export function Stats() {
             <CardContent className="py-8 text-center">
               <p className="text-red-400 font-mono">{error}</p>
               <Button
-                onClick={fetchStats}
+                onClick={() => fetchStats(weekOffset)}
                 className="mt-4 bg-green-600 hover:bg-green-700 text-black"
               >
                 Försök igen
@@ -261,7 +321,7 @@ export function Stats() {
           <div className="space-y-6">
             {/* Summary Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Week Navigation - replaces Total Tid */}
+              {/* Week Navigation */}
               <Card className="bg-[#0f1a0f] border-2 border-green-500/30">
                 <CardContent className="p-4 flex items-center justify-between">
                   <Button
@@ -304,51 +364,63 @@ export function Stats() {
                 </CardContent>
               </Card>
               
+              {/* Calendar 1 Summary with daily breakdown */}
               <Card className="bg-[#0f1a0f] border-2 border-green-500/30">
-                <CardContent className="p-4 flex items-center gap-4">
-                  <div className="p-3 bg-green-500/10 rounded-lg">
-                    <BookOpen className="w-6 h-6 text-green-400" />
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="p-2 bg-green-500/10 rounded-lg">
+                      <Clock className="w-5 h-5 text-green-400" />
+                    </div>
+                    <div>
+                      <p className="text-green-500/60 font-mono text-xs uppercase">
+                        {stats.calendars.calendar_1?.name || "Kalender 1"}
+                      </p>
+                      <p className="text-green-400 font-mono text-xl">
+                        {formatMinutes(stats.calendars.calendar_1?.total_minutes || 0)}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-green-500/60 font-mono text-xs uppercase">
-                      {stats.calendars.calendar_1?.name || "Kalender 1"}
-                    </p>
-                    <p className="text-green-400 font-mono text-xl">
-                      {formatMinutes(stats.calendars.calendar_1?.total_minutes || 0)}
-                    </p>
-                  </div>
+                  <DailyBreakdown daily={stats.calendars.calendar_1?.daily} />
                 </CardContent>
               </Card>
               
+              {/* Calendar 2 Summary with daily breakdown */}
               <Card className="bg-[#0f1a0f] border-2 border-green-500/30">
-                <CardContent className="p-4 flex items-center gap-4">
-                  <div className="p-3 bg-green-500/10 rounded-lg">
-                    <BookOpen className="w-6 h-6 text-green-400" />
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="p-2 bg-green-500/10 rounded-lg">
+                      <Clock className="w-5 h-5 text-green-400" />
+                    </div>
+                    <div>
+                      <p className="text-green-500/60 font-mono text-xs uppercase">
+                        {stats.calendars.calendar_2?.name || "Kalender 2"}
+                      </p>
+                      <p className="text-green-400 font-mono text-xl">
+                        {formatMinutes(stats.calendars.calendar_2?.total_minutes || 0)}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-green-500/60 font-mono text-xs uppercase">
-                      {stats.calendars.calendar_2?.name || "Kalender 2"}
-                    </p>
-                    <p className="text-green-400 font-mono text-xl">
-                      {formatMinutes(stats.calendars.calendar_2?.total_minutes || 0)}
-                    </p>
-                  </div>
+                  <DailyBreakdown daily={stats.calendars.calendar_2?.daily} />
                 </CardContent>
               </Card>
             </div>
 
-            {/* Calendar Stats */}
+            {/* Calendar Stats with Events */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <CalendarStats
                 name={stats.calendars.calendar_1?.name || "Kalender 1"}
                 subjects={stats.calendars.calendar_1?.subjects || []}
                 totalMinutes={stats.calendars.calendar_1?.total_minutes || 0}
+                daily={stats.calendars.calendar_1?.daily || []}
+                events={stats.calendars.calendar_1?.events || []}
                 colorOffset={0}
               />
               <CalendarStats
                 name={stats.calendars.calendar_2?.name || "Kalender 2"}
                 subjects={stats.calendars.calendar_2?.subjects || []}
                 totalMinutes={stats.calendars.calendar_2?.total_minutes || 0}
+                daily={stats.calendars.calendar_2?.daily || []}
+                events={stats.calendars.calendar_2?.events || []}
                 colorOffset={3}
               />
             </div>
