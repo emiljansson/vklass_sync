@@ -107,9 +107,20 @@ The user requested a full-stack application to monitor two user-provided iCal ca
 │       ├── App.js
 │       ├── index.css    # Fallout theme styles
 │       └── components/
+│           ├── settings/           # NEW: Refactored settings components
+│           │   ├── index.js
+│           │   ├── SettingsCard.jsx
+│           │   ├── SoundSettings.jsx
+│           │   ├── ImpactEffectSettings.jsx
+│           │   ├── CalendarSettings.jsx
+│           │   ├── SyncSettings.jsx
+│           │   ├── EventMappingsSettings.jsx
+│           │   ├── AuthSettings.jsx
+│           │   ├── WebpushrSettings.jsx
+│           │   └── DatabaseToolsSettings.jsx
 │           ├── Dashboard.jsx
-│           ├── Settings.jsx
-│           ├── Stats.jsx        # Weekly statistics page
+│           ├── Settings.jsx     # Refactored: 1053 → 525 lines
+│           ├── Stats.jsx
 │           ├── Login.jsx
 │           ├── AddToHomeScreen.js
 │           ├── ScreenFlicker.js
@@ -150,10 +161,11 @@ The user requested a full-stack application to monitor two user-provided iCal ca
 - [x] **Stats uses scheduled activities** - Hämtar events med start- och sluttid för verklig tidsberäkning (2026-03-06)
 - [x] **Stats week navigation** - Bläddra framåt/bakåt mellan veckor (2026-03-06)
 - [x] **Backend refaktorering** - Uppdelad i config.py, models/, services/ (2026-03-06)
+- [x] **Frontend refaktorering** - Settings.jsx uppdelad i 9 komponenter under settings/ (2026-03-06)
 
 ## Backlog / Future Tasks
-- [ ] Refactoring: Dela upp Settings.jsx i mindre komponenter
 - [ ] Refactoring: Migrera routes från server.py till routes/
+- [ ] Refactoring: Dela upp Dashboard.jsx i mindre komponenter
 
 ## Known Credentials
 - **Settings Password:** 2378
