@@ -119,3 +119,11 @@ async def test_push_notification():
 async def health_check():
     """Health check endpoint"""
     return {"status": "healthy"}
+
+
+@router.post("/test-stats-notification")
+async def test_stats_notification():
+    """Send weekly stats notification to specific user"""
+    from services.sync_service import generate_weekly_summary
+    await generate_weekly_summary()
+    return {"success": True, "message": "Stats-notifikation skickad till 197920509"}
