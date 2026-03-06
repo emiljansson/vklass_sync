@@ -88,7 +88,19 @@ The user requested a full-stack application to monitor two user-provided iCal ca
 ```
 /app/
 ├── backend/
-│   ├── server.py        # All backend logic (monolith - needs refactoring)
+│   ├── config.py           # Configuration, database, logging
+│   ├── models/             # Pydantic models
+│   │   ├── settings.py
+│   │   ├── events.py
+│   │   ├── auth.py
+│   │   └── sync.py
+│   ├── services/           # Business logic
+│   │   ├── settings_service.py
+│   │   ├── ical_service.py
+│   │   ├── notification_service.py
+│   │   ├── event_service.py
+│   │   └── sync_service.py
+│   ├── server.py           # FastAPI app with routes
 │   └── .env
 ├── frontend/
 │   └── src/
@@ -97,7 +109,7 @@ The user requested a full-stack application to monitor two user-provided iCal ca
 │       └── components/
 │           ├── Dashboard.jsx
 │           ├── Settings.jsx
-│           ├── Stats.jsx        # NEW: Weekly statistics page
+│           ├── Stats.jsx        # Weekly statistics page
 │           ├── Login.jsx
 │           ├── AddToHomeScreen.js
 │           ├── ScreenFlicker.js
@@ -137,11 +149,11 @@ The user requested a full-stack application to monitor two user-provided iCal ca
 - [x] **Stats page (/stats)** - Veckostatistik med grafer (2026-03-06)
 - [x] **Stats uses scheduled activities** - Hämtar events med start- och sluttid för verklig tidsberäkning (2026-03-06)
 - [x] **Stats week navigation** - Bläddra framåt/bakåt mellan veckor (2026-03-06)
+- [x] **Backend refaktorering** - Uppdelad i config.py, models/, services/ (2026-03-06)
 
 ## Backlog / Future Tasks
-- [ ] Refactoring: Dela upp backend/server.py i moduler (routes/, services/, models/)
 - [ ] Refactoring: Dela upp Settings.jsx i mindre komponenter
-- [ ] Refactoring: Dela upp Dashboard.jsx i mindre komponenter
+- [ ] Refactoring: Migrera routes från server.py till routes/
 
 ## Known Credentials
 - **Settings Password:** 2378
