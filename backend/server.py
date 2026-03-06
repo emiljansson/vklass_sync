@@ -568,6 +568,8 @@ async def sync_calendars() -> SyncResult:
     # Send notification for new events with calendar name and details
     # Only include future events (not past events)
     future_new_events = [e for e in new_events_details if not is_event_past(e['start'], e.get('event_time'))]
+    past_new_events = [e for e in new_events_details if is_event_past(e['start'], e.get('event_time'))]
+    
     if future_new_events:
         # Group events by calendar
         cal_events = {}
@@ -601,6 +603,16 @@ async def sync_calendars() -> SyncResult:
             '\n'.join(message_parts),
             settings
         )
+    
+    # Send notification for past events (already completed)
+    if past_new_events:
+        for event in past_new_events:
+            subject = event.get('subject_name', '')
+            title = subject if subject else event.get('calendar_name', 'Kalender')
+            message = f"Utfört ({event['start']})"
+            
+            await send_webpushr_notification(title, message, settings)
+            logger.info(f"Sent past event notification: {title} - {message}")
     
     # Send notification for removed events
     if removed_events_details:
