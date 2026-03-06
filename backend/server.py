@@ -506,7 +506,7 @@ async def sync_calendars() -> SyncResult:
                     start=event_data['start'],
                     end=event_data['end'],
                     event_time=event_data.get('event_time'),
-                    status="new",
+                    status="normal" if is_event_past(event_data['start'], event_data.get('event_time')) else "new",
                     status_changed_at=datetime.now(timezone.utc).isoformat()
                 )
                 await db.events.insert_one(new_event.model_dump())
@@ -528,6 +528,7 @@ async def sync_calendars() -> SyncResult:
                     'calendar_name': cal_name,
                     'summary': event_data['summary'],
                     'start': event_data['start'],
+                    'event_time': event_data.get('event_time'),
                     'subject_name': subject_name
                 })
                 logger.info(f"New event detected: {event_data['summary']} in {cal_name}")
@@ -565,10 +566,12 @@ async def sync_calendars() -> SyncResult:
                 logger.info(f"Event removed: {existing['summary']} from {cal_name}")
     
     # Send notification for new events with calendar name and details
-    if new_events_details:
+    # Only include future events (not past events)
+    future_new_events = [e for e in new_events_details if not is_event_past(e['start'], e.get('event_time'))]
+    if future_new_events:
         # Group events by calendar
         cal_events = {}
-        for event in new_events_details:
+        for event in future_new_events:
             cal_name = event['calendar_name']
             if cal_name not in cal_events:
                 cal_events[cal_name] = []
