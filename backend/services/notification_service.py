@@ -31,6 +31,8 @@ async def send_webpushr_notification(title: str, message: str, settings: Setting
         base_url = "https://vklass.frontproduction.se"
         target_url = f"{base_url}{target_path}" if target_path else base_url
         
+        logger.info(f"Building notification with target_url: {target_url}")
+        
         payload = {
             "title": title,
             "message": message,
