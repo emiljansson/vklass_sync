@@ -183,41 +183,19 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
                 {chartData.map((entry, index) => {
                   const barWidth = Math.max((entry.minutes / maxMinutes) * 45, 2);
                   return (
-                    <div key={index} className="flex flex-col sm:flex-row items-stretch sm:items-center min-h-[36px] py-1 border-b border-green-500/10">
-                      {/* Mobile: Full width stacked layout */}
-                      <div className="sm:hidden w-full mb-1">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="font-mono text-[11px] text-green-400 truncate flex-1">
-                            {entry.name}
-                          </span>
-                          <span className="font-mono text-[10px] text-green-400/70 ml-2">
-                            {entry.label}
-                          </span>
-                        </div>
-                        <div className="w-full bg-green-500/10 rounded h-5 overflow-hidden">
-                          <div 
-                            className={`h-full ${entry.isLeft ? 'ml-auto rounded-l' : 'rounded-r'}`}
-                            style={{ 
-                              width: `${Math.max((entry.minutes / maxMinutes) * 100, 5)}%`, 
-                              backgroundColor: entry.fill
-                            }}
-                          />
-                        </div>
-                      </div>
-                      
-                      {/* Desktop: Diverging layout */}
+                    <div key={index} className="flex items-center h-9 border-b border-green-500/10">
                       {/* Left half */}
-                      <div className="hidden sm:flex w-1/2 items-center justify-end pr-1">
+                      <div className="w-1/2 flex items-center justify-end pr-1">
                         {entry.isLeft ? (
                           <>
                             <span className="font-mono text-[11px] text-green-400 mr-2 whitespace-nowrap">
                               {entry.name}
                             </span>
-                            <span className="font-mono text-[11px] text-green-400/70 mr-2 whitespace-nowrap">
+                            <span className="font-mono text-[11px] text-green-400 mr-2 whitespace-nowrap">
                               {entry.label}
                             </span>
                             <div 
-                              className="h-7 rounded-l flex-shrink-0"
+                              className="h-7 rounded-l"
                               style={{ 
                                 width: `${barWidth}%`, 
                                 backgroundColor: entry.fill,
@@ -229,18 +207,18 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
                       </div>
                       
                       {/* Right half */}
-                      <div className="hidden sm:flex w-1/2 items-center justify-start pl-1">
+                      <div className="w-1/2 flex items-center justify-start pl-1">
                         {!entry.isLeft ? (
                           <>
                             <div 
-                              className="h-7 rounded-r flex-shrink-0"
+                              className="h-7 rounded-r"
                               style={{ 
                                 width: `${barWidth}%`, 
                                 backgroundColor: entry.fill,
                                 minWidth: '8px'
                               }}
                             />
-                            <span className="font-mono text-[11px] text-green-400/70 ml-2 whitespace-nowrap">
+                            <span className="font-mono text-[11px] text-green-400 ml-2 whitespace-nowrap">
                               {entry.label}
                             </span>
                             <span className="font-mono text-[11px] text-green-400 ml-2 whitespace-nowrap">
