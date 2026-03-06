@@ -328,7 +328,8 @@ async def send_webpushr_notification(title: str, message: str, settings: Setting
         
         # Determine endpoint based on test user setting
         if settings.webpushr_test_user_id:
-            endpoint = f"https://api.webpushr.com/v1/notification/send/sid/{settings.webpushr_test_user_id}"
+            endpoint = "https://api.webpushr.com/v1/notification/send/sid"
+            payload["sid"] = settings.webpushr_test_user_id
             logger.info(f"Sending to test user: {settings.webpushr_test_user_id}")
         else:
             endpoint = "https://api.webpushr.com/v1/notification/send/all"
