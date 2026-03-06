@@ -205,7 +205,7 @@ function App() {
           />
           <Route
             path="/stats"
-            element={<Navigate to="/stats/1" replace />}
+            element={<Stats />}
           />
         </Routes>
       </BrowserRouter>

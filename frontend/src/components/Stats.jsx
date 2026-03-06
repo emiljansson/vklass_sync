@@ -245,6 +245,7 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
 
 export function Stats() {
   const { calendarIndex } = useParams();
+  const showBoth = !calendarIndex;
   const calIndex = parseInt(calendarIndex) || 1;
   const calKey = `calendar_${calIndex}`;
   
@@ -287,10 +288,11 @@ export function Stats() {
 
   const calendarData = stats?.calendars?.[calKey];
   const calendarName = calendarData?.name || `Kalender ${calIndex}`;
+  const pageTitle = showBoth ? "VECKOSTATISTIK" : calendarName;
 
   return (
     <div className="min-h-screen bg-[#0a120a] fallout-scanlines p-4">
-      <div className="max-w-4xl mx-auto">
+      <div className={`mx-auto ${showBoth ? 'max-w-6xl' : 'max-w-4xl'}`}>
         {/* Header */}
         <header className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-4">
@@ -307,7 +309,7 @@ export function Stats() {
             <div>
               <h1 className="text-2xl font-mono text-green-400 pip-glow flex items-center gap-2">
                 <BarChart3 className="w-6 h-6" />
-                {calendarName}
+                {pageTitle}
               </h1>
               {stats && (
                 <p className="text-green-500/60 font-mono text-sm">
@@ -394,7 +396,98 @@ export function Stats() {
               </Button>
             </CardContent>
           </Card>
+        ) : showBoth && stats ? (
+          // Show both calendars
+          <div className="space-y-6">
+            {/* Summary Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Calendar 1 Summary */}
+              <Link to="/stats/1" className="block">
+                <Card className="bg-[#0f1a0f] border-2 border-green-500/30 hover:border-green-400/50 transition-colors cursor-pointer">
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="p-2 bg-green-500/10 rounded-lg">
+                        <Clock className="w-5 h-5 text-green-400" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-baseline justify-between">
+                          <p className="text-green-500/60 font-mono text-xs uppercase">
+                            {stats.calendars.calendar_1?.name || "Kalender 1"} - Lektionstid
+                          </p>
+                          <p className="text-green-500/60 font-mono text-xs uppercase">
+                            Skoltid
+                          </p>
+                        </div>
+                        <div className="flex items-baseline justify-between">
+                          <p className="text-green-400 font-mono text-xl">
+                            {formatMinutes(stats.calendars.calendar_1?.total_minutes || 0)}
+                          </p>
+                          <p className="text-green-400 font-mono text-xl">
+                            {formatMinutes(stats.calendars.calendar_1?.school_time_minutes || 0)}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <DailyBreakdown daily={stats.calendars.calendar_1?.daily} showTimes={true} />
+                  </CardContent>
+                </Card>
+              </Link>
+              
+              {/* Calendar 2 Summary */}
+              <Link to="/stats/2" className="block">
+                <Card className="bg-[#0f1a0f] border-2 border-green-500/30 hover:border-green-400/50 transition-colors cursor-pointer">
+                  <CardContent className="p-4">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="p-2 bg-green-500/10 rounded-lg">
+                        <Clock className="w-5 h-5 text-green-400" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-baseline justify-between">
+                          <p className="text-green-500/60 font-mono text-xs uppercase">
+                            {stats.calendars.calendar_2?.name || "Kalender 2"} - Lektionstid
+                          </p>
+                          <p className="text-green-500/60 font-mono text-xs uppercase">
+                            Skoltid
+                          </p>
+                        </div>
+                        <div className="flex items-baseline justify-between">
+                          <p className="text-green-400 font-mono text-xl">
+                            {formatMinutes(stats.calendars.calendar_2?.total_minutes || 0)}
+                          </p>
+                          <p className="text-green-400 font-mono text-xl">
+                            {formatMinutes(stats.calendars.calendar_2?.school_time_minutes || 0)}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <DailyBreakdown daily={stats.calendars.calendar_2?.daily} showTimes={true} />
+                  </CardContent>
+                </Card>
+              </Link>
+            </div>
+
+            {/* Calendar Stats with Events - Side by Side */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <CalendarStats
+                name={stats.calendars.calendar_1?.name || "Kalender 1"}
+                subjects={stats.calendars.calendar_1?.subjects || []}
+                totalMinutes={stats.calendars.calendar_1?.total_minutes || 0}
+                daily={stats.calendars.calendar_1?.daily || []}
+                events={stats.calendars.calendar_1?.events || []}
+                colorOffset={0}
+              />
+              <CalendarStats
+                name={stats.calendars.calendar_2?.name || "Kalender 2"}
+                subjects={stats.calendars.calendar_2?.subjects || []}
+                totalMinutes={stats.calendars.calendar_2?.total_minutes || 0}
+                daily={stats.calendars.calendar_2?.daily || []}
+                events={stats.calendars.calendar_2?.events || []}
+                colorOffset={3}
+              />
+            </div>
+          </div>
         ) : calendarData ? (
+          // Show single calendar
           <div className="space-y-6">
             {/* Summary Card */}
             <Card className="bg-[#0f1a0f] border-2 border-green-500/30">
