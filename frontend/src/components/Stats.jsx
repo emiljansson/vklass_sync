@@ -168,33 +168,40 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
           <>
             {/* Diverging Bar Chart */}
             <div className="relative">
-              {/* Center line */}
-              <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-green-500 z-10" />
+              {/* Grid lines */}
+              <div className="absolute inset-0 flex justify-between pointer-events-none">
+                {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                  <div 
+                    key={i} 
+                    className={`h-full ${i === 4 ? 'w-0.5 bg-green-500' : 'w-px bg-green-500/20'}`}
+                    style={{ borderStyle: i !== 4 ? 'dashed' : 'solid' }}
+                  />
+                ))}
+              </div>
               
-              <div className="space-y-1">
+              <div className="space-y-1 relative">
                 {chartData.map((entry, index) => {
                   const barWidth = Math.max((entry.minutes / maxMinutes) * 45, 2);
                   return (
-                    <div key={index} className="flex items-center h-9">
+                    <div key={index} className="flex items-center h-9 border-b border-green-500/10">
                       {/* Left half */}
                       <div className="w-1/2 flex items-center justify-end pr-1">
                         {entry.isLeft ? (
                           <>
                             <span className="font-mono text-[11px] text-green-400 mr-2 whitespace-nowrap">
-                              {entry.name}
+                              {entry.label}
                             </span>
                             <div 
-                              className="h-7 rounded-l flex items-center justify-start pl-2"
+                              className="h-7 rounded-l"
                               style={{ 
                                 width: `${barWidth}%`, 
                                 backgroundColor: entry.fill,
-                                minWidth: '40px'
+                                minWidth: '8px'
                               }}
-                            >
-                              <span className="font-mono text-[10px] text-black font-bold whitespace-nowrap">
-                                {entry.label}
-                              </span>
-                            </div>
+                            />
+                            <span className="font-mono text-[11px] text-green-400 ml-2 whitespace-nowrap">
+                              {entry.name}
+                            </span>
                           </>
                         ) : null}
                       </div>
@@ -203,20 +210,19 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
                       <div className="w-1/2 flex items-center justify-start pl-1">
                         {!entry.isLeft ? (
                           <>
+                            <span className="font-mono text-[11px] text-green-400 mr-2 whitespace-nowrap">
+                              {entry.name}
+                            </span>
                             <div 
-                              className="h-7 rounded-r flex items-center justify-end pr-2"
+                              className="h-7 rounded-r"
                               style={{ 
                                 width: `${barWidth}%`, 
                                 backgroundColor: entry.fill,
-                                minWidth: '40px'
+                                minWidth: '8px'
                               }}
-                            >
-                              <span className="font-mono text-[10px] text-black font-bold whitespace-nowrap">
-                                {entry.label}
-                              </span>
-                            </div>
+                            />
                             <span className="font-mono text-[11px] text-green-400 ml-2 whitespace-nowrap">
-                              {entry.name}
+                              {entry.label}
                             </span>
                           </>
                         ) : null}
