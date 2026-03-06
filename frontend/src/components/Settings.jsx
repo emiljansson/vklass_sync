@@ -38,6 +38,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
   });
   const [saving, setSaving] = useState(false);
   const [testingPush, setTestingPush] = useState(false);
+  const [originalTestUserId, setOriginalTestUserId] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [showWebpushrKey, setShowWebpushrKey] = useState(false);
   const [showWebpushrToken, setShowWebpushrToken] = useState(false);
@@ -63,6 +64,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
         impact_effect_enabled: settings.impact_effect_enabled || false,
         event_mappings: settings.event_mappings || []
       });
+      setOriginalTestUserId(settings.webpushr_test_user_id || "");
     }
   }, [settings]);
 
@@ -745,17 +747,29 @@ export const Settings = ({ settings, onUpdateSettings }) => {
                   <Label className="text-green-400">Testa push-notifikation</Label>
                   <p className="text-sm text-green-500/60">Skicka en testnotifikation för att verifiera inställningarna</p>
                 </div>
-                <Button
-                  type="button"
-                  data-testid="test-push-button"
-                  variant="outline"
-                  onClick={handleTestPush}
-                  disabled={testingPush || !formData.webpushr_key || !formData.webpushr_auth_token}
-                  className="gap-2 border-green-500/40 text-green-400 hover:bg-green-500/10 hover:text-green-300"
-                >
-                  <Send className="w-4 h-4" />
-                  {testingPush ? 'Skickar...' : 'Testa'}
-                </Button>
+                {formData.webpushr_test_user_id !== originalTestUserId ? (
+                  <Button
+                    type="button"
+                    onClick={handleSubmit}
+                    disabled={saving}
+                    className="gap-2 bg-amber-600 hover:bg-amber-500 text-black font-bold"
+                  >
+                    <Save className="w-4 h-4" />
+                    {saving ? 'Sparar...' : 'Spara först'}
+                  </Button>
+                ) : (
+                  <Button
+                    type="button"
+                    data-testid="test-push-button"
+                    variant="outline"
+                    onClick={handleTestPush}
+                    disabled={testingPush || !formData.webpushr_key || !formData.webpushr_auth_token}
+                    className="gap-2 border-green-500/40 text-green-400 hover:bg-green-500/10 hover:text-green-300"
+                  >
+                    <Send className="w-4 h-4" />
+                    {testingPush ? 'Skickar...' : 'Testa'}
+                  </Button>
+                )}
               </div>
             </CardContent>
           </Card>
