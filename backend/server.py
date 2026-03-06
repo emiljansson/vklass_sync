@@ -809,104 +809,30 @@ async def periodic_completion_check():
         await asyncio.sleep(60)
 
 async def generate_weekly_summary():
-    """Generate weekly summary of subject minutes per calendar - uses scheduled activities with actual duration"""
-    from urllib.parse import urlparse, parse_qs
-    
+    """Send a simple push notification linking to the stats page"""
     settings = await get_settings_from_db()
     
     # Get current week's Monday and Sunday
     now = datetime.now(SWEDISH_TZ)
     days_since_monday = now.weekday()
     monday = (now - timedelta(days=days_since_monday)).replace(hour=0, minute=0, second=0, microsecond=0)
-    sunday = monday + timedelta(days=6, hours=23, minutes=59, seconds=59)
+    sunday = monday + timedelta(days=6)
     
     monday_str = monday.strftime("%Y-%m-%d")
     sunday_str = sunday.strftime("%Y-%m-%d")
     
-    # Create CID to subject lookup
-    cid_lookup = {m.get('cid'): m.get('subject', '') for m in (settings.event_mappings or []) if m.get('cid') and m.get('subject')}
+    title = "Veckans statistik"
+    message = f"Datum: {monday_str} - {sunday_str}"
     
-    # Fetch scheduled activities from both calendars
-    calendar_summaries = {1: {}, 2: {}}
+    # Send to specific user ID with link to stats page
+    original_test_id = settings.webpushr_test_user_id
+    settings.webpushr_test_user_id = "197920509"  # Always send to this user
     
-    for cal_index in [1, 2]:
-        url = settings.ical_url_1 if cal_index == 1 else settings.ical_url_2
-        if not url:
-            continue
-        
-        events = await parse_ical_for_stats(url, monday, sunday)
-        
-        for event in events:
-            subject = None
-            
-            # Method 1: Try to get subject from CID in URL
-            event_url = event.get('url', '')
-            if event_url:
-                try:
-                    params = parse_qs(urlparse(event_url).query)
-                    cid = params.get('cid', [''])[0]
-                    if cid and cid in cid_lookup:
-                        subject = cid_lookup[cid]
-                except:
-                    pass
-            
-            # Method 2: Use summary as subject (common for scheduled lessons)
-            if not subject:
-                summary = event.get('summary', '').strip()
-                if '(' in summary:
-                    subject = summary.split('(')[0].strip()
-                elif '\n' in summary:
-                    subject = summary.split('\n')[0].strip()
-                else:
-                    subject = summary
-            
-            if not subject:
-                subject = 'Okänt ämne'
-            
-            # Use actual duration from event
-            duration = event.get('duration_minutes', 0)
-            
-            if subject not in calendar_summaries[cal_index]:
-                calendar_summaries[cal_index][subject] = 0
-            calendar_summaries[cal_index][subject] += duration
+    await send_webpushr_notification(title, message, settings, target_path="/stats")
+    logger.info(f"Weekly summary notification sent: {title}")
     
-    # Build notification message
-    cal1_name = settings.calendar_name_1 or "Kalender 1"
-    cal2_name = settings.calendar_name_2 or "Kalender 2"
-    
-    message_parts = [f"Vecka {now.isocalendar()[1]} ({monday_str} - {sunday_str})"]
-    message_parts.append("")
-    
-    # Calendar 1
-    message_parts.append(f"📚 {cal1_name}:")
-    if calendar_summaries[1]:
-        for subject, mins in sorted(calendar_summaries[1].items()):
-            hours = mins // 60
-            remaining_mins = mins % 60
-            if hours > 0:
-                message_parts.append(f"  • {subject}: {hours}h {remaining_mins}min")
-            else:
-                message_parts.append(f"  • {subject}: {mins}min")
-    else:
-        message_parts.append("  Inga aktiviteter")
-    
-    message_parts.append("")
-    
-    # Calendar 2
-    message_parts.append(f"📚 {cal2_name}:")
-    if calendar_summaries[2]:
-        for subject, mins in sorted(calendar_summaries[2].items()):
-            hours = mins // 60
-            remaining_mins = mins % 60
-            if hours > 0:
-                message_parts.append(f"  • {subject}: {hours}h {remaining_mins}min")
-            else:
-                message_parts.append(f"  • {subject}: {mins}min")
-    else:
-        message_parts.append("  Inga aktiviteter")
-    
-    title = "📊 Veckosammanfattning"
-    message = "\n".join(message_parts)
+    # Restore original setting
+    settings.webpushr_test_user_id = original_test_id
     
     # Send to specific user ID with link to stats page
     original_test_id = settings.webpushr_test_user_id
