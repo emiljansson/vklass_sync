@@ -135,17 +135,12 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
     return {
       name: s.name || "Okänt ämne",
       minutes: s.minutes,
-      // For diverging chart: left side is negative, right side is positive
-      leftMinutes: isLeft ? -s.minutes : 0,
-      rightMinutes: isLeft ? 0 : s.minutes,
       percent: percent,
       label: `${timeStr} (${percent}%)`,
       fill: CHART_COLORS[(index + colorOffset) % CHART_COLORS.length],
       isLeft: isLeft
     };
   });
-
-  const chartHeight = Math.max(200, chartData.length * 45);
 
   return (
     <Card className="bg-[#0f1a0f] border-2 border-green-500/30">
@@ -171,59 +166,65 @@ const CalendarStats = ({ name, subjects, totalMinutes, daily, events, colorOffse
           </p>
         ) : (
           <>
-            {/* Diverging Bar Chart - Custom Implementation */}
-            <div className="space-y-2">
-              {chartData.map((entry, index) => {
-                const barWidth = (entry.minutes / maxMinutes) * 100;
-                return (
-                  <div key={index} className="flex items-center h-8">
-                    {/* Left side - label for left bars */}
-                    <div className="w-[100px] text-right pr-2 font-mono text-xs text-green-400 truncate">
-                      {entry.isLeft ? entry.label : ''}
+            {/* Diverging Bar Chart */}
+            <div className="relative">
+              {/* Center line */}
+              <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-green-500 z-10" />
+              
+              <div className="space-y-1">
+                {chartData.map((entry, index) => {
+                  const barWidth = Math.max((entry.minutes / maxMinutes) * 45, 2);
+                  return (
+                    <div key={index} className="flex items-center h-9">
+                      {/* Left half */}
+                      <div className="w-1/2 flex items-center justify-end pr-1">
+                        {entry.isLeft ? (
+                          <>
+                            <span className="font-mono text-[11px] text-green-400 mr-2 whitespace-nowrap">
+                              {entry.name}
+                            </span>
+                            <div 
+                              className="h-7 rounded-l flex items-center justify-start pl-2"
+                              style={{ 
+                                width: `${barWidth}%`, 
+                                backgroundColor: entry.fill,
+                                minWidth: '40px'
+                              }}
+                            >
+                              <span className="font-mono text-[10px] text-black font-bold whitespace-nowrap">
+                                {entry.label}
+                              </span>
+                            </div>
+                          </>
+                        ) : null}
+                      </div>
+                      
+                      {/* Right half */}
+                      <div className="w-1/2 flex items-center justify-start pl-1">
+                        {!entry.isLeft ? (
+                          <>
+                            <div 
+                              className="h-7 rounded-r flex items-center justify-end pr-2"
+                              style={{ 
+                                width: `${barWidth}%`, 
+                                backgroundColor: entry.fill,
+                                minWidth: '40px'
+                              }}
+                            >
+                              <span className="font-mono text-[10px] text-black font-bold whitespace-nowrap">
+                                {entry.label}
+                              </span>
+                            </div>
+                            <span className="font-mono text-[11px] text-green-400 ml-2 whitespace-nowrap">
+                              {entry.name}
+                            </span>
+                          </>
+                        ) : null}
+                      </div>
                     </div>
-                    
-                    {/* Left bar area */}
-                    <div className="w-[35%] flex justify-end">
-                      {entry.isLeft && (
-                        <div 
-                          className="h-7 rounded-l"
-                          style={{ 
-                            width: `${barWidth}%`, 
-                            backgroundColor: entry.fill,
-                            minWidth: '4px'
-                          }}
-                        />
-                      )}
-                    </div>
-                    
-                    {/* Center line and name */}
-                    <div className="w-[140px] flex items-center justify-center border-l-2 border-r-2 border-green-500 px-2">
-                      <span className="font-mono text-xs text-green-400 text-center truncate">
-                        {entry.name}
-                      </span>
-                    </div>
-                    
-                    {/* Right bar area */}
-                    <div className="w-[35%] flex justify-start">
-                      {!entry.isLeft && (
-                        <div 
-                          className="h-7 rounded-r"
-                          style={{ 
-                            width: `${barWidth}%`, 
-                            backgroundColor: entry.fill,
-                            minWidth: '4px'
-                          }}
-                        />
-                      )}
-                    </div>
-                    
-                    {/* Right side - label for right bars */}
-                    <div className="w-[100px] text-left pl-2 font-mono text-xs text-green-400 truncate">
-                      {!entry.isLeft ? entry.label : ''}
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </>
         )}
