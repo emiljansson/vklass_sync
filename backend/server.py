@@ -613,6 +613,13 @@ async def sync_calendars() -> SyncResult:
             
             await send_webpushr_notification(title, message, settings)
             logger.info(f"Sent past event notification: {title} - {message}")
+        
+        # Mark all past events as notified to prevent duplicate notifications
+        for event in past_new_events:
+            await db.events.update_one(
+                {"summary": event['summary'], "start": event['start']},
+                {"$set": {"notified_utfort": True}}
+            )
     
     # Send notification for removed events
     if removed_events_details:
@@ -1067,7 +1074,7 @@ async def health_check():
 
 @api_router.post("/migrate/fix-past-new-events")
 async def fix_past_new_events():
-    """Fix past events that still have status 'new' - change them to 'normal'"""
+    """Fix past events that still have status 'new' - change them to 'normal' and mark as notified"""
     events = await db.events.find({"status": "new"}, {"_id": 0}).to_list(10000)
     fixed_count = 0
     
@@ -1078,7 +1085,7 @@ async def fix_past_new_events():
         if is_event_past(start, event_time):
             await db.events.update_one(
                 {"id": event.get('id')},
-                {"$set": {"status": "normal"}}
+                {"$set": {"status": "normal", "notified_utfort": True}}
             )
             fixed_count += 1
             logger.info(f"Fixed past event: {event.get('summary')}")
