@@ -1113,6 +1113,30 @@ async def health_check():
     """Health check endpoint"""
     return {"status": "healthy"}
 
+@api_router.post("/test-notification")
+async def send_test_notification(notification_type: str = "utfort"):
+    """Send a test notification"""
+    settings = await get_settings_from_db()
+    
+    if notification_type == "utfort":
+        # Test "Utfört" notification for Anton
+        title = "Utfört: Matematik - Prov ✓"
+        message = f"Bra jobbat {settings.calendar_name_1 or 'Anton'}!"
+    elif notification_type == "past":
+        # Test notification for past event from iCal
+        title = "Utfört: Måndag 2 mars 2026 kl: 10:00."
+        message = f"{settings.calendar_name_1 or 'Anton'}\n[Engelska] Test \"Animals\""
+    else:
+        title = "Test Notifikation"
+        message = "Detta är en testnotis"
+    
+    success = await send_webpushr_notification(title, message, settings)
+    
+    if success:
+        return {"success": True, "message": f"Testnotis skickad: {title}"}
+    else:
+        return {"success": False, "message": "Kunde inte skicka notifikation"}
+
 @api_router.post("/migrate/fix-past-new-events")
 async def fix_past_new_events():
     """Fix past events that still have status 'new' - change them to 'normal' and mark as notified"""
