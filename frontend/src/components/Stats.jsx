@@ -73,9 +73,17 @@ const CustomPieTooltip = ({ active, payload }) => {
   return null;
 };
 
+// Truncate long subject names
+const truncateName = (name, maxLength = 15) => {
+  if (!name) return "Okänt";
+  if (name.length <= maxLength) return name;
+  return name.substring(0, maxLength - 1) + "…";
+};
+
 const CalendarStats = ({ name, subjects, totalMinutes, colorOffset = 0 }) => {
   const chartData = subjects.map((s, index) => ({
     name: s.name || "Okänt ämne",
+    shortName: truncateName(s.name || "Okänt ämne", 18),
     minutes: s.minutes,
     fill: CHART_COLORS[(index + colorOffset) % CHART_COLORS.length]
   }));
@@ -133,16 +141,17 @@ const CalendarStats = ({ name, subjects, totalMinutes, colorOffset = 0 }) => {
                 tickFormatter={(value) => `${Math.floor(value / 60)}h`}
               />
               <YAxis 
-                dataKey="name" 
+                dataKey="shortName" 
                 type="category" 
-                width={100}
+                width={120}
                 stroke="#22c55e"
-                tick={{ fill: "#4ade80", fontSize: 12 }}
+                tick={{ fill: "#4ade80", fontSize: 11 }}
               />
               <Tooltip content={<CustomTooltip />} />
               <Bar 
                 dataKey="minutes" 
                 radius={[0, 4, 4, 0]}
+                isAnimationActive={false}
               >
                 {chartData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.fill} />
@@ -153,20 +162,19 @@ const CalendarStats = ({ name, subjects, totalMinutes, colorOffset = 0 }) => {
         </div>
 
         {/* Pie Chart */}
-        <div className="h-64">
+        <div className="h-56">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
                 data={chartData}
                 cx="50%"
                 cy="50%"
-                innerRadius={40}
-                outerRadius={80}
+                innerRadius={35}
+                outerRadius={70}
                 paddingAngle={2}
                 dataKey="minutes"
                 nameKey="name"
-                label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
-                labelLine={{ stroke: "#22c55e", strokeWidth: 1 }}
+                isAnimationActive={false}
               >
                 {chartData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.fill} />
@@ -177,27 +185,35 @@ const CalendarStats = ({ name, subjects, totalMinutes, colorOffset = 0 }) => {
           </ResponsiveContainer>
         </div>
 
-        {/* Subject List */}
+        {/* Subject List with percentages */}
         <div className="space-y-2">
-          {chartData.map((subject, index) => (
-            <div 
-              key={index}
-              className="flex items-center justify-between p-2 bg-green-500/5 rounded border border-green-500/20"
-            >
-              <div className="flex items-center gap-2">
-                <div 
-                  className="w-3 h-3 rounded-full"
-                  style={{ backgroundColor: subject.fill }}
-                />
-                <span className="text-green-400 font-mono text-sm">
-                  {subject.name}
-                </span>
+          {chartData.map((subject, index) => {
+            const percent = totalMinutes > 0 ? Math.round((subject.minutes / totalMinutes) * 100) : 0;
+            return (
+              <div 
+                key={index}
+                className="flex items-center justify-between p-2 bg-green-500/5 rounded border border-green-500/20 gap-2"
+              >
+                <div className="flex items-center gap-2 min-w-0 flex-1">
+                  <div 
+                    className="w-3 h-3 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: subject.fill }}
+                  />
+                  <span className="text-green-400 font-mono text-sm truncate" title={subject.name}>
+                    {subject.name}
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 flex-shrink-0">
+                  <span className="text-green-500/50 font-mono text-xs">
+                    {percent}%
+                  </span>
+                  <span className="text-green-300 font-mono text-sm min-w-[60px] text-right">
+                    {formatMinutes(subject.minutes)}
+                  </span>
+                </div>
               </div>
-              <span className="text-green-300 font-mono text-sm">
-                {formatMinutes(subject.minutes)}
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </CardContent>
     </Card>
