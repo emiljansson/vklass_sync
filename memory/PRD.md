@@ -136,6 +136,7 @@ The user requested a full-stack application to monitor two user-provided iCal ca
 - [x] Weekly summary background job (Fridays 16:00)
 - [x] **Stats page (/stats)** - Veckostatistik med grafer (2026-03-06)
 - [x] **Stats uses scheduled activities** - Hämtar events med start- och sluttid för verklig tidsberäkning (2026-03-06)
+- [x] **Stats week navigation** - Bläddra framåt/bakåt mellan veckor (2026-03-06)
 
 ## Backlog / Future Tasks
 - [ ] Refactoring: Dela upp backend/server.py i moduler (routes/, services/, models/)

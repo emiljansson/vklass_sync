@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, RefreshCw, BarChart3, Clock, BookOpen } from "lucide-react";
+import { ArrowLeft, RefreshCw, BarChart3, BookOpen, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import axios from "axios";
@@ -208,12 +208,13 @@ export function Stats() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [weekOffset, setWeekOffset] = useState(0);
 
-  const fetchStats = async () => {
+  const fetchStats = useCallback(async (offset = 0) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`${API}/stats/weekly`);
+      const response = await axios.get(`${API}/stats/weekly?week_offset=${offset}`);
       setStats(response.data);
     } catch (e) {
       console.error("Error fetching stats:", e);
@@ -221,11 +222,25 @@ export function Stats() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    fetchStats();
-  }, []);
+    fetchStats(weekOffset);
+  }, [weekOffset, fetchStats]);
+
+  const goToPreviousWeek = () => {
+    setWeekOffset(prev => prev - 1);
+  };
+
+  const goToNextWeek = () => {
+    if (stats?.has_next_week) {
+      setWeekOffset(prev => prev + 1);
+    }
+  };
+
+  const goToCurrentWeek = () => {
+    setWeekOffset(0);
+  };
 
   return (
     <div className="min-h-screen bg-[#0a120a] fallout-scanlines p-4">
@@ -258,7 +273,7 @@ export function Stats() {
           <Button
             variant="outline"
             size="icon"
-            onClick={fetchStats}
+            onClick={() => fetchStats(weekOffset)}
             disabled={loading}
             className="border-green-500/50 text-green-500 hover:bg-green-500/10"
             data-testid="refresh-stats-button"
@@ -291,20 +306,46 @@ export function Stats() {
           <div className="space-y-6">
             {/* Summary Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Week Navigation - replaces Total Tid */}
               <Card className="bg-[#0f1a0f] border-2 border-green-500/30">
-                <CardContent className="p-4 flex items-center gap-4">
-                  <div className="p-3 bg-green-500/10 rounded-lg">
-                    <Clock className="w-6 h-6 text-green-400" />
-                  </div>
-                  <div>
-                    <p className="text-green-500/60 font-mono text-xs uppercase">Total Tid</p>
-                    <p className="text-green-400 font-mono text-xl">
-                      {formatMinutes(
-                        (stats.calendars.calendar_1?.total_minutes || 0) +
-                        (stats.calendars.calendar_2?.total_minutes || 0)
-                      )}
+                <CardContent className="p-4 flex items-center justify-between">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={goToPreviousWeek}
+                    className="text-green-500 hover:text-green-400 hover:bg-green-500/10"
+                    data-testid="prev-week-button"
+                  >
+                    <ChevronLeft className="w-6 h-6" />
+                  </Button>
+                  
+                  <div className="text-center flex-1">
+                    <p className="text-green-500/60 font-mono text-xs uppercase">
+                      {weekOffset === 0 ? "Denna vecka" : weekOffset > 0 ? `+${weekOffset} vecka` : `${weekOffset} vecka`}
                     </p>
+                    <p className="text-green-400 font-mono text-lg">
+                      V{stats.week_number}
+                    </p>
+                    {weekOffset !== 0 && (
+                      <button
+                        onClick={goToCurrentWeek}
+                        className="text-green-500/50 hover:text-green-400 font-mono text-xs underline mt-1"
+                      >
+                        Tillbaka till idag
+                      </button>
+                    )}
                   </div>
+                  
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={goToNextWeek}
+                    disabled={!stats?.has_next_week}
+                    className={`text-green-500 hover:text-green-400 hover:bg-green-500/10 ${!stats?.has_next_week ? 'opacity-30 cursor-not-allowed' : ''}`}
+                    data-testid="next-week-button"
+                  >
+                    <ChevronRight className="w-6 h-6" />
+                  </Button>
                 </CardContent>
               </Card>
               

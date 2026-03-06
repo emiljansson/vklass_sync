@@ -1280,16 +1280,23 @@ async def parse_ical_for_stats(url: str, week_start: datetime, week_end: datetim
 
 
 @api_router.get("/stats/weekly")
-async def get_weekly_stats():
-    """Get weekly statistics for the stats page - uses scheduled activities with actual duration"""
+async def get_weekly_stats(week_offset: int = 0):
+    """Get weekly statistics for the stats page - uses scheduled activities with actual duration
+    
+    Args:
+        week_offset: Number of weeks to offset from current week (0 = current, 1 = next week, -1 = last week)
+    """
     from urllib.parse import urlparse, parse_qs
     
     settings = await get_settings_from_db()
     
-    # Get current week's Monday and Sunday
+    # Get the target week's Monday and Sunday based on offset
     now = datetime.now(SWEDISH_TZ)
     days_since_monday = now.weekday()
-    monday = (now - timedelta(days=days_since_monday)).replace(hour=0, minute=0, second=0, microsecond=0)
+    current_monday = (now - timedelta(days=days_since_monday)).replace(hour=0, minute=0, second=0, microsecond=0)
+    
+    # Apply week offset
+    monday = current_monday + timedelta(weeks=week_offset)
     sunday = monday + timedelta(days=6, hours=23, minutes=59, seconds=59)
     
     monday_str = monday.strftime("%Y-%m-%d")
@@ -1346,10 +1353,25 @@ async def get_weekly_stats():
                 calendar_summaries[cal_index][subject] = 0
             calendar_summaries[cal_index][subject] += duration
     
+    # Check if there's data for the next week
+    next_monday = monday + timedelta(weeks=1)
+    next_sunday = next_monday + timedelta(days=6, hours=23, minutes=59, seconds=59)
+    has_next_week = False
+    
+    for cal_index in [1, 2]:
+        url = settings.ical_url_1 if cal_index == 1 else settings.ical_url_2
+        if url:
+            next_week_events = await parse_ical_for_stats(url, next_monday, next_sunday)
+            if next_week_events:
+                has_next_week = True
+                break
+    
     # Format response
     return {
-        "week_number": now.isocalendar()[1],
-        "year": now.year,
+        "week_number": monday.isocalendar()[1],
+        "year": monday.year,
+        "week_offset": week_offset,
+        "has_next_week": has_next_week,
         "period": {
             "start": monday_str,
             "end": sunday_str
