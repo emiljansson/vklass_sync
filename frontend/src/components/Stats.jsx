@@ -12,10 +12,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Cell,
-  PieChart,
-  Pie,
-  Legend
+  Cell
 } from "recharts";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -59,31 +56,9 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-const CustomPieTooltip = ({ active, payload }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className="bg-[#141e14] border-2 border-green-500/50 rounded p-3 shadow-lg">
-        <p className="text-green-400 font-mono text-sm mb-1">{payload[0].name}</p>
-        <p className="text-green-300 font-mono text-lg">
-          {formatMinutes(payload[0].value)}
-        </p>
-      </div>
-    );
-  }
-  return null;
-};
-
-// Truncate long subject names
-const truncateName = (name, maxLength = 15) => {
-  if (!name) return "Okänt";
-  if (name.length <= maxLength) return name;
-  return name.substring(0, maxLength - 1) + "…";
-};
-
 const CalendarStats = ({ name, subjects, totalMinutes, colorOffset = 0 }) => {
   const chartData = subjects.map((s, index) => ({
     name: s.name || "Okänt ämne",
-    shortName: truncateName(s.name || "Okänt ämne", 18),
     minutes: s.minutes,
     fill: CHART_COLORS[(index + colorOffset) % CHART_COLORS.length]
   }));
@@ -106,6 +81,9 @@ const CalendarStats = ({ name, subjects, totalMinutes, colorOffset = 0 }) => {
     );
   }
 
+  // Calculate dynamic height based on number of subjects (40px per bar minimum)
+  const chartHeight = Math.max(300, chartData.length * 45);
+
   return (
     <Card className="bg-[#0f1a0f] border-2 border-green-500/30">
       <CardHeader className="pb-2">
@@ -119,14 +97,14 @@ const CalendarStats = ({ name, subjects, totalMinutes, colorOffset = 0 }) => {
           </span>
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-6">
-        {/* Bar Chart */}
-        <div className="h-64">
+      <CardContent>
+        {/* Bar Chart with labels on bars */}
+        <div style={{ height: `${chartHeight}px` }}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={chartData}
               layout="vertical"
-              margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              margin={{ top: 5, right: 60, left: 10, bottom: 5 }}
             >
               <CartesianGrid 
                 strokeDasharray="3 3" 
@@ -139,19 +117,28 @@ const CalendarStats = ({ name, subjects, totalMinutes, colorOffset = 0 }) => {
                 stroke="#22c55e"
                 tick={{ fill: "#22c55e", fontSize: 12 }}
                 tickFormatter={(value) => `${Math.floor(value / 60)}h`}
+                hide
               />
               <YAxis 
-                dataKey="shortName" 
+                dataKey="name" 
                 type="category" 
-                width={120}
+                width={180}
                 stroke="#22c55e"
-                tick={{ fill: "#4ade80", fontSize: 11 }}
+                tick={{ fill: "#4ade80", fontSize: 12 }}
               />
               <Tooltip content={<CustomTooltip />} />
               <Bar 
                 dataKey="minutes" 
                 radius={[0, 4, 4, 0]}
                 isAnimationActive={false}
+                barSize={28}
+                label={{
+                  position: 'right',
+                  fill: '#4ade80',
+                  fontSize: 12,
+                  fontFamily: 'Share Tech Mono, monospace',
+                  formatter: (value) => formatMinutes(value)
+                }}
               >
                 {chartData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.fill} />
@@ -159,61 +146,6 @@ const CalendarStats = ({ name, subjects, totalMinutes, colorOffset = 0 }) => {
               </Bar>
             </BarChart>
           </ResponsiveContainer>
-        </div>
-
-        {/* Pie Chart */}
-        <div className="h-56">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart>
-              <Pie
-                data={chartData}
-                cx="50%"
-                cy="50%"
-                innerRadius={35}
-                outerRadius={70}
-                paddingAngle={2}
-                dataKey="minutes"
-                nameKey="name"
-                isAnimationActive={false}
-              >
-                {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.fill} />
-                ))}
-              </Pie>
-              <Tooltip content={<CustomPieTooltip />} />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
-
-        {/* Subject List with percentages */}
-        <div className="space-y-2">
-          {chartData.map((subject, index) => {
-            const percent = totalMinutes > 0 ? Math.round((subject.minutes / totalMinutes) * 100) : 0;
-            return (
-              <div 
-                key={index}
-                className="flex items-center justify-between p-2 bg-green-500/5 rounded border border-green-500/20 gap-2"
-              >
-                <div className="flex items-center gap-2 min-w-0 flex-1">
-                  <div 
-                    className="w-3 h-3 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: subject.fill }}
-                  />
-                  <span className="text-green-400 font-mono text-sm truncate" title={subject.name}>
-                    {subject.name}
-                  </span>
-                </div>
-                <div className="flex items-center gap-3 flex-shrink-0">
-                  <span className="text-green-500/50 font-mono text-xs">
-                    {percent}%
-                  </span>
-                  <span className="text-green-300 font-mono text-sm min-w-[60px] text-right">
-                    {formatMinutes(subject.minutes)}
-                  </span>
-                </div>
-              </div>
-            );
-          })}
         </div>
       </CardContent>
     </Card>
