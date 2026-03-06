@@ -730,7 +730,7 @@ export const Settings = ({ settings, onUpdateSettings }) => {
               </div>
               
               <div className="space-y-2">
-                <Label htmlFor="webpushr_test_user_id" className="text-green-400">Test User ID (valfritt)</Label>
+                <Label htmlFor="webpushr_test_user_id" className="text-green-400">Test User ID (valfritt) 197920509</Label>
                 <Input
                   id="webpushr_test_user_id"
                   value={formData.webpushr_test_user_id}
