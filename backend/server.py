@@ -1053,6 +1053,26 @@ async def health_check():
     """Health check endpoint"""
     return {"status": "healthy"}
 
+@api_router.post("/migrate/fix-past-new-events")
+async def fix_past_new_events():
+    """Fix past events that still have status 'new' - change them to 'normal'"""
+    events = await db.events.find({"status": "new"}, {"_id": 0}).to_list(10000)
+    fixed_count = 0
+    
+    for event in events:
+        start = event.get('start', '')
+        event_time = event.get('event_time')
+        
+        if is_event_past(start, event_time):
+            await db.events.update_one(
+                {"id": event.get('id')},
+                {"$set": {"status": "normal"}}
+            )
+            fixed_count += 1
+            logger.info(f"Fixed past event: {event.get('summary')}")
+    
+    return {"success": True, "message": f"Fixade {fixed_count} gamla events", "fixed_count": fixed_count}
+
 @api_router.get("/debug/cid-status")
 async def debug_cid_status():
     """Debug endpoint to check event mapping status"""
