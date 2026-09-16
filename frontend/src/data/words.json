@@ -1,0 +1,14942 @@
+[
+{
+"en": "the",
+"sv": "den/det"
+},
+{
+"en": "be",
+"sv": "vara"
+},
+{
+"en": "to",
+"sv": "till"
+},
+{
+"en": "of",
+"sv": "av"
+},
+{
+"en": "and",
+"sv": "och"
+},
+{
+"en": "a",
+"sv": "en/ett"
+},
+{
+"en": "in",
+"sv": "i"
+},
+{
+"en": "that",
+"sv": "att/den där"
+},
+{
+"en": "have",
+"sv": "ha"
+},
+{
+"en": "I",
+"sv": "jag"
+},
+{
+"en": "it",
+"sv": "det"
+},
+{
+"en": "for",
+"sv": "för"
+},
+{
+"en": "not",
+"sv": "inte"
+},
+{
+"en": "on",
+"sv": "på"
+},
+{
+"en": "with",
+"sv": "med"
+},
+{
+"en": "he",
+"sv": "han"
+},
+{
+"en": "as",
+"sv": "som"
+},
+{
+"en": "you",
+"sv": "du/ni"
+},
+{
+"en": "do",
+"sv": "göra"
+},
+{
+"en": "at",
+"sv": "vid"
+},
+{
+"en": "this",
+"sv": "denna"
+},
+{
+"en": "but",
+"sv": "men"
+},
+{
+"en": "his",
+"sv": "hans"
+},
+{
+"en": "by",
+"sv": "av/vid"
+},
+{
+"en": "from",
+"sv": "från"
+},
+{
+"en": "they",
+"sv": "de"
+},
+{
+"en": "we",
+"sv": "vi"
+},
+{
+"en": "say",
+"sv": "säga"
+},
+{
+"en": "her",
+"sv": "hennes/henne"
+},
+{
+"en": "she",
+"sv": "hon"
+},
+{
+"en": "or",
+"sv": "eller"
+},
+{
+"en": "an",
+"sv": "en/ett"
+},
+{
+"en": "will",
+"sv": "ska/vilja"
+},
+{
+"en": "my",
+"sv": "min"
+},
+{
+"en": "one",
+"sv": "en"
+},
+{
+"en": "all",
+"sv": "alla"
+},
+{
+"en": "would",
+"sv": "skulle"
+},
+{
+"en": "there",
+"sv": "där"
+},
+{
+"en": "their",
+"sv": "deras"
+},
+{
+"en": "what",
+"sv": "vad"
+},
+{
+"en": "so",
+"sv": "så"
+},
+{
+"en": "up",
+"sv": "upp"
+},
+{
+"en": "out",
+"sv": "ut"
+},
+{
+"en": "if",
+"sv": "om"
+},
+{
+"en": "about",
+"sv": "om"
+},
+{
+"en": "who",
+"sv": "vem"
+},
+{
+"en": "get",
+"sv": "få"
+},
+{
+"en": "which",
+"sv": "vilken"
+},
+{
+"en": "go",
+"sv": "gå"
+},
+{
+"en": "me",
+"sv": "mig"
+},
+{
+"en": "when",
+"sv": "när"
+},
+{
+"en": "make",
+"sv": "göra"
+},
+{
+"en": "can",
+"sv": "kunna"
+},
+{
+"en": "like",
+"sv": "gilla/som"
+},
+{
+"en": "time",
+"sv": "tid"
+},
+{
+"en": "no",
+"sv": "nej/ingen"
+},
+{
+"en": "just",
+"sv": "bara"
+},
+{
+"en": "him",
+"sv": "honom"
+},
+{
+"en": "know",
+"sv": "veta"
+},
+{
+"en": "take",
+"sv": "ta"
+},
+{
+"en": "people",
+"sv": "människor"
+},
+{
+"en": "into",
+"sv": "in i"
+},
+{
+"en": "year",
+"sv": "år"
+},
+{
+"en": "your",
+"sv": "din"
+},
+{
+"en": "good",
+"sv": "bra"
+},
+{
+"en": "some",
+"sv": "några"
+},
+{
+"en": "could",
+"sv": "kunde"
+},
+{
+"en": "them",
+"sv": "dem"
+},
+{
+"en": "see",
+"sv": "se"
+},
+{
+"en": "other",
+"sv": "annan"
+},
+{
+"en": "than",
+"sv": "än"
+},
+{
+"en": "then",
+"sv": "sedan"
+},
+{
+"en": "now",
+"sv": "nu"
+},
+{
+"en": "look",
+"sv": "titta"
+},
+{
+"en": "only",
+"sv": "bara"
+},
+{
+"en": "come",
+"sv": "komma"
+},
+{
+"en": "its",
+"sv": "dess"
+},
+{
+"en": "over",
+"sv": "över"
+},
+{
+"en": "think",
+"sv": "tänka"
+},
+{
+"en": "also",
+"sv": "också"
+},
+{
+"en": "back",
+"sv": "tillbaka"
+},
+{
+"en": "after",
+"sv": "efter"
+},
+{
+"en": "use",
+"sv": "använda"
+},
+{
+"en": "two",
+"sv": "två"
+},
+{
+"en": "how",
+"sv": "hur"
+},
+{
+"en": "our",
+"sv": "vår"
+},
+{
+"en": "work",
+"sv": "arbete/arbeta"
+},
+{
+"en": "first",
+"sv": "första"
+},
+{
+"en": "well",
+"sv": "bra"
+},
+{
+"en": "way",
+"sv": "sätt"
+},
+{
+"en": "even",
+"sv": "även"
+},
+{
+"en": "new",
+"sv": "ny"
+},
+{
+"en": "want",
+"sv": "vilja"
+},
+{
+"en": "because",
+"sv": "eftersom"
+},
+{
+"en": "any",
+"sv": "någon"
+},
+{
+"en": "these",
+"sv": "dessa"
+},
+{
+"en": "give",
+"sv": "ge"
+},
+{
+"en": "day",
+"sv": "dag"
+},
+{
+"en": "most",
+"sv": "mest"
+},
+{
+"en": "us",
+"sv": "oss"
+},
+{
+"en": "is",
+"sv": "är"
+},
+{
+"en": "are",
+"sv": "är"
+},
+{
+"en": "was",
+"sv": "var"
+},
+{
+"en": "were",
+"sv": "var"
+},
+{
+"en": "been",
+"sv": "varit"
+},
+{
+"en": "has",
+"sv": "har"
+},
+{
+"en": "had",
+"sv": "hade"
+},
+{
+"en": "did",
+"sv": "gjorde"
+},
+{
+"en": "does",
+"sv": "gör"
+},
+{
+"en": "am",
+"sv": "är"
+},
+{
+"en": "should",
+"sv": "bör"
+},
+{
+"en": "may",
+"sv": "får"
+},
+{
+"en": "must",
+"sv": "måste"
+},
+{
+"en": "shall",
+"sv": "ska"
+},
+{
+"en": "might",
+"sv": "kanske"
+},
+{
+"en": "here",
+"sv": "här"
+},
+{
+"en": "where",
+"sv": "var"
+},
+{
+"en": "why",
+"sv": "varför"
+},
+{
+"en": "before",
+"sv": "före"
+},
+{
+"en": "too",
+"sv": "också"
+},
+{
+"en": "very",
+"sv": "väldigt"
+},
+{
+"en": "something",
+"sv": "något"
+},
+{
+"en": "much",
+"sv": "mycket"
+},
+{
+"en": "many",
+"sv": "många"
+},
+{
+"en": "more",
+"sv": "mer"
+},
+{
+"en": "such",
+"sv": "sådan"
+},
+{
+"en": "through",
+"sv": "genom"
+},
+{
+"en": "still",
+"sv": "fortfarande"
+},
+{
+"en": "own",
+"sv": "egen"
+},
+{
+"en": "same",
+"sv": "samma"
+},
+{
+"en": "last",
+"sv": "sista"
+},
+{
+"en": "long",
+"sv": "lång"
+},
+{
+"en": "great",
+"sv": "stor"
+},
+{
+"en": "little",
+"sv": "liten"
+},
+{
+"en": "old",
+"sv": "gammal"
+},
+{
+"en": "right",
+"sv": "rätt"
+},
+{
+"en": "big",
+"sv": "stor"
+},
+{
+"en": "high",
+"sv": "hög"
+},
+{
+"en": "different",
+"sv": "annorlunda"
+},
+{
+"en": "small",
+"sv": "liten"
+},
+{
+"en": "large",
+"sv": "stor"
+},
+{
+"en": "next",
+"sv": "nästa"
+},
+{
+"en": "early",
+"sv": "tidig"
+},
+{
+"en": "young",
+"sv": "ung"
+},
+{
+"en": "important",
+"sv": "viktig"
+},
+{
+"en": "few",
+"sv": "få"
+},
+{
+"en": "public",
+"sv": "offentlig"
+},
+{
+"en": "bad",
+"sv": "dålig"
+},
+{
+"en": "able",
+"sv": "kapabel"
+},
+{
+"en": "house",
+"sv": "hus"
+},
+{
+"en": "home",
+"sv": "hem"
+},
+{
+"en": "school",
+"sv": "skola"
+},
+{
+"en": "world",
+"sv": "värld"
+},
+{
+"en": "life",
+"sv": "liv"
+},
+{
+"en": "hand",
+"sv": "hand"
+},
+{
+"en": "part",
+"sv": "del"
+},
+{
+"en": "child",
+"sv": "barn"
+},
+{
+"en": "eye",
+"sv": "öga"
+},
+{
+"en": "woman",
+"sv": "kvinna"
+},
+{
+"en": "man",
+"sv": "man"
+},
+{
+"en": "place",
+"sv": "plats"
+},
+{
+"en": "case",
+"sv": "fall"
+},
+{
+"en": "week",
+"sv": "vecka"
+},
+{
+"en": "company",
+"sv": "företag"
+},
+{
+"en": "system",
+"sv": "system"
+},
+{
+"en": "program",
+"sv": "program"
+},
+{
+"en": "question",
+"sv": "fråga"
+},
+{
+"en": "government",
+"sv": "regering"
+},
+{
+"en": "number",
+"sv": "nummer"
+},
+{
+"en": "night",
+"sv": "natt"
+},
+{
+"en": "point",
+"sv": "punkt"
+},
+{
+"en": "fact",
+"sv": "fakta"
+},
+{
+"en": "group",
+"sv": "grupp"
+},
+{
+"en": "problem",
+"sv": "problem"
+},
+{
+"en": "water",
+"sv": "vatten"
+},
+{
+"en": "room",
+"sv": "rum"
+},
+{
+"en": "mother",
+"sv": "mamma"
+},
+{
+"en": "area",
+"sv": "område"
+},
+{
+"en": "money",
+"sv": "pengar"
+},
+{
+"en": "story",
+"sv": "berättelse"
+},
+{
+"en": "month",
+"sv": "månad"
+},
+{
+"en": "lot",
+"sv": "mycket"
+},
+{
+"en": "study",
+"sv": "studera"
+},
+{
+"en": "book",
+"sv": "bok"
+},
+{
+"en": "job",
+"sv": "jobb"
+},
+{
+"en": "word",
+"sv": "ord"
+},
+{
+"en": "business",
+"sv": "affärer"
+},
+{
+"en": "issue",
+"sv": "fråga"
+},
+{
+"en": "side",
+"sv": "sida"
+},
+{
+"en": "kind",
+"sv": "sort"
+},
+{
+"en": "head",
+"sv": "huvud"
+},
+{
+"en": "service",
+"sv": "tjänst"
+},
+{
+"en": "friend",
+"sv": "vän"
+},
+{
+"en": "father",
+"sv": "pappa"
+},
+{
+"en": "power",
+"sv": "makt"
+},
+{
+"en": "hour",
+"sv": "timme"
+},
+{
+"en": "game",
+"sv": "spel"
+},
+{
+"en": "line",
+"sv": "linje"
+},
+{
+"en": "end",
+"sv": "slut"
+},
+{
+"en": "member",
+"sv": "medlem"
+},
+{
+"en": "law",
+"sv": "lag"
+},
+{
+"en": "car",
+"sv": "bil"
+},
+{
+"en": "city",
+"sv": "stad"
+},
+{
+"en": "community",
+"sv": "gemenskap"
+},
+{
+"en": "name",
+"sv": "namn"
+},
+{
+"en": "president",
+"sv": "president"
+},
+{
+"en": "team",
+"sv": "lag"
+},
+{
+"en": "minute",
+"sv": "minut"
+},
+{
+"en": "idea",
+"sv": "idé"
+},
+{
+"en": "kid",
+"sv": "barn"
+},
+{
+"en": "body",
+"sv": "kropp"
+},
+{
+"en": "information",
+"sv": "information"
+},
+{
+"en": "parent",
+"sv": "förälder"
+},
+{
+"en": "face",
+"sv": "ansikte"
+},
+{
+"en": "others",
+"sv": "andra"
+},
+{
+"en": "level",
+"sv": "nivå"
+},
+{
+"en": "office",
+"sv": "kontor"
+},
+{
+"en": "door",
+"sv": "dörr"
+},
+{
+"en": "health",
+"sv": "hälsa"
+},
+{
+"en": "person",
+"sv": "person"
+},
+{
+"en": "art",
+"sv": "konst"
+},
+{
+"en": "war",
+"sv": "krig"
+},
+{
+"en": "history",
+"sv": "historia"
+},
+{
+"en": "party",
+"sv": "fest"
+},
+{
+"en": "result",
+"sv": "resultat"
+},
+{
+"en": "change",
+"sv": "förändring"
+},
+{
+"en": "morning",
+"sv": "morgon"
+},
+{
+"en": "reason",
+"sv": "orsak"
+},
+{
+"en": "research",
+"sv": "forskning"
+},
+{
+"en": "girl",
+"sv": "flicka"
+},
+{
+"en": "guy",
+"sv": "kille"
+},
+{
+"en": "moment",
+"sv": "ögonblick"
+},
+{
+"en": "air",
+"sv": "luft"
+},
+{
+"en": "teacher",
+"sv": "lärare"
+},
+{
+"en": "force",
+"sv": "kraft"
+},
+{
+"en": "education",
+"sv": "utbildning"
+},
+{
+"en": "find",
+"sv": "hitta"
+},
+{
+"en": "tell",
+"sv": "berätta"
+},
+{
+"en": "ask",
+"sv": "fråga"
+},
+{
+"en": "seem",
+"sv": "verka"
+},
+{
+"en": "feel",
+"sv": "känna"
+},
+{
+"en": "try",
+"sv": "försöka"
+},
+{
+"en": "leave",
+"sv": "lämna"
+},
+{
+"en": "call",
+"sv": "ringa"
+},
+{
+"en": "keep",
+"sv": "behålla"
+},
+{
+"en": "let",
+"sv": "låta"
+},
+{
+"en": "begin",
+"sv": "börja"
+},
+{
+"en": "help",
+"sv": "hjälpa"
+},
+{
+"en": "talk",
+"sv": "prata"
+},
+{
+"en": "turn",
+"sv": "vända"
+},
+{
+"en": "start",
+"sv": "börja"
+},
+{
+"en": "show",
+"sv": "visa"
+},
+{
+"en": "hear",
+"sv": "höra"
+},
+{
+"en": "play",
+"sv": "leka/spela"
+},
+{
+"en": "run",
+"sv": "springa"
+},
+{
+"en": "move",
+"sv": "flytta"
+},
+{
+"en": "live",
+"sv": "leva"
+},
+{
+"en": "believe",
+"sv": "tro"
+},
+{
+"en": "hold",
+"sv": "hålla"
+},
+{
+"en": "bring",
+"sv": "ta med"
+},
+{
+"en": "happen",
+"sv": "hända"
+},
+{
+"en": "write",
+"sv": "skriva"
+},
+{
+"en": "provide",
+"sv": "förse"
+},
+{
+"en": "sit",
+"sv": "sitta"
+},
+{
+"en": "stand",
+"sv": "stå"
+},
+{
+"en": "lose",
+"sv": "förlora"
+},
+{
+"en": "pay",
+"sv": "betala"
+},
+{
+"en": "meet",
+"sv": "träffa"
+},
+{
+"en": "include",
+"sv": "inkludera"
+},
+{
+"en": "continue",
+"sv": "fortsätta"
+},
+{
+"en": "set",
+"sv": "sätta"
+},
+{
+"en": "learn",
+"sv": "lära"
+},
+{
+"en": "lead",
+"sv": "leda"
+},
+{
+"en": "understand",
+"sv": "förstå"
+},
+{
+"en": "watch",
+"sv": "titta"
+},
+{
+"en": "follow",
+"sv": "följa"
+},
+{
+"en": "stop",
+"sv": "stoppa"
+},
+{
+"en": "create",
+"sv": "skapa"
+},
+{
+"en": "speak",
+"sv": "tala"
+},
+{
+"en": "read",
+"sv": "läsa"
+},
+{
+"en": "allow",
+"sv": "tillåta"
+},
+{
+"en": "add",
+"sv": "lägga till"
+},
+{
+"en": "spend",
+"sv": "spendera"
+},
+{
+"en": "grow",
+"sv": "växa"
+},
+{
+"en": "open",
+"sv": "öppna"
+},
+{
+"en": "walk",
+"sv": "gå"
+},
+{
+"en": "win",
+"sv": "vinna"
+},
+{
+"en": "offer",
+"sv": "erbjuda"
+},
+{
+"en": "remember",
+"sv": "komma ihåg"
+},
+{
+"en": "love",
+"sv": "älska"
+},
+{
+"en": "consider",
+"sv": "överväga"
+},
+{
+"en": "appear",
+"sv": "dyka upp"
+},
+{
+"en": "buy",
+"sv": "köpa"
+},
+{
+"en": "wait",
+"sv": "vänta"
+},
+{
+"en": "serve",
+"sv": "servera"
+},
+{
+"en": "die",
+"sv": "dö"
+},
+{
+"en": "send",
+"sv": "skicka"
+},
+{
+"en": "expect",
+"sv": "förvänta"
+},
+{
+"en": "build",
+"sv": "bygga"
+},
+{
+"en": "stay",
+"sv": "stanna"
+},
+{
+"en": "fall",
+"sv": "falla"
+},
+{
+"en": "cut",
+"sv": "skära"
+},
+{
+"en": "reach",
+"sv": "nå"
+},
+{
+"en": "kill",
+"sv": "döda"
+},
+{
+"en": "remain",
+"sv": "förbli"
+},
+{
+"en": "suggest",
+"sv": "föreslå"
+},
+{
+"en": "raise",
+"sv": "höja"
+},
+{
+"en": "pass",
+"sv": "passa"
+},
+{
+"en": "sell",
+"sv": "sälja"
+},
+{
+"en": "require",
+"sv": "kräva"
+},
+{
+"en": "report",
+"sv": "rapportera"
+},
+{
+"en": "decide",
+"sv": "bestämma"
+},
+{
+"en": "pull",
+"sv": "dra"
+},
+{
+"en": "return",
+"sv": "återvända"
+},
+{
+"en": "explain",
+"sv": "förklara"
+},
+{
+"en": "hope",
+"sv": "hoppas"
+},
+{
+"en": "develop",
+"sv": "utveckla"
+},
+{
+"en": "carry",
+"sv": "bära"
+},
+{
+"en": "break",
+"sv": "bryta"
+},
+{
+"en": "receive",
+"sv": "ta emot"
+},
+{
+"en": "agree",
+"sv": "komma överens"
+},
+{
+"en": "support",
+"sv": "stödja"
+},
+{
+"en": "hit",
+"sv": "träffa"
+},
+{
+"en": "produce",
+"sv": "producera"
+},
+{
+"en": "eat",
+"sv": "äta"
+},
+{
+"en": "cover",
+"sv": "täcka"
+},
+{
+"en": "catch",
+"sv": "fånga"
+},
+{
+"en": "draw",
+"sv": "rita"
+},
+{
+"en": "choose",
+"sv": "välja"
+},
+{
+"en": "cause",
+"sv": "orsaka"
+},
+{
+"en": "drive",
+"sv": "köra"
+},
+{
+"en": "put",
+"sv": "lägga"
+},
+{
+"en": "teach",
+"sv": "undervisa"
+},
+{
+"en": "save",
+"sv": "spara"
+},
+{
+"en": "fight",
+"sv": "kämpa"
+},
+{
+"en": "throw",
+"sv": "kasta"
+},
+{
+"en": "rise",
+"sv": "stiga"
+},
+{
+"en": "finish",
+"sv": "avsluta"
+},
+{
+"en": "forget",
+"sv": "glömma"
+},
+{
+"en": "join",
+"sv": "gå med"
+},
+{
+"en": "share",
+"sv": "dela"
+},
+{
+"en": "close",
+"sv": "stänga"
+},
+{
+"en": "answer",
+"sv": "svara"
+},
+{
+"en": "laugh",
+"sv": "skratta"
+},
+{
+"en": "smile",
+"sv": "le"
+},
+{
+"en": "cry",
+"sv": "gråta"
+},
+{
+"en": "sleep",
+"sv": "sova"
+},
+{
+"en": "dream",
+"sv": "drömma"
+},
+{
+"en": "wake",
+"sv": "vakna"
+},
+{
+"en": "cook",
+"sv": "laga mat"
+},
+{
+"en": "clean",
+"sv": "städa"
+},
+{
+"en": "wash",
+"sv": "tvätta"
+},
+{
+"en": "wear",
+"sv": "bära (kläder)"
+},
+{
+"en": "dress",
+"sv": "klä sig"
+},
+{
+"en": "sing",
+"sv": "sjunga"
+},
+{
+"en": "dance",
+"sv": "dansa"
+},
+{
+"en": "swim",
+"sv": "simma"
+},
+{
+"en": "fly",
+"sv": "flyga"
+},
+{
+"en": "ride",
+"sv": "rida"
+},
+{
+"en": "climb",
+"sv": "klättra"
+},
+{
+"en": "jump",
+"sv": "hoppa"
+},
+{
+"en": "push",
+"sv": "knuffa"
+},
+{
+"en": "touch",
+"sv": "röra"
+},
+{
+"en": "lie",
+"sv": "ligga"
+},
+{
+"en": "hang",
+"sv": "hänga"
+},
+{
+"en": "shake",
+"sv": "skaka"
+},
+{
+"en": "fill",
+"sv": "fylla"
+},
+{
+"en": "pick",
+"sv": "plocka"
+},
+{
+"en": "drop",
+"sv": "släppa"
+},
+{
+"en": "hide",
+"sv": "gömma"
+},
+{
+"en": "seek",
+"sv": "söka"
+},
+{
+"en": "search",
+"sv": "söka"
+},
+{
+"en": "discover",
+"sv": "upptäcka"
+},
+{
+"en": "explore",
+"sv": "utforska"
+},
+{
+"en": "travel",
+"sv": "resa"
+},
+{
+"en": "visit",
+"sv": "besöka"
+},
+{
+"en": "arrive",
+"sv": "ankomma"
+},
+{
+"en": "enter",
+"sv": "gå in"
+},
+{
+"en": "exit",
+"sv": "gå ut"
+},
+{
+"en": "escape",
+"sv": "fly"
+},
+{
+"en": "avoid",
+"sv": "undvika"
+},
+{
+"en": "protect",
+"sv": "skydda"
+},
+{
+"en": "defend",
+"sv": "försvara"
+},
+{
+"en": "attack",
+"sv": "attackera"
+},
+{
+"en": "destroy",
+"sv": "förstöra"
+},
+{
+"en": "repair",
+"sv": "laga"
+},
+{
+"en": "fix",
+"sv": "fixa"
+},
+{
+"en": "improve",
+"sv": "förbättra"
+},
+{
+"en": "increase",
+"sv": "öka"
+},
+{
+"en": "decrease",
+"sv": "minska"
+},
+{
+"en": "reduce",
+"sv": "reducera"
+},
+{
+"en": "compare",
+"sv": "jämföra"
+},
+{
+"en": "measure",
+"sv": "mäta"
+},
+{
+"en": "count",
+"sv": "räkna"
+},
+{
+"en": "check",
+"sv": "kontrollera"
+},
+{
+"en": "test",
+"sv": "testa"
+},
+{
+"en": "prove",
+"sv": "bevisa"
+},
+{
+"en": "solve",
+"sv": "lösa"
+},
+{
+"en": "manage",
+"sv": "hantera"
+},
+{
+"en": "control",
+"sv": "kontrollera"
+},
+{
+"en": "organize",
+"sv": "organisera"
+},
+{
+"en": "prepare",
+"sv": "förbereda"
+},
+{
+"en": "plan",
+"sv": "planera"
+},
+{
+"en": "design",
+"sv": "designa"
+},
+{
+"en": "invent",
+"sv": "uppfinna"
+},
+{
+"en": "imagine",
+"sv": "föreställa"
+},
+{
+"en": "guess",
+"sv": "gissa"
+},
+{
+"en": "wonder",
+"sv": "undrar"
+},
+{
+"en": "doubt",
+"sv": "tvivla"
+},
+{
+"en": "trust",
+"sv": "lita"
+},
+{
+"en": "respect",
+"sv": "respektera"
+},
+{
+"en": "admire",
+"sv": "beundra"
+},
+{
+"en": "enjoy",
+"sv": "njuta"
+},
+{
+"en": "prefer",
+"sv": "föredra"
+},
+{
+"en": "hate",
+"sv": "hata"
+},
+{
+"en": "fear",
+"sv": "frukta"
+},
+{
+"en": "worry",
+"sv": "oroa"
+},
+{
+"en": "care",
+"sv": "bry sig"
+},
+{
+"en": "need",
+"sv": "behöva"
+},
+{
+"en": "wish",
+"sv": "önska"
+},
+{
+"en": "promise",
+"sv": "lova"
+},
+{
+"en": "refuse",
+"sv": "vägra"
+},
+{
+"en": "accept",
+"sv": "acceptera"
+},
+{
+"en": "invite",
+"sv": "bjuda in"
+},
+{
+"en": "introduce",
+"sv": "presentera"
+},
+{
+"en": "welcome",
+"sv": "välkomna"
+},
+{
+"en": "thank",
+"sv": "tacka"
+},
+{
+"en": "apologize",
+"sv": "be om ursäkt"
+},
+{
+"en": "forgive",
+"sv": "förlåta"
+},
+{
+"en": "blame",
+"sv": "skylla"
+},
+{
+"en": "complain",
+"sv": "klaga"
+},
+{
+"en": "argue",
+"sv": "argumentera"
+},
+{
+"en": "discuss",
+"sv": "diskutera"
+},
+{
+"en": "mention",
+"sv": "nämna"
+},
+{
+"en": "describe",
+"sv": "beskriva"
+},
+{
+"en": "express",
+"sv": "uttrycka"
+},
+{
+"en": "announce",
+"sv": "tillkännage"
+},
+{
+"en": "declare",
+"sv": "deklarera"
+},
+{
+"en": "claim",
+"sv": "hävda"
+},
+{
+"en": "admit",
+"sv": "erkänna"
+},
+{
+"en": "deny",
+"sv": "förneka"
+},
+{
+"en": "warn",
+"sv": "varna"
+},
+{
+"en": "advise",
+"sv": "råda"
+},
+{
+"en": "recommend",
+"sv": "rekommendera"
+},
+{
+"en": "encourage",
+"sv": "uppmuntra"
+},
+{
+"en": "inspire",
+"sv": "inspirera"
+},
+{
+"en": "influence",
+"sv": "påverka"
+},
+{
+"en": "persuade",
+"sv": "övertala"
+},
+{
+"en": "convince",
+"sv": "övertyga"
+},
+{
+"en": "prevent",
+"sv": "förhindra"
+},
+{
+"en": "pause",
+"sv": "pausa"
+},
+{
+"en": "repeat",
+"sv": "upprepa"
+},
+{
+"en": "practice",
+"sv": "öva"
+},
+{
+"en": "train",
+"sv": "träna"
+},
+{
+"en": "exercise",
+"sv": "motionera"
+},
+{
+"en": "rest",
+"sv": "vila"
+},
+{
+"en": "relax",
+"sv": "slappna av"
+},
+{
+"en": "recover",
+"sv": "återhämta"
+},
+{
+"en": "heal",
+"sv": "läka"
+},
+{
+"en": "suffer",
+"sv": "lida"
+},
+{
+"en": "hurt",
+"sv": "skada"
+},
+{
+"en": "injure",
+"sv": "skada"
+},
+{
+"en": "bleed",
+"sv": "blöda"
+},
+{
+"en": "breathe",
+"sv": "andas"
+},
+{
+"en": "cough",
+"sv": "hosta"
+},
+{
+"en": "sneeze",
+"sv": "nysa"
+},
+{
+"en": "taste",
+"sv": "smaka"
+},
+{
+"en": "smell",
+"sv": "lukta"
+},
+{
+"en": "listen",
+"sv": "lyssna"
+},
+{
+"en": "observe",
+"sv": "observera"
+},
+{
+"en": "notice",
+"sv": "lägga märke till"
+},
+{
+"en": "recognize",
+"sv": "känna igen"
+},
+{
+"en": "realize",
+"sv": "inse"
+},
+{
+"en": "remind",
+"sv": "påminna"
+},
+{
+"en": "recall",
+"sv": "minnas"
+},
+{
+"en": "memorize",
+"sv": "lära sig utantill"
+},
+{
+"en": "concentrate",
+"sv": "koncentrera"
+},
+{
+"en": "focus",
+"sv": "fokusera"
+},
+{
+"en": "distract",
+"sv": "distrahera"
+},
+{
+"en": "confuse",
+"sv": "förvirra"
+},
+{
+"en": "surprise",
+"sv": "överraska"
+},
+{
+"en": "shock",
+"sv": "chocka"
+},
+{
+"en": "amaze",
+"sv": "förbluffa"
+},
+{
+"en": "impress",
+"sv": "imponera"
+},
+{
+"en": "disappoint",
+"sv": "göra besviken"
+},
+{
+"en": "satisfy",
+"sv": "tillfredsställa"
+},
+{
+"en": "please",
+"sv": "behaga"
+},
+{
+"en": "bother",
+"sv": "störa"
+},
+{
+"en": "annoy",
+"sv": "irritera"
+},
+{
+"en": "upset",
+"sv": "uppröra"
+},
+{
+"en": "calm",
+"sv": "lugna"
+},
+{
+"en": "comfort",
+"sv": "trösta"
+},
+{
+"en": "cheer",
+"sv": "heja"
+},
+{
+"en": "celebrate",
+"sv": "fira"
+},
+{
+"en": "congratulate",
+"sv": "gratulera"
+},
+{
+"en": "gift",
+"sv": "gåva"
+},
+{
+"en": "borrow",
+"sv": "låna"
+},
+{
+"en": "lend",
+"sv": "låna ut"
+},
+{
+"en": "owe",
+"sv": "skylda"
+},
+{
+"en": "afford",
+"sv": "ha råd"
+},
+{
+"en": "earn",
+"sv": "tjäna"
+},
+{
+"en": "waste",
+"sv": "slösa"
+},
+{
+"en": "invest",
+"sv": "investera"
+},
+{
+"en": "trade",
+"sv": "handla"
+},
+{
+"en": "exchange",
+"sv": "växla"
+},
+{
+"en": "deliver",
+"sv": "leverera"
+},
+{
+"en": "order",
+"sv": "beställa"
+},
+{
+"en": "cancel",
+"sv": "avboka"
+},
+{
+"en": "reserve",
+"sv": "reservera"
+},
+{
+"en": "rent",
+"sv": "hyra"
+},
+{
+"en": "belong",
+"sv": "tillhöra"
+},
+{
+"en": "contain",
+"sv": "innehålla"
+},
+{
+"en": "consist",
+"sv": "bestå"
+},
+{
+"en": "exclude",
+"sv": "utesluta"
+},
+{
+"en": "involve",
+"sv": "involvera"
+},
+{
+"en": "affect",
+"sv": "påverka"
+},
+{
+"en": "effect",
+"sv": "effekt"
+},
+{
+"en": "depend",
+"sv": "bero"
+},
+{
+"en": "rely",
+"sv": "lita på"
+},
+{
+"en": "base",
+"sv": "basera"
+},
+{
+"en": "relate",
+"sv": "relatera"
+},
+{
+"en": "connect",
+"sv": "koppla"
+},
+{
+"en": "link",
+"sv": "länka"
+},
+{
+"en": "attach",
+"sv": "fästa"
+},
+{
+"en": "separate",
+"sv": "separera"
+},
+{
+"en": "divide",
+"sv": "dela"
+},
+{
+"en": "combine",
+"sv": "kombinera"
+},
+{
+"en": "mix",
+"sv": "blanda"
+},
+{
+"en": "match",
+"sv": "matcha"
+},
+{
+"en": "fit",
+"sv": "passa"
+},
+{
+"en": "suit",
+"sv": "passa"
+},
+{
+"en": "replace",
+"sv": "ersätta"
+},
+{
+"en": "remove",
+"sv": "ta bort"
+},
+{
+"en": "delete",
+"sv": "radera"
+},
+{
+"en": "erase",
+"sv": "sudda"
+},
+{
+"en": "postpone",
+"sv": "skjuta upp"
+},
+{
+"en": "delay",
+"sv": "fördröja"
+},
+{
+"en": "hurry",
+"sv": "skynda"
+},
+{
+"en": "rush",
+"sv": "ruska"
+},
+{
+"en": "speed",
+"sv": "hastighet"
+},
+{
+"en": "slow",
+"sv": "sakta"
+},
+{
+"en": "accelerate",
+"sv": "accelerera"
+},
+{
+"en": "brake",
+"sv": "bromsa"
+},
+{
+"en": "park",
+"sv": "parkera"
+},
+{
+"en": "steer",
+"sv": "styra"
+},
+{
+"en": "navigate",
+"sv": "navigera"
+},
+{
+"en": "guide",
+"sv": "guida"
+},
+{
+"en": "chase",
+"sv": "jaga"
+},
+{
+"en": "hunt",
+"sv": "jaga"
+},
+{
+"en": "track",
+"sv": "spåra"
+},
+{
+"en": "trace",
+"sv": "spåra"
+},
+{
+"en": "mark",
+"sv": "markera"
+},
+{
+"en": "sign",
+"sv": "skriva under"
+},
+{
+"en": "stamp",
+"sv": "stämpla"
+},
+{
+"en": "print",
+"sv": "skriva ut"
+},
+{
+"en": "copy",
+"sv": "kopiera"
+},
+{
+"en": "paste",
+"sv": "klistra"
+},
+{
+"en": "edit",
+"sv": "redigera"
+},
+{
+"en": "publish",
+"sv": "publicera"
+},
+{
+"en": "broadcast",
+"sv": "sända"
+},
+{
+"en": "record",
+"sv": "spela in"
+},
+{
+"en": "film",
+"sv": "filma"
+},
+{
+"en": "photograph",
+"sv": "fotografera"
+},
+{
+"en": "paint",
+"sv": "måla"
+},
+{
+"en": "sketch",
+"sv": "skissa"
+},
+{
+"en": "carve",
+"sv": "snida"
+},
+{
+"en": "sculpt",
+"sv": "skulptera"
+},
+{
+"en": "craft",
+"sv": "hantverk"
+},
+{
+"en": "sew",
+"sv": "sy"
+},
+{
+"en": "knit",
+"sv": "sticka"
+},
+{
+"en": "weave",
+"sv": "väva"
+},
+{
+"en": "fold",
+"sv": "vika"
+},
+{
+"en": "wrap",
+"sv": "paketera"
+},
+{
+"en": "unwrap",
+"sv": "packa upp"
+},
+{
+"en": "pack",
+"sv": "packa"
+},
+{
+"en": "unpack",
+"sv": "packa upp"
+},
+{
+"en": "load",
+"sv": "lasta"
+},
+{
+"en": "unload",
+"sv": "lasta av"
+},
+{
+"en": "lift",
+"sv": "lyfta"
+},
+{
+"en": "lower",
+"sv": "sänka"
+},
+{
+"en": "elevate",
+"sv": "höja"
+},
+{
+"en": "dump",
+"sv": "dumpa"
+},
+{
+"en": "pour",
+"sv": "hälla"
+},
+{
+"en": "spill",
+"sv": "spilla"
+},
+{
+"en": "leak",
+"sv": "läcka"
+},
+{
+"en": "flow",
+"sv": "flöda"
+},
+{
+"en": "flood",
+"sv": "översvämma"
+},
+{
+"en": "freeze",
+"sv": "frysa"
+},
+{
+"en": "melt",
+"sv": "smälta"
+},
+{
+"en": "boil",
+"sv": "koka"
+},
+{
+"en": "burn",
+"sv": "bränna"
+},
+{
+"en": "smoke",
+"sv": "röka"
+},
+{
+"en": "light",
+"sv": "tända"
+},
+{
+"en": "extinguish",
+"sv": "släcka"
+},
+{
+"en": "shine",
+"sv": "skina"
+},
+{
+"en": "glow",
+"sv": "glöda"
+},
+{
+"en": "sparkle",
+"sv": "glittra"
+},
+{
+"en": "flash",
+"sv": "blixt"
+},
+{
+"en": "reflect",
+"sv": "reflektera"
+},
+{
+"en": "absorb",
+"sv": "absorbera"
+},
+{
+"en": "filter",
+"sv": "filtrera"
+},
+{
+"en": "drain",
+"sv": "tömma"
+},
+{
+"en": "dry",
+"sv": "torka"
+},
+{
+"en": "wet",
+"sv": "blöta"
+},
+{
+"en": "soak",
+"sv": "blöta upp"
+},
+{
+"en": "rinse",
+"sv": "skölja"
+},
+{
+"en": "scrub",
+"sv": "skrubba"
+},
+{
+"en": "polish",
+"sv": "polera"
+},
+{
+"en": "wipe",
+"sv": "torka av"
+},
+{
+"en": "sweep",
+"sv": "sopa"
+},
+{
+"en": "vacuum",
+"sv": "dammsuga"
+},
+{
+"en": "dust",
+"sv": "dammtorka"
+},
+{
+"en": "mop",
+"sv": "mopp"
+},
+{
+"en": "tidy",
+"sv": "städa"
+},
+{
+"en": "arrange",
+"sv": "ordna"
+},
+{
+"en": "sort",
+"sv": "sortera"
+},
+{
+"en": "store",
+"sv": "lagra"
+},
+{
+"en": "collect",
+"sv": "samla"
+},
+{
+"en": "gather",
+"sv": "samla"
+},
+{
+"en": "assemble",
+"sv": "montera"
+},
+{
+"en": "install",
+"sv": "installera"
+},
+{
+"en": "operate",
+"sv": "använda"
+},
+{
+"en": "function",
+"sv": "fungera"
+},
+{
+"en": "perform",
+"sv": "utföra"
+},
+{
+"en": "achieve",
+"sv": "uppnå"
+},
+{
+"en": "accomplish",
+"sv": "åstadkomma"
+},
+{
+"en": "succeed",
+"sv": "lyckas"
+},
+{
+"en": "fail",
+"sv": "misslyckas"
+},
+{
+"en": "attempt",
+"sv": "försöka"
+},
+{
+"en": "risk",
+"sv": "riskera"
+},
+{
+"en": "dare",
+"sv": "våga"
+},
+{
+"en": "challenge",
+"sv": "utmana"
+},
+{
+"en": "compete",
+"sv": "tävla"
+},
+{
+"en": "race",
+"sv": "race"
+},
+{
+"en": "score",
+"sv": "göra mål"
+},
+{
+"en": "beat",
+"sv": "slå"
+},
+{
+"en": "defeat",
+"sv": "besegra"
+},
+{
+"en": "conquer",
+"sv": "erövra"
+},
+{
+"en": "rule",
+"sv": "styra"
+},
+{
+"en": "govern",
+"sv": "styra"
+},
+{
+"en": "elect",
+"sv": "välja"
+},
+{
+"en": "vote",
+"sv": "rösta"
+},
+{
+"en": "campaign",
+"sv": "kampanja"
+},
+{
+"en": "protest",
+"sv": "protestera"
+},
+{
+"en": "strike",
+"sv": "strejka"
+},
+{
+"en": "demand",
+"sv": "kräva"
+},
+{
+"en": "request",
+"sv": "begära"
+},
+{
+"en": "apply",
+"sv": "ansöka"
+},
+{
+"en": "submit",
+"sv": "skicka in"
+},
+{
+"en": "approve",
+"sv": "godkänna"
+},
+{
+"en": "reject",
+"sv": "avvisa"
+},
+{
+"en": "grant",
+"sv": "bevilja"
+},
+{
+"en": "award",
+"sv": "tilldela"
+},
+{
+"en": "reward",
+"sv": "belöna"
+},
+{
+"en": "punish",
+"sv": "straffa"
+},
+{
+"en": "fine",
+"sv": "böter"
+},
+{
+"en": "arrest",
+"sv": "arrestera"
+},
+{
+"en": "accuse",
+"sv": "anklaga"
+},
+{
+"en": "charge",
+"sv": "åtala"
+},
+{
+"en": "judge",
+"sv": "döma"
+},
+{
+"en": "sentence",
+"sv": "döma"
+},
+{
+"en": "prison",
+"sv": "fängelse"
+},
+{
+"en": "free",
+"sv": "frigöra"
+},
+{
+"en": "release",
+"sv": "släppa"
+},
+{
+"en": "rescue",
+"sv": "rädda"
+},
+{
+"en": "assist",
+"sv": "assistera"
+},
+{
+"en": "aid",
+"sv": "bistå"
+},
+{
+"en": "contribute",
+"sv": "bidra"
+},
+{
+"en": "donate",
+"sv": "donera"
+},
+{
+"en": "volunteer",
+"sv": "volontär"
+},
+{
+"en": "employ",
+"sv": "anställa"
+},
+{
+"en": "hire",
+"sv": "anställa"
+},
+{
+"en": "fire",
+"sv": "avskeda"
+},
+{
+"en": "retire",
+"sv": "gå i pension"
+},
+{
+"en": "quit",
+"sv": "sluta"
+},
+{
+"en": "resign",
+"sv": "avgå"
+},
+{
+"en": "promote",
+"sv": "befordra"
+},
+{
+"en": "transfer",
+"sv": "överföra"
+},
+{
+"en": "assign",
+"sv": "tilldela"
+},
+{
+"en": "delegate",
+"sv": "delegera"
+},
+{
+"en": "supervise",
+"sv": "övervaka"
+},
+{
+"en": "inspect",
+"sv": "inspektera"
+},
+{
+"en": "examine",
+"sv": "undersöka"
+},
+{
+"en": "investigate",
+"sv": "utreda"
+},
+{
+"en": "analyze",
+"sv": "analysera"
+},
+{
+"en": "evaluate",
+"sv": "utvärdera"
+},
+{
+"en": "assess",
+"sv": "bedöma"
+},
+{
+"en": "review",
+"sv": "granska"
+},
+{
+"en": "revise",
+"sv": "revidera"
+},
+{
+"en": "update",
+"sv": "uppdatera"
+},
+{
+"en": "upgrade",
+"sv": "uppgradera"
+},
+{
+"en": "maintain",
+"sv": "underhålla"
+},
+{
+"en": "sustain",
+"sv": "upprätthålla"
+},
+{
+"en": "preserve",
+"sv": "bevara"
+},
+{
+"en": "conserve",
+"sv": "spara"
+},
+{
+"en": "pollute",
+"sv": "förorena"
+},
+{
+"en": "recycle",
+"sv": "återvinna"
+},
+{
+"en": "reuse",
+"sv": "återanvända"
+},
+{
+"en": "plant",
+"sv": "plantera"
+},
+{
+"en": "harvest",
+"sv": "skörda"
+},
+{
+"en": "farm",
+"sv": "odla"
+},
+{
+"en": "feed",
+"sv": "mata"
+},
+{
+"en": "dig",
+"sv": "gräva"
+},
+{
+"en": "bury",
+"sv": "begrava"
+},
+{
+"en": "seed",
+"sv": "så"
+},
+{
+"en": "sprout",
+"sv": "gro"
+},
+{
+"en": "bloom",
+"sv": "blomma"
+},
+{
+"en": "fade",
+"sv": "tona"
+},
+{
+"en": "wither",
+"sv": "vissna"
+},
+{
+"en": "rot",
+"sv": "ruttna"
+},
+{
+"en": "decay",
+"sv": "förmultna"
+},
+{
+"en": "age",
+"sv": "åldras"
+},
+{
+"en": "mature",
+"sv": "mogna"
+},
+{
+"en": "evolve",
+"sv": "utvecklas"
+},
+{
+"en": "adapt",
+"sv": "anpassa"
+},
+{
+"en": "adjust",
+"sv": "justera"
+},
+{
+"en": "modify",
+"sv": "modifiera"
+},
+{
+"en": "alter",
+"sv": "ändra"
+},
+{
+"en": "transform",
+"sv": "förvandla"
+},
+{
+"en": "convert",
+"sv": "omvandla"
+},
+{
+"en": "translate",
+"sv": "översätta"
+},
+{
+"en": "interpret",
+"sv": "tolka"
+},
+{
+"en": "define",
+"sv": "definiera"
+},
+{
+"en": "mean",
+"sv": "betyda"
+},
+{
+"en": "represent",
+"sv": "representera"
+},
+{
+"en": "symbolize",
+"sv": "symbolisera"
+},
+{
+"en": "indicate",
+"sv": "indikera"
+},
+{
+"en": "signal",
+"sv": "signalera"
+},
+{
+"en": "demonstrate",
+"sv": "demonstrera"
+},
+{
+"en": "illustrate",
+"sv": "illustrera"
+},
+{
+"en": "clarify",
+"sv": "klargöra"
+},
+{
+"en": "confirm",
+"sv": "bekräfta"
+},
+{
+"en": "verify",
+"sv": "verifiera"
+},
+{
+"en": "validate",
+"sv": "validera"
+},
+{
+"en": "certify",
+"sv": "certifiera"
+},
+{
+"en": "guarantee",
+"sv": "garantera"
+},
+{
+"en": "ensure",
+"sv": "säkerställa"
+},
+{
+"en": "assure",
+"sv": "försäkra"
+},
+{
+"en": "secure",
+"sv": "säkra"
+},
+{
+"en": "lock",
+"sv": "låsa"
+},
+{
+"en": "unlock",
+"sv": "låsa upp"
+},
+{
+"en": "key",
+"sv": "nyckel"
+},
+{
+"en": "password",
+"sv": "lösenord"
+},
+{
+"en": "access",
+"sv": "åtkomst"
+},
+{
+"en": "login",
+"sv": "logga in"
+},
+{
+"en": "logout",
+"sv": "logga ut"
+},
+{
+"en": "download",
+"sv": "ladda ner"
+},
+{
+"en": "upload",
+"sv": "ladda upp"
+},
+{
+"en": "browse",
+"sv": "surfa"
+},
+{
+"en": "click",
+"sv": "klicka"
+},
+{
+"en": "type",
+"sv": "skriva"
+},
+{
+"en": "scroll",
+"sv": "skrolla"
+},
+{
+"en": "swipe",
+"sv": "svepa"
+},
+{
+"en": "tap",
+"sv": "trycka"
+},
+{
+"en": "zoom",
+"sv": "zooma"
+},
+{
+"en": "select",
+"sv": "välja"
+},
+{
+"en": "deselect",
+"sv": "avmarkera"
+},
+{
+"en": "highlight",
+"sv": "markera"
+},
+{
+"en": "underline",
+"sv": "understryka"
+},
+{
+"en": "bold",
+"sv": "fetstil"
+},
+{
+"en": "italic",
+"sv": "kursiv"
+},
+{
+"en": "format",
+"sv": "formatera"
+},
+{
+"en": "align",
+"sv": "justera"
+},
+{
+"en": "indent",
+"sv": "indrag"
+},
+{
+"en": "margin",
+"sv": "marginal"
+},
+{
+"en": "border",
+"sv": "kant"
+},
+{
+"en": "background",
+"sv": "bakgrund"
+},
+{
+"en": "foreground",
+"sv": "förgrund"
+},
+{
+"en": "color",
+"sv": "färg"
+},
+{
+"en": "shape",
+"sv": "form"
+},
+{
+"en": "size",
+"sv": "storlek"
+},
+{
+"en": "width",
+"sv": "bredd"
+},
+{
+"en": "height",
+"sv": "höjd"
+},
+{
+"en": "length",
+"sv": "längd"
+},
+{
+"en": "depth",
+"sv": "djup"
+},
+{
+"en": "weight",
+"sv": "vikt"
+},
+{
+"en": "volume",
+"sv": "volym"
+},
+{
+"en": "amount",
+"sv": "mängd"
+},
+{
+"en": "quantity",
+"sv": "kvantitet"
+},
+{
+"en": "quality",
+"sv": "kvalitet"
+},
+{
+"en": "value",
+"sv": "värde"
+},
+{
+"en": "price",
+"sv": "pris"
+},
+{
+"en": "cost",
+"sv": "kostnad"
+},
+{
+"en": "fee",
+"sv": "avgift"
+},
+{
+"en": "tax",
+"sv": "skatt"
+},
+{
+"en": "discount",
+"sv": "rabatt"
+},
+{
+"en": "sale",
+"sv": "rea"
+},
+{
+"en": "bargain",
+"sv": "fynd"
+},
+{
+"en": "deal",
+"sv": "affär"
+},
+{
+"en": "coupon",
+"sv": "kupong"
+},
+{
+"en": "receipt",
+"sv": "kvitto"
+},
+{
+"en": "invoice",
+"sv": "faktura"
+},
+{
+"en": "bill",
+"sv": "räkning"
+},
+{
+"en": "payment",
+"sv": "betalning"
+},
+{
+"en": "cash",
+"sv": "kontanter"
+},
+{
+"en": "coin",
+"sv": "mynt"
+},
+{
+"en": "note",
+"sv": "sedel"
+},
+{
+"en": "card",
+"sv": "kort"
+},
+{
+"en": "credit",
+"sv": "kredit"
+},
+{
+"en": "debit",
+"sv": "debit"
+},
+{
+"en": "account",
+"sv": "konto"
+},
+{
+"en": "balance",
+"sv": "saldo"
+},
+{
+"en": "debt",
+"sv": "skuld"
+},
+{
+"en": "loan",
+"sv": "lån"
+},
+{
+"en": "interest",
+"sv": "ränta"
+},
+{
+"en": "profit",
+"sv": "vinst"
+},
+{
+"en": "loss",
+"sv": "förlust"
+},
+{
+"en": "income",
+"sv": "inkomst"
+},
+{
+"en": "salary",
+"sv": "lön"
+},
+{
+"en": "wage",
+"sv": "lön"
+},
+{
+"en": "budget",
+"sv": "budget"
+},
+{
+"en": "expense",
+"sv": "utgift"
+},
+{
+"en": "spending",
+"sv": "utgifter"
+},
+{
+"en": "saving",
+"sv": "sparande"
+},
+{
+"en": "investment",
+"sv": "investering"
+},
+{
+"en": "stock",
+"sv": "aktie"
+},
+{
+"en": "market",
+"sv": "marknad"
+},
+{
+"en": "firm",
+"sv": "firma"
+},
+{
+"en": "corporation",
+"sv": "bolag"
+},
+{
+"en": "industry",
+"sv": "industri"
+},
+{
+"en": "sector",
+"sv": "sektor"
+},
+{
+"en": "economy",
+"sv": "ekonomi"
+},
+{
+"en": "finance",
+"sv": "finans"
+},
+{
+"en": "bank",
+"sv": "bank"
+},
+{
+"en": "insurance",
+"sv": "försäkring"
+},
+{
+"en": "pension",
+"sv": "pension"
+},
+{
+"en": "retirement",
+"sv": "pensionering"
+},
+{
+"en": "career",
+"sv": "karriär"
+},
+{
+"en": "profession",
+"sv": "yrke"
+},
+{
+"en": "occupation",
+"sv": "yrke"
+},
+{
+"en": "position",
+"sv": "position"
+},
+{
+"en": "role",
+"sv": "roll"
+},
+{
+"en": "duty",
+"sv": "plikt"
+},
+{
+"en": "task",
+"sv": "uppgift"
+},
+{
+"en": "project",
+"sv": "projekt"
+},
+{
+"en": "goal",
+"sv": "mål"
+},
+{
+"en": "target",
+"sv": "mål"
+},
+{
+"en": "objective",
+"sv": "mål"
+},
+{
+"en": "purpose",
+"sv": "syfte"
+},
+{
+"en": "mission",
+"sv": "uppdrag"
+},
+{
+"en": "vision",
+"sv": "vision"
+},
+{
+"en": "strategy",
+"sv": "strategi"
+},
+{
+"en": "tactic",
+"sv": "taktik"
+},
+{
+"en": "method",
+"sv": "metod"
+},
+{
+"en": "approach",
+"sv": "angreppssätt"
+},
+{
+"en": "technique",
+"sv": "teknik"
+},
+{
+"en": "skill",
+"sv": "färdighet"
+},
+{
+"en": "ability",
+"sv": "förmåga"
+},
+{
+"en": "talent",
+"sv": "talang"
+},
+{
+"en": "strength",
+"sv": "styrka"
+},
+{
+"en": "weakness",
+"sv": "svaghet"
+},
+{
+"en": "advantage",
+"sv": "fördel"
+},
+{
+"en": "disadvantage",
+"sv": "nackdel"
+},
+{
+"en": "benefit",
+"sv": "förmån"
+},
+{
+"en": "danger",
+"sv": "fara"
+},
+{
+"en": "threat",
+"sv": "hot"
+},
+{
+"en": "opportunity",
+"sv": "möjlighet"
+},
+{
+"en": "chance",
+"sv": "chans"
+},
+{
+"en": "luck",
+"sv": "tur"
+},
+{
+"en": "fortune",
+"sv": "lycka"
+},
+{
+"en": "fate",
+"sv": "öde"
+},
+{
+"en": "destiny",
+"sv": "öde"
+},
+{
+"en": "future",
+"sv": "framtid"
+},
+{
+"en": "past",
+"sv": "förflutet"
+},
+{
+"en": "present",
+"sv": "nutid"
+},
+{
+"en": "today",
+"sv": "idag"
+},
+{
+"en": "tomorrow",
+"sv": "imorgon"
+},
+{
+"en": "yesterday",
+"sv": "igår"
+},
+{
+"en": "tonight",
+"sv": "ikväll"
+},
+{
+"en": "weekend",
+"sv": "helg"
+},
+{
+"en": "holiday",
+"sv": "helgdag"
+},
+{
+"en": "vacation",
+"sv": "semester"
+},
+{
+"en": "season",
+"sv": "säsong"
+},
+{
+"en": "spring",
+"sv": "vår"
+},
+{
+"en": "summer",
+"sv": "sommar"
+},
+{
+"en": "autumn",
+"sv": "höst"
+},
+{
+"en": "winter",
+"sv": "vinter"
+},
+{
+"en": "January",
+"sv": "januari"
+},
+{
+"en": "February",
+"sv": "februari"
+},
+{
+"en": "March",
+"sv": "mars"
+},
+{
+"en": "April",
+"sv": "april"
+},
+{
+"en": "June",
+"sv": "juni"
+},
+{
+"en": "July",
+"sv": "juli"
+},
+{
+"en": "August",
+"sv": "augusti"
+},
+{
+"en": "September",
+"sv": "september"
+},
+{
+"en": "October",
+"sv": "oktober"
+},
+{
+"en": "November",
+"sv": "november"
+},
+{
+"en": "December",
+"sv": "december"
+},
+{
+"en": "Monday",
+"sv": "måndag"
+},
+{
+"en": "Tuesday",
+"sv": "tisdag"
+},
+{
+"en": "Wednesday",
+"sv": "onsdag"
+},
+{
+"en": "Thursday",
+"sv": "torsdag"
+},
+{
+"en": "Friday",
+"sv": "fredag"
+},
+{
+"en": "Saturday",
+"sv": "lördag"
+},
+{
+"en": "Sunday",
+"sv": "söndag"
+},
+{
+"en": "second",
+"sv": "sekund"
+},
+{
+"en": "clock",
+"sv": "klocka"
+},
+{
+"en": "calendar",
+"sv": "kalender"
+},
+{
+"en": "schedule",
+"sv": "schema"
+},
+{
+"en": "appointment",
+"sv": "möte"
+},
+{
+"en": "meeting",
+"sv": "möte"
+},
+{
+"en": "deadline",
+"sv": "deadline"
+},
+{
+"en": "late",
+"sv": "sent"
+},
+{
+"en": "on time",
+"sv": "i tid"
+},
+{
+"en": "punctual",
+"sv": "punktlig"
+},
+{
+"en": "quick",
+"sv": "snabb"
+},
+{
+"en": "fast",
+"sv": "snabb"
+},
+{
+"en": "sudden",
+"sv": "plötslig"
+},
+{
+"en": "gradual",
+"sv": "gradvis"
+},
+{
+"en": "immediate",
+"sv": "omedelbar"
+},
+{
+"en": "instant",
+"sv": "ögonblicklig"
+},
+{
+"en": "temporary",
+"sv": "tillfällig"
+},
+{
+"en": "permanent",
+"sv": "permanent"
+},
+{
+"en": "eternal",
+"sv": "evig"
+},
+{
+"en": "ancient",
+"sv": "antik"
+},
+{
+"en": "modern",
+"sv": "modern"
+},
+{
+"en": "recent",
+"sv": "nylig"
+},
+{
+"en": "current",
+"sv": "nuvarande"
+},
+{
+"en": "previous",
+"sv": "föregående"
+},
+{
+"en": "former",
+"sv": "tidigare"
+},
+{
+"en": "latter",
+"sv": "senare"
+},
+{
+"en": "initial",
+"sv": "inledande"
+},
+{
+"en": "final",
+"sv": "slutgiltig"
+},
+{
+"en": "ultimate",
+"sv": "ultimat"
+},
+{
+"en": "basic",
+"sv": "grundläggande"
+},
+{
+"en": "simple",
+"sv": "enkel"
+},
+{
+"en": "complex",
+"sv": "komplex"
+},
+{
+"en": "complicated",
+"sv": "komplicerad"
+},
+{
+"en": "difficult",
+"sv": "svår"
+},
+{
+"en": "hard",
+"sv": "hård/svår"
+},
+{
+"en": "easy",
+"sv": "lätt"
+},
+{
+"en": "soft",
+"sv": "mjuk"
+},
+{
+"en": "smooth",
+"sv": "slät"
+},
+{
+"en": "rough",
+"sv": "ojämn"
+},
+{
+"en": "sharp",
+"sv": "vass"
+},
+{
+"en": "dull",
+"sv": "trubbig"
+},
+{
+"en": "thick",
+"sv": "tjock"
+},
+{
+"en": "thin",
+"sv": "tunn"
+},
+{
+"en": "wide",
+"sv": "bred"
+},
+{
+"en": "narrow",
+"sv": "smal"
+},
+{
+"en": "deep",
+"sv": "djup"
+},
+{
+"en": "shallow",
+"sv": "grund"
+},
+{
+"en": "tall",
+"sv": "lång"
+},
+{
+"en": "short",
+"sv": "kort"
+},
+{
+"en": "heavy",
+"sv": "tung"
+},
+{
+"en": "strong",
+"sv": "stark"
+},
+{
+"en": "weak",
+"sv": "svag"
+},
+{
+"en": "tough",
+"sv": "tuff"
+},
+{
+"en": "fragile",
+"sv": "ömtålig"
+},
+{
+"en": "solid",
+"sv": "solid"
+},
+{
+"en": "liquid",
+"sv": "vätska"
+},
+{
+"en": "gas",
+"sv": "gas"
+},
+{
+"en": "empty",
+"sv": "tom"
+},
+{
+"en": "full",
+"sv": "full"
+},
+{
+"en": "half",
+"sv": "halv"
+},
+{
+"en": "whole",
+"sv": "hel"
+},
+{
+"en": "complete",
+"sv": "komplett"
+},
+{
+"en": "partial",
+"sv": "partiell"
+},
+{
+"en": "total",
+"sv": "total"
+},
+{
+"en": "entire",
+"sv": "hel"
+},
+{
+"en": "single",
+"sv": "ensam"
+},
+{
+"en": "double",
+"sv": "dubbel"
+},
+{
+"en": "triple",
+"sv": "trippel"
+},
+{
+"en": "multiple",
+"sv": "flera"
+},
+{
+"en": "several",
+"sv": "flera"
+},
+{
+"en": "various",
+"sv": "olika"
+},
+{
+"en": "numerous",
+"sv": "talrika"
+},
+{
+"en": "countless",
+"sv": "oräkneliga"
+},
+{
+"en": "zero",
+"sv": "noll"
+},
+{
+"en": "three",
+"sv": "tre"
+},
+{
+"en": "four",
+"sv": "fyra"
+},
+{
+"en": "five",
+"sv": "fem"
+},
+{
+"en": "six",
+"sv": "sex"
+},
+{
+"en": "seven",
+"sv": "sju"
+},
+{
+"en": "eight",
+"sv": "åtta"
+},
+{
+"en": "nine",
+"sv": "nio"
+},
+{
+"en": "ten",
+"sv": "tio"
+},
+{
+"en": "eleven",
+"sv": "elva"
+},
+{
+"en": "twelve",
+"sv": "tolv"
+},
+{
+"en": "thirteen",
+"sv": "tretton"
+},
+{
+"en": "fourteen",
+"sv": "fjorton"
+},
+{
+"en": "fifteen",
+"sv": "femton"
+},
+{
+"en": "sixteen",
+"sv": "sexton"
+},
+{
+"en": "seventeen",
+"sv": "sjutton"
+},
+{
+"en": "eighteen",
+"sv": "arton"
+},
+{
+"en": "nineteen",
+"sv": "nitton"
+},
+{
+"en": "twenty",
+"sv": "tjugo"
+},
+{
+"en": "thirty",
+"sv": "trettio"
+},
+{
+"en": "forty",
+"sv": "fyrtio"
+},
+{
+"en": "fifty",
+"sv": "femtio"
+},
+{
+"en": "sixty",
+"sv": "sextio"
+},
+{
+"en": "seventy",
+"sv": "sjuttio"
+},
+{
+"en": "eighty",
+"sv": "åttio"
+},
+{
+"en": "ninety",
+"sv": "nittio"
+},
+{
+"en": "hundred",
+"sv": "hundra"
+},
+{
+"en": "thousand",
+"sv": "tusen"
+},
+{
+"en": "million",
+"sv": "miljon"
+},
+{
+"en": "billion",
+"sv": "miljard"
+},
+{
+"en": "third",
+"sv": "tredje"
+},
+{
+"en": "fourth",
+"sv": "fjärde"
+},
+{
+"en": "fifth",
+"sv": "femte"
+},
+{
+"en": "sixth",
+"sv": "sjätte"
+},
+{
+"en": "seventh",
+"sv": "sjunde"
+},
+{
+"en": "eighth",
+"sv": "åttonde"
+},
+{
+"en": "ninth",
+"sv": "nionde"
+},
+{
+"en": "tenth",
+"sv": "tionde"
+},
+{
+"en": "another",
+"sv": "en annan"
+},
+{
+"en": "both",
+"sv": "båda"
+},
+{
+"en": "either",
+"sv": "antingen"
+},
+{
+"en": "neither",
+"sv": "ingen av"
+},
+{
+"en": "each",
+"sv": "varje"
+},
+{
+"en": "every",
+"sv": "varje"
+},
+{
+"en": "none",
+"sv": "ingen"
+},
+{
+"en": "red",
+"sv": "röd"
+},
+{
+"en": "blue",
+"sv": "blå"
+},
+{
+"en": "green",
+"sv": "grön"
+},
+{
+"en": "yellow",
+"sv": "gul"
+},
+{
+"en": "orange",
+"sv": "orange"
+},
+{
+"en": "purple",
+"sv": "lila"
+},
+{
+"en": "pink",
+"sv": "rosa"
+},
+{
+"en": "brown",
+"sv": "brun"
+},
+{
+"en": "black",
+"sv": "svart"
+},
+{
+"en": "white",
+"sv": "vit"
+},
+{
+"en": "gray",
+"sv": "grå"
+},
+{
+"en": "grey",
+"sv": "grå"
+},
+{
+"en": "gold",
+"sv": "guld"
+},
+{
+"en": "silver",
+"sv": "silver"
+},
+{
+"en": "bronze",
+"sv": "brons"
+},
+{
+"en": "bright",
+"sv": "ljus"
+},
+{
+"en": "dark",
+"sv": "mörk"
+},
+{
+"en": "pale",
+"sv": "blek"
+},
+{
+"en": "vivid",
+"sv": "livlig"
+},
+{
+"en": "beautiful",
+"sv": "vacker"
+},
+{
+"en": "pretty",
+"sv": "söt"
+},
+{
+"en": "handsome",
+"sv": "stilig"
+},
+{
+"en": "ugly",
+"sv": "ful"
+},
+{
+"en": "attractive",
+"sv": "attraktiv"
+},
+{
+"en": "cute",
+"sv": "söt"
+},
+{
+"en": "lovely",
+"sv": "ljuvlig"
+},
+{
+"en": "gorgeous",
+"sv": "fantastisk"
+},
+{
+"en": "plain",
+"sv": "enkel"
+},
+{
+"en": "elegant",
+"sv": "elegant"
+},
+{
+"en": "fashionable",
+"sv": "modetrogen"
+},
+{
+"en": "stylish",
+"sv": "stilren"
+},
+{
+"en": "trendy",
+"sv": "trendig"
+},
+{
+"en": "classic",
+"sv": "klassisk"
+},
+{
+"en": "dirty",
+"sv": "smutsig"
+},
+{
+"en": "messy",
+"sv": "rörig"
+},
+{
+"en": "neat",
+"sv": "prydlig"
+},
+{
+"en": "organized",
+"sv": "organiserad"
+},
+{
+"en": "chaotic",
+"sv": "kaotisk"
+},
+{
+"en": "orderly",
+"sv": "ordnad"
+},
+{
+"en": "random",
+"sv": "slumpmässig"
+},
+{
+"en": "regular",
+"sv": "regelbunden"
+},
+{
+"en": "normal",
+"sv": "normal"
+},
+{
+"en": "unusual",
+"sv": "ovanlig"
+},
+{
+"en": "strange",
+"sv": "konstig"
+},
+{
+"en": "weird",
+"sv": "märklig"
+},
+{
+"en": "odd",
+"sv": "udda"
+},
+{
+"en": "curious",
+"sv": "nyfiken"
+},
+{
+"en": "interesting",
+"sv": "intressant"
+},
+{
+"en": "boring",
+"sv": "tråkig"
+},
+{
+"en": "exciting",
+"sv": "spännande"
+},
+{
+"en": "amazing",
+"sv": "fantastisk"
+},
+{
+"en": "wonderful",
+"sv": "underbar"
+},
+{
+"en": "fantastic",
+"sv": "fantastisk"
+},
+{
+"en": "excellent",
+"sv": "utmärkt"
+},
+{
+"en": "perfect",
+"sv": "perfekt"
+},
+{
+"en": "awesome",
+"sv": "fantastisk"
+},
+{
+"en": "terrible",
+"sv": "fruktansvärd"
+},
+{
+"en": "awful",
+"sv": "hemsk"
+},
+{
+"en": "horrible",
+"sv": "hemsk"
+},
+{
+"en": "dreadful",
+"sv": "fruktansvärd"
+},
+{
+"en": "nice",
+"sv": "trevlig"
+},
+{
+"en": "pleasant",
+"sv": "behaglig"
+},
+{
+"en": "delightful",
+"sv": "härlig"
+},
+{
+"en": "charming",
+"sv": "charmig"
+},
+{
+"en": "friendly",
+"sv": "vänlig"
+},
+{
+"en": "gentle",
+"sv": "mild"
+},
+{
+"en": "polite",
+"sv": "artig"
+},
+{
+"en": "rude",
+"sv": "ohövlig"
+},
+{
+"en": "cruel",
+"sv": "grym"
+},
+{
+"en": "harsh",
+"sv": "hård"
+},
+{
+"en": "strict",
+"sv": "strikt"
+},
+{
+"en": "flexible",
+"sv": "flexibel"
+},
+{
+"en": "patient",
+"sv": "tålmodig"
+},
+{
+"en": "impatient",
+"sv": "otålig"
+},
+{
+"en": "nervous",
+"sv": "nervös"
+},
+{
+"en": "anxious",
+"sv": "ängslig"
+},
+{
+"en": "worried",
+"sv": "orolig"
+},
+{
+"en": "scared",
+"sv": "rädd"
+},
+{
+"en": "afraid",
+"sv": "rädd"
+},
+{
+"en": "brave",
+"sv": "modig"
+},
+{
+"en": "courageous",
+"sv": "tapper"
+},
+{
+"en": "confident",
+"sv": "självsäker"
+},
+{
+"en": "shy",
+"sv": "blyg"
+},
+{
+"en": "proud",
+"sv": "stolt"
+},
+{
+"en": "humble",
+"sv": "ödmjuk"
+},
+{
+"en": "arrogant",
+"sv": "arrogant"
+},
+{
+"en": "honest",
+"sv": "ärlig"
+},
+{
+"en": "dishonest",
+"sv": "oärlig"
+},
+{
+"en": "loyal",
+"sv": "lojal"
+},
+{
+"en": "faithful",
+"sv": "trogen"
+},
+{
+"en": "reliable",
+"sv": "pålitlig"
+},
+{
+"en": "responsible",
+"sv": "ansvarig"
+},
+{
+"en": "careful",
+"sv": "försiktig"
+},
+{
+"en": "careless",
+"sv": "slarvig"
+},
+{
+"en": "thoughtful",
+"sv": "omtänksam"
+},
+{
+"en": "selfish",
+"sv": "självisk"
+},
+{
+"en": "generous",
+"sv": "generös"
+},
+{
+"en": "greedy",
+"sv": "girig"
+},
+{
+"en": "jealous",
+"sv": "avundsjuk"
+},
+{
+"en": "envious",
+"sv": "avundsam"
+},
+{
+"en": "grateful",
+"sv": "tacksam"
+},
+{
+"en": "thankful",
+"sv": "tacksam"
+},
+{
+"en": "happy",
+"sv": "glad"
+},
+{
+"en": "sad",
+"sv": "ledsen"
+},
+{
+"en": "angry",
+"sv": "arg"
+},
+{
+"en": "mad",
+"sv": "arg"
+},
+{
+"en": "disappointed",
+"sv": "besviken"
+},
+{
+"en": "frustrated",
+"sv": "frustrerad"
+},
+{
+"en": "confused",
+"sv": "förvirrad"
+},
+{
+"en": "surprised",
+"sv": "överraskad"
+},
+{
+"en": "shocked",
+"sv": "chockad"
+},
+{
+"en": "amazed",
+"sv": "förbluffad"
+},
+{
+"en": "excited",
+"sv": "exalterad"
+},
+{
+"en": "thrilled",
+"sv": "uppeggad"
+},
+{
+"en": "bored",
+"sv": "uttråkad"
+},
+{
+"en": "tired",
+"sv": "trött"
+},
+{
+"en": "exhausted",
+"sv": "utmattad"
+},
+{
+"en": "sleepy",
+"sv": "sömnig"
+},
+{
+"en": "awake",
+"sv": "vaken"
+},
+{
+"en": "alert",
+"sv": "alert"
+},
+{
+"en": "hungry",
+"sv": "hungrig"
+},
+{
+"en": "thirsty",
+"sv": "törstig"
+},
+{
+"en": "sick",
+"sv": "sjuk"
+},
+{
+"en": "ill",
+"sv": "sjuk"
+},
+{
+"en": "healthy",
+"sv": "frisk"
+},
+{
+"en": "dizzy",
+"sv": "yr"
+},
+{
+"en": "pain",
+"sv": "smärta"
+},
+{
+"en": "ache",
+"sv": "värk"
+},
+{
+"en": "fever",
+"sv": "feber"
+},
+{
+"en": "cold",
+"sv": "förkylning"
+},
+{
+"en": "headache",
+"sv": "huvudvärk"
+},
+{
+"en": "stomachache",
+"sv": "magont"
+},
+{
+"en": "medicine",
+"sv": "medicin"
+},
+{
+"en": "pill",
+"sv": "tablett"
+},
+{
+"en": "doctor",
+"sv": "läkare"
+},
+{
+"en": "nurse",
+"sv": "sjuksköterska"
+},
+{
+"en": "hospital",
+"sv": "sjukhus"
+},
+{
+"en": "clinic",
+"sv": "klinik"
+},
+{
+"en": "pharmacy",
+"sv": "apotek"
+},
+{
+"en": "ambulance",
+"sv": "ambulans"
+},
+{
+"en": "emergency",
+"sv": "nödsituation"
+},
+{
+"en": "accident",
+"sv": "olycka"
+},
+{
+"en": "injury",
+"sv": "skada"
+},
+{
+"en": "wound",
+"sv": "sår"
+},
+{
+"en": "bruise",
+"sv": "blåmärke"
+},
+{
+"en": "blood",
+"sv": "blod"
+},
+{
+"en": "bone",
+"sv": "ben"
+},
+{
+"en": "muscle",
+"sv": "muskel"
+},
+{
+"en": "skin",
+"sv": "hud"
+},
+{
+"en": "hair",
+"sv": "hår"
+},
+{
+"en": "tooth",
+"sv": "tand"
+},
+{
+"en": "teeth",
+"sv": "tänder"
+},
+{
+"en": "tongue",
+"sv": "tunga"
+},
+{
+"en": "lip",
+"sv": "läpp"
+},
+{
+"en": "nose",
+"sv": "näsa"
+},
+{
+"en": "ear",
+"sv": "öra"
+},
+{
+"en": "eyebrow",
+"sv": "ögonbryn"
+},
+{
+"en": "eyelash",
+"sv": "ögonfrans"
+},
+{
+"en": "cheek",
+"sv": "kind"
+},
+{
+"en": "chin",
+"sv": "haka"
+},
+{
+"en": "forehead",
+"sv": "panna"
+},
+{
+"en": "neck",
+"sv": "nacke"
+},
+{
+"en": "shoulder",
+"sv": "axel"
+},
+{
+"en": "arm",
+"sv": "arm"
+},
+{
+"en": "elbow",
+"sv": "armbåge"
+},
+{
+"en": "wrist",
+"sv": "handled"
+},
+{
+"en": "finger",
+"sv": "finger"
+},
+{
+"en": "thumb",
+"sv": "tumme"
+},
+{
+"en": "nail",
+"sv": "nagel"
+},
+{
+"en": "chest",
+"sv": "bröst"
+},
+{
+"en": "stomach",
+"sv": "mage"
+},
+{
+"en": "waist",
+"sv": "midja"
+},
+{
+"en": "hip",
+"sv": "höft"
+},
+{
+"en": "leg",
+"sv": "ben"
+},
+{
+"en": "knee",
+"sv": "knä"
+},
+{
+"en": "ankle",
+"sv": "vrist"
+},
+{
+"en": "foot",
+"sv": "fot"
+},
+{
+"en": "toe",
+"sv": "tå"
+},
+{
+"en": "heart",
+"sv": "hjärta"
+},
+{
+"en": "brain",
+"sv": "hjärna"
+},
+{
+"en": "lung",
+"sv": "lunga"
+},
+{
+"en": "liver",
+"sv": "lever"
+},
+{
+"en": "family",
+"sv": "familj"
+},
+{
+"en": "mom",
+"sv": "mamma"
+},
+{
+"en": "dad",
+"sv": "pappa"
+},
+{
+"en": "son",
+"sv": "son"
+},
+{
+"en": "daughter",
+"sv": "dotter"
+},
+{
+"en": "brother",
+"sv": "bror"
+},
+{
+"en": "sister",
+"sv": "syster"
+},
+{
+"en": "uncle",
+"sv": "morbror/farbror"
+},
+{
+"en": "aunt",
+"sv": "moster/faster"
+},
+{
+"en": "cousin",
+"sv": "kusin"
+},
+{
+"en": "nephew",
+"sv": "brorson/systerson"
+},
+{
+"en": "niece",
+"sv": "brorsdotter"
+},
+{
+"en": "grandfather",
+"sv": "morfar/farfar"
+},
+{
+"en": "grandmother",
+"sv": "mormor/farmor"
+},
+{
+"en": "grandpa",
+"sv": "morfar/farfar"
+},
+{
+"en": "grandma",
+"sv": "mormor/farmor"
+},
+{
+"en": "husband",
+"sv": "make"
+},
+{
+"en": "wife",
+"sv": "maka"
+},
+{
+"en": "spouse",
+"sv": "make/maka"
+},
+{
+"en": "partner",
+"sv": "partner"
+},
+{
+"en": "fiancé",
+"sv": "fästman"
+},
+{
+"en": "fiancée",
+"sv": "fästmö"
+},
+{
+"en": "boyfriend",
+"sv": "pojkvän"
+},
+{
+"en": "girlfriend",
+"sv": "flickvän"
+},
+{
+"en": "neighbor",
+"sv": "granne"
+},
+{
+"en": "colleague",
+"sv": "kollega"
+},
+{
+"en": "classmate",
+"sv": "klasskamrat"
+},
+{
+"en": "roommate",
+"sv": "rumskompis"
+},
+{
+"en": "guest",
+"sv": "gäst"
+},
+{
+"en": "host",
+"sv": "värd"
+},
+{
+"en": "stranger",
+"sv": "främling"
+},
+{
+"en": "enemy",
+"sv": "fiende"
+},
+{
+"en": "rival",
+"sv": "rival"
+},
+{
+"en": "ally",
+"sv": "allierad"
+},
+{
+"en": "boss",
+"sv": "chef"
+},
+{
+"en": "manager",
+"sv": "chef"
+},
+{
+"en": "employee",
+"sv": "anställd"
+},
+{
+"en": "worker",
+"sv": "arbetare"
+},
+{
+"en": "staff",
+"sv": "personal"
+},
+{
+"en": "customer",
+"sv": "kund"
+},
+{
+"en": "client",
+"sv": "klient"
+},
+{
+"en": "student",
+"sv": "elev"
+},
+{
+"en": "pupil",
+"sv": "elev"
+},
+{
+"en": "professor",
+"sv": "professor"
+},
+{
+"en": "principal",
+"sv": "rektor"
+},
+{
+"en": "coach",
+"sv": "tränare"
+},
+{
+"en": "trainer",
+"sv": "tränare"
+},
+{
+"en": "athlete",
+"sv": "idrottare"
+},
+{
+"en": "player",
+"sv": "spelare"
+},
+{
+"en": "musician",
+"sv": "musiker"
+},
+{
+"en": "singer",
+"sv": "sångare"
+},
+{
+"en": "actor",
+"sv": "skådespelare"
+},
+{
+"en": "actress",
+"sv": "skådespelerska"
+},
+{
+"en": "artist",
+"sv": "konstnär"
+},
+{
+"en": "writer",
+"sv": "författare"
+},
+{
+"en": "author",
+"sv": "författare"
+},
+{
+"en": "poet",
+"sv": "poet"
+},
+{
+"en": "journalist",
+"sv": "journalist"
+},
+{
+"en": "reporter",
+"sv": "reporter"
+},
+{
+"en": "photographer",
+"sv": "fotograf"
+},
+{
+"en": "designer",
+"sv": "designer"
+},
+{
+"en": "engineer",
+"sv": "ingenjör"
+},
+{
+"en": "scientist",
+"sv": "forskare"
+},
+{
+"en": "researcher",
+"sv": "forskare"
+},
+{
+"en": "lawyer",
+"sv": "advokat"
+},
+{
+"en": "police",
+"sv": "polis"
+},
+{
+"en": "officer",
+"sv": "officer"
+},
+{
+"en": "soldier",
+"sv": "soldat"
+},
+{
+"en": "firefighter",
+"sv": "brandman"
+},
+{
+"en": "pilot",
+"sv": "pilot"
+},
+{
+"en": "driver",
+"sv": "förare"
+},
+{
+"en": "farmer",
+"sv": "bonde"
+},
+{
+"en": "chef",
+"sv": "kock"
+},
+{
+"en": "waiter",
+"sv": "servitör"
+},
+{
+"en": "waitress",
+"sv": "servitris"
+},
+{
+"en": "baker",
+"sv": "bagare"
+},
+{
+"en": "butcher",
+"sv": "slaktare"
+},
+{
+"en": "carpenter",
+"sv": "snickare"
+},
+{
+"en": "plumber",
+"sv": "rörmokare"
+},
+{
+"en": "electrician",
+"sv": "elektriker"
+},
+{
+"en": "mechanic",
+"sv": "mekaniker"
+},
+{
+"en": "builder",
+"sv": "byggare"
+},
+{
+"en": "architect",
+"sv": "arkitekt"
+},
+{
+"en": "painter",
+"sv": "målare"
+},
+{
+"en": "cleaner",
+"sv": "städare"
+},
+{
+"en": "gardener",
+"sv": "trädgårdsmästare"
+},
+{
+"en": "food",
+"sv": "mat"
+},
+{
+"en": "meal",
+"sv": "måltid"
+},
+{
+"en": "breakfast",
+"sv": "frukost"
+},
+{
+"en": "lunch",
+"sv": "lunch"
+},
+{
+"en": "dinner",
+"sv": "middag"
+},
+{
+"en": "supper",
+"sv": "kvällsmat"
+},
+{
+"en": "snack",
+"sv": "mellanmål"
+},
+{
+"en": "appetizer",
+"sv": "förrätt"
+},
+{
+"en": "dessert",
+"sv": "efterrätt"
+},
+{
+"en": "soup",
+"sv": "soppa"
+},
+{
+"en": "salad",
+"sv": "sallad"
+},
+{
+"en": "bread",
+"sv": "bröd"
+},
+{
+"en": "butter",
+"sv": "smör"
+},
+{
+"en": "cheese",
+"sv": "ost"
+},
+{
+"en": "egg",
+"sv": "ägg"
+},
+{
+"en": "meat",
+"sv": "kött"
+},
+{
+"en": "beef",
+"sv": "nötkött"
+},
+{
+"en": "pork",
+"sv": "fläsk"
+},
+{
+"en": "chicken",
+"sv": "kyckling"
+},
+{
+"en": "fish",
+"sv": "fisk"
+},
+{
+"en": "seafood",
+"sv": "skaldjur"
+},
+{
+"en": "shrimp",
+"sv": "räka"
+},
+{
+"en": "rice",
+"sv": "ris"
+},
+{
+"en": "pasta",
+"sv": "pasta"
+},
+{
+"en": "noodle",
+"sv": "nudel"
+},
+{
+"en": "potato",
+"sv": "potatis"
+},
+{
+"en": "tomato",
+"sv": "tomat"
+},
+{
+"en": "onion",
+"sv": "lök"
+},
+{
+"en": "garlic",
+"sv": "vitlök"
+},
+{
+"en": "carrot",
+"sv": "morot"
+},
+{
+"en": "cucumber",
+"sv": "gurka"
+},
+{
+"en": "lettuce",
+"sv": "sallad"
+},
+{
+"en": "cabbage",
+"sv": "kål"
+},
+{
+"en": "broccoli",
+"sv": "broccoli"
+},
+{
+"en": "spinach",
+"sv": "spenat"
+},
+{
+"en": "pepper",
+"sv": "peppar"
+},
+{
+"en": "salt",
+"sv": "salt"
+},
+{
+"en": "sugar",
+"sv": "socker"
+},
+{
+"en": "flour",
+"sv": "mjöl"
+},
+{
+"en": "oil",
+"sv": "olja"
+},
+{
+"en": "vinegar",
+"sv": "vinäger"
+},
+{
+"en": "sauce",
+"sv": "sås"
+},
+{
+"en": "spice",
+"sv": "krydda"
+},
+{
+"en": "herb",
+"sv": "ört"
+},
+{
+"en": "fruit",
+"sv": "frukt"
+},
+{
+"en": "apple",
+"sv": "äpple"
+},
+{
+"en": "banana",
+"sv": "banan"
+},
+{
+"en": "lemon",
+"sv": "citron"
+},
+{
+"en": "lime",
+"sv": "lime"
+},
+{
+"en": "grape",
+"sv": "druva"
+},
+{
+"en": "strawberry",
+"sv": "jordgubbe"
+},
+{
+"en": "blueberry",
+"sv": "blåbär"
+},
+{
+"en": "raspberry",
+"sv": "hallon"
+},
+{
+"en": "cherry",
+"sv": "körsbär"
+},
+{
+"en": "peach",
+"sv": "persika"
+},
+{
+"en": "pear",
+"sv": "päron"
+},
+{
+"en": "plum",
+"sv": "plommon"
+},
+{
+"en": "melon",
+"sv": "melon"
+},
+{
+"en": "watermelon",
+"sv": "vattenmelon"
+},
+{
+"en": "pineapple",
+"sv": "ananas"
+},
+{
+"en": "mango",
+"sv": "mango"
+},
+{
+"en": "coconut",
+"sv": "kokosnöt"
+},
+{
+"en": "nut",
+"sv": "nöt"
+},
+{
+"en": "almond",
+"sv": "mandel"
+},
+{
+"en": "peanut",
+"sv": "jordnöt"
+},
+{
+"en": "walnut",
+"sv": "valnöt"
+},
+{
+"en": "honey",
+"sv": "honung"
+},
+{
+"en": "jam",
+"sv": "sylt"
+},
+{
+"en": "chocolate",
+"sv": "choklad"
+},
+{
+"en": "candy",
+"sv": "godis"
+},
+{
+"en": "cake",
+"sv": "kaka"
+},
+{
+"en": "cookie",
+"sv": "kaka"
+},
+{
+"en": "pie",
+"sv": "paj"
+},
+{
+"en": "ice cream",
+"sv": "glass"
+},
+{
+"en": "drink",
+"sv": "dryck"
+},
+{
+"en": "beverage",
+"sv": "dryck"
+},
+{
+"en": "juice",
+"sv": "juice"
+},
+{
+"en": "milk",
+"sv": "mjölk"
+},
+{
+"en": "coffee",
+"sv": "kaffe"
+},
+{
+"en": "tea",
+"sv": "te"
+},
+{
+"en": "soda",
+"sv": "läsk"
+},
+{
+"en": "beer",
+"sv": "öl"
+},
+{
+"en": "wine",
+"sv": "vin"
+},
+{
+"en": "alcohol",
+"sv": "alkohol"
+},
+{
+"en": "cocktail",
+"sv": "cocktail"
+},
+{
+"en": "smoothie",
+"sv": "smoothie"
+},
+{
+"en": "hot chocolate",
+"sv": "varm choklad"
+},
+{
+"en": "kitchen",
+"sv": "kök"
+},
+{
+"en": "stove",
+"sv": "spis"
+},
+{
+"en": "oven",
+"sv": "ugn"
+},
+{
+"en": "fridge",
+"sv": "kylskåp"
+},
+{
+"en": "freezer",
+"sv": "frys"
+},
+{
+"en": "microwave",
+"sv": "mikrovågsugn"
+},
+{
+"en": "sink",
+"sv": "diskho"
+},
+{
+"en": "dishwasher",
+"sv": "diskmaskin"
+},
+{
+"en": "plate",
+"sv": "tallrik"
+},
+{
+"en": "bowl",
+"sv": "skål"
+},
+{
+"en": "cup",
+"sv": "kopp"
+},
+{
+"en": "glass",
+"sv": "glas"
+},
+{
+"en": "mug",
+"sv": "mugg"
+},
+{
+"en": "fork",
+"sv": "gaffel"
+},
+{
+"en": "knife",
+"sv": "kniv"
+},
+{
+"en": "spoon",
+"sv": "sked"
+},
+{
+"en": "chopsticks",
+"sv": "ätpinnar"
+},
+{
+"en": "napkin",
+"sv": "servett"
+},
+{
+"en": "tablecloth",
+"sv": "bordsduk"
+},
+{
+"en": "tray",
+"sv": "bricka"
+},
+{
+"en": "pan",
+"sv": "panna"
+},
+{
+"en": "pot",
+"sv": "gryta"
+},
+{
+"en": "kettle",
+"sv": "vattenkokare"
+},
+{
+"en": "toaster",
+"sv": "brödrost"
+},
+{
+"en": "blender",
+"sv": "mixer"
+},
+{
+"en": "apartment",
+"sv": "lägenhet"
+},
+{
+"en": "flat",
+"sv": "lägenhet"
+},
+{
+"en": "building",
+"sv": "byggnad"
+},
+{
+"en": "floor",
+"sv": "våning"
+},
+{
+"en": "ceiling",
+"sv": "tak"
+},
+{
+"en": "roof",
+"sv": "tak"
+},
+{
+"en": "wall",
+"sv": "vägg"
+},
+{
+"en": "window",
+"sv": "fönster"
+},
+{
+"en": "stairs",
+"sv": "trappa"
+},
+{
+"en": "elevator",
+"sv": "hiss"
+},
+{
+"en": "balcony",
+"sv": "balkong"
+},
+{
+"en": "garden",
+"sv": "trädgård"
+},
+{
+"en": "yard",
+"sv": "gård"
+},
+{
+"en": "garage",
+"sv": "garage"
+},
+{
+"en": "basement",
+"sv": "källare"
+},
+{
+"en": "attic",
+"sv": "vind"
+},
+{
+"en": "hallway",
+"sv": "hall"
+},
+{
+"en": "living room",
+"sv": "vardagsrum"
+},
+{
+"en": "bedroom",
+"sv": "sovrum"
+},
+{
+"en": "bathroom",
+"sv": "badrum"
+},
+{
+"en": "toilet",
+"sv": "toalett"
+},
+{
+"en": "dining room",
+"sv": "matsal"
+},
+{
+"en": "closet",
+"sv": "garderob"
+},
+{
+"en": "wardrobe",
+"sv": "garderob"
+},
+{
+"en": "drawer",
+"sv": "låda"
+},
+{
+"en": "shelf",
+"sv": "hylla"
+},
+{
+"en": "cabinet",
+"sv": "skåp"
+},
+{
+"en": "desk",
+"sv": "skrivbord"
+},
+{
+"en": "table",
+"sv": "bord"
+},
+{
+"en": "chair",
+"sv": "stol"
+},
+{
+"en": "sofa",
+"sv": "soffa"
+},
+{
+"en": "couch",
+"sv": "soffa"
+},
+{
+"en": "bed",
+"sv": "säng"
+},
+{
+"en": "mattress",
+"sv": "madrass"
+},
+{
+"en": "pillow",
+"sv": "kudde"
+},
+{
+"en": "blanket",
+"sv": "filt"
+},
+{
+"en": "sheet",
+"sv": "lakan"
+},
+{
+"en": "curtain",
+"sv": "gardin"
+},
+{
+"en": "carpet",
+"sv": "matta"
+},
+{
+"en": "rug",
+"sv": "matta"
+},
+{
+"en": "lamp",
+"sv": "lampa"
+},
+{
+"en": "mirror",
+"sv": "spegel"
+},
+{
+"en": "picture",
+"sv": "bild"
+},
+{
+"en": "painting",
+"sv": "målning"
+},
+{
+"en": "television",
+"sv": "tv"
+},
+{
+"en": "TV",
+"sv": "tv"
+},
+{
+"en": "radio",
+"sv": "radio"
+},
+{
+"en": "computer",
+"sv": "dator"
+},
+{
+"en": "laptop",
+"sv": "laptop"
+},
+{
+"en": "phone",
+"sv": "telefon"
+},
+{
+"en": "smartphone",
+"sv": "smartphone"
+},
+{
+"en": "tablet",
+"sv": "surfplatta"
+},
+{
+"en": "camera",
+"sv": "kamera"
+},
+{
+"en": "remote",
+"sv": "fjärrkontroll"
+},
+{
+"en": "charger",
+"sv": "laddare"
+},
+{
+"en": "battery",
+"sv": "batteri"
+},
+{
+"en": "cable",
+"sv": "kabel"
+},
+{
+"en": "plug",
+"sv": "kontakt"
+},
+{
+"en": "socket",
+"sv": "uttag"
+},
+{
+"en": "switch",
+"sv": "strömbrytare"
+},
+{
+"en": "fan",
+"sv": "fläkt"
+},
+{
+"en": "heater",
+"sv": "värmare"
+},
+{
+"en": "air conditioner",
+"sv": "luftkonditionering"
+},
+{
+"en": "washing machine",
+"sv": "tvättmaskin"
+},
+{
+"en": "dryer",
+"sv": "torktumlare"
+},
+{
+"en": "iron",
+"sv": "strykjärn"
+},
+{
+"en": "vacuum cleaner",
+"sv": "dammsugare"
+},
+{
+"en": "broom",
+"sv": "kvast"
+},
+{
+"en": "bucket",
+"sv": "hink"
+},
+{
+"en": "trash",
+"sv": "sopor"
+},
+{
+"en": "bin",
+"sv": "soptunna"
+},
+{
+"en": "recycling",
+"sv": "återvinning"
+},
+{
+"en": "clothes",
+"sv": "kläder"
+},
+{
+"en": "clothing",
+"sv": "kläder"
+},
+{
+"en": "shirt",
+"sv": "skjorta"
+},
+{
+"en": "t-shirt",
+"sv": "t-shirt"
+},
+{
+"en": "blouse",
+"sv": "blus"
+},
+{
+"en": "sweater",
+"sv": "tröja"
+},
+{
+"en": "hoodie",
+"sv": "huvtröja"
+},
+{
+"en": "jacket",
+"sv": "jacka"
+},
+{
+"en": "coat",
+"sv": "rock"
+},
+{
+"en": "pants",
+"sv": "byxor"
+},
+{
+"en": "trousers",
+"sv": "byxor"
+},
+{
+"en": "jeans",
+"sv": "jeans"
+},
+{
+"en": "shorts",
+"sv": "shorts"
+},
+{
+"en": "skirt",
+"sv": "kjol"
+},
+{
+"en": "tie",
+"sv": "slips"
+},
+{
+"en": "scarf",
+"sv": "halsduk"
+},
+{
+"en": "hat",
+"sv": "hatt"
+},
+{
+"en": "cap",
+"sv": "keps"
+},
+{
+"en": "gloves",
+"sv": "handskar"
+},
+{
+"en": "socks",
+"sv": "strumpor"
+},
+{
+"en": "shoes",
+"sv": "skor"
+},
+{
+"en": "boots",
+"sv": "stövlar"
+},
+{
+"en": "sneakers",
+"sv": "sneakers"
+},
+{
+"en": "sandals",
+"sv": "sandaler"
+},
+{
+"en": "slippers",
+"sv": "tofflor"
+},
+{
+"en": "underwear",
+"sv": "underkläder"
+},
+{
+"en": "pajamas",
+"sv": "pyjamas"
+},
+{
+"en": "belt",
+"sv": "bälte"
+},
+{
+"en": "button",
+"sv": "knapp"
+},
+{
+"en": "zipper",
+"sv": "blixtlås"
+},
+{
+"en": "pocket",
+"sv": "ficka"
+},
+{
+"en": "sleeve",
+"sv": "ärm"
+},
+{
+"en": "collar",
+"sv": "krage"
+},
+{
+"en": "hem",
+"sv": "fåll"
+},
+{
+"en": "fabric",
+"sv": "tyg"
+},
+{
+"en": "cotton",
+"sv": "bomull"
+},
+{
+"en": "wool",
+"sv": "ull"
+},
+{
+"en": "silk",
+"sv": "silke"
+},
+{
+"en": "leather",
+"sv": "läder"
+},
+{
+"en": "denim",
+"sv": "denim"
+},
+{
+"en": "pattern",
+"sv": "mönster"
+},
+{
+"en": "stripe",
+"sv": "rand"
+},
+{
+"en": "dot",
+"sv": "prick"
+},
+{
+"en": "weather",
+"sv": "väder"
+},
+{
+"en": "climate",
+"sv": "klimat"
+},
+{
+"en": "sun",
+"sv": "sol"
+},
+{
+"en": "moon",
+"sv": "måne"
+},
+{
+"en": "star",
+"sv": "stjärna"
+},
+{
+"en": "sky",
+"sv": "himmel"
+},
+{
+"en": "cloud",
+"sv": "moln"
+},
+{
+"en": "rain",
+"sv": "regn"
+},
+{
+"en": "snow",
+"sv": "snö"
+},
+{
+"en": "wind",
+"sv": "vind"
+},
+{
+"en": "storm",
+"sv": "storm"
+},
+{
+"en": "thunder",
+"sv": "åska"
+},
+{
+"en": "lightning",
+"sv": "blixt"
+},
+{
+"en": "fog",
+"sv": "dimma"
+},
+{
+"en": "mist",
+"sv": "dis"
+},
+{
+"en": "frost",
+"sv": "frost"
+},
+{
+"en": "ice",
+"sv": "is"
+},
+{
+"en": "hail",
+"sv": "hagel"
+},
+{
+"en": "rainbow",
+"sv": "regnbåge"
+},
+{
+"en": "temperature",
+"sv": "temperatur"
+},
+{
+"en": "hot",
+"sv": "het"
+},
+{
+"en": "warm",
+"sv": "varm"
+},
+{
+"en": "cool",
+"sv": "sval"
+},
+{
+"en": "freezing",
+"sv": "iskall"
+},
+{
+"en": "boiling",
+"sv": "kokhet"
+},
+{
+"en": "humid",
+"sv": "fuktig"
+},
+{
+"en": "sunny",
+"sv": "soligt"
+},
+{
+"en": "cloudy",
+"sv": "molnigt"
+},
+{
+"en": "rainy",
+"sv": "regnigt"
+},
+{
+"en": "snowy",
+"sv": "snöigt"
+},
+{
+"en": "windy",
+"sv": "blåsigt"
+},
+{
+"en": "stormy",
+"sv": "stormigt"
+},
+{
+"en": "nature",
+"sv": "natur"
+},
+{
+"en": "environment",
+"sv": "miljö"
+},
+{
+"en": "earth",
+"sv": "jord"
+},
+{
+"en": "ground",
+"sv": "mark"
+},
+{
+"en": "soil",
+"sv": "jord"
+},
+{
+"en": "sand",
+"sv": "sand"
+},
+{
+"en": "rock",
+"sv": "sten"
+},
+{
+"en": "stone",
+"sv": "sten"
+},
+{
+"en": "mountain",
+"sv": "berg"
+},
+{
+"en": "hill",
+"sv": "kulle"
+},
+{
+"en": "valley",
+"sv": "dal"
+},
+{
+"en": "forest",
+"sv": "skog"
+},
+{
+"en": "wood",
+"sv": "skog"
+},
+{
+"en": "tree",
+"sv": "träd"
+},
+{
+"en": "branch",
+"sv": "gren"
+},
+{
+"en": "leaf",
+"sv": "löv"
+},
+{
+"en": "flower",
+"sv": "blomma"
+},
+{
+"en": "grass",
+"sv": "gräs"
+},
+{
+"en": "bush",
+"sv": "buske"
+},
+{
+"en": "root",
+"sv": "rot"
+},
+{
+"en": "river",
+"sv": "flod"
+},
+{
+"en": "stream",
+"sv": "bäck"
+},
+{
+"en": "lake",
+"sv": "sjö"
+},
+{
+"en": "sea",
+"sv": "hav"
+},
+{
+"en": "ocean",
+"sv": "ocean"
+},
+{
+"en": "beach",
+"sv": "strand"
+},
+{
+"en": "coast",
+"sv": "kust"
+},
+{
+"en": "island",
+"sv": "ö"
+},
+{
+"en": "wave",
+"sv": "våg"
+},
+{
+"en": "tide",
+"sv": "tidvatten"
+},
+{
+"en": "field",
+"sv": "fält"
+},
+{
+"en": "meadow",
+"sv": "äng"
+},
+{
+"en": "desert",
+"sv": "öken"
+},
+{
+"en": "jungle",
+"sv": "djungel"
+},
+{
+"en": "swamp",
+"sv": "träsk"
+},
+{
+"en": "cave",
+"sv": "grotta"
+},
+{
+"en": "cliff",
+"sv": "klippa"
+},
+{
+"en": "waterfall",
+"sv": "vattenfall"
+},
+{
+"en": "volcano",
+"sv": "vulkan"
+},
+{
+"en": "earthquake",
+"sv": "jordbävning"
+},
+{
+"en": "animal",
+"sv": "djur"
+},
+{
+"en": "pet",
+"sv": "husdjur"
+},
+{
+"en": "dog",
+"sv": "hund"
+},
+{
+"en": "cat",
+"sv": "katt"
+},
+{
+"en": "bird",
+"sv": "fågel"
+},
+{
+"en": "horse",
+"sv": "häst"
+},
+{
+"en": "cow",
+"sv": "ko"
+},
+{
+"en": "pig",
+"sv": "gris"
+},
+{
+"en": "sheep",
+"sv": "får"
+},
+{
+"en": "goat",
+"sv": "get"
+},
+{
+"en": "duck",
+"sv": "anka"
+},
+{
+"en": "goose",
+"sv": "gås"
+},
+{
+"en": "turkey",
+"sv": "kalkon"
+},
+{
+"en": "rabbit",
+"sv": "kanin"
+},
+{
+"en": "mouse",
+"sv": "mus"
+},
+{
+"en": "rat",
+"sv": "råtta"
+},
+{
+"en": "hamster",
+"sv": "hamster"
+},
+{
+"en": "guinea pig",
+"sv": "marsvin"
+},
+{
+"en": "lion",
+"sv": "lejon"
+},
+{
+"en": "tiger",
+"sv": "tiger"
+},
+{
+"en": "bear",
+"sv": "björn"
+},
+{
+"en": "wolf",
+"sv": "varg"
+},
+{
+"en": "fox",
+"sv": "räv"
+},
+{
+"en": "deer",
+"sv": "hjort"
+},
+{
+"en": "moose",
+"sv": "älg"
+},
+{
+"en": "elephant",
+"sv": "elefant"
+},
+{
+"en": "giraffe",
+"sv": "giraff"
+},
+{
+"en": "zebra",
+"sv": "zebra"
+},
+{
+"en": "monkey",
+"sv": "apa"
+},
+{
+"en": "gorilla",
+"sv": "gorilla"
+},
+{
+"en": "snake",
+"sv": "orm"
+},
+{
+"en": "lizard",
+"sv": "ödla"
+},
+{
+"en": "frog",
+"sv": "groda"
+},
+{
+"en": "turtle",
+"sv": "sköldpadda"
+},
+{
+"en": "crocodile",
+"sv": "krokodil"
+},
+{
+"en": "shark",
+"sv": "haj"
+},
+{
+"en": "whale",
+"sv": "val"
+},
+{
+"en": "dolphin",
+"sv": "delfin"
+},
+{
+"en": "octopus",
+"sv": "bläckfisk"
+},
+{
+"en": "crab",
+"sv": "krabba"
+},
+{
+"en": "lobster",
+"sv": "hummer"
+},
+{
+"en": "insect",
+"sv": "insekt"
+},
+{
+"en": "bug",
+"sv": "kryp"
+},
+{
+"en": "bee",
+"sv": "bi"
+},
+{
+"en": "butterfly",
+"sv": "fjäril"
+},
+{
+"en": "spider",
+"sv": "spindel"
+},
+{
+"en": "ant",
+"sv": "myra"
+},
+{
+"en": "mosquito",
+"sv": "mygga"
+},
+{
+"en": "worm",
+"sv": "mask"
+},
+{
+"en": "snail",
+"sv": "snigel"
+},
+{
+"en": "transport",
+"sv": "transport"
+},
+{
+"en": "vehicle",
+"sv": "fordon"
+},
+{
+"en": "bus",
+"sv": "buss"
+},
+{
+"en": "tram",
+"sv": "spårvagn"
+},
+{
+"en": "subway",
+"sv": "tunnelbana"
+},
+{
+"en": "metro",
+"sv": "tunnelbana"
+},
+{
+"en": "taxi",
+"sv": "taxi"
+},
+{
+"en": "bike",
+"sv": "cykel"
+},
+{
+"en": "bicycle",
+"sv": "cykel"
+},
+{
+"en": "motorcycle",
+"sv": "motorcykel"
+},
+{
+"en": "scooter",
+"sv": "scooter"
+},
+{
+"en": "truck",
+"sv": "lastbil"
+},
+{
+"en": "van",
+"sv": "skåpbil"
+},
+{
+"en": "fire truck",
+"sv": "brandbil"
+},
+{
+"en": "police car",
+"sv": "polisbil"
+},
+{
+"en": "boat",
+"sv": "båt"
+},
+{
+"en": "ship",
+"sv": "skepp"
+},
+{
+"en": "ferry",
+"sv": "färja"
+},
+{
+"en": "yacht",
+"sv": "yacht"
+},
+{
+"en": "plane",
+"sv": "flygplan"
+},
+{
+"en": "airplane",
+"sv": "flygplan"
+},
+{
+"en": "helicopter",
+"sv": "helikopter"
+},
+{
+"en": "rocket",
+"sv": "raket"
+},
+{
+"en": "spaceship",
+"sv": "rymdskepp"
+},
+{
+"en": "airport",
+"sv": "flygplats"
+},
+{
+"en": "station",
+"sv": "station"
+},
+{
+"en": "port",
+"sv": "hamn"
+},
+{
+"en": "harbor",
+"sv": "hamn"
+},
+{
+"en": "road",
+"sv": "väg"
+},
+{
+"en": "street",
+"sv": "gata"
+},
+{
+"en": "avenue",
+"sv": "aveny"
+},
+{
+"en": "highway",
+"sv": "motorväg"
+},
+{
+"en": "bridge",
+"sv": "bro"
+},
+{
+"en": "tunnel",
+"sv": "tunnel"
+},
+{
+"en": "traffic",
+"sv": "trafik"
+},
+{
+"en": "parking",
+"sv": "parkering"
+},
+{
+"en": "gas station",
+"sv": "bensinmack"
+},
+{
+"en": "fuel",
+"sv": "bränsle"
+},
+{
+"en": "gasoline",
+"sv": "bensin"
+},
+{
+"en": "diesel",
+"sv": "diesel"
+},
+{
+"en": "electric",
+"sv": "elektrisk"
+},
+{
+"en": "engine",
+"sv": "motor"
+},
+{
+"en": "wheel",
+"sv": "hjul"
+},
+{
+"en": "tire",
+"sv": "däck"
+},
+{
+"en": "steering wheel",
+"sv": "ratt"
+},
+{
+"en": "seat",
+"sv": "säte"
+},
+{
+"en": "seatbelt",
+"sv": "säkerhetsbälte"
+},
+{
+"en": "helmet",
+"sv": "hjälm"
+},
+{
+"en": "map",
+"sv": "karta"
+},
+{
+"en": "compass",
+"sv": "kompass"
+},
+{
+"en": "GPS",
+"sv": "GPS"
+},
+{
+"en": "direction",
+"sv": "riktning"
+},
+{
+"en": "north",
+"sv": "norr"
+},
+{
+"en": "south",
+"sv": "söder"
+},
+{
+"en": "east",
+"sv": "öster"
+},
+{
+"en": "west",
+"sv": "väster"
+},
+{
+"en": "left",
+"sv": "vänster"
+},
+{
+"en": "straight",
+"sv": "rakt fram"
+},
+{
+"en": "around",
+"sv": "runt"
+},
+{
+"en": "across",
+"sv": "över"
+},
+{
+"en": "along",
+"sv": "längs"
+},
+{
+"en": "toward",
+"sv": "mot"
+},
+{
+"en": "away",
+"sv": "bort"
+},
+{
+"en": "near",
+"sv": "nära"
+},
+{
+"en": "far",
+"sv": "långt"
+},
+{
+"en": "distant",
+"sv": "avlägsen"
+},
+{
+"en": "everywhere",
+"sv": "överallt"
+},
+{
+"en": "somewhere",
+"sv": "någonstans"
+},
+{
+"en": "nowhere",
+"sv": "ingenstans"
+},
+{
+"en": "inside",
+"sv": "inuti"
+},
+{
+"en": "outside",
+"sv": "utanför"
+},
+{
+"en": "above",
+"sv": "ovanför"
+},
+{
+"en": "below",
+"sv": "nedanför"
+},
+{
+"en": "under",
+"sv": "under"
+},
+{
+"en": "between",
+"sv": "mellan"
+},
+{
+"en": "among",
+"sv": "bland"
+},
+{
+"en": "beside",
+"sv": "bredvid"
+},
+{
+"en": "behind",
+"sv": "bakom"
+},
+{
+"en": "in front",
+"sv": "framför"
+},
+{
+"en": "opposite",
+"sv": "mittemot"
+},
+{
+"en": "middle",
+"sv": "mitten"
+},
+{
+"en": "center",
+"sv": "centrum"
+},
+{
+"en": "edge",
+"sv": "kant"
+},
+{
+"en": "corner",
+"sv": "hörn"
+},
+{
+"en": "top",
+"sv": "topp"
+},
+{
+"en": "bottom",
+"sv": "botten"
+},
+{
+"en": "front",
+"sv": "framsida"
+},
+{
+"en": "rear",
+"sv": "baksida"
+},
+{
+"en": "university",
+"sv": "universitet"
+},
+{
+"en": "college",
+"sv": "högskola"
+},
+{
+"en": "classroom",
+"sv": "klassrum"
+},
+{
+"en": "lesson",
+"sv": "lektion"
+},
+{
+"en": "class",
+"sv": "klass"
+},
+{
+"en": "course",
+"sv": "kurs"
+},
+{
+"en": "subject",
+"sv": "ämne"
+},
+{
+"en": "homework",
+"sv": "läxa"
+},
+{
+"en": "assignment",
+"sv": "uppgift"
+},
+{
+"en": "exam",
+"sv": "tenta"
+},
+{
+"en": "grade",
+"sv": "betyg"
+},
+{
+"en": "degree",
+"sv": "examen"
+},
+{
+"en": "diploma",
+"sv": "diplom"
+},
+{
+"en": "certificate",
+"sv": "certifikat"
+},
+{
+"en": "scholarship",
+"sv": "stipendium"
+},
+{
+"en": "tuition",
+"sv": "studieavgift"
+},
+{
+"en": "library",
+"sv": "bibliotek"
+},
+{
+"en": "bookstore",
+"sv": "bokhandel"
+},
+{
+"en": "notebook",
+"sv": "anteckningsbok"
+},
+{
+"en": "pen",
+"sv": "penna"
+},
+{
+"en": "pencil",
+"sv": "blyertspenna"
+},
+{
+"en": "eraser",
+"sv": "suddgummi"
+},
+{
+"en": "ruler",
+"sv": "linjal"
+},
+{
+"en": "scissors",
+"sv": "sax"
+},
+{
+"en": "glue",
+"sv": "lim"
+},
+{
+"en": "tape",
+"sv": "tejp"
+},
+{
+"en": "paper",
+"sv": "papper"
+},
+{
+"en": "page",
+"sv": "sida"
+},
+{
+"en": "chapter",
+"sv": "kapitel"
+},
+{
+"en": "paragraph",
+"sv": "stycke"
+},
+{
+"en": "letter",
+"sv": "bokstav"
+},
+{
+"en": "alphabet",
+"sv": "alfabet"
+},
+{
+"en": "grammar",
+"sv": "grammatik"
+},
+{
+"en": "vocabulary",
+"sv": "ordförråd"
+},
+{
+"en": "pronunciation",
+"sv": "uttal"
+},
+{
+"en": "spelling",
+"sv": "stavning"
+},
+{
+"en": "meaning",
+"sv": "betydelse"
+},
+{
+"en": "definition",
+"sv": "definition"
+},
+{
+"en": "example",
+"sv": "exempel"
+},
+{
+"en": "language",
+"sv": "språk"
+},
+{
+"en": "English",
+"sv": "engelska"
+},
+{
+"en": "Swedish",
+"sv": "svenska"
+},
+{
+"en": "Spanish",
+"sv": "spanska"
+},
+{
+"en": "French",
+"sv": "franska"
+},
+{
+"en": "German",
+"sv": "tyska"
+},
+{
+"en": "Chinese",
+"sv": "kinesiska"
+},
+{
+"en": "Japanese",
+"sv": "japanska"
+},
+{
+"en": "Arabic",
+"sv": "arabiska"
+},
+{
+"en": "Russian",
+"sv": "ryska"
+},
+{
+"en": "translation",
+"sv": "översättning"
+},
+{
+"en": "dictionary",
+"sv": "ordbok"
+},
+{
+"en": "phrase",
+"sv": "fras"
+},
+{
+"en": "expression",
+"sv": "uttryck"
+},
+{
+"en": "idiom",
+"sv": "idiom"
+},
+{
+"en": "accent",
+"sv": "brytning"
+},
+{
+"en": "dialect",
+"sv": "dialekt"
+},
+{
+"en": "fluent",
+"sv": "flytande"
+},
+{
+"en": "native",
+"sv": "modersmål"
+},
+{
+"en": "bilingual",
+"sv": "tvåspråkig"
+},
+{
+"en": "music",
+"sv": "musik"
+},
+{
+"en": "song",
+"sv": "sång"
+},
+{
+"en": "melody",
+"sv": "melodi"
+},
+{
+"en": "rhythm",
+"sv": "rytm"
+},
+{
+"en": "lyrics",
+"sv": "text"
+},
+{
+"en": "chorus",
+"sv": "refräng"
+},
+{
+"en": "verse",
+"sv": "vers"
+},
+{
+"en": "instrument",
+"sv": "instrument"
+},
+{
+"en": "guitar",
+"sv": "gitarr"
+},
+{
+"en": "piano",
+"sv": "piano"
+},
+{
+"en": "violin",
+"sv": "violin"
+},
+{
+"en": "drums",
+"sv": "trummor"
+},
+{
+"en": "flute",
+"sv": "flöjt"
+},
+{
+"en": "trumpet",
+"sv": "trumpet"
+},
+{
+"en": "concert",
+"sv": "konsert"
+},
+{
+"en": "band",
+"sv": "band"
+},
+{
+"en": "orchestra",
+"sv": "orkester"
+},
+{
+"en": "choir",
+"sv": "kör"
+},
+{
+"en": "movie",
+"sv": "film"
+},
+{
+"en": "cinema",
+"sv": "bio"
+},
+{
+"en": "theater",
+"sv": "teater"
+},
+{
+"en": "director",
+"sv": "regissör"
+},
+{
+"en": "scene",
+"sv": "scen"
+},
+{
+"en": "plot",
+"sv": "handling"
+},
+{
+"en": "character",
+"sv": "karaktär"
+},
+{
+"en": "audience",
+"sv": "publik"
+},
+{
+"en": "sport",
+"sv": "sport"
+},
+{
+"en": "football",
+"sv": "fotboll"
+},
+{
+"en": "soccer",
+"sv": "fotboll"
+},
+{
+"en": "basketball",
+"sv": "basket"
+},
+{
+"en": "tennis",
+"sv": "tennis"
+},
+{
+"en": "golf",
+"sv": "golf"
+},
+{
+"en": "hockey",
+"sv": "hockey"
+},
+{
+"en": "baseball",
+"sv": "baseboll"
+},
+{
+"en": "volleyball",
+"sv": "volleyboll"
+},
+{
+"en": "swimming",
+"sv": "simning"
+},
+{
+"en": "running",
+"sv": "löpning"
+},
+{
+"en": "cycling",
+"sv": "cykling"
+},
+{
+"en": "skiing",
+"sv": "skidåkning"
+},
+{
+"en": "skating",
+"sv": "skridskoåkning"
+},
+{
+"en": "boxing",
+"sv": "boxning"
+},
+{
+"en": "wrestling",
+"sv": "brottning"
+},
+{
+"en": "martial arts",
+"sv": "kampsport"
+},
+{
+"en": "yoga",
+"sv": "yoga"
+},
+{
+"en": "gym",
+"sv": "gym"
+},
+{
+"en": "fitness",
+"sv": "fitness"
+},
+{
+"en": "tournament",
+"sv": "turnering"
+},
+{
+"en": "championship",
+"sv": "mästerskap"
+},
+{
+"en": "winner",
+"sv": "vinnare"
+},
+{
+"en": "loser",
+"sv": "förlorare"
+},
+{
+"en": "medal",
+"sv": "medalj"
+},
+{
+"en": "trophy",
+"sv": "trofé"
+},
+{
+"en": "prize",
+"sv": "pris"
+},
+{
+"en": "foul",
+"sv": "regelbrott"
+},
+{
+"en": "referee",
+"sv": "domare"
+},
+{
+"en": "supporter",
+"sv": "supporter"
+},
+{
+"en": "stadium",
+"sv": "arena"
+},
+{
+"en": "court",
+"sv": "bana"
+},
+{
+"en": "ball",
+"sv": "boll"
+},
+{
+"en": "bat",
+"sv": "slagträ"
+},
+{
+"en": "racket",
+"sv": "racket"
+},
+{
+"en": "net",
+"sv": "nät"
+},
+{
+"en": "goalpost",
+"sv": "målstolpe"
+},
+{
+"en": "technology",
+"sv": "teknik"
+},
+{
+"en": "science",
+"sv": "vetenskap"
+},
+{
+"en": "internet",
+"sv": "internet"
+},
+{
+"en": "website",
+"sv": "webbplats"
+},
+{
+"en": "webpage",
+"sv": "webbsida"
+},
+{
+"en": "email",
+"sv": "e-post"
+},
+{
+"en": "message",
+"sv": "meddelande"
+},
+{
+"en": "chat",
+"sv": "chatt"
+},
+{
+"en": "social media",
+"sv": "sociala medier"
+},
+{
+"en": "app",
+"sv": "app"
+},
+{
+"en": "software",
+"sv": "programvara"
+},
+{
+"en": "hardware",
+"sv": "hårdvara"
+},
+{
+"en": "device",
+"sv": "enhet"
+},
+{
+"en": "screen",
+"sv": "skärm"
+},
+{
+"en": "keyboard",
+"sv": "tangentbord"
+},
+{
+"en": "printer",
+"sv": "skrivare"
+},
+{
+"en": "scanner",
+"sv": "skanner"
+},
+{
+"en": "speaker",
+"sv": "högtalare"
+},
+{
+"en": "headphones",
+"sv": "hörlurar"
+},
+{
+"en": "microphone",
+"sv": "mikrofon"
+},
+{
+"en": "webcam",
+"sv": "webbkamera"
+},
+{
+"en": "wifi",
+"sv": "wifi"
+},
+{
+"en": "bluetooth",
+"sv": "bluetooth"
+},
+{
+"en": "data",
+"sv": "data"
+},
+{
+"en": "file",
+"sv": "fil"
+},
+{
+"en": "folder",
+"sv": "mapp"
+},
+{
+"en": "document",
+"sv": "dokument"
+},
+{
+"en": "image",
+"sv": "bild"
+},
+{
+"en": "video",
+"sv": "video"
+},
+{
+"en": "audio",
+"sv": "ljud"
+},
+{
+"en": "username",
+"sv": "användarnamn"
+},
+{
+"en": "profile",
+"sv": "profil"
+},
+{
+"en": "settings",
+"sv": "inställningar"
+},
+{
+"en": "notification",
+"sv": "avisering"
+},
+{
+"en": "server",
+"sv": "server"
+},
+{
+"en": "database",
+"sv": "databas"
+},
+{
+"en": "network",
+"sv": "nätverk"
+},
+{
+"en": "security",
+"sv": "säkerhet"
+},
+{
+"en": "privacy",
+"sv": "integritet"
+},
+{
+"en": "virus",
+"sv": "virus"
+},
+{
+"en": "hack",
+"sv": "hacka"
+},
+{
+"en": "country",
+"sv": "land"
+},
+{
+"en": "nation",
+"sv": "nation"
+},
+{
+"en": "state",
+"sv": "stat"
+},
+{
+"en": "province",
+"sv": "provins"
+},
+{
+"en": "region",
+"sv": "region"
+},
+{
+"en": "capital",
+"sv": "huvudstad"
+},
+{
+"en": "town",
+"sv": "stad"
+},
+{
+"en": "village",
+"sv": "by"
+},
+{
+"en": "district",
+"sv": "distrikt"
+},
+{
+"en": "neighborhood",
+"sv": "kvarter"
+},
+{
+"en": "address",
+"sv": "adress"
+},
+{
+"en": "zip code",
+"sv": "postnummer"
+},
+{
+"en": "postcode",
+"sv": "postnummer"
+},
+{
+"en": "Sweden",
+"sv": "Sverige"
+},
+{
+"en": "Norway",
+"sv": "Norge"
+},
+{
+"en": "Denmark",
+"sv": "Danmark"
+},
+{
+"en": "Finland",
+"sv": "Finland"
+},
+{
+"en": "Iceland",
+"sv": "Island"
+},
+{
+"en": "England",
+"sv": "England"
+},
+{
+"en": "Britain",
+"sv": "Storbritannien"
+},
+{
+"en": "USA",
+"sv": "USA"
+},
+{
+"en": "America",
+"sv": "Amerika"
+},
+{
+"en": "Canada",
+"sv": "Kanada"
+},
+{
+"en": "Germany",
+"sv": "Tyskland"
+},
+{
+"en": "France",
+"sv": "Frankrike"
+},
+{
+"en": "Spain",
+"sv": "Spanien"
+},
+{
+"en": "Italy",
+"sv": "Italien"
+},
+{
+"en": "Portugal",
+"sv": "Portugal"
+},
+{
+"en": "Netherlands",
+"sv": "Nederländerna"
+},
+{
+"en": "Belgium",
+"sv": "Belgien"
+},
+{
+"en": "Switzerland",
+"sv": "Schweiz"
+},
+{
+"en": "Austria",
+"sv": "Österrike"
+},
+{
+"en": "Poland",
+"sv": "Polen"
+},
+{
+"en": "Russia",
+"sv": "Ryssland"
+},
+{
+"en": "China",
+"sv": "Kina"
+},
+{
+"en": "Japan",
+"sv": "Japan"
+},
+{
+"en": "India",
+"sv": "Indien"
+},
+{
+"en": "Australia",
+"sv": "Australien"
+},
+{
+"en": "Brazil",
+"sv": "Brasilien"
+},
+{
+"en": "Mexico",
+"sv": "Mexiko"
+},
+{
+"en": "Africa",
+"sv": "Afrika"
+},
+{
+"en": "Europe",
+"sv": "Europa"
+},
+{
+"en": "Asia",
+"sv": "Asien"
+},
+{
+"en": "politics",
+"sv": "politik"
+},
+{
+"en": "democracy",
+"sv": "demokrati"
+},
+{
+"en": "election",
+"sv": "val"
+},
+{
+"en": "freedom",
+"sv": "frihet"
+},
+{
+"en": "justice",
+"sv": "rättvisa"
+},
+{
+"en": "peace",
+"sv": "fred"
+},
+{
+"en": "conflict",
+"sv": "konflikt"
+},
+{
+"en": "agreement",
+"sv": "avtal"
+},
+{
+"en": "treaty",
+"sv": "fördrag"
+},
+{
+"en": "policy",
+"sv": "politik"
+},
+{
+"en": "citizen",
+"sv": "medborgare"
+},
+{
+"en": "immigrant",
+"sv": "invandrare"
+},
+{
+"en": "passport",
+"sv": "pass"
+},
+{
+"en": "visa",
+"sv": "visum"
+},
+{
+"en": "customs",
+"sv": "tull"
+},
+{
+"en": "embassy",
+"sv": "ambassad"
+},
+{
+"en": "religion",
+"sv": "religion"
+},
+{
+"en": "church",
+"sv": "kyrka"
+},
+{
+"en": "temple",
+"sv": "tempel"
+},
+{
+"en": "mosque",
+"sv": "moské"
+},
+{
+"en": "faith",
+"sv": "tro"
+},
+{
+"en": "belief",
+"sv": "övertygelse"
+},
+{
+"en": "prayer",
+"sv": "bön"
+},
+{
+"en": "god",
+"sv": "gud"
+},
+{
+"en": "soul",
+"sv": "själ"
+},
+{
+"en": "spirit",
+"sv": "ande"
+},
+{
+"en": "culture",
+"sv": "kultur"
+},
+{
+"en": "tradition",
+"sv": "tradition"
+},
+{
+"en": "custom",
+"sv": "sed"
+},
+{
+"en": "festival",
+"sv": "festival"
+},
+{
+"en": "ceremony",
+"sv": "ceremoni"
+},
+{
+"en": "wedding",
+"sv": "bröllop"
+},
+{
+"en": "funeral",
+"sv": "begravning"
+},
+{
+"en": "birthday",
+"sv": "födelsedag"
+},
+{
+"en": "anniversary",
+"sv": "årsdag"
+},
+{
+"en": "celebration",
+"sv": "firande"
+},
+{
+"en": "invitation",
+"sv": "inbjudan"
+},
+{
+"en": "emotion",
+"sv": "känsla"
+},
+{
+"en": "feeling",
+"sv": "känsla"
+},
+{
+"en": "mood",
+"sv": "humör"
+},
+{
+"en": "attitude",
+"sv": "attityd"
+},
+{
+"en": "personality",
+"sv": "personlighet"
+},
+{
+"en": "behavior",
+"sv": "beteende"
+},
+{
+"en": "habit",
+"sv": "vana"
+},
+{
+"en": "routine",
+"sv": "rutin"
+},
+{
+"en": "lifestyle",
+"sv": "livsstil"
+},
+{
+"en": "hobby",
+"sv": "hobby"
+},
+{
+"en": "passion",
+"sv": "passion"
+},
+{
+"en": "ambition",
+"sv": "ambition"
+},
+{
+"en": "success",
+"sv": "framgång"
+},
+{
+"en": "failure",
+"sv": "misslyckande"
+},
+{
+"en": "progress",
+"sv": "framsteg"
+},
+{
+"en": "achievement",
+"sv": "prestation"
+},
+{
+"en": "effort",
+"sv": "ansträngning"
+},
+{
+"en": "energy",
+"sv": "energi"
+},
+{
+"en": "pressure",
+"sv": "tryck"
+},
+{
+"en": "stress",
+"sv": "stress"
+},
+{
+"en": "nightmare",
+"sv": "mardröm"
+},
+{
+"en": "memory",
+"sv": "minne"
+},
+{
+"en": "thought",
+"sv": "tanke"
+},
+{
+"en": "opinion",
+"sv": "åsikt"
+},
+{
+"en": "view",
+"sv": "synpunkt"
+},
+{
+"en": "decision",
+"sv": "beslut"
+},
+{
+"en": "choice",
+"sv": "val"
+},
+{
+"en": "option",
+"sv": "alternativ"
+},
+{
+"en": "possibility",
+"sv": "möjlighet"
+},
+{
+"en": "probability",
+"sv": "sannolikhet"
+},
+{
+"en": "certainty",
+"sv": "säkerhet"
+},
+{
+"en": "solution",
+"sv": "lösning"
+},
+{
+"en": "difficulty",
+"sv": "svårighet"
+},
+{
+"en": "obstacle",
+"sv": "hinder"
+},
+{
+"en": "gain",
+"sv": "vinst"
+},
+{
+"en": "consequence",
+"sv": "konsekvens"
+},
+{
+"en": "aim",
+"sv": "mål"
+},
+{
+"en": "intention",
+"sv": "avsikt"
+},
+{
+"en": "action",
+"sv": "handling"
+},
+{
+"en": "activity",
+"sv": "aktivitet"
+},
+{
+"en": "event",
+"sv": "händelse"
+},
+{
+"en": "situation",
+"sv": "situation"
+},
+{
+"en": "circumstance",
+"sv": "omständighet"
+},
+{
+"en": "condition",
+"sv": "tillstånd"
+},
+{
+"en": "status",
+"sv": "status"
+},
+{
+"en": "location",
+"sv": "plats"
+},
+{
+"en": "space",
+"sv": "utrymme"
+},
+{
+"en": "zone",
+"sv": "zon"
+},
+{
+"en": "material",
+"sv": "material"
+},
+{
+"en": "substance",
+"sv": "ämne"
+},
+{
+"en": "matter",
+"sv": "materia"
+},
+{
+"en": "object",
+"sv": "föremål"
+},
+{
+"en": "thing",
+"sv": "sak"
+},
+{
+"en": "item",
+"sv": "artikel"
+},
+{
+"en": "product",
+"sv": "produkt"
+},
+{
+"en": "goods",
+"sv": "varor"
+},
+{
+"en": "equipment",
+"sv": "utrustning"
+},
+{
+"en": "tool",
+"sv": "verktyg"
+},
+{
+"en": "machine",
+"sv": "maskin"
+},
+{
+"en": "weapon",
+"sv": "vapen"
+},
+{
+"en": "gun",
+"sv": "pistol"
+},
+{
+"en": "sword",
+"sv": "svärd"
+},
+{
+"en": "shield",
+"sv": "sköld"
+},
+{
+"en": "armor",
+"sv": "rustning"
+},
+{
+"en": "society",
+"sv": "samhälle"
+},
+{
+"en": "crowd",
+"sv": "folksamling"
+},
+{
+"en": "population",
+"sv": "befolkning"
+},
+{
+"en": "generation",
+"sv": "generation"
+},
+{
+"en": "youth",
+"sv": "ungdom"
+},
+{
+"en": "adult",
+"sv": "vuxen"
+},
+{
+"en": "elderly",
+"sv": "äldre"
+},
+{
+"en": "baby",
+"sv": "bebis"
+},
+{
+"en": "teenager",
+"sv": "tonåring"
+},
+{
+"en": "male",
+"sv": "manlig"
+},
+{
+"en": "female",
+"sv": "kvinnlig"
+},
+{
+"en": "boy",
+"sv": "pojke"
+},
+{
+"en": "human",
+"sv": "människa"
+},
+{
+"en": "individual",
+"sv": "individ"
+},
+{
+"en": "identity",
+"sv": "identitet"
+},
+{
+"en": "title",
+"sv": "titel"
+},
+{
+"en": "label",
+"sv": "etikett"
+},
+{
+"en": "category",
+"sv": "kategori"
+},
+{
+"en": "collection",
+"sv": "samling"
+},
+{
+"en": "list",
+"sv": "lista"
+},
+{
+"en": "series",
+"sv": "serie"
+},
+{
+"en": "sequence",
+"sv": "sekvens"
+},
+{
+"en": "rank",
+"sv": "rang"
+},
+{
+"en": "extent",
+"sv": "omfattning"
+},
+{
+"en": "unit",
+"sv": "enhet"
+},
+{
+"en": "percent",
+"sv": "procent"
+},
+{
+"en": "average",
+"sv": "genomsnitt"
+},
+{
+"en": "sum",
+"sv": "summa"
+},
+{
+"en": "difference",
+"sv": "skillnad"
+},
+{
+"en": "ratio",
+"sv": "förhållande"
+},
+{
+"en": "rate",
+"sv": "takt"
+},
+{
+"en": "pace",
+"sv": "tempo"
+},
+{
+"en": "frequency",
+"sv": "frekvens"
+},
+{
+"en": "period",
+"sv": "period"
+},
+{
+"en": "duration",
+"sv": "varaktighet"
+},
+{
+"en": "interval",
+"sv": "intervall"
+},
+{
+"en": "beginning",
+"sv": "början"
+},
+{
+"en": "yes",
+"sv": "ja"
+},
+{
+"en": "maybe",
+"sv": "kanske"
+},
+{
+"en": "perhaps",
+"sv": "kanske"
+},
+{
+"en": "probably",
+"sv": "förmodligen"
+},
+{
+"en": "certainly",
+"sv": "absolut"
+},
+{
+"en": "definitely",
+"sv": "definitivt"
+},
+{
+"en": "absolutely",
+"sv": "absolut"
+},
+{
+"en": "exactly",
+"sv": "exakt"
+},
+{
+"en": "approximately",
+"sv": "ungefär"
+},
+{
+"en": "almost",
+"sv": "nästan"
+},
+{
+"en": "nearly",
+"sv": "nästan"
+},
+{
+"en": "quite",
+"sv": "ganska"
+},
+{
+"en": "rather",
+"sv": "ganska"
+},
+{
+"en": "fairly",
+"sv": "rätt så"
+},
+{
+"en": "really",
+"sv": "verkligen"
+},
+{
+"en": "actually",
+"sv": "egentligen"
+},
+{
+"en": "basically",
+"sv": "i princip"
+},
+{
+"en": "especially",
+"sv": "särskilt"
+},
+{
+"en": "particularly",
+"sv": "särskilt"
+},
+{
+"en": "mainly",
+"sv": "främst"
+},
+{
+"en": "mostly",
+"sv": "mest"
+},
+{
+"en": "generally",
+"sv": "generellt"
+},
+{
+"en": "usually",
+"sv": "vanligtvis"
+},
+{
+"en": "normally",
+"sv": "normalt"
+},
+{
+"en": "often",
+"sv": "ofta"
+},
+{
+"en": "sometimes",
+"sv": "ibland"
+},
+{
+"en": "rarely",
+"sv": "sällan"
+},
+{
+"en": "seldom",
+"sv": "sällan"
+},
+{
+"en": "never",
+"sv": "aldrig"
+},
+{
+"en": "always",
+"sv": "alltid"
+},
+{
+"en": "forever",
+"sv": "för alltid"
+},
+{
+"en": "already",
+"sv": "redan"
+},
+{
+"en": "yet",
+"sv": "ännu"
+},
+{
+"en": "again",
+"sv": "igen"
+},
+{
+"en": "once",
+"sv": "en gång"
+},
+{
+"en": "twice",
+"sv": "två gånger"
+},
+{
+"en": "together",
+"sv": "tillsammans"
+},
+{
+"en": "alone",
+"sv": "ensam"
+},
+{
+"en": "apart",
+"sv": "isär"
+},
+{
+"en": "aside",
+"sv": "åt sidan"
+},
+{
+"en": "instead",
+"sv": "istället"
+},
+{
+"en": "otherwise",
+"sv": "annars"
+},
+{
+"en": "however",
+"sv": "dock"
+},
+{
+"en": "therefore",
+"sv": "därför"
+},
+{
+"en": "thus",
+"sv": "således"
+},
+{
+"en": "hence",
+"sv": "därav"
+},
+{
+"en": "meanwhile",
+"sv": "samtidigt"
+},
+{
+"en": "furthermore",
+"sv": "vidare"
+},
+{
+"en": "moreover",
+"sv": "dessutom"
+},
+{
+"en": "besides",
+"sv": "förutom"
+},
+{
+"en": "although",
+"sv": "även om"
+},
+{
+"en": "though",
+"sv": "fastän"
+},
+{
+"en": "unless",
+"sv": "om inte"
+},
+{
+"en": "whether",
+"sv": "huruvida"
+},
+{
+"en": "while",
+"sv": "medan"
+},
+{
+"en": "during",
+"sv": "under"
+},
+{
+"en": "until",
+"sv": "tills"
+},
+{
+"en": "since",
+"sv": "sedan"
+},
+{
+"en": "ago",
+"sv": "sedan"
+},
+{
+"en": "lately",
+"sv": "på sistone"
+},
+{
+"en": "recently",
+"sv": "nyligen"
+},
+{
+"en": "soon",
+"sv": "snart"
+},
+{
+"en": "eventually",
+"sv": "så småningom"
+},
+{
+"en": "suddenly",
+"sv": "plötsligt"
+},
+{
+"en": "gradually",
+"sv": "gradvis"
+},
+{
+"en": "slowly",
+"sv": "långsamt"
+},
+{
+"en": "quickly",
+"sv": "snabbt"
+},
+{
+"en": "rapidly",
+"sv": "hastigt"
+},
+{
+"en": "carefully",
+"sv": "försiktigt"
+},
+{
+"en": "easily",
+"sv": "lätt"
+},
+{
+"en": "hardly",
+"sv": "knappast"
+},
+{
+"en": "barely",
+"sv": "knappt"
+},
+{
+"en": "simply",
+"sv": "helt enkelt"
+},
+{
+"en": "clearly",
+"sv": "tydligt"
+},
+{
+"en": "obviously",
+"sv": "uppenbart"
+},
+{
+"en": "apparently",
+"sv": "tydligen"
+},
+{
+"en": "seemingly",
+"sv": "till synes"
+},
+{
+"en": "hopefully",
+"sv": "förhoppningsvis"
+},
+{
+"en": "fortunately",
+"sv": "lyckligtvis"
+},
+{
+"en": "unfortunately",
+"sv": "tyvärr"
+},
+{
+"en": "surprisingly",
+"sv": "överraskande"
+},
+{
+"en": "interestingly",
+"sv": "intressant nog"
+},
+{
+"en": "honestly",
+"sv": "ärligt talat"
+},
+{
+"en": "personally",
+"sv": "personligen"
+},
+{
+"en": "frankly",
+"sv": "uppriktigt"
+},
+{
+"en": "literally",
+"sv": "bokstavligen"
+},
+{
+"en": "seriously",
+"sv": "allvarligt"
+},
+{
+"en": "hello",
+"sv": "hej"
+},
+{
+"en": "hi",
+"sv": "hej"
+},
+{
+"en": "hey",
+"sv": "hej"
+},
+{
+"en": "goodbye",
+"sv": "hej då"
+},
+{
+"en": "bye",
+"sv": "hej då"
+},
+{
+"en": "thanks",
+"sv": "tack"
+},
+{
+"en": "thank you",
+"sv": "tack"
+},
+{
+"en": "sorry",
+"sv": "förlåt"
+},
+{
+"en": "excuse me",
+"sv": "ursäkta"
+},
+{
+"en": "congratulations",
+"sv": "grattis"
+},
+{
+"en": "good luck",
+"sv": "lycka till"
+},
+{
+"en": "cheers",
+"sv": "skål"
+},
+{
+"en": "bless you",
+"sv": "prosit"
+},
+{
+"en": "yes please",
+"sv": "ja tack"
+},
+{
+"en": "no thanks",
+"sv": "nej tack"
+},
+{
+"en": "of course",
+"sv": "självklart"
+},
+{
+"en": "no problem",
+"sv": "inga problem"
+},
+{
+"en": "okay",
+"sv": "okej"
+},
+{
+"en": "alright",
+"sv": "okej"
+},
+{
+"en": "sure",
+"sv": "visst"
+},
+{
+"en": "wow",
+"sv": "wow"
+},
+{
+"en": "oops",
+"sv": "oj"
+},
+{
+"en": "ouch",
+"sv": "aj"
+},
+{
+"en": "abandon",
+"sv": "överge"
+},
+{
+"en": "absence",
+"sv": "frånvaro"
+},
+{
+"en": "absolute",
+"sv": "absolut"
+},
+{
+"en": "abstract",
+"sv": "abstrakt"
+},
+{
+"en": "abundant",
+"sv": "riklig"
+},
+{
+"en": "abuse",
+"sv": "missbruk"
+},
+{
+"en": "academic",
+"sv": "akademisk"
+},
+{
+"en": "acceptable",
+"sv": "acceptabel"
+},
+{
+"en": "accommodate",
+"sv": "inkvartera"
+},
+{
+"en": "accompany",
+"sv": "följa med"
+},
+{
+"en": "according",
+"sv": "enligt"
+},
+{
+"en": "accurate",
+"sv": "exakt"
+},
+{
+"en": "acid",
+"sv": "syra"
+},
+{
+"en": "acknowledge",
+"sv": "erkänna"
+},
+{
+"en": "acquire",
+"sv": "förvärva"
+},
+{
+"en": "act",
+"sv": "agera"
+},
+{
+"en": "active",
+"sv": "aktiv"
+},
+{
+"en": "activist",
+"sv": "aktivist"
+},
+{
+"en": "actual",
+"sv": "verklig"
+},
+{
+"en": "ad",
+"sv": "annons"
+},
+{
+"en": "addition",
+"sv": "tillägg"
+},
+{
+"en": "additional",
+"sv": "ytterligare"
+},
+{
+"en": "adequate",
+"sv": "tillräcklig"
+},
+{
+"en": "administration",
+"sv": "förvaltning"
+},
+{
+"en": "administrator",
+"sv": "administratör"
+},
+{
+"en": "admission",
+"sv": "inträde"
+},
+{
+"en": "adolescent",
+"sv": "ungdom"
+},
+{
+"en": "adopt",
+"sv": "adoptera"
+},
+{
+"en": "advance",
+"sv": "framsteg"
+},
+{
+"en": "advanced",
+"sv": "avancerad"
+},
+{
+"en": "adventure",
+"sv": "äventyr"
+},
+{
+"en": "advertising",
+"sv": "reklam"
+},
+{
+"en": "advice",
+"sv": "råd"
+},
+{
+"en": "adviser",
+"sv": "rådgivare"
+},
+{
+"en": "advocate",
+"sv": "förespråka"
+},
+{
+"en": "affair",
+"sv": "affär"
+},
+{
+"en": "African",
+"sv": "afrikansk"
+},
+{
+"en": "afternoon",
+"sv": "eftermiddag"
+},
+{
+"en": "afterward",
+"sv": "därefter"
+},
+{
+"en": "against",
+"sv": "mot"
+},
+{
+"en": "agency",
+"sv": "byrå"
+},
+{
+"en": "agenda",
+"sv": "dagordning"
+},
+{
+"en": "agent",
+"sv": "agent"
+},
+{
+"en": "aggressive",
+"sv": "aggressiv"
+},
+{
+"en": "agricultural",
+"sv": "jordbruk"
+},
+{
+"en": "agriculture",
+"sv": "jordbruk"
+},
+{
+"en": "ahead",
+"sv": "framför"
+},
+{
+"en": "aide",
+"sv": "medhjälpare"
+},
+{
+"en": "AIDS",
+"sv": "AIDS"
+},
+{
+"en": "aircraft",
+"sv": "flygplan"
+},
+{
+"en": "airline",
+"sv": "flygbolag"
+},
+{
+"en": "album",
+"sv": "album"
+},
+{
+"en": "alive",
+"sv": "levande"
+},
+{
+"en": "alliance",
+"sv": "allians"
+},
+{
+"en": "alternative",
+"sv": "alternativ"
+},
+{
+"en": "American",
+"sv": "amerikansk"
+},
+{
+"en": "analysis",
+"sv": "analys"
+},
+{
+"en": "analyst",
+"sv": "analytiker"
+},
+{
+"en": "anger",
+"sv": "ilska"
+},
+{
+"en": "angle",
+"sv": "vinkel"
+},
+{
+"en": "annual",
+"sv": "årlig"
+},
+{
+"en": "anticipate",
+"sv": "förutse"
+},
+{
+"en": "anxiety",
+"sv": "ångest"
+},
+{
+"en": "anybody",
+"sv": "någon"
+},
+{
+"en": "anymore",
+"sv": "inte längre"
+},
+{
+"en": "anyone",
+"sv": "någon"
+},
+{
+"en": "anything",
+"sv": "någonting"
+},
+{
+"en": "anyway",
+"sv": "ändå"
+},
+{
+"en": "anywhere",
+"sv": "någonstans"
+},
+{
+"en": "apparent",
+"sv": "uppenbar"
+},
+{
+"en": "appeal",
+"sv": "överklaga"
+},
+{
+"en": "appearance",
+"sv": "utseende"
+},
+{
+"en": "application",
+"sv": "ansökan"
+},
+{
+"en": "appoint",
+"sv": "utnämna"
+},
+{
+"en": "appreciate",
+"sv": "uppskatta"
+},
+{
+"en": "appropriate",
+"sv": "lämplig"
+},
+{
+"en": "approval",
+"sv": "godkännande"
+},
+{
+"en": "Arab",
+"sv": "arab"
+},
+{
+"en": "argument",
+"sv": "argument"
+},
+{
+"en": "arise",
+"sv": "uppstå"
+},
+{
+"en": "armed",
+"sv": "beväpnad"
+},
+{
+"en": "army",
+"sv": "armé"
+},
+{
+"en": "arrangement",
+"sv": "arrangemang"
+},
+{
+"en": "arrival",
+"sv": "ankomst"
+},
+{
+"en": "article",
+"sv": "artikel"
+},
+{
+"en": "artistic",
+"sv": "konstnärlig"
+},
+{
+"en": "Asian",
+"sv": "asiatisk"
+},
+{
+"en": "asleep",
+"sv": "sovande"
+},
+{
+"en": "aspect",
+"sv": "aspekt"
+},
+{
+"en": "assault",
+"sv": "överfall"
+},
+{
+"en": "assert",
+"sv": "hävda"
+},
+{
+"en": "assessment",
+"sv": "bedömning"
+},
+{
+"en": "asset",
+"sv": "tillgång"
+},
+{
+"en": "assistance",
+"sv": "hjälp"
+},
+{
+"en": "assistant",
+"sv": "assistent"
+},
+{
+"en": "associate",
+"sv": "medarbetare"
+},
+{
+"en": "association",
+"sv": "förening"
+},
+{
+"en": "assume",
+"sv": "anta"
+},
+{
+"en": "assumption",
+"sv": "antagande"
+},
+{
+"en": "athletic",
+"sv": "atletisk"
+},
+{
+"en": "atmosphere",
+"sv": "atmosfär"
+},
+{
+"en": "attend",
+"sv": "närvara"
+},
+{
+"en": "attention",
+"sv": "uppmärksamhet"
+},
+{
+"en": "attorney",
+"sv": "advokat"
+},
+{
+"en": "attract",
+"sv": "attrahera"
+},
+{
+"en": "attribute",
+"sv": "egenskap"
+},
+{
+"en": "authority",
+"sv": "myndighet"
+},
+{
+"en": "auto",
+"sv": "bil"
+},
+{
+"en": "available",
+"sv": "tillgänglig"
+},
+{
+"en": "aware",
+"sv": "medveten"
+},
+{
+"en": "awareness",
+"sv": "medvetenhet"
+},
+{
+"en": "badly",
+"sv": "dåligt"
+},
+{
+"en": "bag",
+"sv": "väska"
+},
+{
+"en": "bake",
+"sv": "baka"
+},
+{
+"en": "ban",
+"sv": "förbjuda"
+},
+{
+"en": "bar",
+"sv": "bar"
+},
+{
+"en": "barrel",
+"sv": "fat"
+},
+{
+"en": "barrier",
+"sv": "barriär"
+},
+{
+"en": "basis",
+"sv": "grund"
+},
+{
+"en": "basket",
+"sv": "korg"
+},
+{
+"en": "battle",
+"sv": "strid"
+},
+{
+"en": "bean",
+"sv": "böna"
+},
+{
+"en": "beauty",
+"sv": "skönhet"
+},
+{
+"en": "become",
+"sv": "bli"
+},
+{
+"en": "being",
+"sv": "varande"
+},
+{
+"en": "bell",
+"sv": "klocka"
+},
+{
+"en": "bench",
+"sv": "bänk"
+},
+{
+"en": "bend",
+"sv": "böja"
+},
+{
+"en": "beneath",
+"sv": "under"
+},
+{
+"en": "best",
+"sv": "bäst"
+},
+{
+"en": "bet",
+"sv": "satsa"
+},
+{
+"en": "better",
+"sv": "bättre"
+},
+{
+"en": "beyond",
+"sv": "bortom"
+},
+{
+"en": "Bible",
+"sv": "Bibeln"
+},
+{
+"en": "bind",
+"sv": "binda"
+},
+{
+"en": "biological",
+"sv": "biologisk"
+},
+{
+"en": "birth",
+"sv": "födelse"
+},
+{
+"en": "bit",
+"sv": "bit"
+},
+{
+"en": "bite",
+"sv": "bita"
+},
+{
+"en": "blade",
+"sv": "blad"
+},
+{
+"en": "blind",
+"sv": "blind"
+},
+{
+"en": "block",
+"sv": "blockera"
+},
+{
+"en": "blow",
+"sv": "blåsa"
+},
+{
+"en": "board",
+"sv": "bräda"
+},
+{
+"en": "bomb",
+"sv": "bomb"
+},
+{
+"en": "bombing",
+"sv": "bombning"
+},
+{
+"en": "bond",
+"sv": "band"
+},
+{
+"en": "boom",
+"sv": "boom"
+},
+{
+"en": "boot",
+"sv": "stövel"
+},
+{
+"en": "born",
+"sv": "född"
+},
+{
+"en": "bottle",
+"sv": "flaska"
+},
+{
+"en": "boundary",
+"sv": "gräns"
+},
+{
+"en": "box",
+"sv": "låda"
+},
+{
+"en": "brand",
+"sv": "varumärke"
+},
+{
+"en": "breast",
+"sv": "bröst"
+},
+{
+"en": "breath",
+"sv": "andetag"
+},
+{
+"en": "brick",
+"sv": "tegel"
+},
+{
+"en": "brief",
+"sv": "kort"
+},
+{
+"en": "briefly",
+"sv": "kortfattat"
+},
+{
+"en": "brilliant",
+"sv": "briljant"
+},
+{
+"en": "British",
+"sv": "brittisk"
+},
+{
+"en": "broad",
+"sv": "bred"
+},
+{
+"en": "broken",
+"sv": "trasig"
+},
+{
+"en": "brush",
+"sv": "borste"
+},
+{
+"en": "buck",
+"sv": "dollar"
+},
+{
+"en": "bullet",
+"sv": "kula"
+},
+{
+"en": "bunch",
+"sv": "bunt"
+},
+{
+"en": "burden",
+"sv": "börda"
+},
+{
+"en": "busy",
+"sv": "upptagen"
+},
+{
+"en": "buyer",
+"sv": "köpare"
+},
+{
+"en": "cabin",
+"sv": "stuga"
+},
+{
+"en": "calculate",
+"sv": "beräkna"
+},
+{
+"en": "camp",
+"sv": "läger"
+},
+{
+"en": "campus",
+"sv": "campus"
+},
+{
+"en": "Canadian",
+"sv": "kanadensisk"
+},
+{
+"en": "cancer",
+"sv": "cancer"
+},
+{
+"en": "candidate",
+"sv": "kandidat"
+},
+{
+"en": "capability",
+"sv": "förmåga"
+},
+{
+"en": "capable",
+"sv": "kapabel"
+},
+{
+"en": "capacity",
+"sv": "kapacitet"
+},
+{
+"en": "captain",
+"sv": "kapten"
+},
+{
+"en": "capture",
+"sv": "fånga"
+},
+{
+"en": "carbon",
+"sv": "kol"
+},
+{
+"en": "carrier",
+"sv": "bärare"
+},
+{
+"en": "cast",
+"sv": "kasta"
+},
+{
+"en": "Catholic",
+"sv": "katolsk"
+},
+{
+"en": "celebrity",
+"sv": "kändis"
+},
+{
+"en": "cell",
+"sv": "cell"
+},
+{
+"en": "central",
+"sv": "central"
+},
+{
+"en": "century",
+"sv": "århundrade"
+},
+{
+"en": "CEO",
+"sv": "VD"
+},
+{
+"en": "certain",
+"sv": "viss"
+},
+{
+"en": "chain",
+"sv": "kedja"
+},
+{
+"en": "chairman",
+"sv": "ordförande"
+},
+{
+"en": "chamber",
+"sv": "kammare"
+},
+{
+"en": "champion",
+"sv": "mästare"
+},
+{
+"en": "changing",
+"sv": "föränderlig"
+},
+{
+"en": "channel",
+"sv": "kanal"
+},
+{
+"en": "characteristic",
+"sv": "egenskap"
+},
+{
+"en": "characterize",
+"sv": "karakterisera"
+},
+{
+"en": "charity",
+"sv": "välgörenhet"
+},
+{
+"en": "chart",
+"sv": "diagram"
+},
+{
+"en": "cheap",
+"sv": "billig"
+},
+{
+"en": "chemical",
+"sv": "kemisk"
+},
+{
+"en": "chief",
+"sv": "chef"
+},
+{
+"en": "childhood",
+"sv": "barndom"
+},
+{
+"en": "chip",
+"sv": "chip"
+},
+{
+"en": "cholesterol",
+"sv": "kolesterol"
+},
+{
+"en": "Christian",
+"sv": "kristen"
+},
+{
+"en": "Christmas",
+"sv": "jul"
+},
+{
+"en": "cigarette",
+"sv": "cigarett"
+},
+{
+"en": "circle",
+"sv": "cirkel"
+},
+{
+"en": "cite",
+"sv": "citera"
+},
+{
+"en": "civil",
+"sv": "civil"
+},
+{
+"en": "civilian",
+"sv": "civil"
+},
+{
+"en": "clear",
+"sv": "tydlig"
+},
+{
+"en": "clinical",
+"sv": "klinisk"
+},
+{
+"en": "closely",
+"sv": "nära"
+},
+{
+"en": "closer",
+"sv": "närmare"
+},
+{
+"en": "club",
+"sv": "klubb"
+},
+{
+"en": "clue",
+"sv": "ledtråd"
+},
+{
+"en": "cluster",
+"sv": "kluster"
+},
+{
+"en": "coal",
+"sv": "kol"
+},
+{
+"en": "coalition",
+"sv": "koalition"
+},
+{
+"en": "code",
+"sv": "kod"
+},
+{
+"en": "cognitive",
+"sv": "kognitiv"
+},
+{
+"en": "collapse",
+"sv": "kollapsa"
+},
+{
+"en": "collective",
+"sv": "kollektiv"
+},
+{
+"en": "colonial",
+"sv": "kolonial"
+},
+{
+"en": "column",
+"sv": "kolumn"
+},
+{
+"en": "combination",
+"sv": "kombination"
+},
+{
+"en": "comedy",
+"sv": "komedi"
+},
+{
+"en": "comfortable",
+"sv": "bekväm"
+},
+{
+"en": "comic",
+"sv": "serie"
+},
+{
+"en": "coming",
+"sv": "kommande"
+},
+{
+"en": "command",
+"sv": "kommando"
+},
+{
+"en": "commander",
+"sv": "befälhavare"
+},
+{
+"en": "comment",
+"sv": "kommentar"
+},
+{
+"en": "commercial",
+"sv": "kommersiell"
+},
+{
+"en": "commission",
+"sv": "kommission"
+},
+{
+"en": "commit",
+"sv": "förplikta"
+},
+{
+"en": "commitment",
+"sv": "åtagande"
+},
+{
+"en": "committee",
+"sv": "kommitté"
+},
+{
+"en": "common",
+"sv": "vanlig"
+},
+{
+"en": "commonly",
+"sv": "vanligen"
+},
+{
+"en": "communicate",
+"sv": "kommunicera"
+},
+{
+"en": "communication",
+"sv": "kommunikation"
+},
+{
+"en": "comparison",
+"sv": "jämförelse"
+},
+{
+"en": "competition",
+"sv": "tävling"
+},
+{
+"en": "competitive",
+"sv": "konkurrenskraftig"
+},
+{
+"en": "competitor",
+"sv": "konkurrent"
+},
+{
+"en": "complaint",
+"sv": "klagomål"
+},
+{
+"en": "completely",
+"sv": "helt"
+},
+{
+"en": "component",
+"sv": "komponent"
+},
+{
+"en": "compose",
+"sv": "komponera"
+},
+{
+"en": "composition",
+"sv": "komposition"
+},
+{
+"en": "comprehensive",
+"sv": "omfattande"
+},
+{
+"en": "concentration",
+"sv": "koncentration"
+},
+{
+"en": "concept",
+"sv": "begrepp"
+},
+{
+"en": "concern",
+"sv": "oro"
+},
+{
+"en": "concerned",
+"sv": "orolig"
+},
+{
+"en": "conclude",
+"sv": "sluta sig till"
+},
+{
+"en": "conclusion",
+"sv": "slutsats"
+},
+{
+"en": "concrete",
+"sv": "betong"
+},
+{
+"en": "conduct",
+"sv": "leda"
+},
+{
+"en": "conference",
+"sv": "konferens"
+},
+{
+"en": "confidence",
+"sv": "självförtroende"
+},
+{
+"en": "confront",
+"sv": "konfrontera"
+},
+{
+"en": "confusion",
+"sv": "förvirring"
+},
+{
+"en": "Congress",
+"sv": "kongress"
+},
+{
+"en": "congressional",
+"sv": "kongress"
+},
+{
+"en": "connection",
+"sv": "koppling"
+},
+{
+"en": "consciousness",
+"sv": "medvetande"
+},
+{
+"en": "consensus",
+"sv": "konsensus"
+},
+{
+"en": "conservative",
+"sv": "konservativ"
+},
+{
+"en": "considerable",
+"sv": "avsevärd"
+},
+{
+"en": "consideration",
+"sv": "övervägande"
+},
+{
+"en": "consistent",
+"sv": "konsekvent"
+},
+{
+"en": "constant",
+"sv": "konstant"
+},
+{
+"en": "constantly",
+"sv": "ständigt"
+},
+{
+"en": "constitute",
+"sv": "utgöra"
+},
+{
+"en": "constitutional",
+"sv": "konstitutionell"
+},
+{
+"en": "construct",
+"sv": "bygga"
+},
+{
+"en": "construction",
+"sv": "byggande"
+},
+{
+"en": "consultant",
+"sv": "konsult"
+},
+{
+"en": "consume",
+"sv": "konsumera"
+},
+{
+"en": "consumer",
+"sv": "konsument"
+},
+{
+"en": "consumption",
+"sv": "konsumtion"
+},
+{
+"en": "contact",
+"sv": "kontakt"
+},
+{
+"en": "container",
+"sv": "behållare"
+},
+{
+"en": "contemporary",
+"sv": "samtida"
+},
+{
+"en": "content",
+"sv": "innehåll"
+},
+{
+"en": "contest",
+"sv": "tävling"
+},
+{
+"en": "context",
+"sv": "sammanhang"
+},
+{
+"en": "continued",
+"sv": "fortsatt"
+},
+{
+"en": "contract",
+"sv": "kontrakt"
+},
+{
+"en": "contrast",
+"sv": "kontrast"
+},
+{
+"en": "contribution",
+"sv": "bidrag"
+},
+{
+"en": "controversial",
+"sv": "kontroversiell"
+},
+{
+"en": "controversy",
+"sv": "kontrovers"
+},
+{
+"en": "convention",
+"sv": "konvention"
+},
+{
+"en": "conventional",
+"sv": "konventionell"
+},
+{
+"en": "conversation",
+"sv": "samtal"
+},
+{
+"en": "conviction",
+"sv": "övertygelse"
+},
+{
+"en": "cooking",
+"sv": "matlagning"
+},
+{
+"en": "cooperation",
+"sv": "samarbete"
+},
+{
+"en": "cop",
+"sv": "polis"
+},
+{
+"en": "cope",
+"sv": "klara av"
+},
+{
+"en": "core",
+"sv": "kärna"
+},
+{
+"en": "corn",
+"sv": "majs"
+},
+{
+"en": "corporate",
+"sv": "företags"
+},
+{
+"en": "correct",
+"sv": "korrekt"
+},
+{
+"en": "correspondent",
+"sv": "korrespondent"
+},
+{
+"en": "council",
+"sv": "råd"
+},
+{
+"en": "counselor",
+"sv": "rådgivare"
+},
+{
+"en": "counter",
+"sv": "disk"
+},
+{
+"en": "county",
+"sv": "län"
+},
+{
+"en": "couple",
+"sv": "par"
+},
+{
+"en": "courage",
+"sv": "mod"
+},
+{
+"en": "coverage",
+"sv": "täckning"
+},
+{
+"en": "crack",
+"sv": "spricka"
+},
+{
+"en": "crash",
+"sv": "krock"
+},
+{
+"en": "crazy",
+"sv": "galen"
+},
+{
+"en": "cream",
+"sv": "grädde"
+},
+{
+"en": "creation",
+"sv": "skapande"
+},
+{
+"en": "creative",
+"sv": "kreativ"
+},
+{
+"en": "creature",
+"sv": "varelse"
+},
+{
+"en": "crew",
+"sv": "besättning"
+},
+{
+"en": "crime",
+"sv": "brott"
+},
+{
+"en": "criminal",
+"sv": "kriminell"
+},
+{
+"en": "crisis",
+"sv": "kris"
+},
+{
+"en": "criteria",
+"sv": "kriterier"
+},
+{
+"en": "critic",
+"sv": "kritiker"
+},
+{
+"en": "critical",
+"sv": "kritisk"
+},
+{
+"en": "criticism",
+"sv": "kritik"
+},
+{
+"en": "criticize",
+"sv": "kritisera"
+},
+{
+"en": "crop",
+"sv": "gröda"
+},
+{
+"en": "cross",
+"sv": "korsa"
+},
+{
+"en": "crucial",
+"sv": "avgörande"
+},
+{
+"en": "cultural",
+"sv": "kulturell"
+},
+{
+"en": "currently",
+"sv": "för närvarande"
+},
+{
+"en": "curriculum",
+"sv": "läroplan"
+},
+{
+"en": "cycle",
+"sv": "cykel"
+},
+{
+"en": "advertise",
+"sv": "annonsera"
+},
+{
+"en": "advertisement",
+"sv": "reklam"
+},
+{
+"en": "alarm",
+"sv": "alarm"
+},
+{
+"en": "altogether",
+"sv": "totalt"
+},
+{
+"en": "amuse",
+"sv": "roa"
+},
+{
+"en": "analyse",
+"sv": "analysera"
+},
+{
+"en": "approximate",
+"sv": "ungefärlig"
+},
+{
+"en": "arrow",
+"sv": "pil"
+},
+{
+"en": "artificial",
+"sv": "konstgjord"
+},
+{
+"en": "ashamed",
+"sv": "skamsen"
+},
+{
+"en": "astonish",
+"sv": "förvåna"
+},
+{
+"en": "attraction",
+"sv": "attraktion"
+},
+{
+"en": "automatic",
+"sv": "automatisk"
+},
+{
+"en": "awkward",
+"sv": "besvärlig"
+},
+{
+"en": "backward",
+"sv": "bakåt"
+},
+{
+"en": "bacon",
+"sv": "bacon"
+},
+{
+"en": "basin",
+"sv": "handfat"
+},
+{
+"en": "bath",
+"sv": "bad"
+},
+{
+"en": "bathtub",
+"sv": "badkar"
+},
+{
+"en": "bay",
+"sv": "vik"
+},
+{
+"en": "beak",
+"sv": "näbb"
+},
+{
+"en": "beard",
+"sv": "skägg"
+},
+{
+"en": "beg",
+"sv": "tigga"
+},
+{
+"en": "behave",
+"sv": "bete sig"
+},
+{
+"en": "bid",
+"sv": "bjuda"
+},
+{
+"en": "biology",
+"sv": "biologi"
+},
+{
+"en": "biscuit",
+"sv": "kex"
+},
+{
+"en": "bitter",
+"sv": "bitter"
+},
+{
+"en": "blank",
+"sv": "blank"
+},
+{
+"en": "bore",
+"sv": "tråka ut"
+},
+{
+"en": "breed",
+"sv": "avla"
+},
+{
+"en": "bubble",
+"sv": "bubbla"
+},
+{
+"en": "bulb",
+"sv": "glödlampa"
+},
+{
+"en": "burst",
+"sv": "brista"
+},
+{
+"en": "cafe",
+"sv": "café"
+},
+{
+"en": "candle",
+"sv": "ljus"
+},
+{
+"en": "cartoon",
+"sv": "tecknad film"
+},
+{
+"en": "cattle",
+"sv": "boskap"
+},
+{
+"en": "cent",
+"sv": "cent"
+},
+{
+"en": "centre",
+"sv": "centrum"
+},
+{
+"en": "charm",
+"sv": "charm"
+},
+{
+"en": "cheat",
+"sv": "fuska"
+},
+{
+"en": "cheerful",
+"sv": "glad"
+},
+{
+"en": "chemist",
+"sv": "apotekare"
+},
+{
+"en": "chemistry",
+"sv": "kemi"
+},
+{
+"en": "cheque",
+"sv": "check"
+},
+{
+"en": "chew",
+"sv": "tugga"
+},
+{
+"en": "chop",
+"sv": "hugga"
+},
+{
+"en": "clap",
+"sv": "klappa"
+},
+{
+"en": "clerk",
+"sv": "kontorist"
+},
+{
+"en": "clever",
+"sv": "smart"
+},
+{
+"en": "cloth",
+"sv": "tyg"
+},
+{
+"en": "colour",
+"sv": "färg"
+},
+{
+"en": "conscious",
+"sv": "medveten"
+},
+{
+"en": "consult",
+"sv": "rådfråga"
+},
+{
+"en": "continent",
+"sv": "kontinent"
+},
+{
+"en": "continuous",
+"sv": "kontinuerlig"
+},
+{
+"en": "convenient",
+"sv": "bekväm"
+},
+{
+"en": "cottage",
+"sv": "stuga"
+},
+{
+"en": "countryside",
+"sv": "landsbygd"
+},
+{
+"en": "coward",
+"sv": "fegis"
+},
+{
+"en": "criterion",
+"sv": "kriterium"
+},
+{
+"en": "crown",
+"sv": "krona"
+},
+{
+"en": "cupboard",
+"sv": "skåp"
+},
+{
+"en": "cure",
+"sv": "bota"
+},
+{
+"en": "curl",
+"sv": "lock"
+},
+{
+"en": "curve",
+"sv": "kurva"
+},
+{
+"en": "daily",
+"sv": "daglig"
+},
+{
+"en": "damage",
+"sv": "skada"
+},
+{
+"en": "damp",
+"sv": "fuktig"
+},
+{
+"en": "dangerous",
+"sv": "farlig"
+},
+{
+"en": "date",
+"sv": "datum"
+},
+{
+"en": "dawn",
+"sv": "gryning"
+},
+{
+"en": "dead",
+"sv": "död"
+},
+{
+"en": "dear",
+"sv": "kära"
+},
+{
+"en": "death",
+"sv": "död"
+},
+{
+"en": "debate",
+"sv": "debatt"
+},
+{
+"en": "decade",
+"sv": "årtionde"
+},
+{
+"en": "decline",
+"sv": "avvisa"
+},
+{
+"en": "decorate",
+"sv": "dekorera"
+},
+{
+"en": "defense",
+"sv": "försvar"
+},
+{
+"en": "definite",
+"sv": "bestämd"
+},
+{
+"en": "deliberate",
+"sv": "medveten"
+},
+{
+"en": "delicate",
+"sv": "ömtålig"
+},
+{
+"en": "delight",
+"sv": "glädje"
+},
+{
+"en": "delivery",
+"sv": "leverans"
+},
+{
+"en": "democratic",
+"sv": "demokratisk"
+},
+{
+"en": "dentist",
+"sv": "tandläkare"
+},
+{
+"en": "department",
+"sv": "avdelning"
+},
+{
+"en": "departure",
+"sv": "avresa"
+},
+{
+"en": "deposit",
+"sv": "deposition"
+},
+{
+"en": "depress",
+"sv": "nedslå"
+},
+{
+"en": "description",
+"sv": "beskrivning"
+},
+{
+"en": "deserve",
+"sv": "förtjäna"
+},
+{
+"en": "desire",
+"sv": "önskan"
+},
+{
+"en": "desperate",
+"sv": "desperat"
+},
+{
+"en": "despite",
+"sv": "trots"
+},
+{
+"en": "detail",
+"sv": "detalj"
+},
+{
+"en": "detect",
+"sv": "upptäcka"
+},
+{
+"en": "determine",
+"sv": "avgöra"
+},
+{
+"en": "development",
+"sv": "utveckling"
+},
+{
+"en": "devil",
+"sv": "djävul"
+},
+{
+"en": "devote",
+"sv": "ägna"
+},
+{
+"en": "diagram",
+"sv": "diagram"
+},
+{
+"en": "dial",
+"sv": "ringa"
+},
+{
+"en": "dialogue",
+"sv": "dialog"
+},
+{
+"en": "diamond",
+"sv": "diamant"
+},
+{
+"en": "diary",
+"sv": "dagbok"
+},
+{
+"en": "diet",
+"sv": "diet"
+},
+{
+"en": "differ",
+"sv": "skilja sig"
+},
+{
+"en": "direct",
+"sv": "direkt"
+},
+{
+"en": "dirt",
+"sv": "smuts"
+},
+{
+"en": "disabled",
+"sv": "funktionshindrad"
+},
+{
+"en": "disagree",
+"sv": "vara oenig"
+},
+{
+"en": "disappear",
+"sv": "försvinna"
+},
+{
+"en": "disaster",
+"sv": "katastrof"
+},
+{
+"en": "discipline",
+"sv": "disciplin"
+},
+{
+"en": "discovery",
+"sv": "upptäckt"
+},
+{
+"en": "discussion",
+"sv": "diskussion"
+},
+{
+"en": "disease",
+"sv": "sjukdom"
+},
+{
+"en": "disgust",
+"sv": "äckel"
+},
+{
+"en": "dish",
+"sv": "rätt"
+},
+{
+"en": "dismiss",
+"sv": "avskeda"
+},
+{
+"en": "display",
+"sv": "visa"
+},
+{
+"en": "distance",
+"sv": "avstånd"
+},
+{
+"en": "distinct",
+"sv": "tydlig"
+},
+{
+"en": "distinguish",
+"sv": "skilja"
+},
+{
+"en": "distribute",
+"sv": "distribuera"
+},
+{
+"en": "disturb",
+"sv": "störa"
+},
+{
+"en": "dive",
+"sv": "dyka"
+},
+{
+"en": "division",
+"sv": "division"
+},
+{
+"en": "divorce",
+"sv": "skilsmässa"
+},
+{
+"en": "dollar",
+"sv": "dollar"
+},
+{
+"en": "domestic",
+"sv": "inhemsk"
+},
+{
+"en": "dominate",
+"sv": "dominera"
+},
+{
+"en": "down",
+"sv": "ner"
+},
+{
+"en": "downstairs",
+"sv": "nedervåning"
+},
+{
+"en": "downtown",
+"sv": "centrum"
+},
+{
+"en": "downward",
+"sv": "nedåt"
+},
+{
+"en": "dozen",
+"sv": "dussin"
+},
+{
+"en": "draft",
+"sv": "utkast"
+},
+{
+"en": "drag",
+"sv": "dra"
+},
+{
+"en": "drama",
+"sv": "drama"
+},
+{
+"en": "dramatic",
+"sv": "dramatisk"
+},
+{
+"en": "drown",
+"sv": "drunkna"
+},
+{
+"en": "drug",
+"sv": "drog"
+},
+{
+"en": "drum",
+"sv": "trumma"
+},
+{
+"en": "drunk",
+"sv": "full"
+},
+{
+"en": "due",
+"sv": "förfallen"
+},
+{
+"en": "dumb",
+"sv": "dum"
+},
+{
+"en": "DVD",
+"sv": "DVD"
+},
+{
+"en": "dying",
+"sv": "döende"
+},
+{
+"en": "eager",
+"sv": "ivrig"
+},
+{
+"en": "ease",
+"sv": "lätthet"
+},
+{
+"en": "eastern",
+"sv": "östlig"
+},
+{
+"en": "economic",
+"sv": "ekonomisk"
+},
+{
+"en": "edition",
+"sv": "upplaga"
+},
+{
+"en": "editor",
+"sv": "redaktör"
+},
+{
+"en": "educate",
+"sv": "utbilda"
+},
+{
+"en": "educational",
+"sv": "pedagogisk"
+},
+{
+"en": "effective",
+"sv": "effektiv"
+},
+{
+"en": "efficient",
+"sv": "effektiv"
+},
+{
+"en": "electricity",
+"sv": "elektricitet"
+},
+{
+"en": "electronic",
+"sv": "elektronisk"
+},
+{
+"en": "element",
+"sv": "element"
+},
+{
+"en": "eliminate",
+"sv": "eliminera"
+},
+{
+"en": "else",
+"sv": "annat"
+},
+{
+"en": "elsewhere",
+"sv": "någon annanstans"
+},
+{
+"en": "embarrass",
+"sv": "förlägga"
+},
+{
+"en": "emerge",
+"sv": "dyka upp"
+},
+{
+"en": "emotional",
+"sv": "emotionell"
+},
+{
+"en": "emphasis",
+"sv": "betoning"
+},
+{
+"en": "emphasize",
+"sv": "betona"
+},
+{
+"en": "empire",
+"sv": "imperium"
+},
+{
+"en": "employer",
+"sv": "arbetsgivare"
+},
+{
+"en": "employment",
+"sv": "anställning"
+},
+{
+"en": "enable",
+"sv": "möjliggöra"
+},
+{
+"en": "encounter",
+"sv": "möte"
+},
+{
+"en": "engage",
+"sv": "engagera"
+},
+{
+"en": "engineering",
+"sv": "ingenjörskonst"
+},
+{
+"en": "enhance",
+"sv": "förbättra"
+},
+{
+"en": "enormous",
+"sv": "enorm"
+},
+{
+"en": "enough",
+"sv": "tillräckligt"
+},
+{
+"en": "enterprise",
+"sv": "företag"
+},
+{
+"en": "entertain",
+"sv": "underhålla"
+},
+{
+"en": "entertainment",
+"sv": "underhållning"
+},
+{
+"en": "enthusiasm",
+"sv": "entusiasm"
+},
+{
+"en": "enthusiastic",
+"sv": "entusiastisk"
+},
+{
+"en": "entirely",
+"sv": "helt"
+},
+{
+"en": "entrance",
+"sv": "ingång"
+},
+{
+"en": "entry",
+"sv": "inlägg"
+},
+{
+"en": "envelope",
+"sv": "kuvert"
+},
+{
+"en": "environmental",
+"sv": "miljö"
+},
+{
+"en": "episode",
+"sv": "avsnitt"
+},
+{
+"en": "equal",
+"sv": "lika"
+},
+{
+"en": "equally",
+"sv": "lika"
+},
+{
+"en": "equivalent",
+"sv": "motsvarande"
+},
+{
+"en": "era",
+"sv": "era"
+},
+{
+"en": "error",
+"sv": "fel"
+},
+{
+"en": "essay",
+"sv": "uppsats"
+},
+{
+"en": "essential",
+"sv": "väsentlig"
+},
+{
+"en": "establish",
+"sv": "etablera"
+},
+{
+"en": "estate",
+"sv": "egendom"
+},
+{
+"en": "estimate",
+"sv": "uppskatta"
+},
+{
+"en": "ethnic",
+"sv": "etnisk"
+},
+{
+"en": "euro",
+"sv": "euro"
+},
+{
+"en": "European",
+"sv": "europeisk"
+},
+{
+"en": "evening",
+"sv": "kväll"
+},
+{
+"en": "ever",
+"sv": "någonsin"
+},
+{
+"en": "everybody",
+"sv": "alla"
+},
+{
+"en": "everyday",
+"sv": "vardaglig"
+},
+{
+"en": "everyone",
+"sv": "alla"
+},
+{
+"en": "everything",
+"sv": "allt"
+},
+{
+"en": "evidence",
+"sv": "bevis"
+},
+{
+"en": "evil",
+"sv": "ond"
+},
+{
+"en": "exact",
+"sv": "exakt"
+},
+{
+"en": "exaggerate",
+"sv": "överdriva"
+},
+{
+"en": "examination",
+"sv": "undersökning"
+},
+{
+"en": "exceed",
+"sv": "överskrida"
+},
+{
+"en": "except",
+"sv": "förutom"
+},
+{
+"en": "exception",
+"sv": "undantag"
+},
+{
+"en": "excite",
+"sv": "upphetsa"
+},
+{
+"en": "excitement",
+"sv": "upphetsning"
+},
+{
+"en": "excuse",
+"sv": "ursäkt"
+},
+{
+"en": "executive",
+"sv": "chef"
+},
+{
+"en": "exhaust",
+"sv": "uttömma"
+},
+{
+"en": "exhibit",
+"sv": "utställa"
+},
+{
+"en": "exhibition",
+"sv": "utställning"
+},
+{
+"en": "exist",
+"sv": "existera"
+},
+{
+"en": "existence",
+"sv": "existens"
+},
+{
+"en": "expand",
+"sv": "expandera"
+},
+{
+"en": "expectation",
+"sv": "förväntan"
+},
+{
+"en": "expected",
+"sv": "förväntad"
+},
+{
+"en": "expensive",
+"sv": "dyr"
+},
+{
+"en": "experience",
+"sv": "erfarenhet"
+},
+{
+"en": "experiment",
+"sv": "experiment"
+},
+{
+"en": "expert",
+"sv": "expert"
+},
+{
+"en": "explanation",
+"sv": "förklaring"
+},
+{
+"en": "explode",
+"sv": "explodera"
+},
+{
+"en": "explosion",
+"sv": "explosion"
+},
+{
+"en": "export",
+"sv": "exportera"
+},
+{
+"en": "expose",
+"sv": "avslöja"
+},
+{
+"en": "extend",
+"sv": "utöka"
+},
+{
+"en": "extension",
+"sv": "förlängning"
+},
+{
+"en": "extensive",
+"sv": "omfattande"
+},
+{
+"en": "external",
+"sv": "extern"
+},
+{
+"en": "extra",
+"sv": "extra"
+},
+{
+"en": "extraordinary",
+"sv": "extraordinär"
+},
+{
+"en": "extreme",
+"sv": "extrem"
+},
+{
+"en": "extremely",
+"sv": "extremt"
+},
+{
+"en": "facility",
+"sv": "anläggning"
+},
+{
+"en": "factor",
+"sv": "faktor"
+},
+{
+"en": "factory",
+"sv": "fabrik"
+},
+{
+"en": "fair",
+"sv": "rättvis"
+},
+{
+"en": "false",
+"sv": "falsk"
+},
+{
+"en": "familiar",
+"sv": "bekant"
+},
+{
+"en": "famous",
+"sv": "berömd"
+},
+{
+"en": "fancy",
+"sv": "fin"
+},
+{
+"en": "fashion",
+"sv": "mode"
+},
+{
+"en": "fasten",
+"sv": "fästa"
+},
+{
+"en": "fat",
+"sv": "fett"
+},
+{
+"en": "fault",
+"sv": "fel"
+},
+{
+"en": "favor",
+"sv": "favör"
+},
+{
+"en": "favorite",
+"sv": "favorit"
+},
+{
+"en": "feather",
+"sv": "fjäder"
+},
+{
+"en": "feature",
+"sv": "egenskap"
+},
+{
+"en": "federal",
+"sv": "federal"
+},
+{
+"en": "fellow",
+"sv": "karl"
+},
+{
+"en": "fence",
+"sv": "staket"
+},
+{
+"en": "fiber",
+"sv": "fiber"
+},
+{
+"en": "fiction",
+"sv": "fiktion"
+},
+{
+"en": "fierce",
+"sv": "häftig"
+},
+{
+"en": "figure",
+"sv": "figur"
+},
+{
+"en": "finally",
+"sv": "äntligen"
+},
+{
+"en": "financial",
+"sv": "finansiell"
+},
+{
+"en": "fishing",
+"sv": "fiske"
+},
+{
+"en": "flag",
+"sv": "flagga"
+},
+{
+"en": "flame",
+"sv": "låga"
+},
+{
+"en": "flavor",
+"sv": "smak"
+},
+{
+"en": "flee",
+"sv": "fly"
+},
+{
+"en": "flesh",
+"sv": "kött"
+},
+{
+"en": "flight",
+"sv": "flygning"
+},
+{
+"en": "float",
+"sv": "flyta"
+},
+{
+"en": "flu",
+"sv": "influensa"
+},
+{
+"en": "folk",
+"sv": "folk"
+},
+{
+"en": "following",
+"sv": "följande"
+},
+{
+"en": "fond",
+"sv": "förtjust"
+},
+{
+"en": "fool",
+"sv": "idiot"
+},
+{
+"en": "foreign",
+"sv": "utländsk"
+},
+{
+"en": "form",
+"sv": "form"
+},
+{
+"en": "formal",
+"sv": "formell"
+},
+{
+"en": "formula",
+"sv": "formel"
+},
+{
+"en": "forth",
+"sv": "vidare"
+},
+{
+"en": "forward",
+"sv": "framåt"
+},
+{
+"en": "found",
+"sv": "grunda"
+},
+{
+"en": "foundation",
+"sv": "grund"
+},
+{
+"en": "frame",
+"sv": "ram"
+},
+{
+"en": "frequent",
+"sv": "frekvent"
+},
+{
+"en": "fresh",
+"sv": "färsk"
+},
+{
+"en": "friendship",
+"sv": "vänskap"
+},
+{
+"en": "frighten",
+"sv": "skrämma"
+},
+{
+"en": "frustrate",
+"sv": "frustrera"
+},
+{
+"en": "fully",
+"sv": "helt"
+},
+{
+"en": "fun",
+"sv": "kul"
+},
+{
+"en": "fund",
+"sv": "fond"
+},
+{
+"en": "fundamental",
+"sv": "grundläggande"
+},
+{
+"en": "funny",
+"sv": "rolig"
+},
+{
+"en": "fur",
+"sv": "päls"
+},
+{
+"en": "furniture",
+"sv": "möbler"
+},
+{
+"en": "further",
+"sv": "vidare"
+},
+{
+"en": "gallery",
+"sv": "galleri"
+},
+{
+"en": "gang",
+"sv": "gäng"
+},
+{
+"en": "gap",
+"sv": "gap"
+},
+{
+"en": "gate",
+"sv": "grind"
+},
+{
+"en": "gay",
+"sv": "gay"
+},
+{
+"en": "gaze",
+"sv": "stirra"
+},
+{
+"en": "gear",
+"sv": "växel"
+},
+{
+"en": "gender",
+"sv": "kön"
+},
+{
+"en": "gene",
+"sv": "gen"
+},
+{
+"en": "general",
+"sv": "allmän"
+},
+{
+"en": "generate",
+"sv": "generera"
+},
+{
+"en": "genetic",
+"sv": "genetisk"
+},
+{
+"en": "gentleman",
+"sv": "gentleman"
+},
+{
+"en": "gently",
+"sv": "milt"
+},
+{
+"en": "genuine",
+"sv": "äkta"
+},
+{
+"en": "gesture",
+"sv": "gest"
+},
+{
+"en": "ghost",
+"sv": "spöke"
+},
+{
+"en": "giant",
+"sv": "jätte"
+},
+{
+"en": "glad",
+"sv": "glad"
+},
+{
+"en": "glance",
+"sv": "blick"
+},
+{
+"en": "global",
+"sv": "global"
+},
+{
+"en": "glove",
+"sv": "handske"
+},
+{
+"en": "governor",
+"sv": "guvernör"
+},
+{
+"en": "grab",
+"sv": "gripa"
+},
+{
+"en": "graduate",
+"sv": "ta examen"
+},
+{
+"en": "grain",
+"sv": "spannmål"
+},
+{
+"en": "grand",
+"sv": "storslagen"
+},
+{
+"en": "grave",
+"sv": "grav"
+},
+{
+"en": "grocery",
+"sv": "livsmedel"
+},
+{
+"en": "growth",
+"sv": "tillväxt"
+},
+{
+"en": "guard",
+"sv": "vakt"
+},
+{
+"en": "guideline",
+"sv": "riktlinje"
+},
+{
+"en": "guilty",
+"sv": "skyldig"
+},
+{
+"en": "hall",
+"sv": "hall"
+},
+{
+"en": "handful",
+"sv": "näve"
+},
+{
+"en": "handle",
+"sv": "handtag"
+},
+{
+"en": "harm",
+"sv": "skada"
+},
+{
+"en": "headline",
+"sv": "rubrik"
+},
+{
+"en": "headquarters",
+"sv": "huvudkontor"
+},
+{
+"en": "hearing",
+"sv": "hörsel"
+},
+{
+"en": "heat",
+"sv": "värme"
+},
+{
+"en": "heaven",
+"sv": "himmel"
+},
+{
+"en": "heavily",
+"sv": "tungt"
+},
+{
+"en": "heel",
+"sv": "häl"
+},
+{
+"en": "hell",
+"sv": "helvete"
+},
+{
+"en": "helpful",
+"sv": "hjälpsam"
+},
+{
+"en": "heritage",
+"sv": "arv"
+},
+{
+"en": "hero",
+"sv": "hjälte"
+},
+{
+"en": "herself",
+"sv": "sig själv"
+},
+{
+"en": "hesitate",
+"sv": "tveka"
+},
+{
+"en": "highly",
+"sv": "högt"
+},
+{
+"en": "himself",
+"sv": "sig själv"
+},
+{
+"en": "historian",
+"sv": "historiker"
+},
+{
+"en": "historic",
+"sv": "historisk"
+},
+{
+"en": "historical",
+"sv": "historisk"
+},
+{
+"en": "hole",
+"sv": "hål"
+},
+{
+"en": "holy",
+"sv": "helig"
+},
+{
+"en": "homeless",
+"sv": "hemlös"
+},
+{
+"en": "honor",
+"sv": "ära"
+},
+{
+"en": "horizon",
+"sv": "horisont"
+},
+{
+"en": "horror",
+"sv": "skräck"
+},
+{
+"en": "hotel",
+"sv": "hotell"
+},
+{
+"en": "household",
+"sv": "hushåll"
+},
+{
+"en": "housing",
+"sv": "bostäder"
+},
+{
+"en": "huge",
+"sv": "enorm"
+},
+{
+"en": "humor",
+"sv": "humor"
+},
+{
+"en": "hunter",
+"sv": "jägare"
+},
+{
+"en": "hurricane",
+"sv": "orkan"
+},
+{
+"en": "hypothesis",
+"sv": "hypotes"
+},
+{
+"en": "ideal",
+"sv": "ideal"
+},
+{
+"en": "identification",
+"sv": "identifiering"
+},
+{
+"en": "identify",
+"sv": "identifiera"
+},
+{
+"en": "ie",
+"sv": "dvs"
+},
+{
+"en": "ignore",
+"sv": "ignorera"
+},
+{
+"en": "illegal",
+"sv": "olaglig"
+},
+{
+"en": "illness",
+"sv": "sjukdom"
+},
+{
+"en": "imagination",
+"sv": "fantasi"
+},
+{
+"en": "immediately",
+"sv": "omedelbart"
+},
+{
+"en": "immigration",
+"sv": "invandring"
+},
+{
+"en": "impact",
+"sv": "påverkan"
+},
+{
+"en": "implement",
+"sv": "genomföra"
+},
+{
+"en": "implication",
+"sv": "innebörd"
+},
+{
+"en": "imply",
+"sv": "antyda"
+},
+{
+"en": "importance",
+"sv": "betydelse"
+},
+{
+"en": "impose",
+"sv": "pålägga"
+},
+{
+"en": "impossible",
+"sv": "omöjlig"
+},
+{
+"en": "impression",
+"sv": "intryck"
+},
+{
+"en": "impressive",
+"sv": "imponerande"
+},
+{
+"en": "improvement",
+"sv": "förbättring"
+},
+{
+"en": "incentive",
+"sv": "incitament"
+},
+{
+"en": "incident",
+"sv": "incident"
+},
+{
+"en": "including",
+"sv": "inklusive"
+},
+{
+"en": "incorporate",
+"sv": "införliva"
+},
+{
+"en": "increased",
+"sv": "ökad"
+},
+{
+"en": "increasing",
+"sv": "ökande"
+},
+{
+"en": "increasingly",
+"sv": "alltmer"
+},
+{
+"en": "incredible",
+"sv": "otrolig"
+},
+{
+"en": "indeed",
+"sv": "verkligen"
+},
+{
+"en": "independence",
+"sv": "självständighet"
+},
+{
+"en": "independent",
+"sv": "självständig"
+},
+{
+"en": "index",
+"sv": "index"
+},
+{
+"en": "indication",
+"sv": "tecken"
+},
+{
+"en": "industrial",
+"sv": "industriell"
+},
+{
+"en": "infant",
+"sv": "spädbarn"
+},
+{
+"en": "infection",
+"sv": "infektion"
+},
+{
+"en": "inflation",
+"sv": "inflation"
+},
+{
+"en": "inform",
+"sv": "informera"
+},
+{
+"en": "ingredient",
+"sv": "ingrediens"
+},
+{
+"en": "initially",
+"sv": "inledningsvis"
+},
+{
+"en": "initiative",
+"sv": "initiativ"
+},
+{
+"en": "inner",
+"sv": "inre"
+},
+{
+"en": "innocent",
+"sv": "oskyldig"
+},
+{
+"en": "inquiry",
+"sv": "utredning"
+},
+{
+"en": "insight",
+"sv": "insikt"
+},
+{
+"en": "insist",
+"sv": "insistera"
+},
+{
+"en": "instance",
+"sv": "exempel"
+},
+{
+"en": "institution",
+"sv": "institution"
+},
+{
+"en": "institutional",
+"sv": "institutionell"
+},
+{
+"en": "instruction",
+"sv": "instruktion"
+},
+{
+"en": "instructor",
+"sv": "instruktör"
+},
+{
+"en": "intellectual",
+"sv": "intellektuell"
+},
+{
+"en": "intelligence",
+"sv": "intelligens"
+},
+{
+"en": "intend",
+"sv": "avse"
+},
+{
+"en": "intense",
+"sv": "intensiv"
+},
+{
+"en": "intensity",
+"sv": "intensitet"
+},
+{
+"en": "interaction",
+"sv": "interaktion"
+},
+{
+"en": "interested",
+"sv": "intresserad"
+},
+{
+"en": "internal",
+"sv": "intern"
+},
+{
+"en": "international",
+"sv": "internationell"
+},
+{
+"en": "interpretation",
+"sv": "tolkning"
+},
+{
+"en": "intervention",
+"sv": "intervention"
+},
+{
+"en": "interview",
+"sv": "intervju"
+},
+{
+"en": "introduction",
+"sv": "introduktion"
+},
+{
+"en": "invasion",
+"sv": "invasion"
+},
+{
+"en": "investigation",
+"sv": "utredning"
+},
+{
+"en": "investigator",
+"sv": "utredare"
+},
+{
+"en": "investor",
+"sv": "investerare"
+},
+{
+"en": "involved",
+"sv": "involverad"
+},
+{
+"en": "involvement",
+"sv": "engagemang"
+},
+{
+"en": "Iraqi",
+"sv": "irakisk"
+},
+{
+"en": "Irish",
+"sv": "irländsk"
+},
+{
+"en": "Islamic",
+"sv": "islamisk"
+},
+{
+"en": "Israeli",
+"sv": "israelisk"
+},
+{
+"en": "Italian",
+"sv": "italiensk"
+},
+{
+"en": "itself",
+"sv": "sig självt"
+},
+{
+"en": "jail",
+"sv": "fängelse"
+},
+{
+"en": "jet",
+"sv": "jetplan"
+},
+{
+"en": "Jew",
+"sv": "jude"
+},
+{
+"en": "Jewish",
+"sv": "judisk"
+},
+{
+"en": "joint",
+"sv": "gemensam"
+},
+{
+"en": "joke",
+"sv": "skämt"
+},
+{
+"en": "journal",
+"sv": "tidskrift"
+},
+{
+"en": "journey",
+"sv": "resa"
+},
+{
+"en": "joy",
+"sv": "glädje"
+},
+{
+"en": "judgment",
+"sv": "dom"
+},
+{
+"en": "junior",
+"sv": "junior"
+},
+{
+"en": "jury",
+"sv": "jury"
+},
+{
+"en": "justify",
+"sv": "motivera"
+},
+{
+"en": "kick",
+"sv": "sparka"
+},
+{
+"en": "killer",
+"sv": "mördare"
+},
+{
+"en": "king",
+"sv": "kung"
+},
+{
+"en": "kiss",
+"sv": "kyss"
+},
+{
+"en": "knock",
+"sv": "knacka"
+},
+{
+"en": "knowledge",
+"sv": "kunskap"
+},
+{
+"en": "lab",
+"sv": "laboratorium"
+},
+{
+"en": "labor",
+"sv": "arbete"
+},
+{
+"en": "laboratory",
+"sv": "laboratorium"
+},
+{
+"en": "lack",
+"sv": "brist"
+},
+{
+"en": "lady",
+"sv": "dam"
+},
+{
+"en": "land",
+"sv": "land"
+},
+{
+"en": "landscape",
+"sv": "landskap"
+},
+{
+"en": "lap",
+"sv": "knä"
+},
+{
+"en": "largely",
+"sv": "till stor del"
+},
+{
+"en": "later",
+"sv": "senare"
+},
+{
+"en": "Latin",
+"sv": "latin"
+},
+{
+"en": "launch",
+"sv": "lansera"
+},
+{
+"en": "lawn",
+"sv": "gräsmatta"
+},
+{
+"en": "lawsuit",
+"sv": "stämning"
+},
+{
+"en": "lay",
+"sv": "lägga"
+},
+{
+"en": "layer",
+"sv": "lager"
+},
+{
+"en": "leader",
+"sv": "ledare"
+},
+{
+"en": "leadership",
+"sv": "ledarskap"
+},
+{
+"en": "league",
+"sv": "liga"
+},
+{
+"en": "lean",
+"sv": "luta"
+},
+{
+"en": "learning",
+"sv": "inlärning"
+},
+{
+"en": "least",
+"sv": "minst"
+},
+{
+"en": "legacy",
+"sv": "arv"
+},
+{
+"en": "legal",
+"sv": "juridisk"
+},
+{
+"en": "legend",
+"sv": "legend"
+},
+{
+"en": "legislation",
+"sv": "lagstiftning"
+},
+{
+"en": "legitimate",
+"sv": "legitim"
+},
+{
+"en": "less",
+"sv": "mindre"
+},
+{
+"en": "liberal",
+"sv": "liberal"
+},
+{
+"en": "license",
+"sv": "licens"
+},
+{
+"en": "lifetime",
+"sv": "livstid"
+},
+{
+"en": "likely",
+"sv": "trolig"
+},
+{
+"en": "limit",
+"sv": "gräns"
+},
+{
+"en": "limitation",
+"sv": "begränsning"
+},
+{
+"en": "limited",
+"sv": "begränsad"
+},
+{
+"en": "literary",
+"sv": "litterär"
+},
+{
+"en": "literature",
+"sv": "litteratur"
+},
+{
+"en": "living",
+"sv": "levande"
+},
+{
+"en": "local",
+"sv": "lokal"
+},
+{
+"en": "locate",
+"sv": "lokalisera"
+},
+{
+"en": "long-term",
+"sv": "långsiktig"
+},
+{
+"en": "loose",
+"sv": "lös"
+},
+{
+"en": "lost",
+"sv": "förlorad"
+},
+{
+"en": "lots",
+"sv": "massor"
+},
+{
+"en": "loud",
+"sv": "hög"
+},
+{
+"en": "lover",
+"sv": "älskare"
+},
+{
+"en": "low",
+"sv": "låg"
+},
+{
+"en": "lucky",
+"sv": "lycklig"
+},
+{
+"en": "magazine",
+"sv": "tidning"
+},
+{
+"en": "mail",
+"sv": "post"
+},
+{
+"en": "main",
+"sv": "huvud"
+},
+{
+"en": "maintenance",
+"sv": "underhåll"
+},
+{
+"en": "major",
+"sv": "stor"
+},
+{
+"en": "majority",
+"sv": "majoritet"
+},
+{
+"en": "maker",
+"sv": "tillverkare"
+},
+{
+"en": "makeup",
+"sv": "smink"
+},
+{
+"en": "mall",
+"sv": "köpcentrum"
+},
+{
+"en": "management",
+"sv": "ledning"
+},
+{
+"en": "manner",
+"sv": "sätt"
+},
+{
+"en": "manufacturer",
+"sv": "tillverkare"
+},
+{
+"en": "manufacturing",
+"sv": "tillverkning"
+},
+{
+"en": "marketing",
+"sv": "marknadsföring"
+},
+{
+"en": "marriage",
+"sv": "äktenskap"
+},
+{
+"en": "married",
+"sv": "gift"
+},
+{
+"en": "marry",
+"sv": "gifta sig"
+},
+{
+"en": "mask",
+"sv": "mask"
+},
+{
+"en": "mass",
+"sv": "massa"
+},
+{
+"en": "massive",
+"sv": "massiv"
+},
+{
+"en": "master",
+"sv": "mästare"
+},
+{
+"en": "math",
+"sv": "matematik"
+},
+{
+"en": "mayor",
+"sv": "borgmästare"
+},
+{
+"en": "measurement",
+"sv": "mätning"
+},
+{
+"en": "mechanism",
+"sv": "mekanism"
+},
+{
+"en": "media",
+"sv": "media"
+},
+{
+"en": "medical",
+"sv": "medicinsk"
+},
+{
+"en": "medication",
+"sv": "medicin"
+},
+{
+"en": "medium",
+"sv": "medium"
+},
+{
+"en": "membership",
+"sv": "medlemskap"
+},
+{
+"en": "mental",
+"sv": "mental"
+},
+{
+"en": "menu",
+"sv": "meny"
+},
+{
+"en": "mere",
+"sv": "blott"
+},
+{
+"en": "merely",
+"sv": "bara"
+},
+{
+"en": "mess",
+"sv": "röra"
+},
+{
+"en": "metal",
+"sv": "metall"
+},
+{
+"en": "meter",
+"sv": "meter"
+},
+{
+"en": "Mexican",
+"sv": "mexikansk"
+},
+{
+"en": "military",
+"sv": "militär"
+},
+{
+"en": "mind",
+"sv": "sinne"
+},
+{
+"en": "mine",
+"sv": "min"
+},
+{
+"en": "mineral",
+"sv": "mineral"
+},
+{
+"en": "minister",
+"sv": "minister"
+},
+{
+"en": "minor",
+"sv": "mindre"
+},
+{
+"en": "minority",
+"sv": "minoritet"
+},
+{
+"en": "miracle",
+"sv": "mirakel"
+},
+{
+"en": "miss",
+"sv": "sakna"
+},
+{
+"en": "missile",
+"sv": "robot"
+},
+{
+"en": "mistake",
+"sv": "misstag"
+},
+{
+"en": "mixture",
+"sv": "blandning"
+},
+{
+"en": "mm-hmm",
+"sv": "mmm"
+},
+{
+"en": "mode",
+"sv": "läge"
+},
+{
+"en": "model",
+"sv": "modell"
+},
+{
+"en": "moderate",
+"sv": "måttlig"
+},
+{
+"en": "modest",
+"sv": "blygsam"
+},
+{
+"en": "monitor",
+"sv": "övervaka"
+},
+{
+"en": "moral",
+"sv": "moralisk"
+},
+{
+"en": "mortgage",
+"sv": "bolån"
+},
+{
+"en": "motion",
+"sv": "rörelse"
+},
+{
+"en": "motivation",
+"sv": "motivation"
+},
+{
+"en": "motor",
+"sv": "motor"
+},
+{
+"en": "mount",
+"sv": "montera"
+},
+{
+"en": "mouth",
+"sv": "mun"
+},
+{
+"en": "movement",
+"sv": "rörelse"
+},
+{
+"en": "Mr",
+"sv": "herr"
+},
+{
+"en": "Mrs",
+"sv": "fru"
+},
+{
+"en": "Ms",
+"sv": "fröken"
+},
+{
+"en": "murder",
+"sv": "mord"
+},
+{
+"en": "museum",
+"sv": "museum"
+},
+{
+"en": "musical",
+"sv": "musikalisk"
+},
+{
+"en": "Muslim",
+"sv": "muslim"
+},
+{
+"en": "mutual",
+"sv": "ömsesidig"
+},
+{
+"en": "myself",
+"sv": "mig själv"
+},
+{
+"en": "mystery",
+"sv": "mysterium"
+},
+{
+"en": "myth",
+"sv": "myt"
+},
+{
+"en": "naked",
+"sv": "naken"
+},
+{
+"en": "narrative",
+"sv": "berättelse"
+},
+{
+"en": "national",
+"sv": "nationell"
+},
+{
+"en": "natural",
+"sv": "naturlig"
+},
+{
+"en": "naturally",
+"sv": "naturligtvis"
+},
+{
+"en": "nearby",
+"sv": "i närheten"
+},
+{
+"en": "necessarily",
+"sv": "nödvändigtvis"
+},
+{
+"en": "necessary",
+"sv": "nödvändig"
+},
+{
+"en": "negative",
+"sv": "negativ"
+},
+{
+"en": "negotiate",
+"sv": "förhandla"
+},
+{
+"en": "negotiation",
+"sv": "förhandling"
+},
+{
+"en": "nerve",
+"sv": "nerv"
+},
+{
+"en": "nevertheless",
+"sv": "ändå"
+},
+{
+"en": "newly",
+"sv": "nyligen"
+},
+{
+"en": "news",
+"sv": "nyheter"
+},
+{
+"en": "newspaper",
+"sv": "tidning"
+},
+{
+"en": "nobody",
+"sv": "ingen"
+},
+{
+"en": "nod",
+"sv": "nicka"
+},
+{
+"en": "noise",
+"sv": "buller"
+},
+{
+"en": "nomination",
+"sv": "nominering"
+},
+{
+"en": "nonetheless",
+"sv": "ändå"
+},
+{
+"en": "nor",
+"sv": "heller"
+},
+{
+"en": "northern",
+"sv": "nordlig"
+},
+{
+"en": "nothing",
+"sv": "ingenting"
+},
+{
+"en": "notion",
+"sv": "begrepp"
+},
+{
+"en": "novel",
+"sv": "roman"
+},
+{
+"en": "nuclear",
+"sv": "nukleär"
+},
+{
+"en": "obligation",
+"sv": "skyldighet"
+},
+{
+"en": "observation",
+"sv": "observation"
+},
+{
+"en": "observer",
+"sv": "observatör"
+},
+{
+"en": "obtain",
+"sv": "erhålla"
+},
+{
+"en": "obvious",
+"sv": "uppenbar"
+},
+{
+"en": "occasion",
+"sv": "tillfälle"
+},
+{
+"en": "occasionally",
+"sv": "ibland"
+},
+{
+"en": "occupy",
+"sv": "ockupera"
+},
+{
+"en": "occur",
+"sv": "inträffa"
+},
+{
+"en": "odds",
+"sv": "odds"
+},
+{
+"en": "off",
+"sv": "av"
+},
+{
+"en": "offense",
+"sv": "brott"
+},
+{
+"en": "offensive",
+"sv": "offensiv"
+},
+{
+"en": "official",
+"sv": "officiell"
+},
+{
+"en": "oh",
+"sv": "oj"
+},
+{
+"en": "ok",
+"sv": "okej"
+},
+{
+"en": "Olympic",
+"sv": "olympisk"
+},
+{
+"en": "ongoing",
+"sv": "pågående"
+},
+{
+"en": "online",
+"sv": "online"
+},
+{
+"en": "onto",
+"sv": "på"
+},
+{
+"en": "opening",
+"sv": "öppning"
+},
+{
+"en": "operating",
+"sv": "drift"
+},
+{
+"en": "operation",
+"sv": "operation"
+},
+{
+"en": "operator",
+"sv": "operatör"
+},
+{
+"en": "opponent",
+"sv": "motståndare"
+},
+{
+"en": "oppose",
+"sv": "motsätta"
+},
+{
+"en": "opposition",
+"sv": "opposition"
+},
+{
+"en": "ordinary",
+"sv": "vanlig"
+},
+{
+"en": "organic",
+"sv": "organisk"
+},
+{
+"en": "organization",
+"sv": "organisation"
+},
+{
+"en": "orientation",
+"sv": "orientering"
+},
+{
+"en": "origin",
+"sv": "ursprung"
+},
+{
+"en": "original",
+"sv": "original"
+},
+{
+"en": "originally",
+"sv": "ursprungligen"
+},
+{
+"en": "ought",
+"sv": "bör"
+},
+{
+"en": "ourselves",
+"sv": "oss själva"
+},
+{
+"en": "outcome",
+"sv": "resultat"
+},
+{
+"en": "overall",
+"sv": "totalt"
+},
+{
+"en": "overcome",
+"sv": "övervinna"
+},
+{
+"en": "overlook",
+"sv": "förbise"
+},
+{
+"en": "owner",
+"sv": "ägare"
+},
+{
+"en": "package",
+"sv": "paket"
+},
+{
+"en": "painful",
+"sv": "smärtsam"
+},
+{
+"en": "pair",
+"sv": "par"
+},
+{
+"en": "Palestinian",
+"sv": "palestinsk"
+},
+{
+"en": "palm",
+"sv": "handflata"
+},
+{
+"en": "panel",
+"sv": "panel"
+},
+{
+"en": "panic",
+"sv": "panik"
+},
+{
+"en": "participant",
+"sv": "deltagare"
+},
+{
+"en": "participate",
+"sv": "delta"
+},
+{
+"en": "participation",
+"sv": "deltagande"
+},
+{
+"en": "particular",
+"sv": "särskild"
+},
+{
+"en": "partly",
+"sv": "delvis"
+},
+{
+"en": "partnership",
+"sv": "partnerskap"
+},
+{
+"en": "passage",
+"sv": "passage"
+},
+{
+"en": "passenger",
+"sv": "passagerare"
+},
+{
+"en": "patch",
+"sv": "lap"
+},
+{
+"en": "path",
+"sv": "stig"
+},
+{
+"en": "PC",
+"sv": "PC"
+},
+{
+"en": "peak",
+"sv": "topp"
+},
+{
+"en": "peer",
+"sv": "jämlike"
+},
+{
+"en": "penalty",
+"sv": "straff"
+},
+{
+"en": "per",
+"sv": "per"
+},
+{
+"en": "perceive",
+"sv": "uppfatta"
+},
+{
+"en": "percentage",
+"sv": "procent"
+},
+{
+"en": "perception",
+"sv": "uppfattning"
+},
+{
+"en": "perfectly",
+"sv": "perfekt"
+},
+{
+"en": "performance",
+"sv": "prestation"
+},
+{
+"en": "permission",
+"sv": "tillstånd"
+},
+{
+"en": "permit",
+"sv": "tillåta"
+},
+{
+"en": "personal",
+"sv": "personlig"
+},
+{
+"en": "personnel",
+"sv": "personal"
+},
+{
+"en": "perspective",
+"sv": "perspektiv"
+},
+{
+"en": "phase",
+"sv": "fas"
+},
+{
+"en": "phenomenon",
+"sv": "fenomen"
+},
+{
+"en": "philosophy",
+"sv": "filosofi"
+},
+{
+"en": "photo",
+"sv": "foto"
+},
+{
+"en": "physical",
+"sv": "fysisk"
+},
+{
+"en": "physically",
+"sv": "fysiskt"
+},
+{
+"en": "physician",
+"sv": "läkare"
+},
+{
+"en": "piece",
+"sv": "bit"
+},
+{
+"en": "pile",
+"sv": "hög"
+},
+{
+"en": "pin",
+"sv": "nål"
+},
+{
+"en": "pine",
+"sv": "tall"
+},
+{
+"en": "pipe",
+"sv": "rör"
+},
+{
+"en": "pitch",
+"sv": "tonhöjd"
+},
+{
+"en": "planet",
+"sv": "planet"
+},
+{
+"en": "planning",
+"sv": "planering"
+},
+{
+"en": "plastic",
+"sv": "plast"
+},
+{
+"en": "platform",
+"sv": "plattform"
+},
+{
+"en": "pleasure",
+"sv": "nöje"
+},
+{
+"en": "plenty",
+"sv": "massor"
+},
+{
+"en": "plus",
+"sv": "plus"
+},
+{
+"en": "PM",
+"sv": "eftermiddag"
+},
+{
+"en": "poem",
+"sv": "dikt"
+},
+{
+"en": "poetry",
+"sv": "poesi"
+},
+{
+"en": "pole",
+"sv": "stolpe"
+},
+{
+"en": "political",
+"sv": "politisk"
+},
+{
+"en": "politically",
+"sv": "politiskt"
+},
+{
+"en": "politician",
+"sv": "politiker"
+},
+{
+"en": "poll",
+"sv": "undersökning"
+},
+{
+"en": "pollution",
+"sv": "förorening"
+},
+{
+"en": "pool",
+"sv": "pool"
+},
+{
+"en": "poor",
+"sv": "fattig"
+},
+{
+"en": "pop",
+"sv": "pop"
+},
+{
+"en": "popular",
+"sv": "populär"
+},
+{
+"en": "porch",
+"sv": "veranda"
+},
+{
+"en": "portion",
+"sv": "portion"
+},
+{
+"en": "portrait",
+"sv": "porträtt"
+},
+{
+"en": "portray",
+"sv": "skildra"
+},
+{
+"en": "pose",
+"sv": "posera"
+},
+{
+"en": "positive",
+"sv": "positiv"
+},
+{
+"en": "possess",
+"sv": "äga"
+},
+{
+"en": "possible",
+"sv": "möjlig"
+},
+{
+"en": "possibly",
+"sv": "möjligen"
+},
+{
+"en": "post",
+"sv": "post"
+},
+{
+"en": "potential",
+"sv": "potential"
+},
+{
+"en": "potentially",
+"sv": "potentiellt"
+},
+{
+"en": "pound",
+"sv": "pund"
+},
+{
+"en": "poverty",
+"sv": "fattigdom"
+},
+{
+"en": "powder",
+"sv": "pulver"
+},
+{
+"en": "powerful",
+"sv": "kraftfull"
+},
+{
+"en": "practical",
+"sv": "praktisk"
+},
+{
+"en": "pray",
+"sv": "be"
+},
+{
+"en": "precisely",
+"sv": "precis"
+},
+{
+"en": "predict",
+"sv": "förutsäga"
+},
+{
+"en": "preference",
+"sv": "preferens"
+},
+{
+"en": "pregnancy",
+"sv": "graviditet"
+},
+{
+"en": "pregnant",
+"sv": "gravid"
+},
+{
+"en": "preparation",
+"sv": "förberedelse"
+},
+{
+"en": "prescription",
+"sv": "recept"
+},
+{
+"en": "presence",
+"sv": "närvaro"
+},
+{
+"en": "presentation",
+"sv": "presentation"
+},
+{
+"en": "press",
+"sv": "trycka"
+},
+{
+"en": "pretend",
+"sv": "låtsas"
+},
+{
+"en": "previously",
+"sv": "tidigare"
+},
+{
+"en": "pride",
+"sv": "stolthet"
+},
+{
+"en": "priest",
+"sv": "präst"
+},
+{
+"en": "primarily",
+"sv": "främst"
+},
+{
+"en": "primary",
+"sv": "primär"
+},
+{
+"en": "prime",
+"sv": "främsta"
+},
+{
+"en": "principle",
+"sv": "princip"
+},
+{
+"en": "prior",
+"sv": "tidigare"
+},
+{
+"en": "priority",
+"sv": "prioritet"
+},
+{
+"en": "prisoner",
+"sv": "fånge"
+},
+{
+"en": "private",
+"sv": "privat"
+},
+{
+"en": "procedure",
+"sv": "procedur"
+},
+{
+"en": "proceed",
+"sv": "fortsätta"
+},
+{
+"en": "process",
+"sv": "process"
+},
+{
+"en": "producer",
+"sv": "producent"
+},
+{
+"en": "production",
+"sv": "produktion"
+},
+{
+"en": "professional",
+"sv": "professionell"
+},
+{
+"en": "prominent",
+"sv": "framträdande"
+},
+{
+"en": "prompt",
+"sv": "snabb"
+},
+{
+"en": "proof",
+"sv": "bevis"
+},
+{
+"en": "proper",
+"sv": "riktig"
+},
+{
+"en": "properly",
+"sv": "ordentligt"
+},
+{
+"en": "property",
+"sv": "egendom"
+},
+{
+"en": "proportion",
+"sv": "proportion"
+},
+{
+"en": "proposal",
+"sv": "förslag"
+},
+{
+"en": "propose",
+"sv": "föreslå"
+},
+{
+"en": "proposed",
+"sv": "föreslagen"
+},
+{
+"en": "prosecutor",
+"sv": "åklagare"
+},
+{
+"en": "prospect",
+"sv": "utsikt"
+},
+{
+"en": "protection",
+"sv": "skydd"
+},
+{
+"en": "protein",
+"sv": "protein"
+},
+{
+"en": "provider",
+"sv": "leverantör"
+},
+{
+"en": "provision",
+"sv": "bestämmelse"
+},
+{
+"en": "psychological",
+"sv": "psykologisk"
+},
+{
+"en": "psychologist",
+"sv": "psykolog"
+},
+{
+"en": "psychology",
+"sv": "psykologi"
+},
+{
+"en": "publication",
+"sv": "publikation"
+},
+{
+"en": "publicly",
+"sv": "offentligt"
+},
+{
+"en": "publisher",
+"sv": "förläggare"
+},
+{
+"en": "punishment",
+"sv": "straff"
+},
+{
+"en": "purchase",
+"sv": "köp"
+},
+{
+"en": "pure",
+"sv": "ren"
+},
+{
+"en": "pursue",
+"sv": "förfölja"
+},
+{
+"en": "qualify",
+"sv": "kvalificera"
+},
+{
+"en": "quarter",
+"sv": "kvart"
+},
+{
+"en": "quiet",
+"sv": "tyst"
+},
+{
+"en": "quietly",
+"sv": "tyst"
+},
+{
+"en": "quote",
+"sv": "citera"
+},
+{
+"en": "racial",
+"sv": "ras"
+},
+{
+"en": "radical",
+"sv": "radikal"
+},
+{
+"en": "rail",
+"sv": "järnväg"
+},
+{
+"en": "range",
+"sv": "sortiment"
+},
+{
+"en": "rapid",
+"sv": "snabb"
+},
+{
+"en": "rare",
+"sv": "sällsynt"
+},
+{
+"en": "rating",
+"sv": "betyg"
+},
+{
+"en": "raw",
+"sv": "rå"
+},
+{
+"en": "react",
+"sv": "reagera"
+},
+{
+"en": "reaction",
+"sv": "reaktion"
+},
+{
+"en": "reader",
+"sv": "läsare"
+},
+{
+"en": "reading",
+"sv": "läsning"
+},
+{
+"en": "ready",
+"sv": "redo"
+},
+{
+"en": "real",
+"sv": "verklig"
+},
+{
+"en": "reality",
+"sv": "verklighet"
+},
+{
+"en": "reasonable",
+"sv": "rimlig"
+},
+{
+"en": "recipe",
+"sv": "recept"
+},
+{
+"en": "recognition",
+"sv": "erkännande"
+},
+{
+"en": "recommendation",
+"sv": "rekommendation"
+},
+{
+"en": "recording",
+"sv": "inspelning"
+},
+{
+"en": "recovery",
+"sv": "återhämtning"
+},
+{
+"en": "recruit",
+"sv": "rekrytera"
+},
+{
+"en": "reduction",
+"sv": "minskning"
+},
+{
+"en": "refer",
+"sv": "hänvisa"
+},
+{
+"en": "reference",
+"sv": "referens"
+},
+{
+"en": "reflection",
+"sv": "reflektion"
+},
+{
+"en": "reform",
+"sv": "reform"
+},
+{
+"en": "refugee",
+"sv": "flykting"
+},
+{
+"en": "regard",
+"sv": "beträffa"
+},
+{
+"en": "regarding",
+"sv": "beträffande"
+},
+{
+"en": "regardless",
+"sv": "oavsett"
+},
+{
+"en": "regime",
+"sv": "regime"
+},
+{
+"en": "regional",
+"sv": "regional"
+},
+{
+"en": "register",
+"sv": "registrera"
+},
+{
+"en": "regularly",
+"sv": "regelbundet"
+},
+{
+"en": "regulate",
+"sv": "reglera"
+},
+{
+"en": "regulation",
+"sv": "reglering"
+},
+{
+"en": "reinforce",
+"sv": "förstärka"
+},
+{
+"en": "relation",
+"sv": "relation"
+},
+{
+"en": "relationship",
+"sv": "förhållande"
+},
+{
+"en": "relative",
+"sv": "relativ"
+},
+{
+"en": "relatively",
+"sv": "relativt"
+},
+{
+"en": "relevant",
+"sv": "relevant"
+},
+{
+"en": "relief",
+"sv": "lättnad"
+},
+{
+"en": "religious",
+"sv": "religiös"
+},
+{
+"en": "remaining",
+"sv": "återstående"
+},
+{
+"en": "remarkable",
+"sv": "anmärkningsvärd"
+},
+{
+"en": "repeatedly",
+"sv": "upprepade gånger"
+},
+{
+"en": "reply",
+"sv": "svara"
+},
+{
+"en": "representation",
+"sv": "representation"
+},
+{
+"en": "representative",
+"sv": "representant"
+},
+{
+"en": "reputation",
+"sv": "rykte"
+},
+{
+"en": "requirement",
+"sv": "krav"
+},
+{
+"en": "resemble",
+"sv": "likna"
+},
+{
+"en": "reservation",
+"sv": "reservation"
+},
+{
+"en": "resident",
+"sv": "invånare"
+},
+{
+"en": "resist",
+"sv": "motstå"
+},
+{
+"en": "resistance",
+"sv": "motstånd"
+},
+{
+"en": "resolution",
+"sv": "resolution"
+},
+{
+"en": "resolve",
+"sv": "lösa"
+},
+{
+"en": "resort",
+"sv": "resort"
+},
+{
+"en": "resource",
+"sv": "resurs"
+},
+{
+"en": "respond",
+"sv": "svara"
+},
+{
+"en": "respondent",
+"sv": "svarande"
+},
+{
+"en": "response",
+"sv": "svar"
+},
+{
+"en": "responsibility",
+"sv": "ansvar"
+},
+{
+"en": "restaurant",
+"sv": "restaurang"
+},
+{
+"en": "restore",
+"sv": "återställa"
+},
+{
+"en": "restriction",
+"sv": "restriktion"
+},
+{
+"en": "retain",
+"sv": "behålla"
+},
+{
+"en": "reveal",
+"sv": "avslöja"
+},
+{
+"en": "revenue",
+"sv": "intäkt"
+},
+{
+"en": "revolution",
+"sv": "revolution"
+},
+{
+"en": "rich",
+"sv": "rik"
+},
+{
+"en": "rid",
+"sv": "bli av med"
+},
+{
+"en": "rifle",
+"sv": "gevär"
+},
+{
+"en": "ring",
+"sv": "ring"
+},
+{
+"en": "roll",
+"sv": "rulla"
+},
+{
+"en": "romantic",
+"sv": "romantisk"
+},
+{
+"en": "rope",
+"sv": "rep"
+},
+{
+"en": "rose",
+"sv": "ros"
+},
+{
+"en": "roughly",
+"sv": "ungefär"
+},
+{
+"en": "round",
+"sv": "rund"
+},
+{
+"en": "route",
+"sv": "rutt"
+},
+{
+"en": "row",
+"sv": "rad"
+},
+{
+"en": "rub",
+"sv": "gnugga"
+},
+{
+"en": "rural",
+"sv": "lantlig"
+},
+{
+"en": "sacred",
+"sv": "helig"
+},
+{
+"en": "safe",
+"sv": "säker"
+},
+{
+"en": "safety",
+"sv": "säkerhet"
+},
+{
+"en": "sake",
+"sv": "skull"
+},
+{
+"en": "sales",
+"sv": "försäljning"
+},
+{
+"en": "sample",
+"sv": "urval"
+},
+{
+"en": "sanction",
+"sv": "sanktion"
+},
+{
+"en": "satellite",
+"sv": "satellit"
+},
+{
+"en": "satisfaction",
+"sv": "tillfredsställelse"
+},
+{
+"en": "scale",
+"sv": "skala"
+},
+{
+"en": "scandal",
+"sv": "skandal"
+},
+{
+"en": "scenario",
+"sv": "scenario"
+},
+{
+"en": "scheme",
+"sv": "schema"
+},
+{
+"en": "scholar",
+"sv": "forskare"
+},
+{
+"en": "scientific",
+"sv": "vetenskaplig"
+},
+{
+"en": "scope",
+"sv": "omfattning"
+},
+{
+"en": "scream",
+"sv": "skrika"
+},
+{
+"en": "script",
+"sv": "manus"
+},
+{
+"en": "secret",
+"sv": "hemlig"
+},
+{
+"en": "secretary",
+"sv": "sekreterare"
+},
+{
+"en": "section",
+"sv": "sektion"
+},
+{
+"en": "segment",
+"sv": "segment"
+},
+{
+"en": "seize",
+"sv": "gripa"
+},
+{
+"en": "selection",
+"sv": "urval"
+},
+{
+"en": "self",
+"sv": "själv"
+},
+{
+"en": "Senate",
+"sv": "senaten"
+},
+{
+"en": "senator",
+"sv": "senator"
+},
+{
+"en": "senior",
+"sv": "senior"
+},
+{
+"en": "sense",
+"sv": "sinne"
+},
+{
+"en": "sensitive",
+"sv": "känslig"
+},
+{
+"en": "serious",
+"sv": "allvarlig"
+},
+{
+"en": "session",
+"sv": "session"
+},
+{
+"en": "setting",
+"sv": "miljö"
+},
+{
+"en": "settle",
+"sv": "avgöra"
+},
+{
+"en": "settlement",
+"sv": "uppgörelse"
+},
+{
+"en": "severe",
+"sv": "allvarlig"
+},
+{
+"en": "sex",
+"sv": "kön"
+},
+{
+"en": "sexual",
+"sv": "sexuell"
+},
+{
+"en": "shade",
+"sv": "skugga"
+},
+{
+"en": "shadow",
+"sv": "skugga"
+},
+{
+"en": "shell",
+"sv": "skal"
+},
+{
+"en": "shelter",
+"sv": "skydd"
+},
+{
+"en": "shift",
+"sv": "skifta"
+},
+{
+"en": "shit",
+"sv": "skit"
+},
+{
+"en": "shoe",
+"sv": "sko"
+},
+{
+"en": "shoot",
+"sv": "skjuta"
+},
+{
+"en": "shooting",
+"sv": "skjutning"
+},
+{
+"en": "shop",
+"sv": "butik"
+},
+{
+"en": "shopping",
+"sv": "shopping"
+},
+{
+"en": "shore",
+"sv": "strand"
+},
+{
+"en": "shortly",
+"sv": "snart"
+},
+{
+"en": "shot",
+"sv": "skott"
+},
+{
+"en": "shout",
+"sv": "ropa"
+},
+{
+"en": "shower",
+"sv": "dusch"
+},
+{
+"en": "shrug",
+"sv": "rycka på axlarna"
+},
+{
+"en": "shut",
+"sv": "stänga"
+},
+{
+"en": "sigh",
+"sv": "sucka"
+},
+{
+"en": "sight",
+"sv": "syn"
+},
+{
+"en": "significance",
+"sv": "betydelse"
+},
+{
+"en": "significant",
+"sv": "betydande"
+},
+{
+"en": "significantly",
+"sv": "betydligt"
+},
+{
+"en": "silence",
+"sv": "tystnad"
+},
+{
+"en": "silent",
+"sv": "tyst"
+},
+{
+"en": "similar",
+"sv": "liknande"
+},
+{
+"en": "similarly",
+"sv": "på liknande sätt"
+},
+{
+"en": "simultaneous",
+"sv": "samtidig"
+},
+{
+"en": "sir",
+"sv": "herr"
+},
+{
+"en": "site",
+"sv": "plats"
+},
+{
+"en": "ski",
+"sv": "skida"
+},
+{
+"en": "slave",
+"sv": "slav"
+},
+{
+"en": "slice",
+"sv": "skiva"
+},
+{
+"en": "slide",
+"sv": "glida"
+},
+{
+"en": "slight",
+"sv": "lätt"
+},
+{
+"en": "slightly",
+"sv": "något"
+},
+{
+"en": "slip",
+"sv": "halka"
+},
+{
+"en": "smart",
+"sv": "smart"
+},
+{
+"en": "snap",
+"sv": "knäppa"
+},
+{
+"en": "so-called",
+"sv": "så kallad"
+},
+{
+"en": "social",
+"sv": "social"
+},
+{
+"en": "solar",
+"sv": "sol"
+},
+{
+"en": "somebody",
+"sv": "någon"
+},
+{
+"en": "somehow",
+"sv": "på något sätt"
+},
+{
+"en": "someone",
+"sv": "någon"
+},
+{
+"en": "somewhat",
+"sv": "något"
+},
+{
+"en": "sophisticated",
+"sv": "sofistikerad"
+},
+{
+"en": "sound",
+"sv": "ljud"
+},
+{
+"en": "source",
+"sv": "källa"
+},
+{
+"en": "southern",
+"sv": "sydlig"
+},
+{
+"en": "Soviet",
+"sv": "sovjetisk"
+},
+{
+"en": "special",
+"sv": "speciell"
+},
+{
+"en": "specialist",
+"sv": "specialist"
+},
+{
+"en": "species",
+"sv": "art"
+},
+{
+"en": "specific",
+"sv": "specifik"
+},
+{
+"en": "specifically",
+"sv": "specifikt"
+},
+{
+"en": "speech",
+"sv": "tal"
+},
+{
+"en": "spin",
+"sv": "snurra"
+},
+{
+"en": "spiritual",
+"sv": "andlig"
+},
+{
+"en": "split",
+"sv": "dela"
+},
+{
+"en": "spokesman",
+"sv": "talesman"
+},
+{
+"en": "spot",
+"sv": "plats"
+},
+{
+"en": "spread",
+"sv": "sprida"
+},
+{
+"en": "square",
+"sv": "kvadrat"
+},
+{
+"en": "squeeze",
+"sv": "klämma"
+},
+{
+"en": "stability",
+"sv": "stabilitet"
+},
+{
+"en": "stable",
+"sv": "stabil"
+},
+{
+"en": "stage",
+"sv": "scen"
+},
+{
+"en": "stair",
+"sv": "trappa"
+},
+{
+"en": "stake",
+"sv": "insat"
+},
+{
+"en": "standard",
+"sv": "standard"
+},
+{
+"en": "standing",
+"sv": "stående"
+},
+{
+"en": "stare",
+"sv": "stirra"
+},
+{
+"en": "statement",
+"sv": "uttalande"
+},
+{
+"en": "statistics",
+"sv": "statistik"
+},
+{
+"en": "steady",
+"sv": "stadig"
+},
+{
+"en": "steal",
+"sv": "stjäla"
+},
+{
+"en": "steel",
+"sv": "stål"
+},
+{
+"en": "step",
+"sv": "steg"
+},
+{
+"en": "stick",
+"sv": "pinne"
+},
+{
+"en": "stir",
+"sv": "röra"
+},
+{
+"en": "storage",
+"sv": "lagring"
+},
+{
+"en": "strategic",
+"sv": "strategisk"
+},
+{
+"en": "strengthen",
+"sv": "stärka"
+},
+{
+"en": "stretch",
+"sv": "sträcka"
+},
+{
+"en": "string",
+"sv": "snöre"
+},
+{
+"en": "strip",
+"sv": "remsa"
+},
+{
+"en": "stroke",
+"sv": "slag"
+},
+{
+"en": "strongly",
+"sv": "starkt"
+},
+{
+"en": "structure",
+"sv": "struktur"
+},
+{
+"en": "struggle",
+"sv": "kämpa"
+},
+{
+"en": "studio",
+"sv": "studio"
+},
+{
+"en": "stuff",
+"sv": "saker"
+},
+{
+"en": "stupid",
+"sv": "dum"
+},
+{
+"en": "style",
+"sv": "stil"
+},
+{
+"en": "subsequent",
+"sv": "efterföljande"
+},
+{
+"en": "substantial",
+"sv": "betydande"
+},
+{
+"en": "successful",
+"sv": "framgångsrik"
+},
+{
+"en": "successfully",
+"sv": "framgångsrikt"
+},
+{
+"en": "sue",
+"sv": "stämma"
+},
+{
+"en": "sufficient",
+"sv": "tillräcklig"
+},
+{
+"en": "suggestion",
+"sv": "förslag"
+},
+{
+"en": "suicide",
+"sv": "självmord"
+},
+{
+"en": "summit",
+"sv": "toppmöte"
+},
+{
+"en": "super",
+"sv": "super"
+},
+{
+"en": "supply",
+"sv": "leverans"
+},
+{
+"en": "suppose",
+"sv": "anta"
+},
+{
+"en": "supposed",
+"sv": "förmodad"
+},
+{
+"en": "Supreme",
+"sv": "högsta"
+},
+{
+"en": "surely",
+"sv": "säkert"
+},
+{
+"en": "surface",
+"sv": "yta"
+},
+{
+"en": "surgery",
+"sv": "kirurgi"
+},
+{
+"en": "surprising",
+"sv": "överraskande"
+},
+{
+"en": "surround",
+"sv": "omge"
+},
+{
+"en": "survey",
+"sv": "undersökning"
+},
+{
+"en": "survival",
+"sv": "överlevnad"
+},
+{
+"en": "survive",
+"sv": "överleva"
+},
+{
+"en": "survivor",
+"sv": "överlevande"
+},
+{
+"en": "suspect",
+"sv": "misstänka"
+},
+{
+"en": "swear",
+"sv": "svära"
+},
+{
+"en": "sweet",
+"sv": "söt"
+},
+{
+"en": "swing",
+"sv": "gunga"
+},
+{
+"en": "symbol",
+"sv": "symbol"
+},
+{
+"en": "symptom",
+"sv": "symptom"
+},
+{
+"en": "tablespoon",
+"sv": "matsked"
+},
+{
+"en": "tail",
+"sv": "svans"
+},
+{
+"en": "tale",
+"sv": "berättelse"
+},
+{
+"en": "tank",
+"sv": "tank"
+},
+{
+"en": "taxpayer",
+"sv": "skattebetalare"
+},
+{
+"en": "teaching",
+"sv": "undervisning"
+},
+{
+"en": "tear",
+"sv": "tår"
+},
+{
+"en": "teaspoon",
+"sv": "tesked"
+},
+{
+"en": "technical",
+"sv": "teknisk"
+},
+{
+"en": "teen",
+"sv": "tonåring"
+},
+{
+"en": "telephone",
+"sv": "telefon"
+},
+{
+"en": "telescope",
+"sv": "teleskop"
+},
+{
+"en": "tend",
+"sv": "tendera"
+},
+{
+"en": "tendency",
+"sv": "tendens"
+},
+{
+"en": "tension",
+"sv": "spänning"
+},
+{
+"en": "tent",
+"sv": "tält"
+},
+{
+"en": "term",
+"sv": "term"
+},
+{
+"en": "terms",
+"sv": "villkor"
+},
+{
+"en": "territory",
+"sv": "territorium"
+},
+{
+"en": "terror",
+"sv": "terror"
+},
+{
+"en": "terrorism",
+"sv": "terrorism"
+},
+{
+"en": "terrorist",
+"sv": "terrorist"
+},
+{
+"en": "testify",
+"sv": "vittna"
+},
+{
+"en": "testimony",
+"sv": "vittnesmål"
+},
+{
+"en": "text",
+"sv": "text"
+},
+{
+"en": "theme",
+"sv": "tema"
+},
+{
+"en": "themselves",
+"sv": "sig själva"
+},
+{
+"en": "theory",
+"sv": "teori"
+},
+{
+"en": "therapy",
+"sv": "terapi"
+},
+{
+"en": "thinking",
+"sv": "tänkande"
+},
+{
+"en": "those",
+"sv": "de där"
+},
+{
+"en": "threaten",
+"sv": "hota"
+},
+{
+"en": "threshold",
+"sv": "tröskel"
+},
+{
+"en": "thrive",
+"sv": "blomstra"
+},
+{
+"en": "throat",
+"sv": "hals"
+},
+{
+"en": "throughout",
+"sv": "genomgående"
+},
+{
+"en": "ticket",
+"sv": "biljett"
+},
+{
+"en": "tight",
+"sv": "tät"
+},
+{
+"en": "tiny",
+"sv": "pytteliten"
+},
+{
+"en": "tip",
+"sv": "tips"
+},
+{
+"en": "tissue",
+"sv": "vävnad"
+},
+{
+"en": "tobacco",
+"sv": "tobak"
+},
+{
+"en": "tone",
+"sv": "ton"
+},
+{
+"en": "topic",
+"sv": "ämne"
+},
+{
+"en": "toss",
+"sv": "kasta"
+},
+{
+"en": "totally",
+"sv": "totalt"
+},
+{
+"en": "tour",
+"sv": "tur"
+},
+{
+"en": "tourist",
+"sv": "turist"
+},
+{
+"en": "towards",
+"sv": "mot"
+},
+{
+"en": "tower",
+"sv": "torn"
+},
+{
+"en": "toy",
+"sv": "leksak"
+},
+{
+"en": "traditional",
+"sv": "traditionell"
+},
+{
+"en": "tragedy",
+"sv": "tragedi"
+},
+{
+"en": "trail",
+"sv": "stig"
+},
+{
+"en": "training",
+"sv": "träning"
+},
+{
+"en": "transformation",
+"sv": "förvandling"
+},
+{
+"en": "transition",
+"sv": "övergång"
+},
+{
+"en": "transmission",
+"sv": "överföring"
+},
+{
+"en": "treat",
+"sv": "behandla"
+},
+{
+"en": "treatment",
+"sv": "behandling"
+},
+{
+"en": "tremendous",
+"sv": "enorm"
+},
+{
+"en": "trend",
+"sv": "trend"
+},
+{
+"en": "trial",
+"sv": "rättegång"
+},
+{
+"en": "tribe",
+"sv": "stam"
+},
+{
+"en": "trick",
+"sv": "trick"
+},
+{
+"en": "trip",
+"sv": "resa"
+},
+{
+"en": "troop",
+"sv": "trupp"
+},
+{
+"en": "trouble",
+"sv": "problem"
+},
+{
+"en": "true",
+"sv": "sann"
+},
+{
+"en": "truly",
+"sv": "verkligen"
+},
+{
+"en": "truth",
+"sv": "sanning"
+},
+{
+"en": "tube",
+"sv": "tub"
+},
+{
+"en": "twin",
+"sv": "tvilling"
+},
+{
+"en": "typical",
+"sv": "typisk"
+},
+{
+"en": "typically",
+"sv": "typiskt"
+},
+{
+"en": "ultimately",
+"sv": "slutligen"
+},
+{
+"en": "unable",
+"sv": "oförmögen"
+},
+{
+"en": "undergo",
+"sv": "genomgå"
+},
+{
+"en": "understanding",
+"sv": "förståelse"
+},
+{
+"en": "uniform",
+"sv": "uniform"
+},
+{
+"en": "union",
+"sv": "fack"
+},
+{
+"en": "unique",
+"sv": "unik"
+},
+{
+"en": "United",
+"sv": "förenade"
+},
+{
+"en": "universal",
+"sv": "universell"
+},
+{
+"en": "universe",
+"sv": "universum"
+},
+{
+"en": "unknown",
+"sv": "okänd"
+},
+{
+"en": "unlike",
+"sv": "olik"
+},
+{
+"en": "unlikely",
+"sv": "osannolik"
+},
+{
+"en": "upon",
+"sv": "på"
+},
+{
+"en": "upper",
+"sv": "övre"
+},
+{
+"en": "urban",
+"sv": "urban"
+},
+{
+"en": "urge",
+"sv": "uppmana"
+},
+{
+"en": "used",
+"sv": "van"
+},
+{
+"en": "useful",
+"sv": "användbar"
+},
+{
+"en": "user",
+"sv": "användare"
+},
+{
+"en": "usual",
+"sv": "vanlig"
+},
+{
+"en": "utility",
+"sv": "nytta"
+},
+{
+"en": "valuable",
+"sv": "värdefull"
+},
+{
+"en": "variable",
+"sv": "variabel"
+},
+{
+"en": "variation",
+"sv": "variation"
+},
+{
+"en": "variety",
+"sv": "variation"
+},
+{
+"en": "vary",
+"sv": "variera"
+},
+{
+"en": "vast",
+"sv": "enorm"
+},
+{
+"en": "vegetable",
+"sv": "grönsak"
+},
+{
+"en": "venture",
+"sv": "äventyr"
+},
+{
+"en": "version",
+"sv": "version"
+},
+{
+"en": "versus",
+"sv": "kontra"
+},
+{
+"en": "vessel",
+"sv": "fartyg"
+},
+{
+"en": "veteran",
+"sv": "veteran"
+},
+{
+"en": "via",
+"sv": "via"
+},
+{
+"en": "victim",
+"sv": "offer"
+},
+{
+"en": "viewer",
+"sv": "tittare"
+},
+{
+"en": "violate",
+"sv": "bryta"
+},
+{
+"en": "violation",
+"sv": "överträdelse"
+},
+{
+"en": "violence",
+"sv": "våld"
+},
+{
+"en": "violent",
+"sv": "våldsam"
+},
+{
+"en": "virtually",
+"sv": "praktiskt taget"
+},
+{
+"en": "virtue",
+"sv": "dygd"
+},
+{
+"en": "visible",
+"sv": "synlig"
+},
+{
+"en": "visitor",
+"sv": "besökare"
+},
+{
+"en": "visual",
+"sv": "visuell"
+},
+{
+"en": "vital",
+"sv": "vital"
+},
+{
+"en": "voice",
+"sv": "röst"
+},
+{
+"en": "voter",
+"sv": "väljare"
+},
+{
+"en": "vs",
+"sv": "kontra"
+},
+{
+"en": "vulnerable",
+"sv": "sårbar"
+},
+{
+"en": "wander",
+"sv": "vandra"
+},
+{
+"en": "warning",
+"sv": "varning"
+},
+{
+"en": "wealth",
+"sv": "rikedom"
+},
+{
+"en": "wealthy",
+"sv": "rik"
+},
+{
+"en": "weekly",
+"sv": "veckovis"
+},
+{
+"en": "weigh",
+"sv": "väga"
+},
+{
+"en": "welfare",
+"sv": "välfärd"
+},
+{
+"en": "western",
+"sv": "västerländsk"
+},
+{
+"en": "whatever",
+"sv": "vad som helst"
+},
+{
+"en": "whenever",
+"sv": "när som helst"
+},
+{
+"en": "whereas",
+"sv": "medan"
+},
+{
+"en": "whisper",
+"sv": "viska"
+},
+{
+"en": "whom",
+"sv": "vem"
+},
+{
+"en": "whose",
+"sv": "vars"
+},
+{
+"en": "widely",
+"sv": "brett"
+},
+{
+"en": "widespread",
+"sv": "utbredd"
+},
+{
+"en": "wild",
+"sv": "vild"
+},
+{
+"en": "willing",
+"sv": "villig"
+},
+{
+"en": "wing",
+"sv": "vinge"
+},
+{
+"en": "wire",
+"sv": "tråd"
+},
+{
+"en": "wisdom",
+"sv": "visdom"
+},
+{
+"en": "wise",
+"sv": "vis"
+},
+{
+"en": "withdraw",
+"sv": "dra tillbaka"
+},
+{
+"en": "within",
+"sv": "inom"
+},
+{
+"en": "without",
+"sv": "utan"
+},
+{
+"en": "witness",
+"sv": "vittne"
+},
+{
+"en": "wooden",
+"sv": "trä"
+},
+{
+"en": "working",
+"sv": "arbetande"
+},
+{
+"en": "works",
+"sv": "verk"
+},
+{
+"en": "workshop",
+"sv": "verkstad"
+},
+{
+"en": "worth",
+"sv": "värd"
+},
+{
+"en": "writing",
+"sv": "skrivande"
+},
+{
+"en": "wrong",
+"sv": "fel"
+},
+{
+"en": "yeah",
+"sv": "ja"
+},
+{
+"en": "yell",
+"sv": "skrika"
+},
+{
+"en": "yield",
+"sv": "ge efter"
+},
+{
+"en": "yours",
+"sv": "din"
+},
+{
+"en": "yourself",
+"sv": "dig själv"
+}
+]

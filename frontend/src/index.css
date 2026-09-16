@@ -1,254 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Outfit:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
 body {
-    margin: 0;
-    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  font-family: "DM Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #e7f0ec;
+  color: #14221f;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Share Tech Mono', monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-code, .font-mono {
-    font-family: 'Share Tech Mono', monospace;
-}
-
-@layer base {
-    :root {
-        /* Fallout Pip-Boy green theme */
-        --background: 120 20% 8%;
-        --foreground: 120 100% 70%;
-        --card: 120 15% 12%;
-        --card-foreground: 120 100% 70%;
-        --popover: 120 15% 10%;
-        --popover-foreground: 120 100% 70%;
-        --primary: 120 100% 50%;
-        --primary-foreground: 120 20% 8%;
-        --secondary: 120 20% 15%;
-        --secondary-foreground: 120 100% 70%;
-        --muted: 120 15% 20%;
-        --muted-foreground: 120 50% 50%;
-        --accent: 45 100% 50%;
-        --accent-foreground: 120 20% 8%;
-        --destructive: 0 80% 50%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 120 50% 25%;
-        --input: 120 50% 25%;
-        --ring: 120 100% 50%;
-        --chart-1: 120 100% 50%;
-        --chart-2: 45 100% 50%;
-        --chart-3: 0 80% 50%;
-        --chart-4: 200 80% 50%;
-        --chart-5: 280 80% 50%;
-        --radius: 0.25rem;
-        
-        /* Fallout status colors */
-        --status-new: 45 100% 50%;
-        --status-new-bg: 45 100% 15%;
-        --status-removed: 0 80% 50%;
-        --status-removed-bg: 0 80% 15%;
-        --status-past: 200 80% 50%;
-        --status-past-bg: 200 80% 15%;
-    }
-}
-
-@layer base {
-    * {
-        @apply border-border;
-    }
-    body {
-        @apply bg-background text-foreground;
-        background-image: 
-            radial-gradient(ellipse at top, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
-            repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(34, 197, 94, 0.03) 2px,
-                rgba(34, 197, 94, 0.03) 4px
-            );
-    }
-}
-
-/* Fallout terminal scanline effect - subtle */
-.fallout-scanlines::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.2),
-        rgba(0, 0, 0, 0.2) 1px,
-        transparent 1px,
-        transparent 3px
-    );
-    z-index: 1000;
-}
-
-/* Pip-Boy glow effect */
-.pip-glow {
-    text-shadow: 0 0 10px rgba(34, 197, 94, 0.8), 0 0 20px rgba(34, 197, 94, 0.4);
-}
-
-.pip-glow-amber {
-    text-shadow: 0 0 10px rgba(234, 179, 8, 0.8), 0 0 20px rgba(234, 179, 8, 0.4);
-}
-
-/* Event card styles */
-.event-card {
-    @apply transition-all duration-200 ease-in-out;
-    border: 1px solid rgba(34, 197, 94, 0.3);
-}
-
-.event-card:hover {
-    @apply -translate-y-0.5;
-    box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
-}
-
-.event-card-new {
-    background: rgba(234, 179, 8, 0.15) !important;
-    border-color: rgba(234, 179, 8, 0.5) !important;
-}
-
-.event-card-removed {
-    background: rgba(107, 114, 128, 0.15) !important;
-    border-color: rgba(107, 114, 128, 0.5) !important;
-    opacity: 0.7;
-}
-
-.event-card-past {
-    background: rgba(56, 189, 248, 0.15) !important;
-    border-color: rgba(56, 189, 248, 0.5) !important;
-}
-
-/* Scrollbar styling - Fallout theme */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(34, 197, 94, 0.1);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(34, 197, 94, 0.4);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(34, 197, 94, 0.6);
-}
-
-/* Vault-Tec style buttons */
-button, .btn {
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-/* Input fields */
-input, select, textarea {
-    background: rgba(34, 197, 94, 0.1) !important;
-    border-color: rgba(34, 197, 94, 0.3) !important;
-    color: #22c55e !important;
-}
-
-input::placeholder {
-    color: rgba(34, 197, 94, 0.5) !important;
-}
-
-input:focus, select:focus, textarea:focus {
-    border-color: rgba(34, 197, 94, 0.6) !important;
-    box-shadow: 0 0 10px rgba(34, 197, 94, 0.2) !important;
-}
-
-
-/* Sonner Toast Fallout Theme */
-[data-sonner-toaster] [data-sonner-toast] {
-    background: #141e14 !important;
-    border: 2px solid rgba(34, 197, 94, 0.5) !important;
-    color: #4ade80 !important;
-    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2) !important;
-}
-
-[data-sonner-toaster] [data-sonner-toast] [data-title] {
-    color: #4ade80 !important;
-}
-
-[data-sonner-toaster] [data-sonner-toast] [data-description] {
-    color: rgba(34, 197, 94, 0.7) !important;
-}
-
-[data-sonner-toaster] [data-sonner-toast][data-type="success"] {
-    border-color: rgba(34, 197, 94, 0.7) !important;
-}
-
-[data-sonner-toaster] [data-sonner-toast][data-type="success"] svg {
-    color: #4ade80 !important;
-}
-
-[data-sonner-toaster] [data-sonner-toast][data-type="error"] {
-    border-color: rgba(239, 68, 68, 0.7) !important;
-}
-
-[data-sonner-toaster] [data-sonner-toast][data-type="error"] [data-title],
-[data-sonner-toaster] [data-sonner-toast][data-type="error"] svg {
-    color: #f87171 !important;
-}
-
-[data-sonner-toaster] [data-sonner-toast][data-type="info"] {
-    border-color: rgba(34, 211, 238, 0.7) !important;
-}
-
-[data-sonner-toaster] [data-sonner-toast][data-type="info"] [data-title],
-[data-sonner-toaster] [data-sonner-toast][data-type="info"] svg {
-    color: #22d3ee !important;
-}
-
-[data-sonner-toaster] [data-sonner-toast][data-type="warning"] {
-    border-color: rgba(251, 191, 36, 0.7) !important;
-}
-
-[data-sonner-toaster] [data-sonner-toast][data-type="warning"] [data-title],
-[data-sonner-toaster] [data-sonner-toast][data-type="warning"] svg {
-    color: #fbbf24 !important;
-}
-
-[data-sonner-toaster] [data-sonner-toast] [data-close-button] {
-    background: rgba(34, 197, 94, 0.2) !important;
-    border-color: rgba(34, 197, 94, 0.3) !important;
-    color: #4ade80 !important;
-}
-
-[data-sonner-toaster] [data-sonner-toast] [data-close-button]:hover {
-    background: rgba(34, 197, 94, 0.3) !important;
-}
-
-
-/* Vault Boy gentle sway animation */
-@keyframes vault-boy-sway {
-    0%, 100% {
-        transform: rotate(-5deg);
-    }
-    50% {
-        transform: rotate(5deg);
-    }
-}
-
-.vault-boy-sway {
-    animation: vault-boy-sway 1.5s ease-in-out infinite;
-    transform-origin: bottom center;
+button,
+input {
+  font: inherit;
 }
